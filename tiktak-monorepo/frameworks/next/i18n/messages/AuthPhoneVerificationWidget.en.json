@@ -1,0 +1,19 @@
+{
+  "back_to_home": "Back to home page",
+  "email": "Email",
+  "phone": "Phone",
+  "email_placeholder": "email@example.com",
+  "phone_placeholder": "+994501234567",
+  "edit_phone_hint": "You can edit your phone number if needed",
+  "verification_code": "Verification Code",
+  "code_placeholder": "000000",
+  "enter_valid_email": "Enter a valid email",
+  "enter_valid_phone": "Enter a valid phone number",
+  "enter_verification_code": "Enter the verification code",
+  "code_expired": "Your verification code has expired. Please request a new one.",
+  "phone_already_verified": "Phone already verified",
+  "code_sent": "Verification code sent",
+  "failed_to_send": "Failed to send verification code",
+  "verification_failed": "Verification failed"
+}
+

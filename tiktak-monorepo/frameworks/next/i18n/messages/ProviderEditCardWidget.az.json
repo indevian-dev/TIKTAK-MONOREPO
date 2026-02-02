@@ -1,0 +1,22 @@
+{
+  "title": "Başlıq",
+  "description": "Təsvir",
+  "price": "Qiymət",
+  "options": "Seçimlər",
+  "accept": "Qəbul edirəm",
+  "rules": "Qaydalar",
+  "open_location_picker": "Yer seçin",
+  "save": "Saxla",
+  "card_updated": "Elan uğurla yeniləndi",
+  "loading": "Yüklənir...",
+  "cancel": "Ləğv et",
+  "status": "Status",
+  "active": "Aktiv",
+  "inactive": "Deaktiv",
+  "edit_card": "Elanı redaktə et",
+  "category": "Kateqoriya",
+  "unsaved_changes": "Yadda saxlanmamış dəyişikliklər var. Səhifədən çıxmaq istəyirsiniz?",
+  "confirm_leave": "Səhifədən çıx",
+  "stay_on_page": "Səhifədə qal"
+}
+

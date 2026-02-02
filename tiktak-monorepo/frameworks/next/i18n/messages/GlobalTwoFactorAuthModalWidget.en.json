@@ -1,0 +1,14 @@
+{
+  "title": "Two-Factor Authentication",
+  "email_method": "Email",
+  "sms_method": "SMS",
+  "send_code": "Send Code",
+  "resend_code": "Resend Code",
+  "verify": "Verify",
+  "code_placeholder": "Enter code",
+  "sending": "Sending...",
+  "verifying": "Verifying...",
+  "close": "Close",
+  "wait_seconds": "Wait {seconds} sec"
+}
+

@@ -1,0 +1,25 @@
+{
+  "sort": "Sırala",
+  "sort_options": "Sıralama seçimləri",
+  "select_sort_option": "Sıralama seçin",
+  "select_sorting_option": "Sıralama seçin...",
+  "quick_sort": "Sürətli sıralama",
+  "sort_direction": "Sıralama istiqaməti",
+  "reverse_order": "Əks sıra",
+  "reset_to_default": "Defolt vəziyyətə qaytar",
+  "apply_sort": "Sıralamanı tətbiq et",
+  "newest_first": "Ən yeni",
+  "oldest_first": "Ən köhnə",
+  "price_low_high": "Qiymət: Aşağıdan yuxarı",
+  "price_high_low": "Qiymət: Yuxarıdan aşağı",
+  "title_a_z": "Başlıq: A-dan Z-yə",
+  "title_z_a": "Başlıq: Z-dən A-ya",
+  "highest_rated": "Ən yüksək reytinqli",
+  "lowest_rated": "Ən aşağı reytinqli",
+  "random": "Təsadüfi",
+  "featured": "Seçilmiş",
+  "latest": "Ən yeni",
+  "low_price": "Aşağı qiymət",
+  "top_rated": "Ən yaxşı"
+}
+

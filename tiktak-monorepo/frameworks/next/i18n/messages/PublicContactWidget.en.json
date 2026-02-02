@@ -1,0 +1,13 @@
+{
+  "contact_us": "Contact Us",
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "subject": "Subject",
+  "message": "Message",
+  "send": "Send",
+  "sending": "Sending...",
+  "message_sent": "Message sent",
+  "required_field": "This field is required"
+}
+

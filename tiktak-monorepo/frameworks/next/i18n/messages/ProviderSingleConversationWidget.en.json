@@ -1,0 +1,11 @@
+{
+  "type_message": "Type a message...",
+  "send": "Send",
+  "online": "Online",
+  "offline": "Offline",
+  "seen": "Seen",
+  "delivered": "Delivered",
+  "block_user": "Block User",
+  "report_conversation": "Report Conversation"
+}
+

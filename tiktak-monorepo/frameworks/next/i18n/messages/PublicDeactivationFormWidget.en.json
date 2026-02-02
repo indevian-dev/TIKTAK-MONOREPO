@@ -1,0 +1,10 @@
+{
+  "deactivate_account": "Deactivate Account",
+  "confirm_deactivation": "Are you sure you want to deactivate your account?",
+  "reason": "Reason",
+  "password": "Password",
+  "deactivate": "Deactivate",
+  "cancel": "Cancel",
+  "account_deactivated": "Account deactivated"
+}
+

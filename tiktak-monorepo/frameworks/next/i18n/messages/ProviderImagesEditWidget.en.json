@@ -1,0 +1,47 @@
+{
+  "card_images": "Card Images",
+  "unsaved_changes": "Unsaved changes",
+  "storage_prefix": "Storage Prefix",
+  "images_count": "Images Count",
+  "marked_for_deletion": "Marked for Deletion",
+  "has_changes": "Has Changes",
+  "current_images": "Current images",
+  "add_images": "Add Images",
+  "uploading": "Uploading...",
+  "select_files_first": "Please select files first.",
+  "upload_failed": "Failed to upload {name}: {error}",
+  "no_files_uploaded": "No files were uploaded successfully",
+  "images_uploaded": "{count} image(s) uploaded successfully",
+  "image_unmarked": "Image unmarked for deletion",
+  "image_marked_for_deletion": "Image marked for deletion - save to apply changes",
+  "move_up": "Move up",
+  "move_down": "Move down",
+  "restore_image": "Restore image",
+  "mark_for_deletion": "Mark for deletion",
+  "must_be_deleted": "Must be deleted",
+  "no_image": "No image"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

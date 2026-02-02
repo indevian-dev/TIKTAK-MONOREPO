@@ -1,0 +1,19 @@
+{
+  "price": "Qiymət",
+  "negotiable": "Razılaşma ilə",
+  "description": "Təsvir",
+  "location": "Yer",
+  "contact_seller": "Satıcı ilə əlaqə",
+  "call": "Zəng et",
+  "message": "Mesaj yaz",
+  "add_to_favorites": "Bəyənilənlərə əlavə et",
+  "remove_from_favorites": "Bəyəniləndən çıxar",
+  "share": "Paylaş",
+  "report": "Şikayət et",
+  "views": "Baxış",
+  "posted_on": "Yerləşdirilib",
+  "updated_on": "Yenilənib",
+  "similar_cards": "Oxşar elanlar",
+  "seller_info": "Satıcı haqqında"
+}
+

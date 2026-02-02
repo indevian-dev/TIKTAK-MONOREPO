@@ -1,0 +1,20 @@
+{
+  "title": "Başlıq",
+  "description": "Təsvir",
+  "price": "Qiymət",
+  "options": "Seçimlər",
+  "accept": "Qəbul edirəm",
+  "rules": "Qaydalar",
+  "open_location_picker": "Yer seçin",
+  "save": "Saxla",
+  "card_created": "Elan yaradıldı və moderasiyaya göndərildi",
+  "basic_rules": "Qaydaları oxudum və ",
+  "processing": "İşlənir...",
+  "creating_card": "Elanınız yaradılır, zəhmət olmasa gözləyin",
+  "category": "Kateqoriya",
+  "select_category": "Kateqoriya seçin",
+  "enter_valid_price": "Düzgün qiymət daxil edin",
+  "error_generating_prefix": "Prefiks yaradılarkən xəta",
+  "failed_to_create": "Elan yaradıla bilmədi"
+}
+

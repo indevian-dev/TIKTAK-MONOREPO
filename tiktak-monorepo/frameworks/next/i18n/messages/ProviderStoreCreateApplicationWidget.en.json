@@ -1,0 +1,17 @@
+{
+  "title": "Store Application",
+  "description": "Fill out the application form to create a store",
+  "contact_name": "Contact Person",
+  "phone": "Phone",
+  "email": "Email",
+  "voen": "TIN",
+  "store_name": "Store Name",
+  "store_address": "Store Address",
+  "submit": "Submit Application",
+  "submitting": "Submitting...",
+  "success_message": "Your application has been submitted successfully",
+  "error_message": "Failed to submit application",
+  "required_field": "This field is required",
+  "invalid_email": "Please enter a valid email address"
+}
+

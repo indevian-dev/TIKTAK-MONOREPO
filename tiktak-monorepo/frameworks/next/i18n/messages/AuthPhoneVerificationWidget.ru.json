@@ -1,0 +1,19 @@
+{
+  "back_to_home": "Вернуться на главную",
+  "email": "Электронная почта",
+  "phone": "Телефон",
+  "email_placeholder": "email@example.com",
+  "phone_placeholder": "+994501234567",
+  "edit_phone_hint": "Вы можете изменить номер телефона при необходимости",
+  "verification_code": "Код подтверждения",
+  "code_placeholder": "000000",
+  "enter_valid_email": "Введите корректный email",
+  "enter_valid_phone": "Введите корректный номер телефона",
+  "enter_verification_code": "Введите код подтверждения",
+  "code_expired": "Срок действия кода истек. Запросите новый код.",
+  "phone_already_verified": "Телефон уже подтвержден",
+  "code_sent": "Код подтверждения отправлен",
+  "failed_to_send": "Не удалось отправить код подтверждения",
+  "verification_failed": "Ошибка подтверждения"
+}
+

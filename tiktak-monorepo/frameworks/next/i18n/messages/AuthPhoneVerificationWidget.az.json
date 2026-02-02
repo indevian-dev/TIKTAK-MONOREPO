@@ -1,0 +1,19 @@
+{
+  "back_to_home": "Ana səhifəyə qayıt",
+  "email": "E-poçt",
+  "phone": "Telefon",
+  "email_placeholder": "email@example.com",
+  "phone_placeholder": "+994501234567",
+  "edit_phone_hint": "Lazım olsa telefon nömrənizi dəyişə bilərsiniz",
+  "verification_code": "Təsdiq kodu",
+  "code_placeholder": "000000",
+  "enter_valid_email": "Düzgün e-poçt daxil edin",
+  "enter_valid_phone": "Düzgün telefon nömrəsi daxil edin",
+  "enter_verification_code": "Təsdiq kodunu daxil edin",
+  "code_expired": "Təsdiq kodunuzun vaxtı bitib. Zəhmət olmasa yenisini tələb edin.",
+  "phone_already_verified": "Telefon artıq təsdiqlənib",
+  "code_sent": "Təsdiq kodu göndərildi",
+  "failed_to_send": "Təsdiq kodu göndərilə bilmədi",
+  "verification_failed": "Təsdiqləmə uğursuz oldu"
+}
+

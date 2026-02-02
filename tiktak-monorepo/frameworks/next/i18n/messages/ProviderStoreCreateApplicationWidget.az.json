@@ -1,0 +1,40 @@
+{
+  "title": "Mağaza müraciəti",
+  "description": "Mağaza yaratmaq üçün müraciət formasını doldurun",
+  "contact_name": "Əlaqədar şəxs",
+  "phone": "Telefon",
+  "email": "E-poçt",
+  "voen": "VÖEN",
+  "store_name": "Mağaza adı",
+  "store_address": "Mağaza ünvanı",
+  "submit": "Müraciət et",
+  "submitting": "Göndərilir...",
+  "success_message": "Müraciətiniz uğurla göndərildi",
+  "error_message": "Müraciət göndərilə bilmədi",
+  "required_field": "Bu sahə tələb olunur",
+  "invalid_email": "Düzgün e-poçt ünvanı daxil edin"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

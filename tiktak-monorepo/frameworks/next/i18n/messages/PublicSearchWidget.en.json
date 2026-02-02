@@ -1,0 +1,16 @@
+{
+  "search_placeholder": "Search...",
+  "search": "Search",
+  "searching": "Searching...",
+  "no_results": "No results found",
+  "recent_searches": "Recent searches",
+  "clear_history": "Clear history",
+  "search_cards_placeholder": "Search cards...",
+  "all": "All",
+  "all_cities": "All Cities",
+  "results_found_single": "{count} result found",
+  "results_found_plural": "{count} results found",
+  "location_available": "Location available",
+  "no_results_for": "No cards found for \"{query}\""
+}
+

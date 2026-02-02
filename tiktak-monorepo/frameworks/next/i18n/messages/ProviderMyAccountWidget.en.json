@@ -1,0 +1,21 @@
+{
+  "my_account": "My Account",
+  "profile_picture": "Profile Picture",
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "password": "Password",
+  "change_password": "Change Password",
+  "current_password": "Current Password",
+  "new_password": "New Password",
+  "confirm_password": "Confirm Password",
+  "save_changes": "Save Changes",
+  "saving": "Saving...",
+  "profile_updated": "Profile updated",
+  "password_changed": "Password changed",
+  "verify_email": "Verify Email",
+  "verify_phone": "Verify Phone",
+  "verified": "Verified",
+  "not_verified": "Not verified"
+}
+

@@ -1,0 +1,25 @@
+{
+  "sort": "Сортировка",
+  "sort_options": "Варианты сортировки",
+  "select_sort_option": "Выберите сортировку",
+  "select_sorting_option": "Выберите сортировку...",
+  "quick_sort": "Быстрая сортировка",
+  "sort_direction": "Направление сортировки",
+  "reverse_order": "Обратный порядок",
+  "reset_to_default": "Сбросить по умолчанию",
+  "apply_sort": "Применить сортировку",
+  "newest_first": "Сначала новые",
+  "oldest_first": "Сначала старые",
+  "price_low_high": "Цена: от низкой к высокой",
+  "price_high_low": "Цена: от высокой к низкой",
+  "title_a_z": "Название: А-Я",
+  "title_z_a": "Название: Я-А",
+  "highest_rated": "С высоким рейтингом",
+  "lowest_rated": "С низким рейтингом",
+  "random": "Случайно",
+  "featured": "Рекомендуемые",
+  "latest": "Новые",
+  "low_price": "Низкая цена",
+  "top_rated": "Лучшие"
+}
+

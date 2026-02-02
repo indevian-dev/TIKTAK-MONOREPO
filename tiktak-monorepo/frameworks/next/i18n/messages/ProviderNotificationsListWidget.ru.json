@@ -1,0 +1,11 @@
+{
+  "notifications": "Уведомления",
+  "no_notifications": "У вас нет уведомлений",
+  "mark_as_read": "Отметить как прочитанное",
+  "mark_all_as_read": "Отметить все как прочитанные",
+  "just_now": "Только что",
+  "minutes_ago": "{minutes} мин. назад",
+  "hours_ago": "{hours} ч. назад",
+  "days_ago": "{days} дн. назад"
+}
+

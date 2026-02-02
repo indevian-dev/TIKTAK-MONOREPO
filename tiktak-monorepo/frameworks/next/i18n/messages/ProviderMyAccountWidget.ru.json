@@ -1,0 +1,21 @@
+{
+  "my_account": "Мой аккаунт",
+  "profile_picture": "Фото профиля",
+  "name": "Имя",
+  "email": "Email",
+  "phone": "Телефон",
+  "password": "Пароль",
+  "change_password": "Изменить пароль",
+  "current_password": "Текущий пароль",
+  "new_password": "Новый пароль",
+  "confirm_password": "Подтвердите пароль",
+  "save_changes": "Сохранить изменения",
+  "saving": "Сохранение...",
+  "profile_updated": "Профиль обновлен",
+  "password_changed": "Пароль изменен",
+  "verify_email": "Подтвердить email",
+  "verify_phone": "Подтвердить телефон",
+  "verified": "Подтверждено",
+  "not_verified": "Не подтверждено"
+}
+

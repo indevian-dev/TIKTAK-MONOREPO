@@ -1,0 +1,16 @@
+{
+  "my_cards": "Elanlarım",
+  "no_cards": "Elanınız yoxdur",
+  "create_first_card": "İlk elanınızı yaradın",
+  "create_card": "Elan yarat",
+  "views": "Baxış",
+  "status": "Status",
+  "active": "Aktiv",
+  "pending": "Gözləmədə",
+  "rejected": "Rədd edilib",
+  "edit": "Redaktə et",
+  "delete": "Sil",
+  "confirm_delete": "Elanı silmək istədiyinizə əminsiniz?",
+  "card_deleted": "Elan silindi"
+}
+

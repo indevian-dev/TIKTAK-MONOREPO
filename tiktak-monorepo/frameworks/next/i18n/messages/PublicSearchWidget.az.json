@@ -1,0 +1,16 @@
+{
+  "search_placeholder": "Axtar...",
+  "search": "Axtar",
+  "searching": "Axtarılır...",
+  "no_results": "Nəticə tapılmadı",
+  "recent_searches": "Son axtarışlar",
+  "clear_history": "Tarixçəni təmizlə",
+  "search_cards_placeholder": "Elanlarda axtar...",
+  "all": "Hamısı",
+  "all_cities": "Bütün şəhərlər",
+  "results_found_single": "{count} nəticə tapıldı",
+  "results_found_plural": "{count} nəticə tapıldı",
+  "location_available": "Məkan məlumatı var",
+  "no_results_for": "\"{query}\" üçün elan tapılmadı"
+}
+

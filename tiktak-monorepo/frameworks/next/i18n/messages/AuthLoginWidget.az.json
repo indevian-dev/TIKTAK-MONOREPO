@@ -1,0 +1,22 @@
+{
+  "back_to_home": "Ana səhifəyə qayıt",
+  "page_title": "Daxil ol",
+  "email": "E-poçt",
+  "email_placeholder": "numune@email.com",
+  "password": "Şifrə",
+  "password_placeholder": "********",
+  "login_button": "Daxil ol",
+  "register_button": "Qeydiyyat",
+  "forgot_password": "Şifrəni unutdunuz?",
+  "sign_in_with_google": "Google ilə daxil ol",
+  "sign_in_with_facebook": "Facebook ilə daxil ol",
+  "sign_in_with_apple": "Apple ilə daxil ol",
+  "login_successful": "Uğurla daxil oldunuz!",
+  "login_failed": "Giriş uğursuz oldu",
+  "invalid_credentials": "Yanlış məlumatlar",
+  "unknown_error": "Naməlum xəta",
+  "error_prefix": "Xəta",
+  "unexpected_error": "Gözlənilməz xəta baş verdi",
+  "oauth_error": "Giriş zamanı xəta baş verdi."
+}
+

@@ -1,0 +1,69 @@
+{
+  "back_to_home": "Back to home page",
+  "email": "Email",
+  "phone": "Phone",
+  "email_placeholder": "email@example.com",
+  "phone_placeholder": "+994501234567",
+  "edit_email_hint": "You can edit your email address if needed",
+  "verification_code": "Verification Code",
+  "code_placeholder": "000000",
+  "enter_valid_email": "Enter a valid email",
+  "enter_valid_phone": "Enter a valid phone number",
+  "enter_verification_code": "Enter the verification code",
+  "code_expired": "Your verification code has expired. Please request a new one.",
+  "already_verified": "{mode} already verified",
+  "code_sent": "Verification code sent",
+  "failed_to_send": "Failed to send verification code",
+  "verification_failed": "Verification failed",
+  "verification": {
+    "title": "Verify your {mode}",
+    "send_button": "Send Code",
+    "resend_button": "Resend Code",
+    "verify_button": "Verify {mode}",
+    "back_text": "← Back to Registration",
+    "success_message": "{mode} verified successfully",
+    "sending_message": "Sending...",
+    "verifying_message": "Verifying..."
+  },
+  "password_reset": {
+    "title": "Reset your password",
+    "send_button": "Send Reset Code",
+    "resend_button": "Resend Reset Code",
+    "verify_button": "Verify Reset Code",
+    "back_text": "← Back to Login",
+    "success_message": "Reset code verified successfully",
+    "sending_message": "Sending...",
+    "verifying_message": "Verifying..."
+  },
+  "two_factor": {
+    "title": "Two-Factor Authentication",
+    "send_button": "Send 2FA Code",
+    "resend_button": "Resend 2FA Code",
+    "verify_button": "Verify 2FA Code",
+    "back_text": "← Back",
+    "success_message": "2FA verification successful",
+    "sending_message": "Sending...",
+    "verifying_message": "Verifying..."
+  },
+  "email_change": {
+    "title": "Verify new email",
+    "send_button": "Send Verification Code",
+    "resend_button": "Resend Verification Code",
+    "verify_button": "Verify Email",
+    "back_text": "← Back to Settings",
+    "success_message": "Email change verified successfully",
+    "sending_message": "Sending...",
+    "verifying_message": "Verifying..."
+  },
+  "phone_change": {
+    "title": "Verify new phone",
+    "send_button": "Send Verification Code",
+    "resend_button": "Resend Verification Code",
+    "verify_button": "Verify Phone",
+    "back_text": "← Back to Settings",
+    "success_message": "Phone change verified successfully",
+    "sending_message": "Sending...",
+    "verifying_message": "Verifying..."
+  }
+}
+

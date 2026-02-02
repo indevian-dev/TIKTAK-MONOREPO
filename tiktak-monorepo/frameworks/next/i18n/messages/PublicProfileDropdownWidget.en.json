@@ -1,0 +1,19 @@
+{
+  "my_account": "My Account",
+  "my_cards": "My Cards",
+  "favorites": "Favorites",
+  "messages": "Messages",
+  "settings": "Settings",
+  "logout": "Logout",
+  "login": "Login",
+  "register": "Register",
+  "loading": "Loading...",
+  "store_owner": "Store Owner",
+  "switch_account": "Switch Account",
+  "profile_settings": "Profile Settings",
+  "signin_message": "Sign in to access your account",
+  "sign_in": "Sign In",
+  "sign_up": "Sign Up",
+  "sign_out": "Sign Out"
+}
+

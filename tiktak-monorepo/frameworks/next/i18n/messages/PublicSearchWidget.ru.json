@@ -1,0 +1,16 @@
+{
+  "search_placeholder": "Поиск...",
+  "search": "Поиск",
+  "searching": "Поиск...",
+  "no_results": "Результаты не найдены",
+  "recent_searches": "Недавние поиски",
+  "clear_history": "Очистить историю",
+  "search_cards_placeholder": "Поиск объявлений...",
+  "all": "Все",
+  "all_cities": "Все города",
+  "results_found_single": "Найден {count} результат",
+  "results_found_plural": "Найдено {count} результатов",
+  "location_available": "Есть данные о местоположении",
+  "no_results_for": "Для \"{query}\" ничего не найдено"
+}
+

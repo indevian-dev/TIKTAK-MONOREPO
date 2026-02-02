@@ -1,0 +1,22 @@
+{
+  "back_to_home": "Back to home page",
+  "page_title": "Login",
+  "email": "Email",
+  "email_placeholder": "example@email.com",
+  "password": "Password",
+  "password_placeholder": "********",
+  "login_button": "Login",
+  "register_button": "Register",
+  "forgot_password": "Forgot password?",
+  "sign_in_with_google": "Sign in with Google",
+  "sign_in_with_facebook": "Sign in with Facebook",
+  "sign_in_with_apple": "Sign in with Apple",
+  "login_successful": "Login successful!",
+  "login_failed": "Login failed",
+  "invalid_credentials": "Invalid credentials",
+  "unknown_error": "Unknown error",
+  "error_prefix": "Error",
+  "unexpected_error": "An unexpected error occurred",
+  "oauth_error": "An error occurred during login."
+}
+

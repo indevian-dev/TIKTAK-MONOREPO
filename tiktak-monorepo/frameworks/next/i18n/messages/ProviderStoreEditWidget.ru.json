@@ -1,0 +1,14 @@
+{
+  "store_settings": "Настройки магазина",
+  "store_name": "Название магазина",
+  "store_description": "Описание магазина",
+  "store_logo": "Логотип",
+  "store_cover": "Обложка",
+  "contact_info": "Контактная информация",
+  "working_hours": "Часы работы",
+  "social_links": "Социальные сети",
+  "save_changes": "Сохранить изменения",
+  "saving": "Сохранение...",
+  "store_updated": "Магазин обновлен"
+}
+

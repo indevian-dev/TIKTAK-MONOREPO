@@ -1,0 +1,13 @@
+{
+  "contact_us": "Bizimlə əlaqə",
+  "name": "Ad",
+  "email": "E-poçt",
+  "phone": "Telefon",
+  "subject": "Mövzu",
+  "message": "Mesaj",
+  "send": "Göndər",
+  "sending": "Göndərilir...",
+  "message_sent": "Mesaj göndərildi",
+  "required_field": "Bu sahə tələb olunur"
+}
+

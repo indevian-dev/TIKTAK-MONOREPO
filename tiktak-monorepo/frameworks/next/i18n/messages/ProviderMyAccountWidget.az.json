@@ -1,0 +1,21 @@
+{
+  "my_account": "Hesabım",
+  "profile_picture": "Profil şəkli",
+  "name": "Ad",
+  "email": "E-poçt",
+  "phone": "Telefon",
+  "password": "Şifrə",
+  "change_password": "Şifrəni dəyiş",
+  "current_password": "Cari şifrə",
+  "new_password": "Yeni şifrə",
+  "confirm_password": "Şifrəni təsdiqlə",
+  "save_changes": "Dəyişiklikləri saxla",
+  "saving": "Saxlanılır...",
+  "profile_updated": "Profil yeniləndi",
+  "password_changed": "Şifrə dəyişdirildi",
+  "verify_email": "E-poçtu təsdiqlə",
+  "verify_phone": "Telefonu təsdiqlə",
+  "verified": "Təsdiqlənib",
+  "not_verified": "Təsdiqlənməyib"
+}
+

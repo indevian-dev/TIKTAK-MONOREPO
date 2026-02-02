@@ -1,0 +1,14 @@
+{
+  "title": "Двухфакторная аутентификация",
+  "email_method": "Email",
+  "sms_method": "SMS",
+  "send_code": "Отправить код",
+  "resend_code": "Отправить повторно",
+  "verify": "Подтвердить",
+  "code_placeholder": "Введите код",
+  "sending": "Отправка...",
+  "verifying": "Проверка...",
+  "close": "Закрыть",
+  "wait_seconds": "Подождите {seconds} сек"
+}
+

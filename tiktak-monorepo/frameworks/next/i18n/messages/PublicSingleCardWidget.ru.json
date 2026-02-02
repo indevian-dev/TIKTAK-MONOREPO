@@ -1,0 +1,19 @@
+{
+  "price": "Цена",
+  "negotiable": "Договорная",
+  "description": "Описание",
+  "location": "Местоположение",
+  "contact_seller": "Связаться с продавцом",
+  "call": "Позвонить",
+  "message": "Написать",
+  "add_to_favorites": "Добавить в избранное",
+  "remove_from_favorites": "Удалить из избранного",
+  "share": "Поделиться",
+  "report": "Пожаловаться",
+  "views": "Просмотров",
+  "posted_on": "Размещено",
+  "updated_on": "Обновлено",
+  "similar_cards": "Похожие объявления",
+  "seller_info": "О продавце"
+}
+

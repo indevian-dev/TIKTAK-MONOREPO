@@ -1,0 +1,18 @@
+{
+  "search_and_filters": "Search & Filters",
+  "search": "Search",
+  "search_placeholder": "Search for products...",
+  "sort_by": "Sort by",
+  "price_range": "Price Range",
+  "min": "Min",
+  "max": "Max",
+  "apply": "Apply",
+  "clear_all": "Clear",
+  "close": "Close",
+  "newest_first": "Newest",
+  "price_low_high": "Price ↑",
+  "price_high_low": "Price ↓",
+  "highest_rated": "Top rated",
+  "random": "Random"
+}
+

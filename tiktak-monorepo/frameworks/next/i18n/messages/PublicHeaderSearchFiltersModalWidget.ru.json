@@ -1,0 +1,18 @@
+{
+  "search_and_filters": "Поиск и фильтры",
+  "search": "Поиск",
+  "search_placeholder": "Поиск товаров...",
+  "sort_by": "Сортировка",
+  "price_range": "Диапазон цен",
+  "min": "Мин",
+  "max": "Макс",
+  "apply": "Применить",
+  "clear_all": "Очистить",
+  "close": "Закрыть",
+  "newest_first": "Новые",
+  "price_low_high": "Цена ↑",
+  "price_high_low": "Цена ↓",
+  "highest_rated": "Рейтинг",
+  "random": "Случайные"
+}
+
