@@ -1,0 +1,6 @@
+{
+  "favorites_limit_reached": "Favorites Limit Reached",
+  "favorites_limit_message": "You can only save up to {limit} favorites. To add more items, please remove some existing favorites first.",
+  "close": "Close"
+}
+

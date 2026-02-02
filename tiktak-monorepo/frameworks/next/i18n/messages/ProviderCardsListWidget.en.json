@@ -1,0 +1,16 @@
+{
+  "my_cards": "My Cards",
+  "no_cards": "You have no cards",
+  "create_first_card": "Create your first card",
+  "create_card": "Create Card",
+  "views": "Views",
+  "status": "Status",
+  "active": "Active",
+  "pending": "Pending",
+  "rejected": "Rejected",
+  "edit": "Edit",
+  "delete": "Delete",
+  "confirm_delete": "Are you sure you want to delete this card?",
+  "card_deleted": "Card deleted"
+}
+

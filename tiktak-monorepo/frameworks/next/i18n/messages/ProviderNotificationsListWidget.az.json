@@ -1,0 +1,11 @@
+{
+  "notifications": "Bildirişlər",
+  "no_notifications": "Bildirişiniz yoxdur",
+  "mark_as_read": "Oxunmuş kimi işarələ",
+  "mark_all_as_read": "Hamısını oxunmuş işarələ",
+  "just_now": "İndicə",
+  "minutes_ago": "{minutes} dəqiqə əvvəl",
+  "hours_ago": "{hours} saat əvvəl",
+  "days_ago": "{days} gün əvvəl"
+}
+

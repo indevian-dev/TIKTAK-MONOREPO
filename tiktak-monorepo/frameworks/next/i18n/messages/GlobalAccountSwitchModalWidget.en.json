@@ -1,0 +1,11 @@
+{
+  "switch_account": "Switch Account",
+  "personal_account": "Personal Account",
+  "store_account": "Store Account",
+  "store": "Store",
+  "no_accounts": "No accounts available",
+  "loading_accounts": "Loading accounts...",
+  "refresh_accounts": "Refresh accounts list",
+  "switching_info": "Switching accounts will update your provider view and permissions."
+}
+

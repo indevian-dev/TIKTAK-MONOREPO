@@ -1,0 +1,20 @@
+{
+  "filters": "Filtrlər",
+  "category": "Kateqoriya",
+  "subcategory": "Alt kateqoriya",
+  "select": "Seç",
+  "price_range": "Qiymət aralığı",
+  "min_price": "Min qiymət",
+  "max_price": "Max qiymət",
+  "min": "Min",
+  "max": "Max",
+  "multiple_selection": "Çoxlu seçim",
+  "location": "Yer",
+  "apply": "Tətbiq et",
+  "clear": "Təmizlə",
+  "sort_by": "Sırala",
+  "newest": "Ən yeni",
+  "oldest": "Ən köhnə",
+  "price_low_high": "Qiymət: Aşağıdan yuxarı",
+  "price_high_low": "Qiymət: Yuxarıdan aşağı"
+}

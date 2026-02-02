@@ -1,0 +1,47 @@
+{
+  "card_images": "Elan şəkilləri",
+  "unsaved_changes": "Yadda saxlanmamış dəyişikliklər",
+  "storage_prefix": "Saxlama prefiksi",
+  "images_count": "Şəkil sayı",
+  "marked_for_deletion": "Silinmək üçün işarələnib",
+  "has_changes": "Dəyişiklikləri var",
+  "current_images": "Cari şəkillər",
+  "add_images": "Şəkil əlavə et",
+  "uploading": "Yüklənir...",
+  "select_files_first": "Əvvəlcə faylları seçin.",
+  "upload_failed": "{name} yüklənə bilmədi: {error}",
+  "no_files_uploaded": "Heç bir fayl uğurla yüklənmədi",
+  "images_uploaded": "{count} şəkil uğurla yükləndi",
+  "image_unmarked": "Şəkil silinmək üçün işarələnmədi",
+  "image_marked_for_deletion": "Şəkil silinmək üçün işarələndi - saxlamaq üçün dəyişiklikləri tətbiq edin",
+  "move_up": "Yuxarı çək",
+  "move_down": "Aşağı çək",
+  "restore_image": "Şəkli bərpa et",
+  "mark_for_deletion": "Silinmək üçün işarələ",
+  "must_be_deleted": "Silinməlidir",
+  "no_image": "Şəkil yoxdur"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

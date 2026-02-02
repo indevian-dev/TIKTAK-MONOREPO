@@ -1,0 +1,19 @@
+{
+  "price": "Price",
+  "negotiable": "Negotiable",
+  "description": "Description",
+  "location": "Location",
+  "contact_seller": "Contact Seller",
+  "call": "Call",
+  "message": "Message",
+  "add_to_favorites": "Add to Favorites",
+  "remove_from_favorites": "Remove from Favorites",
+  "share": "Share",
+  "report": "Report",
+  "views": "Views",
+  "posted_on": "Posted on",
+  "updated_on": "Updated on",
+  "similar_cards": "Similar Cards",
+  "seller_info": "About Seller"
+}
+

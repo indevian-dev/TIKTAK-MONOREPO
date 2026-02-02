@@ -1,0 +1,19 @@
+{
+  "my_account": "Hesabım",
+  "my_cards": "Elanlarım",
+  "favorites": "Bəyənilənlər",
+  "messages": "Mesajlar",
+  "settings": "Parametrlər",
+  "logout": "Çıxış",
+  "login": "Giriş",
+  "register": "Qeydiyyat",
+  "loading": "Yüklənir...",
+  "store_owner": "Mağaza sahibi",
+  "switch_account": "Hesabı dəyiş",
+  "profile_settings": "Profil parametrləri",
+  "signin_message": "Hesabınıza daxil olmaq üçün sistemə daxil olun",
+  "sign_in": "Daxil ol",
+  "sign_up": "Qeydiyyatdan keç",
+  "sign_out": "Çıxış"
+}
+

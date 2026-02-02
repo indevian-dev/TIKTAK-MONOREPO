@@ -1,0 +1,8 @@
+{
+  "image_gallery": "Image Gallery",
+  "next": "Next",
+  "previous": "Previous",
+  "close": "Close",
+  "image_count": "Image {current} of {total}"
+}
+

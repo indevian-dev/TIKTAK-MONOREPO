@@ -1,0 +1,22 @@
+{
+  "title": "Title",
+  "description": "Description",
+  "price": "Price",
+  "options": "Options",
+  "accept": "I accept",
+  "rules": "Rules",
+  "open_location_picker": "Select Location",
+  "save": "Save",
+  "card_updated": "Card updated successfully",
+  "loading": "Loading...",
+  "cancel": "Cancel",
+  "status": "Status",
+  "active": "Active",
+  "inactive": "Inactive",
+  "edit_card": "Edit Card",
+  "category": "Category",
+  "unsaved_changes": "You have unsaved changes. Are you sure you want to leave?",
+  "confirm_leave": "Leave Page",
+  "stay_on_page": "Stay on Page"
+}
+

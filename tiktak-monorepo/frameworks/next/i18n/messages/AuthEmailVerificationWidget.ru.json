@@ -1,0 +1,69 @@
+{
+  "back_to_home": "Вернуться на главную",
+  "email": "Электронная почта",
+  "phone": "Телефон",
+  "email_placeholder": "email@example.com",
+  "phone_placeholder": "+994501234567",
+  "edit_email_hint": "Вы можете изменить email при необходимости",
+  "verification_code": "Код подтверждения",
+  "code_placeholder": "000000",
+  "enter_valid_email": "Введите корректный email",
+  "enter_valid_phone": "Введите корректный номер телефона",
+  "enter_verification_code": "Введите код подтверждения",
+  "code_expired": "Срок действия кода истек. Запросите новый код.",
+  "already_verified": "{mode} уже подтвержден",
+  "code_sent": "Код подтверждения отправлен",
+  "failed_to_send": "Не удалось отправить код подтверждения",
+  "verification_failed": "Ошибка подтверждения",
+  "verification": {
+    "title": "Подтвердите {mode}",
+    "send_button": "Отправить код",
+    "resend_button": "Отправить код повторно",
+    "verify_button": "Подтвердить {mode}",
+    "back_text": "← Вернуться к регистрации",
+    "success_message": "{mode} успешно подтвержден",
+    "sending_message": "Отправка...",
+    "verifying_message": "Проверка..."
+  },
+  "password_reset": {
+    "title": "Сброс пароля",
+    "send_button": "Отправить код сброса",
+    "resend_button": "Отправить код повторно",
+    "verify_button": "Подтвердить код сброса",
+    "back_text": "← Вернуться к входу",
+    "success_message": "Код сброса успешно подтвержден",
+    "sending_message": "Отправка...",
+    "verifying_message": "Проверка..."
+  },
+  "two_factor": {
+    "title": "Двухфакторная аутентификация",
+    "send_button": "Отправить код 2FA",
+    "resend_button": "Отправить код 2FA повторно",
+    "verify_button": "Подтвердить код 2FA",
+    "back_text": "← Назад",
+    "success_message": "2FA проверка успешна",
+    "sending_message": "Отправка...",
+    "verifying_message": "Проверка..."
+  },
+  "email_change": {
+    "title": "Подтвердите новый email",
+    "send_button": "Отправить код подтверждения",
+    "resend_button": "Отправить код повторно",
+    "verify_button": "Подтвердить email",
+    "back_text": "← Вернуться к настройкам",
+    "success_message": "Изменение email успешно подтверждено",
+    "sending_message": "Отправка...",
+    "verifying_message": "Проверка..."
+  },
+  "phone_change": {
+    "title": "Подтвердите новый телефон",
+    "send_button": "Отправить код подтверждения",
+    "resend_button": "Отправить код повторно",
+    "verify_button": "Подтвердить телефон",
+    "back_text": "← Вернуться к настройкам",
+    "success_message": "Изменение телефона успешно подтверждено",
+    "sending_message": "Отправка...",
+    "verifying_message": "Проверка..."
+  }
+}
+

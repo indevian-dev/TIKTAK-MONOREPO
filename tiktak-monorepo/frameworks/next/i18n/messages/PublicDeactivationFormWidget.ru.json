@@ -1,0 +1,10 @@
+{
+  "deactivate_account": "Деактивировать аккаунт",
+  "confirm_deactivation": "Вы уверены, что хотите деактивировать аккаунт?",
+  "reason": "Причина",
+  "password": "Пароль",
+  "deactivate": "Деактивировать",
+  "cancel": "Отмена",
+  "account_deactivated": "Аккаунт деактивирован"
+}
+

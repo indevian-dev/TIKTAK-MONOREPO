@@ -1,0 +1,69 @@
+{
+  "back_to_home": "Ana səhifəyə qayıt",
+  "email": "E-poçt",
+  "phone": "Telefon",
+  "email_placeholder": "email@example.com",
+  "phone_placeholder": "+994501234567",
+  "edit_email_hint": "Lazım olsa e-poçt ünvanınızı dəyişə bilərsiniz",
+  "verification_code": "Təsdiq kodu",
+  "code_placeholder": "000000",
+  "enter_valid_email": "Düzgün e-poçt daxil edin",
+  "enter_valid_phone": "Düzgün telefon nömrəsi daxil edin",
+  "enter_verification_code": "Təsdiq kodunu daxil edin",
+  "code_expired": "Təsdiq kodunuzun vaxtı bitib. Zəhmət olmasa yenisini tələb edin.",
+  "already_verified": "{mode} artıq təsdiqlənib",
+  "code_sent": "Təsdiq kodu göndərildi",
+  "failed_to_send": "Təsdiq kodu göndərilə bilmədi",
+  "verification_failed": "Təsdiqləmə uğursuz oldu",
+  "verification": {
+    "title": "{mode} təsdiqlə",
+    "send_button": "Kod göndər",
+    "resend_button": "Kodu yenidən göndər",
+    "verify_button": "{mode} təsdiqlə",
+    "back_text": "← Qeydiyyata qayıt",
+    "success_message": "{mode} uğurla təsdiqləndi",
+    "sending_message": "Göndərilir...",
+    "verifying_message": "Təsdiqlənir..."
+  },
+  "password_reset": {
+    "title": "Şifrəni sıfırla",
+    "send_button": "Sıfırlama kodu göndər",
+    "resend_button": "Sıfırlama kodunu yenidən göndər",
+    "verify_button": "Sıfırlama kodunu təsdiqlə",
+    "back_text": "← Girişə qayıt",
+    "success_message": "Sıfırlama kodu uğurla təsdiqləndi",
+    "sending_message": "Göndərilir...",
+    "verifying_message": "Təsdiqlənir..."
+  },
+  "two_factor": {
+    "title": "İki faktorlu autentifikasiya",
+    "send_button": "2FA kodu göndər",
+    "resend_button": "2FA kodunu yenidən göndər",
+    "verify_button": "2FA kodunu təsdiqlə",
+    "back_text": "← Geri",
+    "success_message": "2FA təsdiqləmə uğurlu oldu",
+    "sending_message": "Göndərilir...",
+    "verifying_message": "Təsdiqlənir..."
+  },
+  "email_change": {
+    "title": "Yeni e-poçtu təsdiqlə",
+    "send_button": "Təsdiq kodu göndər",
+    "resend_button": "Təsdiq kodunu yenidən göndər",
+    "verify_button": "E-poçtu təsdiqlə",
+    "back_text": "← Parametrlərə qayıt",
+    "success_message": "E-poçt dəyişikliyi uğurla təsdiqləndi",
+    "sending_message": "Göndərilir...",
+    "verifying_message": "Təsdiqlənir..."
+  },
+  "phone_change": {
+    "title": "Yeni telefonu təsdiqlə",
+    "send_button": "Təsdiq kodu göndər",
+    "resend_button": "Təsdiq kodunu yenidən göndər",
+    "verify_button": "Telefonu təsdiqlə",
+    "back_text": "← Parametrlərə qayıt",
+    "success_message": "Telefon dəyişikliyi uğurla təsdiqləndi",
+    "sending_message": "Göndərilir...",
+    "verifying_message": "Təsdiqlənir..."
+  }
+}
+

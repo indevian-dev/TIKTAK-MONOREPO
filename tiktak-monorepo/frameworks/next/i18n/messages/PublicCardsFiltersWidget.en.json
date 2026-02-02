@@ -1,0 +1,20 @@
+{
+  "filters": "Filters",
+  "category": "Category",
+  "subcategory": "Subcategory",
+  "select": "Select",
+  "price_range": "Price Range",
+  "min_price": "Min Price",
+  "max_price": "Max Price",
+  "min": "Min",
+  "max": "Max",
+  "multiple_selection": "Multiple selection",
+  "location": "Location",
+  "apply": "Apply",
+  "clear": "Clear",
+  "sort_by": "Sort By",
+  "newest": "Newest First",
+  "oldest": "Oldest First",
+  "price_low_high": "Price: Low to High",
+  "price_high_low": "Price: High to Low"
+}

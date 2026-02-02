@@ -1,0 +1,25 @@
+{
+  "sort": "Sort",
+  "sort_options": "Sort Options",
+  "select_sort_option": "Select Sort Option",
+  "select_sorting_option": "Select sorting option...",
+  "quick_sort": "Quick Sort",
+  "sort_direction": "Sort Direction",
+  "reverse_order": "Reverse Order",
+  "reset_to_default": "Reset to Default",
+  "apply_sort": "Apply Sort",
+  "newest_first": "Newest First",
+  "oldest_first": "Oldest First",
+  "price_low_high": "Price: Low to High",
+  "price_high_low": "Price: High to Low",
+  "title_a_z": "Title: A to Z",
+  "title_z_a": "Title: Z to A",
+  "highest_rated": "Highest Rated",
+  "lowest_rated": "Lowest Rated",
+  "random": "Random",
+  "featured": "Featured",
+  "latest": "Latest",
+  "low_price": "Low Price",
+  "top_rated": "Top Rated"
+}
+

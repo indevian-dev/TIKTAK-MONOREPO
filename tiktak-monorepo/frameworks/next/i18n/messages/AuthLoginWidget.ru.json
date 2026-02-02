@@ -1,0 +1,21 @@
+{
+  "back_to_home": "Вернуться на главную",
+  "page_title": "Вход",
+  "email": "Электронная почта",
+  "email_placeholder": "example@email.com",
+  "password": "Пароль",
+  "password_placeholder": "********",
+  "login_button": "Войти",
+  "register_button": "Регистрация",
+  "forgot_password": "Забыли пароль?",
+  "sign_in_with_google": "Войти через Google",
+  "sign_in_with_facebook": "Войти через Facebook",
+  "sign_in_with_apple": "Войти через Apple",
+  "login_successful": "Вход выполнен успешно!",
+  "login_failed": "Ошибка входа",
+  "invalid_credentials": "Неверные данные",
+  "unknown_error": "Неизвестная ошибка",
+  "error_prefix": "Ошибка",
+  "unexpected_error": "Произошла непредвиденная ошибка",
+  "oauth_error": "Произошла ошибка при входе."
+}
