@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   PLUGINS (migrated from tailwind.config.ts → v4 CSS-first)
+   ═══════════════════════════════════════════════════════════════ */
+@plugin "tailwind-scrollbar";
+@plugin "@tailwindcss/typography";
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME TOKENS
+   Custom brand colors available as Tailwind utilities:
+   e.g. bg-brandPrimary, text-brandSecondaryDarkText, etc.
+   ═══════════════════════════════════════════════════════════════ */
+@theme {
+  --color-brandPrimary: #ff0032;
+  --color-brandSecondary: #000a39;
+  --color-brandPrimaryDarkBg: #000a39;
+  --color-brandSecondaryDarkBg: #1b2d81;
+  --color-brandPrimaryLightBg: #e6e8ef;
+  --color-brandSecondaryLightBg: #cacedd;
+  --color-brandPrimaryDarkText: #000a39;
+  --color-brandSecondaryDarkText: #393e57;
+  --color-brandPrimaryLightText: #e6e8ef;
+  --color-brandSecondaryLightText: #cacedd;
+  --color-brandPrimaryDarkBorder: #000a39;
+  --color-brandSecondaryDarkBorder: #393e57;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════════ */
+html {
+  font-family: 'Montserrat', sans-serif;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
