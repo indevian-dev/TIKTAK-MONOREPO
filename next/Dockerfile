@@ -17,9 +17,10 @@ WORKDIR /app
 # Copy root workspace manifest + lockfile (source of truth for workspaces)
 COPY package.json bun.lock ./
 
-# Copy each workspace package.json (Bun needs these to resolve workspace:*)
+# Copy each workspace package.json (Bun needs ALL workspaces from root package.json declared)
 COPY next/package.json ./next/
 COPY _shared.types/package.json ./_shared.types/
+COPY expo/package.json ./expo/
 
 # Install all workspace dependencies from the root lockfile
 RUN bun install --frozen-lockfile
