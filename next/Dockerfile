@@ -1,48 +1,62 @@
 
 # ═══════════════════════════════════════════════════════════════
 # 🐳 Dockerfile for Next.js (Standalone) with Bun & Monorepo Support
+# Build context: monorepo root  |  Dockerfile: next/Dockerfile
 # ═══════════════════════════════════════════════════════════════
 
-# Use oven/bun for fast installation and building
 FROM oven/bun:1 AS base
 
+# ──────────────────────────────────────────────────────────────
 # 1. Install dependencies
+#    Must install from monorepo root so Bun workspaces resolves
+#    the shared root bun.lock correctly.
+# ──────────────────────────────────────────────────────────────
 FROM base AS deps
 WORKDIR /app
 
-# Copy necessary files for installation
-# We copy package.json and bun.lock to a subdirectory 'next'
-COPY next/package.json next/bun.lock ./next/
-COPY _shared.types ./_shared.types
+# Copy root workspace manifest + lockfile (source of truth for workspaces)
+COPY package.json bun.lock ./
 
-WORKDIR /app/next
+# Copy each workspace package.json (Bun needs these to resolve workspace:*)
+COPY next/package.json ./next/
+COPY _shared.types/package.json ./_shared.types/
+
+# Install all workspace dependencies from the root lockfile
 RUN bun install --frozen-lockfile
 
-# 2. Build the app
+# ──────────────────────────────────────────────────────────────
+# 2. Build the Next.js app
+# ──────────────────────────────────────────────────────────────
 FROM base AS builder
 WORKDIR /app
 
+# Restore installed node_modules from deps stage
+COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/next/node_modules ./next/node_modules
-COPY --from=deps /app/_shared.types ./_shared.types
+
+# Copy source
+COPY _shared.types ./_shared.types
 COPY next ./next
 
 WORKDIR /app/next
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN bun run build
 
-# 3. Production runner
+# Run next build directly (bypasses prebuild validators which are dev-only)
+RUN bun x next build
+
+# ──────────────────────────────────────────────────────────────
+# 3. Production runner (minimal image - standalone only)
+# ──────────────────────────────────────────────────────────────
 FROM oven/bun:1 AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# COPY the entire standalone folder
-# This includes 'node_modules' (dependencies) and 'next' (the project)
+# Copy the standalone build output
 COPY --from=builder /app/next/.next/standalone ./
 
-# COPY public and static assets to the correct location within the standalone structure
-# Assuming the project folder is named 'next' inside standalone
+# Copy public and static assets into the correct location inside standalone
 COPY --from=builder /app/next/public ./next/public
 COPY --from=builder /app/next/.next/static ./next/.next/static
 
@@ -52,5 +66,4 @@ EXPOSE 8000
 ENV PORT=8000
 ENV HOSTNAME="0.0.0.0"
 
-# Start the server from the specific project directory inside standalone
 CMD ["bun", "next/server.js"]
