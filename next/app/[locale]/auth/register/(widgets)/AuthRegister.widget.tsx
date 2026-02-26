@@ -208,7 +208,7 @@ export default function AuthRegisterWidget() {
 
       // apiCall throws on error — success if we reach here
       // Clear stale profile cache so the verify page loads fresh data for the new user
-      localStorage.removeItem('stuwin.ai_profile');
+      localStorage.removeItem('tiktak.ai_profile');
 
       // Show success message
       toast.success(response?.data?.message || t('registration_successful'));

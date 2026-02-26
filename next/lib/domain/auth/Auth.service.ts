@@ -295,11 +295,11 @@ export class AuthService extends BaseService {
 
             if (channel === 'email') {
                 const emailSubjects: Record<string, string> = {
-                    verification: 'Verify Your Email - stuwin.ai',
-                    password_reset: 'Password Reset - stuwin.ai',
-                    '2fa': 'Two-Factor Authentication - stuwin.ai',
-                    email_change: 'Verify Your New Email - stuwin.ai',
-                    phone_change: 'Verify Email for Phone Change - stuwin.ai'
+                    verification: 'Verify Your Email - tiktak.ai',
+                    password_reset: 'Password Reset - tiktak.ai',
+                    '2fa': 'Two-Factor Authentication - tiktak.ai',
+                    email_change: 'Verify Your New Email - tiktak.ai',
+                    phone_change: 'Verify Email for Phone Change - tiktak.ai'
                 };
 
                 const fullName = [user.firstName, user.lastName].filter(Boolean).join(' ') || user.email || 'User';
@@ -312,7 +312,7 @@ export class AuthService extends BaseService {
 
                 const result = await sendMail({
                     to: user.email,
-                    subject: emailSubjects[operation] || 'Verification Code - stuwin.ai',
+                    subject: emailSubjects[operation] || 'Verification Code - tiktak.ai',
                     html: html || ''
                 });
 

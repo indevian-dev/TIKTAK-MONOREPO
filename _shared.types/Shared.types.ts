@@ -1,4 +1,4 @@
-// STUWIN SHARED TYPE SYSTEM
+// tiktak SHARED TYPE SYSTEM
 
 // Domain Entities
 // export * from './domain/Domain.types';
