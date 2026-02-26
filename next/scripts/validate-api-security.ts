@@ -2,7 +2,7 @@
  * validate-api-security.ts
  * 
  * Pre-build validation: Ensures every API route file (route.ts) in app/api/
- * has a corresponding entry in the endpoint configuration registry.
+ * has a corresponding entry in the route configuration registry.
  * 
  * This catches missing security configs at build time rather than
  * hitting 404s at runtime.
@@ -15,7 +15,7 @@ import { join, relative, sep } from 'path';
 // Find all route.ts files in app/api/
 // ═══════════════════════════════════════════════════════════════
 
-const APP_DIR = join(import.meta.dir, '..', 'app');
+const APP_DIR = join(import.meta.dirname, '..', 'app');
 const API_DIR = join(APP_DIR, 'api');
 
 function findRouteFiles(dir: string, results: string[] = []): string[] {
@@ -48,7 +48,7 @@ function toApiPath(filePath: string): string {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// Read endpoint configs and validate
+// Read route configs and validate
 // ═══════════════════════════════════════════════════════════════
 
 async function validate() {
@@ -56,9 +56,9 @@ async function validate() {
     console.log('🔒 Validating API route security configurations...');
     console.log('');
 
-    // Import the endpoint registry
-    const { allEndpoints } = await import('../lib/routes/index');
-    const registeredPaths = Object.keys(allEndpoints);
+    // Import the route registry
+    const { allRoutes } = await import('../lib/routes/_Route.index');
+    const registeredPaths = Object.keys(allRoutes);
 
     // Build a pattern matcher (handles :param style)
     function pathMatchesRegistered(apiPath: string): boolean {
@@ -99,7 +99,7 @@ async function validate() {
         }
         console.log('');
         console.log('  These routes will return 404 at runtime because');
-        console.log('  withApiHandler cannot find their endpoint config.');
+        console.log('  withApiHandler cannot find their route config.');
         console.log('');
         console.log('  Fix: Add entries to the appropriate Routes file in');
         console.log('  lib/routes/workspaces/ or lib/routes/auth/');

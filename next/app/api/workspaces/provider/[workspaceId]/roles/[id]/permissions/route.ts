@@ -1,77 +1,39 @@
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import type { NextRequest } from 'next/server';
-import type { ApiHandlerContext } from '@/types/next';
-import { NextResponse } from 'next/server';
-import supabase from '@/lib/clients/supabaseServiceRoleClient';
-import type { ApiRouteHandler } from '@/types/next';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { NextRequest } from 'next/server';
+import { okResponse, errorResponse, notFoundResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
+import { RolePermissionsSchema } from '@tiktak/shared/types/domain/Workspace.schemas';
+import { validateBody } from '@/lib/utils/Zod.validate.util';
 
-export const POST: ApiRouteHandler = withApiHandler(async (request, { authData, params }) => {
+export const POST = unifiedApiHandler(async (request: NextRequest, { params, module, log }) => {
     const resolvedParams = await params;
     if (!resolvedParams?.id) {
-        return NextResponse.json({ error: 'Role ID is required' }, { status: 400 });
+        return errorResponse('Role ID is required', 400);
     }
-    const id = resolvedParams.id;
-    const { path, method, action } = await request.json();
+    const id = resolvedParams.id as string;
 
-    // Validate required fields
-    if (!path || !action) {
-        return NextResponse.json({ error: 'Path and action are required' }, { status: 400 });
-    }
+    const parsed = await validateBody(request, RolePermissionsSchema);
+    if (!parsed.success) return parsed.errorResponse;
 
-    if (action !== 'add' && action !== 'remove') {
-        return NextResponse.json({ error: 'Action must be "add" or "remove"' }, { status: 400 });
-    }
+    const { path, action } = parsed.data;
 
     try {
-        // First, get the current role with its permissions
-        const { data: role, error: roleError } = await supabase
-            .from('accounts_roles')
-            .select('permissions')
-            .eq('id', id)
-            .single();
+        const result = await module.roles.updateRolePermissions(id, path, action);
 
-        if (roleError) {
-            return NextResponse.json({ error: 'Role not found' }, { status: 404 });
-        }
-
-        // Initialize permissions object if it doesn't exist
-        let permissions = role.permissions || {};
-
-        if (action === 'add') {
-            // Add the permission to the JSON object
-            permissions[path] = {
-                m: method || 'GET',  // Default to GET if method not provided
-                v: 'permissions',    // Standard value based on your codebase
-                t: 'api',            // Assuming most permissions are for API endpoints
-                d: `Permission for ${path}`  // Description
-            };
-        } else {
-            // Remove the permission from the JSON object
-            if (permissions[path]) {
-                delete permissions[path];
+        if (!result.success) {
+            if (result.status === 404) {
+                return notFoundResponse(result.error ?? 'Role not found');
             }
+            return serverErrorResponse(result.error ?? 'Failed to update permissions');
         }
 
-        // Update the permissions in the database
-        const { data, error } = await supabase
-            .from('accounts_roles')
-            .update({ permissions })
-            .eq('id', id)
-            .select('permissions')
-            .single();
-
-        if (error) {
-            return NextResponse.json({ error: error.message }, { status: 500 });
-        }
-
-        return NextResponse.json({
-            role: data,
+        return okResponse({
+            role: result.role,
             action: action === 'add' ? 'added' : 'removed',
-            path
-        }, { status: 200 });
-
+            path,
+        });
     } catch (error) {
+        log?.error('Permissions update error', error as Error);
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-        return NextResponse.json({ error: errorMessage }, { status: 500 });
+        return serverErrorResponse(errorMessage);
     }
-})
+});

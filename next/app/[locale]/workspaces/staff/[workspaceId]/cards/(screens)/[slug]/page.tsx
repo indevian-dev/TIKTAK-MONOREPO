@@ -1,7 +1,7 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { StaffCardsListWidget }
-  from '@/app/[locale]/workspaces/staff/[workspaceId]/cards/(widgets)/StaffCardsListWidget';
+  from '@/app/[locale]/workspaces/staff/[workspaceId]/cards/(widgets)/StaffCardsList.widget';
 
 export default withPageAuth(
   async function StaffCardsPage({ }) {
@@ -14,5 +14,5 @@ export default withPageAuth(
       </div>
     );
   },
-  { pagePath: '/staff/cards/:slug', inlineHandlers: true }
+  { path: '/staff/cards/:slug', inlineHandlers: true }
 );

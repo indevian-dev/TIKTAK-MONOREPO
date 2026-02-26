@@ -2,13 +2,13 @@
  * validate-page-security.ts
  * 
  * Pre-build validation: Ensures every page.tsx in app/[locale]/
- * (except public and auth routes) has a corresponding page endpoint config.
+ * (except public and auth routes) has a corresponding page route config.
  */
 
 import { readdirSync, existsSync } from 'fs';
 import { join, relative, sep } from 'path';
 
-const APP_DIR = join(import.meta.dir, '..', 'app');
+const APP_DIR = join(import.meta.dirname, '..', 'app');
 const LOCALE_DIR = join(APP_DIR, '[locale]');
 
 function findPageFiles(dir: string, results: string[] = []): string[] {
@@ -45,8 +45,8 @@ async function validate() {
     console.log('🔒 Validating page security configurations...');
     console.log('');
 
-    const { allEndpoints } = await import('../lib/routes/index');
-    const registeredPaths = Object.keys(allEndpoints);
+    const { allRoutes } = await import('../lib/routes/_Route.index');
+    const registeredPaths = Object.keys(allRoutes);
 
     function pathMatchesRegistered(pagePath: string): boolean {
         if (registeredPaths.includes(pagePath)) return true;

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 /**
  * Server-side co-located translation loader
  * For use in Server Components and Server Actions

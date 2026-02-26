@@ -1,24 +1,14 @@
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import type { NextRequest } from 'next/server';
-import type { ApiHandlerContext } from '@/types/next';
-import { NextResponse } from 'next/server';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { NextRequest } from 'next/server';
 import { S3Client, DeleteObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
+import { errorResponse, serverErrorResponse, messageResponse } from '@/lib/middleware/Response.Api.middleware';
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
-export const POST = withApiHandler(async (req: NextRequest, { authData, params }: ApiHandlerContext) => {
-  if (!authData) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
+export const POST = unifiedApiHandler(async (req: NextRequest, { log }) => {
   const { filename, filePath } = await req.json();
 
   if (!filename || !filePath) {
-    return NextResponse.json({
-      error: 'Filename and filePath are required'
-    }, { status: 400 });
+    return errorResponse('Filename and filePath are required', 400);
   }
-
-  ConsoleLogger.log('Received request to delete:', { filename, filePath });
 
   try {
     const s3Client = new S3Client({
@@ -31,40 +21,24 @@ export const POST = withApiHandler(async (req: NextRequest, { authData, params }
     });
 
     const key = `${filePath}/${filename}`;
-    const deleteParams = {
-      Bucket: Bun.env.AWS_S3_BUCKET_NAME,
-      Key: key,
-    };
+    const deleteParams = { Bucket: Bun.env.AWS_S3_BUCKET_NAME, Key: key };
 
-    ConsoleLogger.log('Attempting to delete:', deleteParams);
-
-    // Delete the file from S3
-    const deleteCommand = new DeleteObjectCommand(deleteParams);
-    await s3Client.send(deleteCommand);
-    ConsoleLogger.log('Delete command sent');
+    await s3Client.send(new DeleteObjectCommand(deleteParams));
 
     // Verify deletion
     try {
-      const headCommand = new HeadObjectCommand(deleteParams);
-      await s3Client.send(headCommand);
-      return NextResponse.json({
-        error: 'File could not be deleted'
-      }, { status: 500 });
+      await s3Client.send(new HeadObjectCommand(deleteParams));
+      return serverErrorResponse('File could not be deleted');
     } catch (headErr: unknown) {
       const error = headErr as { name?: string };
       if (error.name === 'NotFound') {
-        ConsoleLogger.log('File successfully deleted');
-        return NextResponse.json({
-          message: 'File deleted successfully'
-        }, { status: 200 });
+        return messageResponse('File deleted successfully');
       }
       throw headErr;
     }
   } catch (error) {
+    log?.error('S3 delete error', error as Error);
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json({
-      error: 'An error occurred while deleting the file',
-      details: errorMessage
-    }, { status: 500 });
+    return serverErrorResponse('An error occurred while deleting the file');
   }
-})
+});

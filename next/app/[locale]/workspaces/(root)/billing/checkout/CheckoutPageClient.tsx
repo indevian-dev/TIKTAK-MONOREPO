@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { PiCheckCircleFill, PiArrowsClockwiseBold, PiArrowLeftBold } from 'react-icons/pi';
-import { apiCallForSpaHelper } from '@/lib/helpers/apiCallForSpaHelper';
+import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import Link from 'next/link';
 
 export function CheckoutPageClient() {
@@ -30,7 +30,7 @@ export function CheckoutPageClient() {
             try {
                 // Determine API endpoint based on tier ID structure or context
                 // For root workspace billing, we use the root endpoint
-                const response = await apiCallForSpaHelper({
+                const response = await apiCall({
                     method: 'GET',
                     url: `/api/workspaces/billing/tiers`
                 });
@@ -61,7 +61,7 @@ export function CheckoutPageClient() {
         setError(null);
         try {
             setActionLoading('coupon');
-            const response = await apiCallForSpaHelper({
+            const response = await apiCall({
                 method: 'POST',
                 url: `/api/workspaces/billing/coupon`,
                 body: { code: couponCode }
@@ -81,7 +81,7 @@ export function CheckoutPageClient() {
         if (!tier) return;
         try {
             setActionLoading('pay');
-            const response = await apiCallForSpaHelper({
+            const response = await apiCall({
                 method: 'POST',
                 url: `/api/workspaces/billing/pay`,
                 body: {

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { apiCallForSpaHelper } from "@/lib/helpers/apiCallForSpaHelper";
+import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import { PiArrowLeft, PiCheckCircleBold, PiBuildingsBold, PiCreditCardBold, PiLightningBold, PiStudentBold } from "react-icons/pi";
 import { toast } from "react-toastify";
 
@@ -34,12 +34,12 @@ export default function EnrollmentPage() {
 
     const checkEnrollmentStatus = async () => {
         try {
-            const response = await apiCallForSpaHelper({
+            const response = await apiCall({
                 url: `/api/workspaces/billing/subscriptions`,
                 method: "GET",
             });
-            if (response.success && Array.isArray(response.data)) {
-                const access = response.data.find((item: any) => item.workspace.id === providerId);
+            if (response.data?.success && Array.isArray(response.data.data)) {
+                const access = response.data.data.find((item: any) => item.workspace.id === providerId);
                 if (access) {
                     setExistingAccess(access);
                     setHasUsedTrial(true); // If record exists, trial is considered used/started
@@ -52,7 +52,7 @@ export default function EnrollmentPage() {
 
     const fetchProvider = async () => {
         try {
-            const response = await apiCallForSpaHelper({
+            const response = await apiCall({
                 url: `/api/providers/${providerId}`,
                 method: "GET",
             });
@@ -83,7 +83,7 @@ export default function EnrollmentPage() {
         try {
             if (useTrial) {
                 // Free Trial / Direct Enrollment
-                const response = await apiCallForSpaHelper({
+                const response = await apiCall({
                     url: "/api/workspaces/onboarding",
                     method: "POST",
                     body: {
@@ -105,7 +105,7 @@ export default function EnrollmentPage() {
                 }
             } else {
                 // Paid Enrollment
-                const response = await apiCallForSpaHelper({
+                const response = await apiCall({
                     url: "/api/workspaces/billing/initiate",
                     method: "POST",
                     body: {
@@ -150,7 +150,7 @@ export default function EnrollmentPage() {
                 let targetWorkspaceId = existingAccess?.workspace?.id;
 
                 if (!targetWorkspaceId) {
-                    const onboardingRes = await apiCallForSpaHelper({
+                    const onboardingRes = await apiCall({
                         url: "/api/workspaces/onboarding",
                         method: "POST",
                         body: {
@@ -171,7 +171,7 @@ export default function EnrollmentPage() {
                 }
 
                 // Now Initiate Payment
-                const payRes = await apiCallForSpaHelper({
+                const payRes = await apiCall({
                     url: "/api/workspaces/billing/initiate",
                     method: "POST",
                     body: {
@@ -182,7 +182,7 @@ export default function EnrollmentPage() {
 
                 if (payRes && (payRes as any).redirectUrl) {
                     window.location.href = (payRes as any).redirectUrl;
-                } else if (payRes.success && (payRes.data as any)?.redirectUrl) {
+                } else if (payRes.data?.success && (payRes.data as any)?.redirectUrl) {
                     window.location.href = (payRes.data as any).redirectUrl;
                 } else if ((payRes as any).data?.redirectUrl) {
                     window.location.href = (payRes as any).data.redirectUrl;
@@ -209,7 +209,7 @@ export default function EnrollmentPage() {
     if (!provider) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-neutral-50 p-6">
-                <h1 className="text-2xl font-black text-dark mb-4">{t('provider_not_found')}</h1>
+                <h1 className="text-2xl font-black text-gray-900 mb-4">{t('provider_not_found')}</h1>
                 <button
                     onClick={() => router.back()}
                     className="px-6 py-3 bg-dark text-white rounded-xl font-bold"
@@ -230,7 +230,7 @@ export default function EnrollmentPage() {
                 <div className="space-y-8">
                     <button
                         onClick={() => router.back()}
-                        className="flex items-center gap-2 text-neutral-400 hover:text-dark transition font-black uppercase tracking-widest text-xs"
+                        className="flex items-center gap-2 text-neutral-400 hover:text-gray-900 transition font-black uppercase tracking-widest text-xs"
                     >
                         <PiArrowLeft /> {t('back')}
                     </button>
@@ -239,7 +239,7 @@ export default function EnrollmentPage() {
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-50 text-teal-700 rounded-full text-xs font-black uppercase tracking-widest">
                             <PiBuildingsBold /> {t('school_enrollment')}
                         </div>
-                        <h1 className="text-5xl font-black text-dark tracking-tight leading-tight">
+                        <h1 className="text-5xl font-black text-gray-900 tracking-tight leading-tight">
                             {t('enroll_in')} <br /> <span className="text-teal-500">{provider.title}</span>
                         </h1>
                         <p className="text-body text-lg font-medium opacity-70">
@@ -252,7 +252,7 @@ export default function EnrollmentPage() {
                             <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-xl">
                                 <PiCheckCircleBold />
                             </div>
-                            <h3 className="font-black text-dark">{t('what_you_get')}</h3>
+                            <h3 className="font-black text-gray-900">{t('what_you_get')}</h3>
                             <ul className="text-sm font-medium text-neutral-500 space-y-2">
                                 <li className="flex items-center gap-2 italic">✓ {t('feature_ai_subjects')}</li>
                                 <li className="flex items-center gap-2 italic">✓ {t('feature_quizzes')}</li>
@@ -263,9 +263,9 @@ export default function EnrollmentPage() {
                             <div className="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center text-xl">
                                 <PiLightningBold />
                             </div>
-                            <h3 className="font-black text-dark">{t('pricing_plan')}</h3>
+                            <h3 className="font-black text-gray-900">{t('pricing_plan')}</h3>
                             <div className="flex items-baseline gap-1">
-                                <span className="text-2xl font-black text-dark">{price} AZN</span>
+                                <span className="text-2xl font-black text-gray-900">{price} AZN</span>
                                 <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest">/ {t('month')}</span>
                             </div>
                             {trialDays > 0 && (
@@ -284,7 +284,7 @@ export default function EnrollmentPage() {
                             <div className="w-12 h-12 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center text-2xl">
                                 <PiStudentBold />
                             </div>
-                            <h2 className="text-2xl font-black text-dark tracking-tight">{t('student_profile')}</h2>
+                            <h2 className="text-2xl font-black text-gray-900 tracking-tight">{t('student_profile')}</h2>
                         </div>
 
                         <div className="space-y-4">

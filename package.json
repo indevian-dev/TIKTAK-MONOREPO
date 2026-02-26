@@ -1,0 +1,15 @@
+{
+    "name": "tiktak-monorepo",
+    "private": true,
+    "workspaces": [
+        "next",
+        "_shared.types",
+        "expo"
+    ],
+    "dependencies": {
+        "zod": "^3.23.8"
+    },
+    "overrides": {
+        "@smithy/types": "4.13.0"
+    }
+}

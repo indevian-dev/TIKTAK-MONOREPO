@@ -2,9 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import { useParams, usePathname } from 'next/navigation';
-import { GlobalHeaderWidget } from '@/app/[locale]/(global)/(widgets)/GlobalHeaderWidget';
-import { GlobalFullNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFullNavigationWidget';
-import { GlobalFastNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFastNavigationWidget';
+import { GlobalHeaderWidget } from '@/app/[locale]/(global)/(widgets)/GlobalHeader.widget';
+import { GlobalFullNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFullNavigation.widget';
+import { GlobalFastNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFastNavigation.widget';
 import {
   PiHouseLine,
   PiPlusCircle,
@@ -16,9 +16,16 @@ import {
   PiBell,
   PiStorefrontDuotone
 } from 'react-icons/pi';
-import type { DomainNavConfig } from '@tiktak/shared/types';
+import type { DomainNavConfig } from '@tiktak/shared/types/ui/Navigation.types';
+import { Main } from '@/app/primitives/Main.primitive';
+import { Container } from '@/app/primitives/Container.primitive';
+import { Section } from '@/app/primitives/Section.primitive';
 
 const getProviderNavConfig = (workspaceId: string): DomainNavConfig => ({
+  domain: 'provider',
+  logoSrc: '/logoblack.svg',
+  label: `Provider [${workspaceId}]`,
+  fastNavLinks: [],
   menuGroups: [
     {
       label: 'Main',
@@ -58,7 +65,7 @@ const getProviderNavConfig = (workspaceId: string): DomainNavConfig => ({
       ]
     }
   ],
-  menuDisplayMode: 'sidebar'
+  menuDisplayMode: { desktop: 'sidebar', mobile: 'mobile-modal' }
 });
 
 export function ProviderClientLayout({ children }: { children: React.ReactNode }) {
@@ -68,17 +75,10 @@ export function ProviderClientLayout({ children }: { children: React.ReactNode }
 
   const workspaceId = params?.workspaceId as string;
 
-  const navConfig = useMemo(() => {
-    const config = getProviderNavConfig(workspaceId);
-    return {
-      ...config,
-      branding: {
-        logo: '/logo-b.svg',
-        showLabel: true,
-        label: `Provider [${workspaceId}]`
-      }
-    };
-  }, [workspaceId]);
+  const navConfig = useMemo(
+    () => getProviderNavConfig(workspaceId),
+    [workspaceId]
+  );
 
   const navProps = {
     navConfig,
@@ -89,29 +89,24 @@ export function ProviderClientLayout({ children }: { children: React.ReactNode }
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-gray-950 flex flex-col transition-colors duration-300">
       <GlobalHeaderWidget {...navProps}>
         <GlobalFastNavigationWidget {...navProps} />
       </GlobalHeaderWidget>
 
-      <div className="flex-1 max-w-[1440px] w-full mx-auto flex flex-col lg:flex-row gap-6 p-4 lg:p-6 mb-16 lg:mb-0">
-        <aside className="lg:w-64 flex-shrink-0">
-          <GlobalFullNavigationWidget {...navProps} />
-        </aside>
+      <Main variant="app">
+        <Container variant="centered">
+          <aside className="hidden lg:flex shrink-0 sticky top-[70px] min-h-[calc(100vh-70px)] overflow-hidden w-64 flex-col">
+            <GlobalFullNavigationWidget {...navProps} />
+          </aside>
+          <Section>
+            {children}
+          </Section>
+        </Container>
+      </Main>
 
-        <main className="flex-1 bg-white p-4 lg:p-0">
-          {children}
-        </main>
-      </div>
-
-      <GlobalFastNavigationWidget {...navProps} />
-
-      {/* Mobile Modal Navigation */}
-      <GlobalFullNavigationWidget
-        {...navProps}
-        navConfig={{ ...navConfig, menuDisplayMode: 'modal' }}
-      />
+      {/* Mobile modal navigation (handled internally by the widget) */}
+      <GlobalFullNavigationWidget {...navProps} />
     </div>
   );
 }
-

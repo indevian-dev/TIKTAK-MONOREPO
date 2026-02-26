@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { apiCallForSpaHelper } from "@/lib/helpers/apiCallForSpaHelper";
+import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import { PiMagnifyingGlass, PiCheckCircleFill, PiUserCircle, PiArrowLeft, PiArrowRight } from "react-icons/pi";
 import { toast } from "react-toastify";
 
@@ -24,7 +24,7 @@ export default function ParentOnboardingPage() {
 
         try {
             setIsSearching(true);
-            const response = await apiCallForSpaHelper({
+            const response = await apiCall({
                 url: `/api/workspaces/onboarding/search-child?fin=${fin}`,
                 method: "GET",
             } as any);
@@ -56,7 +56,7 @@ export default function ParentOnboardingPage() {
 
         try {
             setIsSubmitting(true);
-            const response = await apiCallForSpaHelper({
+            const response = await apiCall({
                 url: "/api/workspaces/onboarding",
                 method: "POST",
                 body: {
@@ -84,13 +84,13 @@ export default function ParentOnboardingPage() {
             <div className="max-w-2xl w-full bg-white rounded-[3rem] p-10 md:p-16 shadow-2xl space-y-12">
                 <button
                     onClick={() => router.push("/workspaces/onboarding/welcome")}
-                    className="flex items-center gap-2 text-neutral-400 hover:text-dark transition font-black uppercase tracking-widest text-xs"
+                    className="flex items-center gap-2 text-neutral-400 hover:text-gray-900 transition font-black uppercase tracking-widest text-xs"
                 >
                     <PiArrowLeft /> {t('back')}
                 </button>
 
                 <div className="space-y-4">
-                    <h1 className="text-4xl font-black text-dark tracking-tight leading-none">
+                    <h1 className="text-4xl font-black text-gray-900 tracking-tight leading-none">
                         {t('find_your_child')} <span className="text-brand">{t('child')}</span>
                     </h1>
                     <p className="text-body font-medium">
@@ -135,7 +135,7 @@ export default function ParentOnboardingPage() {
                                                 <PiUserCircle />
                                             </div>
                                             <div>
-                                                <p className="font-black text-dark leading-none mb-1">{res.workspaceTitle}</p>
+                                                <p className="font-black text-gray-900 leading-none mb-1">{res.workspaceTitle}</p>
                                                 <p className="text-xs font-bold text-neutral-400">{res.studentName}</p>
                                             </div>
                                         </div>
@@ -149,7 +149,7 @@ export default function ParentOnboardingPage() {
                             <button
                                 onClick={handleComplete}
                                 disabled={isSubmitting}
-                                className="w-full h-20 bg-brand text-dark font-black rounded-2xl flex items-center justify-center gap-3 text-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-brand/20"
+                                className="w-full h-20 bg-brand text-gray-900 font-black rounded-2xl flex items-center justify-center gap-3 text-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-brand/20"
                             >
                                 {isSubmitting ? t('finishing') : t('continue_to_dashboard')}
                                 <PiArrowRight />

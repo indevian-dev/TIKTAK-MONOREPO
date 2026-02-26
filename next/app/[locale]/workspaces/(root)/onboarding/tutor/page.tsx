@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { apiCallForSpaHelper } from "@/lib/helpers/apiCallForSpaHelper";
+import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import { PiChalkboardTeacher, PiArrowLeft, PiArrowRight, PiCheckCircle } from "react-icons/pi";
 import { toast } from "react-toastify";
 
@@ -30,7 +30,7 @@ export default function TutorOnboardingPage() {
 
         try {
             setIsSubmitting(true);
-            const response = await apiCallForSpaHelper({
+            const response = await apiCall({
                 url: "/api/workspaces/onboarding",
                 method: "POST",
                 body: {
@@ -65,7 +65,7 @@ export default function TutorOnboardingPage() {
                     <div className="w-24 h-24 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center text-5xl mx-auto mb-8">
                         <PiCheckCircle />
                     </div>
-                    <h1 className="text-4xl font-black text-dark mb-4 tracking-tight">{t('application_submitted')}</h1>
+                    <h1 className="text-4xl font-black text-gray-900 mb-4 tracking-tight">{t('application_submitted')}</h1>
                     <p className="text-body font-medium text-lg leading-relaxed mb-10 opacity-70">
                         {t('review_message')}
                     </p>
@@ -85,13 +85,13 @@ export default function TutorOnboardingPage() {
             <div className="max-w-2xl w-full bg-white rounded-[3rem] p-10 md:p-16 shadow-2xl space-y-12">
                 <button
                     onClick={() => router.push("/workspaces/onboarding/welcome")}
-                    className="flex items-center gap-2 text-neutral-400 hover:text-dark transition font-black uppercase tracking-widest text-xs"
+                    className="flex items-center gap-2 text-neutral-400 hover:text-gray-900 transition font-black uppercase tracking-widest text-xs"
                 >
                     <PiArrowLeft /> {t('back')}
                 </button>
 
                 <div className="space-y-4">
-                    <h1 className="text-4xl font-black text-dark tracking-tight leading-none">
+                    <h1 className="text-4xl font-black text-gray-900 tracking-tight leading-none">
                         {t('become_tutor')} <span className="text-purple-600">{t('tutor')}</span>
                     </h1>
                     <p className="text-body font-medium">

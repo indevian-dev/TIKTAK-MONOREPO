@@ -1,4 +1,4 @@
-import { PublicFaqWidget } from '@/app/[locale]/(public)/pages/faq/(widgets)/PublicFaqWidget'
+import { PublicFaqWidget } from '@/app/[locale]/(public)/pages/faq/(widgets)/PublicFaq.widget'
 
 export default function PublicFaqPage() {
 

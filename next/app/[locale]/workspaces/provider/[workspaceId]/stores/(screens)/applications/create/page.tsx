@@ -1,11 +1,11 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import ProviderStoreCreateApplicationWidget
-  from '@/app/[locale]/workspaces/provider/[workspaceId]/stores/(widgets)/ProviderStoreCreateApplicationWidget';
+  from '@/app/[locale]/workspaces/provider/[workspaceId]/stores/(widgets)/ProviderStoreCreateApplication.widget';
 
 export default withPageAuth(
   async function ProviderStoreCreateApplicationPage({ authData }) {
     return <ProviderStoreCreateApplicationWidget />;
   },
-  { pagePath: '/provider/stores/applications/create', inlineHandlers: true }
+  { path: '/provider/stores/applications/create', inlineHandlers: true }
 );

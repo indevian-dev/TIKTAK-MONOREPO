@@ -1,6 +1,6 @@
-import { unifiedApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import { NextResponse } from 'next/server';
-import { ValidationService } from '@/lib/domain/services/ValidationService';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { ValidationService } from '@/lib/utils/Validator.Id.util';
+import { okResponse, errorResponse, notFoundResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
 
 export const GET = unifiedApiHandler(async (_req, { params, module, log }) => {
   const resolvedParams = await params;
@@ -9,31 +9,23 @@ export const GET = unifiedApiHandler(async (_req, { params, module, log }) => {
   // Validate ID parameter
   const idValidation = ValidationService.validateId(id);
   if (!idValidation.isValid) {
-    return NextResponse.json({
-      error: 'Valid ID is required'
-    }, { status: 400 });
+    return errorResponse('Valid ID is required', 400);
   }
 
   try {
-    const cardId = Number(idValidation.sanitized);
+    // Card IDs are varchar strings — pass directly without Number() coercion
+    const cardId = idValidation.sanitized;
     const card = await module.cards.getPublicCard(cardId);
 
     if (!card) {
-      return NextResponse.json({
-        error: 'Card not found'
-      }, { status: 404 });
+      return notFoundResponse('Card not found');
     }
 
-    return NextResponse.json({
-      card: {
-        ...card.cards_published,
-        stores: card.tenants_providers_type_store
-      }
-    }, { status: 200 });
+    return okResponse({
+      card
+    });
   } catch (error) {
     log?.error('Error fetching card', error as Error);
-    return NextResponse.json({
-      error: 'Internal Server Error'
-    }, { status: 500 });
+    return serverErrorResponse('Internal Server Error');
   }
 });

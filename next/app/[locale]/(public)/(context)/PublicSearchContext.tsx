@@ -1,6 +1,6 @@
 "use client";
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 
 import {
     createContext,
@@ -57,8 +57,8 @@ interface SearchState {
 
 interface InitialProps {
     mode?: 'simple' | 'map';
-    categoryId?: number | null;
-    storeId?: number | null;
+    categoryId?: string | null;
+    storeId?: string | null;
     includeFacets?: boolean;
     pagination?: number;
     useAdvancedFilters?: boolean;
@@ -372,10 +372,10 @@ export function PublicSearchProvider({ children, initialProps = {} }: PublicSear
     useEffect(() => {
         const newMode = initialProps.mode || detectedMode;
         const modeChanged = initialPropsRef.current.mode !== newMode;
-        
+
         if (modeChanged) {
             initialPropsRef.current.mode = newMode;
-            
+
             // If switching to map mode, initialize map params and trigger search
             if (newMode === 'map') {
                 const mapParams = {
@@ -386,10 +386,10 @@ export function PublicSearchProvider({ children, initialProps = {} }: PublicSear
                     },
                     precision: 2
                 };
-                
+
                 initialPropsRef.current.mapParams = mapParams;
                 setSearchParams(prev => ({ ...prev, mapParams }));
-                
+
                 // Trigger initial search for map mode
                 setTimeout(() => {
                     triggerInitialSearch();
@@ -414,7 +414,7 @@ export function PublicSearchProvider({ children, initialProps = {} }: PublicSear
     const updateSearchText = useCallback((searchText: string) => {
         const currentSort = searchParamsRef.current.sort;
         setSearchParams(prev => ({ ...prev, searchText }));
-        
+
         // Clear previous timeout
         if (searchTimeoutRef.current) {
             clearTimeout(searchTimeoutRef.current);
@@ -422,12 +422,12 @@ export function PublicSearchProvider({ children, initialProps = {} }: PublicSear
 
         // Debounced search trigger
         searchTimeoutRef.current = setTimeout(() => {
-            performSearch({ 
-                searchParams: { 
-                    searchText, 
+            performSearch({
+                searchParams: {
+                    searchText,
                     sort: currentSort,
-                    mapParams: searchParamsRef.current.mapParams 
-                } 
+                    mapParams: searchParamsRef.current.mapParams
+                }
             });
         }, 300);
     }, [performSearch]);
@@ -435,12 +435,12 @@ export function PublicSearchProvider({ children, initialProps = {} }: PublicSear
     const updateSort = useCallback((sort: string) => {
         const currentSearchText = searchParamsRef.current.searchText;
         setSearchParams(prev => ({ ...prev, sort }));
-        performSearch({ 
-            searchParams: { 
-                searchText: currentSearchText, 
+        performSearch({
+            searchParams: {
+                searchText: currentSearchText,
                 sort,
                 mapParams: searchParamsRef.current.mapParams
-            } 
+            }
         });
     }, [performSearch]);
 

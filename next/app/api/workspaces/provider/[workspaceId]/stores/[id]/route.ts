@@ -1,36 +1,20 @@
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import type { NextRequest } from 'next/server';
-import type { ApiHandlerContext } from '@/types/next';
-import { NextResponse } from 'next/server';
-import supabase from '@/lib/clients/supabaseServiceRoleClient';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { okResponse, errorResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
 
-export const GET = withApiHandler(async (req: NextRequest, { authData, params }: ApiHandlerContext) => {
-  if (!authData) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
+export const GET = unifiedApiHandler(async (_req, { params, module, log }) => {
   const resolvedParams = await params;
   if (!resolvedParams?.id) {
-    return NextResponse.json({ error: 'Store ID is required' }, { status: 400 });
+    return errorResponse('Store ID is required', 400);
   }
-  const storeId = resolvedParams.id;
 
   try {
-    // Fetch user data from Supabase using the provided token
-    const { data, error } = await supabase
-      .from('stores')
-      .select('*')
-      .eq('id', storeId)
-      .single();
-
-    if (error) throw error;
-
-    // Respond with the fetched data
-    return NextResponse.json(data, { status: 200 });
+    const result = await module.workspace.getWorkspace(resolvedParams.id);
+    if (!result.success) {
+      return serverErrorResponse(result.error ?? 'Failed to fetch workspace');
+    }
+    return okResponse({ workspace: result.workspace });
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    return NextResponse.json({
-      error: 'Failed to fetch Store data from Supabase'
-    }, { status: 500 });
+    log?.error('Error fetching workspace', error as Error);
+    return serverErrorResponse('Failed to fetch workspace data');
   }
-})
+});

@@ -12,7 +12,7 @@ export default function OnboardingWelcomePage() {
         <div className="min-h-screen flex flex-col items-center justify-center p-6">
             <div className="max-w-4xl w-full space-y-12 text-center">
                 <div className="space-y-4">
-                    <h1 className="text-5xl md:text-7xl font-black text-dark tracking-tighter">
+                    <h1 className="text-5xl md:text-7xl font-black text-gray-900 tracking-tighter">
                         {t('choose_your_journey')} <span className="text-brand">{t('journey')}</span>
                     </h1>
                     <p className="text-xl text-body max-w-2xl mx-auto font-medium">
@@ -29,7 +29,7 @@ export default function OnboardingWelcomePage() {
                         <div className="w-16 h-16 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             <PiStudent />
                         </div>
-                        <h3 className="text-2xl font-black text-dark mb-2 group-hover:text-teal-600 transition-colors">{t('im_student')}</h3>
+                        <h3 className="text-2xl font-black text-gray-900 mb-2 group-hover:text-teal-600 transition-colors">{t('im_student')}</h3>
                         <p className="text-body text-sm font-medium mb-6 leading-relaxed opacity-80">
                             {t('student_desc')}
                         </p>
@@ -46,7 +46,7 @@ export default function OnboardingWelcomePage() {
                         <div className="w-16 h-16 bg-brand-light text-brand rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             <PiUsersThree />
                         </div>
-                        <h3 className="text-2xl font-black text-dark mb-2 group-hover:text-brand transition-colors">{t('im_parent')}</h3>
+                        <h3 className="text-2xl font-black text-gray-900 mb-2 group-hover:text-brand transition-colors">{t('im_parent')}</h3>
                         <p className="text-body text-sm font-medium mb-6 leading-relaxed opacity-80">
                             {t('parent_desc')}
                         </p>
@@ -63,7 +63,7 @@ export default function OnboardingWelcomePage() {
                         <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                             <PiBuildings />
                         </div>
-                        <h3 className="text-2xl font-black text-dark mb-2 group-hover:text-blue-600 transition-colors">{t('im_provider')}</h3>
+                        <h3 className="text-2xl font-black text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">{t('im_provider')}</h3>
                         <p className="text-body text-sm font-medium mb-6 leading-relaxed opacity-80">
                             {t('provider_desc')}
                         </p>

@@ -1,11 +1,11 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import ProviderStoreEditWidget
-  from '@/app/[locale]/workspaces/provider/[workspaceId]/stores/(widgets)/ProviderStoreEditWidget';
+  from '@/app/[locale]/workspaces/provider/[workspaceId]/stores/(widgets)/ProviderStoreEdit.widget';
 
 export default withPageAuth(
   async function ProviderStoreEditPage({ authData }) {
     return <ProviderStoreEditWidget />;
   },
-  { pagePath: '/provider/stores/edit/:id', inlineHandlers: true }
+  { path: '/provider/stores/edit/:id', inlineHandlers: true }
 );

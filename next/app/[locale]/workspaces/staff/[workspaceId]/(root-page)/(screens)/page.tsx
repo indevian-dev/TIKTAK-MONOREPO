@@ -1,7 +1,7 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { StaffPageTitleTile }
-  from "@/app/[locale]/workspaces/staff/[workspaceId]/(tiles)/StaffPageTitleTile";
+  from "@/app/[locale]/workspaces/staff/[workspaceId]/(tiles)/StaffPageTitle.tile";
 
 export default withPageAuth(
   async function StaffRootPage() {
@@ -14,5 +14,5 @@ export default withPageAuth(
       </>
     );
   },
-  { pagePath: '/staff', inlineHandlers: true }
+  { path: '/staff', inlineHandlers: true }
 );

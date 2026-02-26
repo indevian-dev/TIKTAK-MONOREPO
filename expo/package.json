@@ -1,0 +1,11 @@
+{
+    "name": "@tiktak/expo",
+    "version": "1.0.0",
+    "private": true,
+    "description": "TIKTAK mobile app (Expo / React Native)",
+    "main": "index.ts",
+    "dependencies": {
+        "@tiktak/shared-types": "*",
+        "zod": "^3.23.8"
+    }
+}

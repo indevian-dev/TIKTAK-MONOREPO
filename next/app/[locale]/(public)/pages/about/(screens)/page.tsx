@@ -1,5 +1,5 @@
 import { PublicAboutWidget }
-    from '@/app/[locale]/(public)/pages/about/(widgets)/PublicAboutWidget'
+    from '@/app/[locale]/(public)/pages/about/(widgets)/PublicAbout.widget'
 
 export default function PublicAboutPage() {
 

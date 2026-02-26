@@ -6,7 +6,7 @@ import { Link } from '@/i18n/routing';
 import { PiPlusBold } from 'react-icons/pi';
 import { useGlobalAuthProfileContext } from '@/app/[locale]/(global)/(context)/GlobalAuthProfileContext';
 import { loadClientSideCoLocatedTranslations } from '@/i18n/i18nClientSide';
-import { apiCallForSpaHelper } from '@/lib/helpers/apiCallForSpaHelper';
+import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import { PiBuildings, PiUserGear, PiStudent, PiBriefcase } from 'react-icons/pi';
 
 interface Workspace {
@@ -28,7 +28,7 @@ export function WorkspacesRootPageClient() {
         const fetchWorkspaces = async () => {
             try {
                 setLoading(true);
-                const response = await apiCallForSpaHelper({
+                const response = await apiCall({
                     url: '/api/workspaces/list',
                     method: 'GET'
                 });
@@ -66,7 +66,7 @@ export function WorkspacesRootPageClient() {
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h1 className="text-4xl font-black text-dark tracking-tighter">
+                    <h1 className="text-4xl font-black text-gray-900 tracking-tighter">
                         {t('welcome_back')}, <span className="text-brand">{firstName || 'User'}</span>
                     </h1>
                     <p className="text-body font-medium opacity-70">
@@ -102,7 +102,7 @@ export function WorkspacesRootPageClient() {
                                     {getWorkspaceIcon(workspace.workspaceType)}
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold text-dark group-hover:text-brand transition-colors">
+                                    <h3 className="text-xl font-bold text-gray-900 group-hover:text-brand transition-colors">
                                         {workspace.title}
                                     </h3>
                                     <p className="text-sm text-body opacity-60 font-medium line-clamp-1 uppercase tracking-widest mt-1">

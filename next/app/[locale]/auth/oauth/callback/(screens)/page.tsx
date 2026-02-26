@@ -1,7 +1,5 @@
 "use client";
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
-
 import {
   useEffect,
   useState
@@ -10,22 +8,22 @@ import {
   useRouter,
   useSearchParams
 } from 'next/navigation';
-import { toast }
-  from 'react-toastify';
-import { apiCallForSpaHelper } from '@/lib/helpers/apiCallForSpaHelper';
-
+import { toast } from 'react-toastify';
+import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
+import { GlobalLoaderTile } from '@/app/[locale]/(global)/(tiles)/GlobalLoader.tile';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 interface OAuthData {
   code: string;
-  state: string;
+  state: string | null;
   provider: string;
-  deviceInfo: Record<string, unknown>;
+  deviceInfo: Record<string, any>;
 }
 
 export default function AuthOAuthCallbackPage() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [needEmail, setNeedEmail] = useState(false);
-  const [email, setEmail] = useState('');
+  const [needEmail, setNeedEmail] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
   const [oauthData, setOauthData] = useState<OAuthData | null>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -47,19 +45,19 @@ export default function AuthOAuthCallbackPage() {
 
         try {
           // Exchange code for token
-          const response = await apiCallForSpaHelper({
+          const response = await apiCall({
             method: 'POST',
             url: '/api/auth/oauth/callback',
             body: { code, state, provider, deviceInfo }
           });
 
-          if (response.status === 200) {
+          if (true) { // apiCall ensures success
             toast.success('Login successful!');
 
             // Clean up
             localStorage.removeItem('auth_provider');
 
-            // Redirect to provider or return URL
+            // Redirect to dashboard or return URL
             const returnUrl = localStorage.getItem('returnUrl') || '/';
             localStorage.removeItem('returnUrl');
 
@@ -68,25 +66,12 @@ export default function AuthOAuthCallbackPage() {
               router.replace(returnUrl);
             }, 500);
           }
-        } catch (apiError) {
+        } catch (apiError: any) {
           // Handle axios error response
-          if (
-            apiError &&
-            typeof apiError === 'object' &&
-            'response' in apiError &&
-            apiError.response &&
-            typeof apiError.response === 'object' &&
-            'status' in apiError.response &&
-            apiError.response.status === 428
-          ) {
+          if (apiError.response && apiError.response.status === 428) {
             // Email required - show email input form
             setNeedEmail(true);
-            setOauthData({
-              code: code || '',
-              state: state || '',
-              provider: provider || '',
-              deviceInfo: deviceInfo || {}
-            });
+            setOauthData({ code, state, provider, deviceInfo });
             setIsLoading(false);
             return;
           } else {
@@ -97,8 +82,9 @@ export default function AuthOAuthCallbackPage() {
 
       } catch (error) {
         ConsoleLogger.error('OAuth callback error:', error);
-        setError(error instanceof Error ? error.message : 'Authentication failed');
-        toast.error(`Login failed: ${error instanceof Error ? error.message : 'Authentication failed'}`);
+        const errorMessage = error instanceof Error ? error.message : 'Authentication failed';
+        setError(errorMessage);
+        toast.error(`Login failed: ${errorMessage}`);
 
         // Redirect to login after error
         setTimeout(() => {
@@ -118,22 +104,19 @@ export default function AuthOAuthCallbackPage() {
 
     try {
       // Submit the code with the provided email
-      const response = await apiCallForSpaHelper({
+      const response = await apiCall({
         method: 'POST',
         url: '/api/auth/oauth/callback',
-        body: { ...oauthData, email: email || '' }
+        body: { ...oauthData, email }
       });
 
-      if (response.status !== 200) {
-        throw new Error(response.data?.error || 'Authentication failed');
-      }
-
+      // apiCall throws on error — no manual status check needed
       toast.success('Login successful!');
 
       // Clean up
       localStorage.removeItem('auth_provider');
 
-      // Redirect to provider or return URL
+      // Redirect to dashboard or return URL
       const returnUrl = localStorage.getItem('returnUrl') || '/';
       localStorage.removeItem('returnUrl');
 
@@ -156,22 +139,12 @@ export default function AuthOAuthCallbackPage() {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mb-4"></div>
-          <h2 className="text-xl font-semibold">Completing login...</h2>
-          <p className="text-gray-500">Please wait while we authenticate you</p>
-        </div>
-      </div>
-    );
-  }
+  if (isLoading) return <GlobalLoaderTile message="Please wait while we authenticate you" />;
 
   if (needEmail) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
+        <div className="w-full max-w-md p-6 bg-white rounded-app shadow-md">
           <h2 className="text-2xl font-semibold text-center mb-6">Email Required</h2>
           <p className="mb-4 text-gray-600">Please provide your email address to complete the login process.</p>
 
@@ -181,7 +154,7 @@ export default function AuthOAuthCallbackPage() {
               <input
                 type="email"
                 id="email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-app focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -191,7 +164,7 @@ export default function AuthOAuthCallbackPage() {
 
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+              className="w-full py-2 px-4 bg-emerald-500 text-white rounded-app hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
               disabled={!email}
             >
               Continue

@@ -1,15 +1,10 @@
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import type { NextRequest } from 'next/server';
-import type { ApiHandlerContext } from '@/types/next';
-import { NextResponse } from 'next/server';
-import supabase from '@/lib/clients/supabaseServiceRoleClient';
-import type { ApiRouteHandler } from '@/types/next';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { okResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
 
-export const GET: ApiRouteHandler = withApiHandler(async (request, { authData, params }) => {
-
-    const { data, error } = await supabase.from('accounts_roles').select('*');
-    if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+export const GET = unifiedApiHandler(async (_request, { module, log }) => {
+    const result = await module.roles.getAllRoles();
+    if (!result.success) {
+        return serverErrorResponse(result.error ?? 'Failed to fetch roles');
     }
-    return NextResponse.json({ roles: data });
-})
+    return okResponse({ roles: result.roles });
+});

@@ -1,15 +1,15 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { ProviderFavoriteCardsListWidget }
-    from '@/app/[locale]/workspaces/provider/[workspaceId]/favorites/(widgets)/ProviderFavoriteCardsListWidget';
+  from '@/app/[locale]/workspaces/provider/[workspaceId]/favorites/(widgets)/ProviderFavoriteCardsList.widget';
 
 export default withPageAuth(
   async function ProviderFavoritesListPage({ authData }) {
     return (
-        <div>
-            <ProviderFavoriteCardsListWidget />
-        </div>
+      <div>
+        <ProviderFavoriteCardsListWidget />
+      </div>
     );
   },
-  { pagePath: '/provider/favorites', inlineHandlers: true }
+  { path: '/provider/favorites', inlineHandlers: true }
 );

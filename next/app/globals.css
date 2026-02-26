@@ -11,22 +11,28 @@
 /* ═══════════════════════════════════════════════════════════════
    THEME TOKENS
    Custom brand colors available as Tailwind utilities:
-   e.g. bg-brandPrimary, text-brandSecondaryDarkText, etc.
+   e.g. bg-app-bright-purple, text-app-dark-purple, etc.
    ═══════════════════════════════════════════════════════════════ */
 @theme {
-  --color-brandPrimary: #ff0032;
-  --color-brandSecondary: #000a39;
-  --color-brandPrimaryDarkBg: #000a39;
-  --color-brandSecondaryDarkBg: #1b2d81;
-  --color-brandPrimaryLightBg: #e6e8ef;
-  --color-brandSecondaryLightBg: #cacedd;
-  --color-brandPrimaryDarkText: #000a39;
-  --color-brandSecondaryDarkText: #393e57;
-  --color-brandPrimaryLightText: #e6e8ef;
-  --color-brandSecondaryLightText: #cacedd;
-  --color-brandPrimaryDarkBorder: #000a39;
-  --color-brandSecondaryDarkBorder: #393e57;
+  /* =========================================
+     APP COLORS (Unified Raw Palette)
+     ========================================= */
+  /* Primary Brand */
+  --color-app-bright-purple: #5B23FF;
+  --color-app-bright-cyan: #4EFFB8;
+  --color-app-dark-purple: #120f1c;
+
+  /* Utility / Feedback Colors */
+  --color-app-success: #10b981;
+  --color-app-warning: #f59e0b;
+  --color-app-danger: #ef4444;
+
+  /* Border Radius */
+  --radius-app: 1.5rem;
+  --radius-app-full: 9999px;
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* ═══════════════════════════════════════════════════════════════
    BASE STYLES
@@ -35,8 +41,15 @@ html {
   font-family: 'Montserrat', sans-serif;
 }
 
+/* Smooth theme transitions */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loader {
@@ -46,4 +59,32 @@ html {
   width: 30px;
   height: 30px;
   animation: spin 2s linear infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CUSTOM SCROLLBAR — App Brand Colors
+   Usage: add class "scrollbar-app" to any scrollable element
+   ═══════════════════════════════════════════════════════════════ */
+.scrollbar-app {
+  scrollbar-width: thin;
+  scrollbar-color: #5B23FF #5B23FF10;
+}
+
+.scrollbar-app::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.scrollbar-app::-webkit-scrollbar-track {
+  background: rgba(91, 35, 255, 0.06);
+  border-radius: 9999px;
+}
+
+.scrollbar-app::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #5B23FF, #4EFFB8);
+  border-radius: 9999px;
+}
+
+.scrollbar-app::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #4EFFB8, #5B23FF);
 }

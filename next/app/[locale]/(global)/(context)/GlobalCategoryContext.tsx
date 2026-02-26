@@ -1,6 +1,6 @@
 "use client";
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 
 import {
     createContext,
@@ -14,7 +14,7 @@ import {
     getCategoriesHierarchy,
     getSubCategories,
     getCategoryFilters,
-    Category
+    type Category,
 } from '@/app/[locale]/(public)/categories/PublicCategoriesService';
 
 // Define types for the data structures
@@ -27,8 +27,8 @@ interface GlobalCategoryContextType {
     categoriesHierarchy: Category[];
     loading: boolean;
     error: string | null;
-    getSubCategories: (categoryId: number) => Promise<{ categories: Category[]; error?: string | null }>;
-    getCategoryFilters: (categoryIds: number | number[]) => Promise<{ filters: Filter[]; error?: string | null }>;
+    getSubCategories: (categoryId: string) => Promise<{ categories: Category[]; error?: string | null }>;
+    getCategoryFilters: (categoryIds: string | string[]) => Promise<{ filters: Filter[]; error?: string | null }>;
     refreshCategories: () => void;
 }
 
@@ -75,7 +75,7 @@ export function GlobalCategoryProvider({ children }: { children: ReactNode }) {
     }, []);
 
     // Memoized function to get subcategories
-    const getSubCategoriesFromContext = useCallback(async (categoryId: number) => {
+    const getSubCategoriesFromContext = useCallback(async (categoryId: string) => {
         try {
             const result = await getSubCategories(categoryId);
             return result;
@@ -86,7 +86,7 @@ export function GlobalCategoryProvider({ children }: { children: ReactNode }) {
     }, []);
 
     // Memoized function to get category filters
-    const getCategoryFiltersFromContext = useCallback(async (categoryIds: number | number[]) => {
+    const getCategoryFiltersFromContext = useCallback(async (categoryIds: string | string[]) => {
         try {
             const result = await getCategoryFilters(categoryIds);
             return result;

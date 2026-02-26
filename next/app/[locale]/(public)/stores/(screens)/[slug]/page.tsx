@@ -1,9 +1,9 @@
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 
 // pages/Cards/[id].js
 import PublicStoreDetailsWidget
-  from '@/app/[locale]/(public)/stores/(widgets)/PublicStoreDetailsWidget';
-import { fetch as apiCallForSsrHelper } from '@/lib/helpers/apiCallForSsrHelper';
+  from '@/app/[locale]/(public)/stores/(widgets)/PublicStoreDetails.widget';
+import { fetch as apiCallForSsrHelper } from '@/lib/utils/Http.FetchApiSSR.util';
 import { notFound }
   from 'next/navigation';
 import { cache }

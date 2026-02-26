@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { apiCallForSpaHelper } from "@/lib/helpers/apiCallForSpaHelper";
+import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import { PiStudent, PiArrowLeft, PiArrowRight, PiCheckCircle, PiMagnifyingGlass, PiBuildings } from "react-icons/pi";
 import { toast } from "react-toastify";
 
@@ -32,7 +32,7 @@ export default function StudentOnboardingPage() {
         try {
             // Fetch providers
             // Using a large limit to get most relevant ones for client-side search for now
-            const response = await apiCallForSpaHelper({
+            const response = await apiCall({
                 url: "/api/providers?pageSize=100",
                 method: "GET",
             });
@@ -73,7 +73,7 @@ export default function StudentOnboardingPage() {
 
         try {
             setIsSubmitting(true);
-            const response = await apiCallForSpaHelper({
+            const response = await apiCall({
                 url: "/api/workspaces/onboarding",
                 method: "POST",
                 body: {
@@ -110,7 +110,7 @@ export default function StudentOnboardingPage() {
                     <div className="w-24 h-24 bg-teal-50 text-teal-600 rounded-full flex items-center justify-center text-5xl mx-auto mb-8">
                         <PiCheckCircle />
                     </div>
-                    <h1 className="text-4xl font-black text-dark mb-4 tracking-tight">{t('ready_title')}</h1>
+                    <h1 className="text-4xl font-black text-gray-900 mb-4 tracking-tight">{t('ready_title')}</h1>
                     <p className="text-body font-medium text-lg leading-relaxed mb-10 opacity-70">
                         {t('ready_message')}
                     </p>
@@ -131,7 +131,7 @@ export default function StudentOnboardingPage() {
                 <div className="flex items-center justify-between">
                     <button
                         onClick={() => step === 1 ? router.push("/workspaces/onboarding/welcome") : setStep(1)}
-                        className="flex items-center gap-2 text-neutral-400 hover:text-dark transition font-black uppercase tracking-widest text-xs"
+                        className="flex items-center gap-2 text-neutral-400 hover:text-gray-900 transition font-black uppercase tracking-widest text-xs"
                     >
                         <PiArrowLeft /> {t('back')}
                     </button>
@@ -143,7 +143,7 @@ export default function StudentOnboardingPage() {
                 {step === 1 && (
                     <div className="space-y-8 animate-in slide-in-from-right-8 duration-500">
                         <div className="space-y-4">
-                            <h1 className="text-4xl font-black text-dark tracking-tight leading-none">
+                            <h1 className="text-4xl font-black text-gray-900 tracking-tight leading-none">
                                 {t('select_school')} <span className="text-teal-500">{t('school')}</span>
                             </h1>
                             <p className="text-body font-medium">
@@ -176,7 +176,7 @@ export default function StudentOnboardingPage() {
                                             <PiBuildings />
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <h3 className="font-bold text-dark group-hover:text-teal-600 truncate">{provider.title}</h3>
+                                            <h3 className="font-bold text-gray-900 group-hover:text-teal-600 truncate">{provider.title}</h3>
                                             <div className="flex items-center gap-3">
                                                 <p className="text-xs text-neutral-400 font-bold uppercase tracking-wider">
                                                     {provider.city?.title || "Online"}
@@ -208,7 +208,7 @@ export default function StudentOnboardingPage() {
                 {step === 2 && (
                     <div className="space-y-6 animate-in slide-in-from-right-8 duration-500">
                         <div className="space-y-4">
-                            <h1 className="text-4xl font-black text-dark tracking-tight leading-none">
+                            <h1 className="text-4xl font-black text-gray-900 tracking-tight leading-none">
                                 {t('student_profile')} <span className="text-teal-500">{t('profile')}</span>
                             </h1>
                             <p className="text-body font-medium">

@@ -17,5 +17,16 @@
   "unknown_error": "Неизвестная ошибка",
   "error_prefix": "Ошибка",
   "unexpected_error": "Произошла непредвиденная ошибка",
-  "oauth_error": "Произошла ошибка при входе."
+  "oauth_error": "Произошла ошибка при входе.",
+  "need_account": "Нет аккаунта?",
+  "sign_in": "Войти",
+  "sign_in_description": "Войдите, чтобы получить доступ к вашему аккаунту.",
+  "secured_with_device": "Защищено на вашем устройстве",
+  "signing_in": "Вход...",
+  "sign_in_button": "Войти",
+  "social_login_soon": "Вход через соцсети скоро появится",
+  "google": "Google",
+  "facebook": "Facebook",
+  "apple": "Apple",
+  "login_error": "Ошибка входа: {message}"
 }

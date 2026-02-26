@@ -24,21 +24,21 @@ export function PublicHeaderNavDefault({
     <div className="flex items-center gap-2">
       {!catalogueVisible ? (
         <button
-          className="inline-flex items-center gap-1 text-dark hover:text-gray-600 focus:text-gray-600 focus:outline-none bg-brandPrimaryLightBg rounded-md p-2"
+          className="inline-flex items-center gap-1 text-gray-900 hover:text-gray-600 focus:text-gray-600 focus:outline-none bg-app-bright-purple/10 rounded-md p-2"
           onClick={toggleCatalogue}
         >
-          <PiSquaresFourLight className='text-dark text-3xl' />
-          <span className='no-wrap flex flex-nowrap whitespace-nowrap font-bold text-dark text-md'>
+          <PiSquaresFourLight className='text-gray-900 text-3xl' />
+          <span className='no-wrap flex flex-nowrap whitespace-nowrap font-bold text-gray-900 text-md'>
             {t('catalogue')}
           </span>
         </button>
       ) : (
         <button
-          className="inline-flex items-center gap-1 text-dark hover:text-gray-600 focus:text-gray-600 focus:outline-none bg-brandPrimaryLightBg rounded-md p-2"
+          className="inline-flex items-center gap-1 text-gray-900 hover:text-gray-600 focus:text-gray-600 focus:outline-none bg-app-bright-purple/10 rounded-md p-2"
           onClick={toggleCatalogue}
         >
-          <PiXCircleLight className='text-dark text-3xl' />
-          <span className='no-wrap flex flex-nowrap whitespace-nowrap font-bold text-dark text-md'>
+          <PiXCircleLight className='text-gray-900 text-3xl' />
+          <span className='no-wrap flex flex-nowrap whitespace-nowrap font-bold text-gray-900 text-md'>
             {t('catalogue')}
           </span>
         </button>

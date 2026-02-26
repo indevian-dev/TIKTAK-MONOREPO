@@ -1,14 +1,12 @@
-import { unifiedApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import { NextResponse } from 'next/server';
-import { ValidationService } from '@/lib/domain/services/ValidationService';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { ValidationService } from '@/lib/utils/Validator.Id.util';
+import { okResponse, errorResponse, notFoundResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
 
 export const GET = unifiedApiHandler(async (_request, { params, module, log }) => {
   const resolvedParams = await params;
 
   if (!resolvedParams?.id) {
-    return NextResponse.json({
-      error: 'Store ID is required'
-    }, { status: 400 });
+    return errorResponse('Store ID is required', 400);
   }
 
   const { id } = resolvedParams;
@@ -16,26 +14,19 @@ export const GET = unifiedApiHandler(async (_request, { params, module, log }) =
   // Validate ID parameter
   const idValidation = ValidationService.validateId(id);
   if (!idValidation.isValid) {
-    return NextResponse.json({
-      error: 'Valid ID is required'
-    }, { status: 400 });
+    return errorResponse('Valid ID is required', 400);
   }
 
   try {
-    const storeId = Number(idValidation.sanitized);
-    const store = await module.stores.getPublicStore(storeId);
+    const result = await module.workspace.getWorkspace(idValidation.sanitized!);
 
-    if (!store) {
-      return NextResponse.json({
-        error: 'Store not found'
-      }, { status: 404 });
+    if (!result.workspace) {
+      return notFoundResponse('Store not found');
     }
 
-    return NextResponse.json({ store });
+    return okResponse({ store: result.workspace });
   } catch (error) {
     log?.error('Error fetching store', error as Error);
-    return NextResponse.json({
-      error: 'Internal Server Error'
-    }, { status: 500 });
+    return serverErrorResponse('Internal Server Error');
   }
 });

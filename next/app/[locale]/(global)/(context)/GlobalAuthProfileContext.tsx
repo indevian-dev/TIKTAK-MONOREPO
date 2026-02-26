@@ -9,10 +9,10 @@ import React, {
     useCallback,
     ReactNode
 } from 'react';
-import { apiCallForSpaHelper } from '@/lib/helpers/apiCallForSpaHelper';
-import type { AuthContextPayload } from '@/types/auth/authContext';
+import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
+import type { AuthContextPayload } from '@tiktak/shared/types/auth/AuthData.types';
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 
 // Extend Window interface for global auth context update
 declare global {
@@ -30,9 +30,22 @@ export interface Workspace {
     displayName?: string;
 }
 
+export interface ProfileState {
+    userId: string | null;
+    firstName: string | null;
+    lastName: string | null;
+    email: string | null;
+    phone: string | null;
+    emailVerified: boolean;
+    phoneVerified: boolean;
+    subscriptionType: string | null;
+    subscribedUntil: string | null;
+    subscriptions: ActiveSubscription[];
+    timestamp: number;
+}
+
 interface GlobalAuthProfileContextType {
     userId: string | null;
-    accountId: number | null;
     firstName: string | null;
     lastName: string | null;
     email: string | null;
@@ -43,7 +56,7 @@ interface GlobalAuthProfileContextType {
     subscribedUntil: string | null;
     isLoading: boolean;
     loading: boolean; // Alias for backward compatibility
-    error: any;
+    error: string | null;
     getInitials: (name?: string) => string;
     clearProfile: () => void;
     refreshProfile: () => Promise<void>;
@@ -71,7 +84,6 @@ interface GlobalAuthProfileProviderProps {
 export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProviderProps) {
     // Try to load initial state from localStorage synchronously
     const [userId, setUserId] = useState<string | null>(null);
-    const [accountId, setAccountId] = useState<number | null>(null);
     const [firstName, setFirstName] = useState<string | null>(null);
     const [lastName, setLastName] = useState<string | null>(null);
     const [email, setEmail] = useState<string | null>(null);
@@ -82,7 +94,7 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
     const [subscribedUntil, setSubscribedUntil] = useState<string | null>(null);
     const [subscriptions, setSubscriptions] = useState<ActiveSubscription[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<any>(null);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const getInitialState = () => {
@@ -90,7 +102,7 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
             try {
                 const saved = localStorage.getItem('stuwin.ai_profile');
                 if (saved) {
-                    const parsed = JSON.parse(saved);
+                    const parsed = JSON.parse(saved) as ProfileState;
                     // Only use if less than 60 minutes old for initial snap
                     if (Date.now() - parsed.timestamp < 60 * 60 * 1000) {
                         ConsoleLogger.log('🔄 Loading initial state from localStorage');
@@ -106,7 +118,6 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
         const initialState = getInitialState();
         if (initialState) {
             setUserId(initialState.userId);
-            setAccountId(initialState.accountId || null);
             setFirstName(initialState.firstName);
             setLastName(initialState.lastName);
             setEmail(initialState.email);
@@ -121,7 +132,6 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
 
     const clearProfile = useCallback(() => {
         setUserId(null);
-        setAccountId(null);
         setFirstName(null);
         setLastName(null);
         setEmail(null);
@@ -135,10 +145,10 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
     }, []);
 
     // Create a ref to always have the latest state values without triggering dependency updates
-    const stateRef = React.useRef({ userId, accountId, firstName, lastName, email, phone, subscriptionType, subscribedUntil, subscriptions });
+    const stateRef = React.useRef({ userId, firstName, lastName, email, phone, subscriptionType, subscribedUntil, subscriptions });
     useEffect(() => {
-        stateRef.current = { userId, accountId, firstName, lastName, email, phone, subscriptionType, subscribedUntil, subscriptions };
-    }, [userId, accountId, firstName, lastName, email, phone, subscriptionType, subscribedUntil, subscriptions]);
+        stateRef.current = { userId, firstName, lastName, email, phone, subscriptionType, subscribedUntil, subscriptions };
+    }, [userId, firstName, lastName, email, phone, subscriptionType, subscribedUntil, subscriptions]);
 
     const updateFromAuthPayload = useCallback((payload: AuthContextPayload) => {
         try {
@@ -150,19 +160,17 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
             }
 
             const newUserId = payload.user?.id || null;
-            const newAccountId = payload.account?.id || null;
             const newFirstName = payload.user?.firstName || null;
             const newLastName = payload.user?.lastName || null;
             const newEmail = payload.user?.email || null;
             const newPhone = payload.user?.phone || null;
             const newEmailVerified = payload.user?.emailVerified || false;
             const newPhoneVerified = payload.user?.phoneVerified || false;
-            const newSubscribedUntil = (payload.account as any)?.subscribedUntil || (payload.account as any)?.workspaceSubscribedUntil || null;
-            const newSubscriptionType = (payload.account as any)?.subscriptionType || (payload.account as any)?.workspaceSubscriptionType || null;
-            const newSubscriptions = (payload as any).subscriptions || [];
+            const newSubscribedUntil = (payload.account)?.subscribedUntil || (payload.account)?.workspaceSubscribedUntil || null;
+            const newSubscriptionType = (payload.account)?.subscriptionType || (payload.account)?.workspaceSubscriptionType || null;
+            const newSubscriptions = (payload as AuthContextPayload & { subscriptions?: ActiveSubscription[] }).subscriptions || [];
 
             if (newUserId) setUserId(newUserId);
-            if (newAccountId) setAccountId(newAccountId);
             if (newFirstName) setFirstName(newFirstName);
             if (newLastName) setLastName(newLastName);
             if (newEmail) setEmail(newEmail);
@@ -176,7 +184,6 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
             // Update localStorage using latest values (fallback to current state if payload missing field)
             const dataToStore = {
                 userId: newUserId || stateRef.current.userId,
-                accountId: newAccountId || stateRef.current.accountId,
                 firstName: newFirstName || stateRef.current.firstName,
                 lastName: newLastName || stateRef.current.lastName,
                 email: newEmail || stateRef.current.email,
@@ -201,15 +208,18 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
     const loadProfileData = useCallback(async () => {
         try {
             setLoading(true);
-            const response = await apiCallForSpaHelper({
+            // fetchApiUtil already unwraps the { success, data } envelope
+            const response = await apiCall({
                 method: 'GET',
                 url: '/api/auth'
             });
 
-            if (response.data) {
+            const data = response?.data as Partial<AuthContextPayload> | undefined;
+
+            if (data) {
                 updateFromAuthPayload({
                     action: 'initial',
-                    ...response.data
+                    ...data
                 });
             }
         } catch (error) {
@@ -256,7 +266,7 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
             return {
                 type: workspaceSub.planType,
                 until: workspaceSub.endsAt ? new Date(workspaceSub.endsAt) : null,
-                source: 'WORKSPACE' as const
+                source: 'WORKSPACE' as 'WORKSPACE' | 'WORKSPACE_TYPE' | 'NONE'
             };
         }
 
@@ -265,7 +275,6 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
 
     const value = {
         userId,
-        accountId,
         firstName,
         lastName,
         email,

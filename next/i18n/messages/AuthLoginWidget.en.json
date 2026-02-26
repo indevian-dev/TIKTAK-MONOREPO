@@ -17,6 +17,16 @@
   "unknown_error": "Unknown error",
   "error_prefix": "Error",
   "unexpected_error": "An unexpected error occurred",
-  "oauth_error": "An error occurred during login."
+  "oauth_error": "An error occurred during login.",
+  "need_account": "Don't have an account?",
+  "sign_in": "Sign In",
+  "sign_in_description": "Sign in to access your account.",
+  "secured_with_device": "Secured with your device",
+  "signing_in": "Signing in...",
+  "sign_in_button": "Sign In",
+  "social_login_soon": "Social login coming soon",
+  "google": "Google",
+  "facebook": "Facebook",
+  "apple": "Apple",
+  "login_error": "Login error: {message}"
 }
-

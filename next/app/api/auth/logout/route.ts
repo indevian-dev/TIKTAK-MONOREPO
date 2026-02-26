@@ -1,89 +1,26 @@
-import { withApiHandler }
-  from '@/lib/middleware/handlers/ApiInterceptor';
-import { NextRequest, NextResponse }
-  from 'next/server';
-import type { ApiRouteHandler, ApiHandlerContext, DbTransaction } from '@/types/next';
-import { eq } from 'drizzle-orm';
-import { users } from '@/lib/database/schema';
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
-import { CookieManager }
-  from '@/lib/auth/CookieManager';
 
+import { NextRequest } from 'next/server';
+import { unifiedApiHandler } from "@/lib/middleware/_Middleware.index";
+import { CookieAuthenticator } from "@/lib/middleware/Authenticator.Cookie.middleware";
+import { okResponse } from '@/lib/middleware/Response.Api.middleware';
 
-export const POST: ApiRouteHandler = withApiHandler(async (request: NextRequest, { authData, params, db }: ApiHandlerContext) => {
+export const POST = unifiedApiHandler(async (request: NextRequest, { authData, log }) => {
   try {
-    ConsoleLogger.log(('🚪 Logout request initiated'))
+    log.info("Logout request initiated");
 
-    // Extract authentication cookies using CookieManager
-    const userId = authData?.user?.id;
-    const accountId = authData?.account?.id;
-    const sessionId = 'logout-session';
+    const response = okResponse({ success: true, message: "Logged out successfully", });
 
-    ConsoleLogger.log((`📊 Processing logout for User ID: ${userId}, Account ID: ${accountId}, Session ID: ${sessionId}`))
+    const { authCookiesResponse } = CookieAuthenticator.clearAuthCookies({ response });
 
-    // Remove session from database in transaction
-    const result = await db.transaction(async (tx: DbTransaction) => {
-      // Remove current session from user's sessions if sessionId exists
-      if (sessionId && userId) {
-        ConsoleLogger.log(('🔄 Removing session from database'))
-
-        // First, get the current user's sessions
-        const [currentUser] = await tx
-          .select({ sessions: users.sessions })
-          .from(users)
-          .where(eq(users.id, userId));
-
-        if (currentUser) {
-          // Parse the sessions, remove the target session, and update
-          const currentSessions = (currentUser.sessions as Record<string, any>) || {};
-          const { [sessionId]: removedSession, ...remainingSessions } = currentSessions;
-
-          const sessionUpdateResult = await tx
-            .update(users)
-            .set({
-              sessions: remainingSessions
-            })
-            .where(eq(users.id, userId))
-            .returning({ id: users.id, sessions: users.sessions });
-
-          if (sessionUpdateResult.length === 0) {
-            ConsoleLogger.log(('❌ User not found during session cleanup'))
-          } else {
-            ConsoleLogger.log(('✅ Session removed from database'))
-          }
-        } else {
-          ConsoleLogger.log(('❌ User not found'))
-        }
-      }
-
-      return { success: true }
-    })
-
-    // Create response
-    const initialResponse = NextResponse.json({
-      success: true,
-      message: 'Logged out successfully'
-    }, { status: 200 })
-
-    // Clear all authentication cookies using CookieManager
-    const { authCookiesResponse } = CookieManager.clearAuthCookies({ response: initialResponse })
-
-    // Log successful logout
-    ConsoleLogger.log((`✅ Logout completed successfully for Account ID: ${accountId}`))
-
-    return authCookiesResponse
+    log.info("Logout completed", { accountId: authData?.account?.id });
+    return authCookiesResponse;
   } catch (error) {
-    ConsoleLogger.error(('❌ Logout error:'), error)
+    log.error("Logout error", error as Error);
 
-    // Even if there's an error, we should still clear cookies for security
-    const initialResponse = NextResponse.json({
-      success: true,
-      message: 'Logged out successfully'
-    }, { status: 200 })
+    const response = okResponse({ success: true, message: "Logged out successfully", });
 
-    // Always clear cookies on logout, regardless of database errors
-    const { authCookiesResponse } = CookieManager.clearAuthCookies({ response: initialResponse })
-
-    return authCookiesResponse
+    const { authCookiesResponse } = CookieAuthenticator.clearAuthCookies({ response });
+    return authCookiesResponse;
   }
 });
+

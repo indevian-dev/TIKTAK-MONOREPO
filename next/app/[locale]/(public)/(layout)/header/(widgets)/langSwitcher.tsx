@@ -15,7 +15,7 @@ const LangSwitcher = () => {
   return (
     <div className="relative">
       <button
-        className="px-4 ml-4 py-2 text-dark rounded text-lg font-light transform transition-transform focus:outline-none"
+        className="px-4 ml-4 py-2 text-gray-900 rounded text-lg font-light transform transition-transform focus:outline-none"
         onMouseEnter={() => setShowDropdown(true)}
         onMouseLeave={() => setShowDropdown(false)}
       >
