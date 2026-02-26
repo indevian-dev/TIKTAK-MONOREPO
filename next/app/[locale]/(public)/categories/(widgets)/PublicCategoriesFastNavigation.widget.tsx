@@ -71,21 +71,16 @@ export function PublicCategoriesFastNavigationWidget({ category }: PublicCategor
 
   return (
     <Section variant="centered">
-      <div className='grid grid-rows-2 grid-flow-col gap-3 overflow-x-scroll py-2 pb-4 text-md scrollbar-app'>
-        <Link key={'map'} href={`/map`} passHref className={`col-span-6 lg:col-span-8 px-2 pt-2 pb-10 rounded-app flex items-center  relative bg-app-bright-purple text-white`} >
+      <div className='grid grid-rows-2 grid-flow-col gap-3 overflow-x-scroll py-2 pb-4 text-sm scrollbar-app'>
+        <Link key={'map'} href={`/map`} passHref className={`col-span-10 px-2 pt-2 pb-10 rounded-app flex items-center  relative bg-app-bright-purple text-white`} >
           <span className="absolute top-2 font-semibold line-clamp-2">Map</span>
         </Link>
         {categories && categories.length > 0 && categories.map((category) => {
           return (
-            <Link key={category.id} href={`/categories/${category.slug}-${category.id}`} passHref className={`col-span-18 px-2 pt-4 pb-8 rounded-app flex items-start relative overflow-hidden ${category.type === 'digital' ? 'bg-gray-900/10 dark:bg-gray-700/30 text-gray-900 dark:text-gray-100' : 'bg-app-dark-purple/5 dark:bg-app-dark-purple/15 text-gray-900 dark:text-gray-100'}`} >
-              {category.icon ? (
-                <img src={`/categories/${category.id}/icon.svg`} alt={lt(category.title)} className="h-3/4 absolute bottom-0 right-0 opacity-100" />
-              ) : (
-                <div className="h-12 w-12  flex items-center justify-center absolute bottom-0 right-0">
-                </div>
-              )}
-              <span className='absolute w-full h-full top-0 bottom-0 left-0 right-0'></span>
-              <span className="font-semibold line-clamp-3 w-2/3">{lt(category.title)}</span>
+            <Link key={category.id} href={`/categories/${category.slug}-${category.id}`} passHref className={`col-span-14 px-2 pt-4 pb-8 rounded-app flex items-start relative overflow-hidden ${category.type === 'digital' ? 'bg-gray-900/10 dark:bg-gray-700/30 text-gray-900 dark:text-gray-100' : 'bg-app-dark-purple/10 dark:bg-white/5 text-gray-900 dark:text-gray-100'}`} >
+              <span className='absolute w-full h-full top-0 bottom-0 left-0 right-0 z-3'></span>
+              <span className="font-semibold line-clamp-3 w-2/3 pl-2 z-3">{lt(category.title)}</span>
+              <img src={`/categories/${category.id}/icon.svg`} alt={lt(category.title)} className="h-1/2 absolute bottom-3 right-3 opacity-100 z-0" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
             </Link>
           );
         })}
