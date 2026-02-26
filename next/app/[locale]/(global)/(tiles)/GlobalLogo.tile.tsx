@@ -12,8 +12,8 @@ interface GlobalLogoTileProps {
 /**
  * GlobalLogoTile
  * Renders the correct logo version based on the current theme:
- *  - Light mode → stuwinlogo.svg  (dark text / colored)
- *  - Dark mode  → stuwinlogowhite.svg (white)
+ *  - Light mode → tiktaklogo.svg  (dark text / colored)
+ *  - Dark mode  → tiktaklogowhite.svg (white)
  *
  * Both images are always rendered in the DOM; CSS hides the inactive one.
  * This avoids a flash-of-wrong-logo on hydration.

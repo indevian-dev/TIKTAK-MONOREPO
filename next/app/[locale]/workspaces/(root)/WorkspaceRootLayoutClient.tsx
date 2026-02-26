@@ -28,7 +28,7 @@ export function WorkspaceRootLayoutClient({ children }: WorkspaceRootLayoutClien
     const navConfig: DomainNavConfig = {
         domain: 'workspaces',
         logoSrc: '/logo.svg',
-        label: 'stuwin.ai',
+        label: 'tiktak.ai',
         subtitle: 'Workspace Selection',
         fastNavLinks: [],
         menuGroups: [
