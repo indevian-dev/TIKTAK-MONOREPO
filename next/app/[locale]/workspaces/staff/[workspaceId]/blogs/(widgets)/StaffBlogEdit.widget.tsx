@@ -13,8 +13,6 @@ import { useRouter }
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import Image
   from 'next/image';
-import Editor
-  from '@/app/[locale]/workspaces/staff/[workspaceId]/ui/editor';
 
 // API response types for blog editing
 interface BlogContent {
@@ -195,7 +193,6 @@ export function StaffBlogEditWidget({ params }: StaffBlogEditWidgetProps) {
 
   const initialConten = content;
 
-
   return (
     <div className="px-4 py-8 my-20 mx-5 text-gray-900 bg-white shadow-md rounded-md">
       <h1 className="text-indigo-700 text-xl font-bold mb-4">Create a new blog post</h1>
@@ -262,7 +259,16 @@ export function StaffBlogEditWidget({ params }: StaffBlogEditWidgetProps) {
           />
         </div>
         <div className='w-full my-5'>
-          <Editor onChange={handleContentChange} initialContent={initialConten} />
+          <label htmlFor="content" className="text-indigo-700 block font-medium">Content:</label>
+          <textarea
+            id="content"
+            name="content"
+            rows={12}
+            value={initialConten}
+            onChange={(e) => handleContentChange(e.target.value)}
+            className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:border-indigo-500 font-mono text-sm"
+            placeholder="Blog content (Sanity manages rich content editing)"
+          />
         </div>
         <button type="submit" className="w-full bg-indigo-800 text-white font-medium py-2 rounded-md hover:bg-indigo-600 transition duration-300">Save</button>
       </form>

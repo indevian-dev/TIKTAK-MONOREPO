@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import Editor from '@/app/[locale]/workspaces/staff/[workspaceId]/ui/editor';
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import { toast } from 'react-toastify';
 
@@ -174,10 +173,10 @@ export function StaffPageEditWidget({ pageType, title }: StaffPageEditWidgetProp
                                     </span>
                                     {locale.label}
                                 </h2>
-                                <Editor
+                                <textarea
                                     key={`editor-${locale.code}-${pages[locale.code] ? 'loaded' : 'loading'}`}
-                                    initialContent={pages[locale.code]?.content || ''}
-                                    onChange={(content: string) => handleContentChange(locale.code, content)}
+                                    value={pages[locale.code]?.content || ''}
+                                    onChange={(e) => handleContentChange(locale.code, e.target.value)}
                                 />
                             </div>
                         ))}
@@ -185,10 +184,10 @@ export function StaffPageEditWidget({ pageType, title }: StaffPageEditWidgetProp
                 ) : (
                     // Show single editor
                     <div className="border border-gray-200 rounded-lg p-4">
-                        <Editor
+                        <textarea
                             key={`editor-${selectedLocale}-${pages[selectedLocale] ? 'loaded' : 'loading'}`}
-                            initialContent={pages[selectedLocale]?.content || ''}
-                            onChange={(content: string) => handleContentChange(selectedLocale, content)}
+                            value={pages[selectedLocale]?.content || ''}
+                            onChange={(e) => handleContentChange(selectedLocale, e.target.value)}
                         />
                     </div>
                 )}
