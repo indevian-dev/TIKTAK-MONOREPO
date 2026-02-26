@@ -2,9 +2,10 @@
 
 import { usePublicSearchContext } from '@/app/[locale]/(public)/(context)/PublicSearchContext';
 import { useEffect } from 'react';
-import { PublicCardsWithFiltersWidget } from '@/app/[locale]/(public)/cards/(widgets)/PublicCardsWithFiltersWidget';
+import { PublicCardsWithFiltersWidget } from '@/app/[locale]/(public)/cards/(widgets)/PublicCardsWithFilters.widget';
 import { usePublicHeaderNavContext } from '@/app/[locale]/(public)/(context)/PublicHeaderNavContext';
 import { Category } from '@/app/[locale]/(public)/categories/PublicCategoriesService';
+import { lt } from '@/lib/utils/Localized.util';
 
 interface PublicCategoriesCatalogueWidgetsProps {
     category: Category;
@@ -31,17 +32,22 @@ export function PublicCategoriesCatalogueWidgets({ category }: PublicCategoriesC
     }, [category?.id, setHeaderNav, resetHeaderNav]);
 
     useEffect(() => {
-        updateInitialProps({
-            categoryId: category?.id,
-            includeFacets: true,
-            pagination: 50,
-            useAdvancedFilters: false
-        });
-    }, [category?.id, updateInitialProps]);
+        if (category?.id) {
+            updateInitialProps({
+                categoryId: category.id,
+                includeFacets: true,
+                pagination: 50,
+                useAdvancedFilters: false
+            });
 
-    useEffect(() => {
-        triggerInitialSearch();
-    }, [triggerInitialSearch]);
+            // Small delay to allow config to settle, then trigger search
+            const timeoutId = setTimeout(() => {
+                triggerInitialSearch();
+            }, 50);
+
+            return () => clearTimeout(timeoutId);
+        }
+    }, [category?.id]); // Only depend on category.id to prevent unnecessary re-runs
 
     return (
         <>

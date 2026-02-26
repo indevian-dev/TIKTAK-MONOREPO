@@ -1,10 +1,10 @@
 'use client';
 
-import { apiCallForSpaHelper } from '@/lib/helpers/apiCallForSpaHelper';
-import { generateSlug } from '@/lib/utils/formatting/slugify';
+import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
+import { generateSlug } from '@/lib/utils/Formatter.Slugify.util';
 
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 /**
  * Categories Public Service
  * Provides client-side functions for fetching category data from the API
@@ -18,16 +18,14 @@ import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
  */
 
 export interface Category {
-  id: number;
-  title: string;
+  id: string;
+  title: { az?: string; ru?: string; en?: string };
   slug?: string;  // Generated on-the-fly, not from DB
   icon?: string;
-  parentId: number | null;  // null = parent category, number = child category
+  parentId?: string | null;  // undefined/null = parent category, string = child category
   isActive?: boolean;
   type?: string;
-  titleRu?: string;
-  titleEn?: string;
-  description?: string;
+  description?: { az?: string; ru?: string; en?: string };
   children?: Category[];
   [key: string]: unknown;
 }
@@ -38,7 +36,7 @@ export interface Category {
 function addSlugToCategory(category: Category): Category {
   return {
     ...category,
-    slug: generateSlug(category.title)
+    slug: generateSlug(category.title?.az || category.title?.en || '')
   };
 }
 
@@ -78,14 +76,14 @@ interface CategoryFiltersResponse {
  * @param {number|null} parentId - Optional parent_id to filter categories
  * @returns {Promise<{categories: Array, error?: string}>}
  */
-export async function getCategories(parentId: number | null = null): Promise<CategoriesResponse> {
+export async function getCategories(parentId: string | null = null): Promise<CategoriesResponse> {
   try {
-    const params: { parent_id?: number } = {};
-    if (parentId !== null) {
+    const params: { parent_id?: string } = {};
+    if (parentId != null) {
       params.parent_id = parentId;
     }
 
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'GET',
       url: '/api/categories',
       params,
@@ -117,13 +115,13 @@ export async function getCategories(parentId: number | null = null): Promise<Cat
  * @param {number} categoryId - The category ID
  * @returns {Promise<{category: Object|null, error?: string}>}
  */
-export async function getCategoryById(categoryId: number): Promise<CategoryResponse> {
+export async function getCategoryById(categoryId: string): Promise<CategoryResponse> {
   try {
     if (!categoryId) {
       throw new Error('Category ID is required');
     }
 
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'GET',
       url: `/api/categories/${categoryId}`,
       params: {},
@@ -156,7 +154,7 @@ export async function getCategoryById(categoryId: number): Promise<CategoryRespo
  */
 export async function getParentCategories(): Promise<CategoriesResponse> {
   try {
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'GET',
       url: '/api/categories',
       params: { parent_id: 'null' },
@@ -188,13 +186,13 @@ export async function getParentCategories(): Promise<CategoriesResponse> {
  * @param {number} parentId - The parent category ID
  * @returns {Promise<{categories: Array, error?: string}>}
  */
-export async function getSubCategories(parentId: number): Promise<CategoriesResponse> {
+export async function getSubCategories(parentId: string): Promise<CategoriesResponse> {
   try {
     if (!parentId) {
       throw new Error('Parent ID is required');
     }
 
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'GET',
       url: '/api/categories',
       params: { parent_id: parentId },
@@ -234,21 +232,26 @@ export async function getSubCategories(parentId: number): Promise<CategoriesResp
  * @param {number|null} parentId - Starting parent ID (null for root level)
  * @returns {Array} Hierarchical category array
  */
-export function buildCategoryHierarchy(categories: Category[], parentId: number | null = null): Category[] {
+export function buildCategoryHierarchy(categories: Category[], parentId: string | null | undefined = null): Category[] {
   if (!Array.isArray(categories)) {
     return [];
   }
 
   return categories
-    .filter(category => category.parentId === parentId)
+    .filter(category => {
+      // Root level: parentId is null/undefined (API omits parentId for root categories)
+      if (parentId == null) return category.parentId == null;
+      // Child level: parentId matches exactly
+      return category.parentId === parentId;
+    })
     .map(category => ({
       ...category,
       children: buildCategoryHierarchy(categories, category.id)
     }))
     .sort((a, b) => {
       // Sort by title, handling null/undefined values
-      const titleA = a.title || '';
-      const titleB = b.title || '';
+      const titleA = a.title?.az || a.title?.en || '';
+      const titleB = b.title?.az || b.title?.en || '';
       return titleA.localeCompare(titleB);
     });
 }
@@ -259,7 +262,7 @@ export function buildCategoryHierarchy(categories: Category[], parentId: number 
  */
 export async function getCategoriesHierarchy(): Promise<CategoriesResponse> {
   try {
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'GET',
       url: '/api/categories',
       params: {},
@@ -272,16 +275,16 @@ export async function getCategoriesHierarchy(): Promise<CategoriesResponse> {
 
     // Add slugs to all categories
     const categoriesWithSlugs = addSlugsToCategories(response.data?.categories || []);
-    
+
     // Debug logging
     ConsoleLogger.log(('📊 Categories fetched:'), categoriesWithSlugs.length);
-    const parentCount = categoriesWithSlugs.filter((cat: Category) => cat.parentId === null).length;
-    const childCount = categoriesWithSlugs.filter((cat: Category) => cat.parentId !== null).length;
+    const parentCount = categoriesWithSlugs.filter((cat: Category) => cat.parentId == null).length;
+    const childCount = categoriesWithSlugs.filter((cat: Category) => cat.parentId != null).length;
     ConsoleLogger.log(('👨‍👩‍👧 Parent categories:'), parentCount);
     ConsoleLogger.log(('👶 Child categories:'), childCount);
-    
+
     const hierarchy = buildCategoryHierarchy(categoriesWithSlugs);
-    
+
     ConsoleLogger.log(('🌳 Hierarchy built with'), hierarchy.length, 'root categories');
 
     return {
@@ -324,7 +327,7 @@ export function filterActiveCategories(categories: Category[], activeOnly = true
  * @param {number} categoryId - Target category ID
  * @returns {Array} Array of categories from root to target
  */
-export function getCategoryPath(categories: Category[], categoryId: number): Category[] {
+export function getCategoryPath(categories: Category[], categoryId: string): Category[] {
   if (!Array.isArray(categories) || !categoryId) {
     return [];
   }
@@ -356,28 +359,22 @@ export function searchCategories(categories: Category[], searchTerm: string, loc
   }
 
   const term = searchTerm.toLowerCase().trim();
-  
+
   return categories.filter(category => {
-    // Check default title
-    if (category.title && category.title.toLowerCase().includes(term)) {
-      return true;
-    }
-    
-    // Check localized title for Russian
-    if (locale === 'ru' && category.titleRu && category.titleRu.toLowerCase().includes(term)) {
-      return true;
-    }
-    
-    // Check localized title for English
-    if (locale === 'en' && category.titleEn && category.titleEn.toLowerCase().includes(term)) {
-      return true;
-    }
-    
-    // Check description
-    if (category.description && category.description.toLowerCase().includes(term)) {
-      return true;
-    }
-    
+    const title = category.title || {};
+    const desc = category.description || {};
+
+    // Check title in current locale first, then all locales
+    const localeTitle = title[locale as keyof typeof title];
+    if (localeTitle && localeTitle.toLowerCase().includes(term)) return true;
+
+    // Fallback: check all locale titles
+    if (Object.values(title).some(v => v && v.toLowerCase().includes(term))) return true;
+
+    // Check description in current locale
+    const localeDesc = desc[locale as keyof typeof desc];
+    if (localeDesc && localeDesc.toLowerCase().includes(term)) return true;
+
     return false;
   });
 }
@@ -401,15 +398,15 @@ export function getCategoriesByType(categories: Category[], type: string): Categ
  * @param {Array|number} categoryIds - Category ID or array of category IDs
  * @returns {Promise<{filters: Array, error?: string}>}
  */
-export async function getCategoryFilters(categoryIds: number | number[]): Promise<CategoryFiltersResponse> {
+export async function getCategoryFilters(categoryIds: string | string[]): Promise<CategoryFiltersResponse> {
   try {
     const ids = Array.isArray(categoryIds) ? categoryIds : [categoryIds];
-    
+
     if (ids.length === 0) {
       return { filters: [], error: null };
     }
 
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'GET',
       url: '/api/categories/filters',
       params: { category_id: ids.join(',') },
@@ -444,7 +441,7 @@ export async function getCategoryFilters(categoryIds: number | number[]): Promis
  * @returns {boolean} true if category is a parent (parentId === null)
  */
 export function isParentCategory(category: Category): boolean {
-  return category.parentId === null;
+  return category.parentId == null;
 }
 
 /**
@@ -453,7 +450,7 @@ export function isParentCategory(category: Category): boolean {
  * @returns {boolean} true if category is a child (parentId !== null)
  */
 export function isChildCategory(category: Category): boolean {
-  return category.parentId !== null;
+  return category.parentId != null;
 }
 
 /**

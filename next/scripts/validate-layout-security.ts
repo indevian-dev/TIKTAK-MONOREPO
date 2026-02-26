@@ -8,7 +8,7 @@
 import { readdirSync, readFileSync, existsSync } from 'fs';
 import { join, relative, sep } from 'path';
 
-const APP_DIR = join(import.meta.dir, '..', 'app');
+const APP_DIR = join(import.meta.dirname, '..', 'app');
 
 function findLayoutFiles(dir: string, results: string[] = []): string[] {
     if (!existsSync(dir)) return results;

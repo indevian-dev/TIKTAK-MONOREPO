@@ -1,5 +1,5 @@
-import { withPageAuth } from '@/lib/middleware/handlers';
-import { AuthProfileEditWidget } from './(widgets)/AuthProfileEditWidget';
+import { withPageAuth } from '@/lib/middleware/Interceptor.View.middleware';
+import { AuthProfileEditWidget } from './(widgets)/AuthProfileEdit.widget';
 
 interface ProfilePageProps {
     params: Promise<{

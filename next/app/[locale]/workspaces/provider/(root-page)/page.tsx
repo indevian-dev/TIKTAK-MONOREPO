@@ -1,15 +1,15 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import PageTitleWidget
-    from "@/app/[locale]/workspaces/provider/[workspaceId]/ui/ProviderPageTitleWidget";
+  from "@/app/[locale]/workspaces/provider/[workspaceId]/ui/ProviderPageTitle.widget";
 
 export default withPageAuth(
   async function ProviderRootPage({ }) {
     return (
-        <div>
-            <PageTitleWidget pageTitle="Tiktak Provider" />
-        </div>
+      <div>
+        <PageTitleWidget pageTitle="Tiktak Provider" />
+      </div>
     );
   },
-  { pagePath: '/provider', inlineHandlers: true }
+  { path: '/provider', inlineHandlers: true }
 );

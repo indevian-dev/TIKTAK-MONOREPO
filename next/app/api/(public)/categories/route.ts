@@ -1,40 +1,11 @@
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import { NextRequest, NextResponse } from 'next/server';
-import { eq, or, isNull } from 'drizzle-orm';
-import { categories } from '@/lib/database/schema';
-import type { ApiRouteHandler, ApiHandlerContext } from '@/types/next';
-import type { CategoryRow } from '@/lib/domain/categories';
-
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
-export const GET: ApiRouteHandler = withApiHandler(async (_request: NextRequest, { log , db }: ApiHandlerContext) => {
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { okResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
+export const GET = unifiedApiHandler(async (_req, { module, log }) => {
   try {
-    // Get all categories where isActive is true
-    const categoriesList = await db
-      .select()
-      .from(categories)
-      .where(eq(categories.isActive, true))
-      .orderBy(categories.id);
-
-    // Debug logging
-    ConsoleLogger.log('📦 API: Categories fetched from DB:', categoriesList.length);
-    const parents = categoriesList.filter((cat: CategoryRow) => cat.parentId === null);
-    const children = categoriesList.filter((cat: CategoryRow) => cat.parentId !== null);
-    ConsoleLogger.log('👨 API: Parent categories (parentId === null):', parents.length);
-    ConsoleLogger.log('👶 API: Child categories (parentId !== null):', children.length);
-    ConsoleLogger.log('📋 API: Parent category details:', parents.map((p: CategoryRow) => ({ id: p.id, title: p.title, parentId: p.parentId })));
-
-    // Check for orphaned children (children whose parent doesn't exist)
-    const parentIds = new Set(parents.map((p: CategoryRow) => p.id));
-    const orphaned = children.filter((child: CategoryRow) => child.parentId && !parentIds.has(child.parentId));
-    if (orphaned.length > 0) {
-      ConsoleLogger.log('⚠️ API: Orphaned categories (parent doesn\'t exist):', orphaned.map((o: CategoryRow) => ({ id: o.id, title: o.title, parentId: o.parentId })));
-    }
-
-    return NextResponse.json({ categories: categoriesList });
+    const categoriesList = await module.categories.getActiveCategories();
+    return okResponse({ categories: categoriesList });
   } catch (error) {
     log?.error('Error fetching categories', error as Error);
-    return NextResponse.json({
-      error: 'Failed to fetch categories'
-    }, { status: 500 });
+    return serverErrorResponse('Failed to fetch categories');
   }
 });

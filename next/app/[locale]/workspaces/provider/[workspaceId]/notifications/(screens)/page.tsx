@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import NotificationsList
-  from '../(widgets)/ProviderNotificationsListWidget';
+  from '../(widgets)/ProviderNotificationsList.widget';
 
 function NotificationsLoadingSkeleton() {
   return (
@@ -49,5 +49,5 @@ export default withPageAuth(
       </div>
     );
   },
-  { pagePath: '/provider/notifications', inlineHandlers: true }
+  { path: '/provider/notifications', inlineHandlers: true }
 );

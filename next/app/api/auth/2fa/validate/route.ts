@@ -1,85 +1,43 @@
-import { withApiHandler }
-from '@/lib/middleware/handlers/ApiInterceptor';
-import { NextRequest, NextResponse }
-    from 'next/server';
-import { eq, and } from 'drizzle-orm';
-import { users, otps } from '@/lib/database/schema';
-import {
-    validateOtp
-} from '@/lib/utils/security/otpHandlingUtility';
-import type { OtpType, ApiRouteHandler, ApiHandlerContext } from '@/types/next';
 
-export const POST: ApiRouteHandler = withApiHandler(async (request: NextRequest, { authData, db, log }: ApiHandlerContext) => {
+import { unifiedApiHandler } from "@/lib/middleware/_Middleware.index";
+import { okResponse, errorResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
+import { SessionStore } from "@/lib/middleware/Store.Session.middleware";
+import { TwoFactorValidateSchema } from '@tiktak/shared/types/auth/Auth.schemas';
+import { validateBody } from '@/lib/utils/Zod.validate.util';
+
+export const POST = unifiedApiHandler(async (request, { module, authData }) => {
     try {
-        if (!authData) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        if (!authData?.user?.id || !authData?.account?.id) {
+            return errorResponse("Unauthorized", 401, "UNAUTHORIZED");
         }
 
-        if (!authData.user) {
-            return NextResponse.json({ error: 'User not found' }, { status: 401 });
-        }
+        const parsed = await validateBody(request, TwoFactorValidateSchema);
+        if (!parsed.success) return parsed.errorResponse;
 
-        const userId = authData.user.id;
+        const { code } = parsed.data;
 
-        const body = await request.json();
-        const { code, method } = body;
-
-        if (!code || !method || !['email', 'phone'].includes(method)) {
-            return NextResponse.json({
-                error: 'Invalid request. Code and method (email/phone) are required'
-            }, { status: 400 });
-        }
-
-        // Validate OTP
-        const isValid = await validateOtp({
-            userId,
-            type: `2fa_${method}` as OtpType,
-            otp: code
+        // Validate the 2FA OTP via AuthService (uses OTP type '2fa')
+        const result = await module.auth.validate2FA({
+            accountId: authData.account.id,
+            code: String(code).trim(),
         });
 
-        if (!isValid) {
-            return NextResponse.json({ error: 'Invalid or expired verification code' }, { status: 400 });
+        if (!result.success) {
+            return errorResponse(result.error || "Invalid OTP", result.status || 400);
         }
 
-        // Update user's 2FA expiration timestamp to 10 minutes from now
-        const expireAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
-
-        const updateData = method === 'email'
-            ? { twoFactorAuthEmailExpireAt: expireAt }
-            : { twoFactorAuthPhoneExpireAt: expireAt };
-
-        const updateResult = await db
-            .update(users)
-            .set(updateData)
-            .where(eq(users.id, userId))
-            .returning({
-                id: users.id,
-                two_factor_auth_email_expire_at: users.twoFactorAuthEmailExpireAt,
-                two_factor_auth_phone_expire_at: users.twoFactorAuthPhoneExpireAt
-            });
-
-        if (!updateResult?.length) {
-            return NextResponse.json({ error: 'Failed to update 2FA status' }, { status: 500 });
+        // Set 2FA verified flag in Redis for this session
+        const sessionId = authData.session?.id;
+        if (sessionId) {
+            await SessionStore.set2FAVerified(sessionId);
         }
 
-        // Clean up used OTPs
-        await db
-            .delete(otps)
-            .where(and(
-                eq(otps.userId, userId),
-                eq(otps.type, `2fa_${method}`)
-            ));
-
-        return NextResponse.json({
-            success: true,
-            message: 'Two-factor authentication verified successfully',
-            method,
-            expiresAt: expireAt.toISOString(),
-            expiresIn: 600 // 10 minutes in seconds
-        }, { status: 200 });
-
+        return okResponse({
+            verified: true,
+            message: "Two-factor authentication verified successfully"
+        });
     } catch (error) {
-        log?.error('2FA OTP validation error', error as Error);
-        return NextResponse.json({ error: 'Failed to validate verification code' }, { status: 500 });
+        console.error("Error in 2FA validate route:", error);
+        return serverErrorResponse("Server error occurred");
     }
 });

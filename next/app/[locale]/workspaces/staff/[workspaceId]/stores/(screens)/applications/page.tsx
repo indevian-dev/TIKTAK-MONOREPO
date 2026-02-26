@@ -1,10 +1,10 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { StaffStoresApplicationsListWidget }
-  from '@/app/[locale]/workspaces/staff/[workspaceId]/stores/(widgets)/StaffStoresApplicationsListWidget';
+  from '@/app/[locale]/workspaces/staff/[workspaceId]/stores/(widgets)/StaffStoresApplicationsList.widget';
 
 export default withPageAuth(
-  async function StaffStoresApplicationsListPage({  }) {
+  async function StaffStoresApplicationsListPage({ }) {
     return (
       <div>
         <h1 className="text-3xl font-black text-left my-4 px-4">
@@ -14,5 +14,5 @@ export default withPageAuth(
       </div>
     );
   },
-  { pagePath: '/staff/stores/applications', inlineHandlers: true }
+  { path: '/staff/stores/applications', inlineHandlers: true }
 );

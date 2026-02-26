@@ -1,12 +1,12 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { ProviderConversationWidget }
-  from '@/app/[locale]/workspaces/provider/[workspaceId]/conversations/(widgets)/ProviderConversationWidget';
+  from '@/app/[locale]/workspaces/provider/[workspaceId]/conversations/(widgets)/ProviderConversation.widget';
 
 export default withPageAuth(
-  async function ProviderConversationPage({ authData, params }) {
+  async function ProviderConversationPage({ params }: any) {
     const { id } = await params;
     return <ProviderConversationWidget conversationId={id} />;
   },
-  { pagePath: '/provider/conversations/:id', inlineHandlers: true }
+  { path: '/provider/conversations/:id', inlineHandlers: true }
 );

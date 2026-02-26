@@ -1,7 +1,7 @@
 import Head
   from 'next/head';
 import { PublicMapWidget }
-  from '@/app/[locale]/(public)/map/(widgets)/PublicMapWidget';
+  from '@/app/[locale]/(public)/map/(widgets)/PublicMap.widget';
 
 const PublicMapPage = () => {
   return (

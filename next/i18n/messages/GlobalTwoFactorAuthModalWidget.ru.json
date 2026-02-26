@@ -1,14 +1,21 @@
 {
   "title": "Двухфакторная аутентификация",
-  "email_method": "Email",
-  "sms_method": "SMS",
-  "send_code": "Отправить код",
-  "resend_code": "Отправить повторно",
-  "verify": "Подтвердить",
-  "code_placeholder": "Введите код",
-  "sending": "Отправка...",
-  "verifying": "Проверка...",
-  "close": "Закрыть",
-  "wait_seconds": "Подождите {seconds} сек"
+  "subtitle_email_required": "Для продолжения требуется подтвердить Email",
+  "subtitle_phone_required": "Для продолжения требуется подтвердить Телефон",
+  "subtitle": "Подтвердите личность для продолжения",
+  "choose_method": "Выберите способ получения кода:",
+  "email_option": "Email",
+  "email_description": "Получить код на email",
+  "phone_option": "SMS",
+  "phone_description": "Получить код по SMS",
+  "send_code": "Отправить код подтверждения",
+  "email_sent": "Код отправлен на ваш email",
+  "sms_sent": "Код отправлен на ваш телефон",
+  "enter_code": "Введите 6-значный код",
+  "auto_verify": "Нажмите Enter или Подтвердить для завершения",
+  "verify": "Подтвердить код",
+  "change_method": "Изменить способ",
+  "resend_in": "Отправить через",
+  "resend_code": "Отправить код еще раз",
+  "security_note": "Эта проверка помогает обезопасить ваш аккаунт"
 }
-

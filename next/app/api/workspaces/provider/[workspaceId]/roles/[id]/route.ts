@@ -1,19 +1,15 @@
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import type { NextRequest } from 'next/server';
-import type { ApiHandlerContext } from '@/types/next';
-import { NextResponse } from 'next/server';
-import supabase from '@/lib/clients/supabaseServiceRoleClient';
-import type { ApiRouteHandler } from '@/types/next';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { okResponse, errorResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
 
-export const GET: ApiRouteHandler = withApiHandler(async (request, { authData, params }) => {
+export const GET = unifiedApiHandler(async (_request, { params, module, log }) => {
     const resolvedParams = await params;
     if (!resolvedParams?.id) {
-        return NextResponse.json({ error: 'Role ID is required' }, { status: 400 });
+        return errorResponse('Role ID is required', 400);
     }
-    const id = resolvedParams.id;
-    const { data, error } = await supabase.from('accounts_roles').select('*').eq('id', id).single();
-    if (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+
+    const result = await module.roles.getRole(resolvedParams.id);
+    if (!result.success) {
+        return serverErrorResponse(result.error ?? 'Failed to fetch role');
     }
-    return NextResponse.json({ role: data });
-})
+    return okResponse({ role: result.role });
+});

@@ -1,10 +1,10 @@
-import { fetch as apiCallForSsrHelper } from '@/lib/helpers/apiCallForSsrHelper';
+import { fetch as apiCallForSsrHelper } from '@/lib/utils/Http.FetchApiSSR.util';
 import { cache }
   from 'react';
-import { PublicStoreCatalogueWidget } from '@/app/[locale]/(public)/stores/(widgets)/PublicStoreCatalogueWidget';
+import { PublicStoreCatalogueWidget } from '@/app/[locale]/(public)/stores/(widgets)/PublicStoreCatalogue.widget';
 import { notFound } from 'next/navigation';
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 // Cached data fetching function - prevents duplicate fetches
 const getStoreData = cache(async (id: number) => {
   try {

@@ -1,12 +1,12 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import ProviderEditCardWidget
-  from '@/app/[locale]/workspaces/provider/[workspaceId]/cards/(widgets)/ProviderEditCardWidget';
+  from '@/app/[locale]/workspaces/provider/[workspaceId]/cards/(widgets)/ProviderEditCard.widget';
 
 export default withPageAuth(
-  async function ProviderEditCardPage({ params }) {
+  async function ProviderEditCardPage({ params }: any) {
     const { id } = await params;
     return <ProviderEditCardWidget cardId={id} />;
   },
-  { pagePath: '/provider/cards/edit/:id', inlineHandlers: true }
+  { path: '/provider/cards/edit/:id', inlineHandlers: true }
 );

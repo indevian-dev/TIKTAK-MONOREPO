@@ -1,9 +1,9 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 
 export default withPageAuth(
   async function BlogsPage({ }) {
     return <div>Blogs</div>;
   },
-  { pagePath: '/staff/blogs', inlineHandlers: true }
+  { path: '/staff/blogs', inlineHandlers: true }
 );

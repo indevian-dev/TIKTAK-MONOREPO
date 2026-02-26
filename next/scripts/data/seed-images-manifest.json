@@ -1,0 +1,3222 @@
+{
+  "SEED2_RE_001": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_RE_002": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_RE_003": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_RE_004": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_RE_005": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_RE_006": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_RE_007": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_RE_008": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_RE_009": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_RE_010": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_RE_011": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_RE_012": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_RE_013": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_RE_014": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_RE_015": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_RE_016": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_RE_017": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_RE_018": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_RE_019": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_RE_020": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_RE_021": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_RE_022": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_RE_023": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_RE_024": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_RE_025": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_RE_026": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_RE_027": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_RE_028": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_RE_029": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_RE_030": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_TR_001": {
+    "folder": "cars",
+    "images": [
+      "toyota-camry.jpg",
+      "mercedes-benz.jpg",
+      "bmw-side.jpg"
+    ]
+  },
+  "SEED2_TR_002": {
+    "folder": "cars",
+    "images": [
+      "mercedes-benz.jpg",
+      "bmw-side.jpg",
+      "car-interior.jpg"
+    ]
+  },
+  "SEED2_TR_003": {
+    "folder": "cars",
+    "images": [
+      "bmw-side.jpg",
+      "car-interior.jpg"
+    ]
+  },
+  "SEED2_TR_004": {
+    "folder": "cars",
+    "images": [
+      "car-interior.jpg",
+      "suv-mountain.jpg",
+      "luxury-car.jpg"
+    ]
+  },
+  "SEED2_TR_005": {
+    "folder": "cars",
+    "images": [
+      "suv-mountain.jpg",
+      "luxury-car.jpg",
+      "toyota-camry.jpg"
+    ]
+  },
+  "SEED2_TR_006": {
+    "folder": "cars",
+    "images": [
+      "luxury-car.jpg",
+      "toyota-camry.jpg"
+    ]
+  },
+  "SEED2_TR_007": {
+    "folder": "cars",
+    "images": [
+      "toyota-camry.jpg",
+      "mercedes-benz.jpg",
+      "bmw-side.jpg"
+    ]
+  },
+  "SEED2_TR_008": {
+    "folder": "cars",
+    "images": [
+      "mercedes-benz.jpg",
+      "bmw-side.jpg",
+      "car-interior.jpg"
+    ]
+  },
+  "SEED2_TR_009": {
+    "folder": "cars",
+    "images": [
+      "bmw-side.jpg",
+      "car-interior.jpg"
+    ]
+  },
+  "SEED2_TR_010": {
+    "folder": "cars",
+    "images": [
+      "car-interior.jpg",
+      "suv-mountain.jpg",
+      "luxury-car.jpg"
+    ]
+  },
+  "SEED2_TR_011": {
+    "folder": "cars",
+    "images": [
+      "suv-mountain.jpg",
+      "luxury-car.jpg",
+      "toyota-camry.jpg"
+    ]
+  },
+  "SEED2_TR_012": {
+    "folder": "cars",
+    "images": [
+      "luxury-car.jpg",
+      "toyota-camry.jpg"
+    ]
+  },
+  "SEED2_TR_013": {
+    "folder": "cars",
+    "images": [
+      "toyota-camry.jpg",
+      "mercedes-benz.jpg",
+      "bmw-side.jpg"
+    ]
+  },
+  "SEED2_TR_014": {
+    "folder": "cars",
+    "images": [
+      "mercedes-benz.jpg",
+      "bmw-side.jpg",
+      "car-interior.jpg"
+    ]
+  },
+  "SEED2_TR_015": {
+    "folder": "cars",
+    "images": [
+      "bmw-side.jpg",
+      "car-interior.jpg"
+    ]
+  },
+  "SEED2_TR_016": {
+    "folder": "cars",
+    "images": [
+      "car-interior.jpg",
+      "suv-mountain.jpg",
+      "luxury-car.jpg"
+    ]
+  },
+  "SEED2_TR_017": {
+    "folder": "cars",
+    "images": [
+      "suv-mountain.jpg",
+      "luxury-car.jpg",
+      "toyota-camry.jpg"
+    ]
+  },
+  "SEED2_TR_018": {
+    "folder": "cars",
+    "images": [
+      "luxury-car.jpg",
+      "toyota-camry.jpg"
+    ]
+  },
+  "SEED2_TR_019": {
+    "folder": "cars",
+    "images": [
+      "toyota-camry.jpg",
+      "mercedes-benz.jpg",
+      "bmw-side.jpg"
+    ]
+  },
+  "SEED2_TR_020": {
+    "folder": "cars",
+    "images": [
+      "mercedes-benz.jpg",
+      "bmw-side.jpg",
+      "car-interior.jpg"
+    ]
+  },
+  "SEED2_TR_021": {
+    "folder": "cars",
+    "images": [
+      "bmw-side.jpg",
+      "car-interior.jpg"
+    ]
+  },
+  "SEED2_TR_022": {
+    "folder": "cars",
+    "images": [
+      "car-interior.jpg",
+      "suv-mountain.jpg",
+      "luxury-car.jpg"
+    ]
+  },
+  "SEED2_TR_023": {
+    "folder": "cars",
+    "images": [
+      "suv-mountain.jpg",
+      "luxury-car.jpg",
+      "toyota-camry.jpg"
+    ]
+  },
+  "SEED2_TR_024": {
+    "folder": "cars",
+    "images": [
+      "luxury-car.jpg",
+      "toyota-camry.jpg"
+    ]
+  },
+  "SEED2_TR_025": {
+    "folder": "cars",
+    "images": [
+      "toyota-camry.jpg",
+      "mercedes-benz.jpg",
+      "bmw-side.jpg"
+    ]
+  },
+  "SEED2_TR_026": {
+    "folder": "cars",
+    "images": [
+      "mercedes-benz.jpg",
+      "bmw-side.jpg",
+      "car-interior.jpg"
+    ]
+  },
+  "SEED2_TR_027": {
+    "folder": "cars",
+    "images": [
+      "bmw-side.jpg",
+      "car-interior.jpg"
+    ]
+  },
+  "SEED2_TR_028": {
+    "folder": "cars",
+    "images": [
+      "car-interior.jpg",
+      "suv-mountain.jpg",
+      "luxury-car.jpg"
+    ]
+  },
+  "SEED2_TR_029": {
+    "folder": "cars",
+    "images": [
+      "suv-mountain.jpg",
+      "luxury-car.jpg",
+      "toyota-camry.jpg"
+    ]
+  },
+  "SEED2_TR_030": {
+    "folder": "cars",
+    "images": [
+      "luxury-car.jpg",
+      "toyota-camry.jpg"
+    ]
+  },
+  "SEED2_EL_001": {
+    "folder": "phones",
+    "images": [
+      "iphone-15-pro.jpg",
+      "phone-closeup.jpg",
+      "smartphone-modern.jpg"
+    ]
+  },
+  "SEED2_EL_002": {
+    "folder": "phones",
+    "images": [
+      "phone-closeup.jpg",
+      "smartphone-modern.jpg",
+      "phone-back.jpg"
+    ]
+  },
+  "SEED2_EL_003": {
+    "folder": "phones",
+    "images": [
+      "smartphone-modern.jpg",
+      "phone-back.jpg"
+    ]
+  },
+  "SEED2_EL_004": {
+    "folder": "phones",
+    "images": [
+      "phone-back.jpg",
+      "phone-screen.jpg",
+      "iphone-15-pro.jpg"
+    ]
+  },
+  "SEED2_EL_005": {
+    "folder": "phones",
+    "images": [
+      "phone-screen.jpg",
+      "iphone-15-pro.jpg",
+      "phone-closeup.jpg"
+    ]
+  },
+  "SEED2_EL_006": {
+    "folder": "phones",
+    "images": [
+      "iphone-15-pro.jpg",
+      "phone-closeup.jpg"
+    ]
+  },
+  "SEED2_EL_007": {
+    "folder": "phones",
+    "images": [
+      "phone-closeup.jpg",
+      "smartphone-modern.jpg",
+      "phone-back.jpg"
+    ]
+  },
+  "SEED2_EL_008": {
+    "folder": "phones",
+    "images": [
+      "smartphone-modern.jpg",
+      "phone-back.jpg",
+      "phone-screen.jpg"
+    ]
+  },
+  "SEED2_EL_009": {
+    "folder": "phones",
+    "images": [
+      "phone-back.jpg",
+      "phone-screen.jpg"
+    ]
+  },
+  "SEED2_EL_010": {
+    "folder": "phones",
+    "images": [
+      "phone-screen.jpg",
+      "iphone-15-pro.jpg",
+      "phone-closeup.jpg"
+    ]
+  },
+  "SEED2_EL_011": {
+    "folder": "phones",
+    "images": [
+      "iphone-15-pro.jpg",
+      "phone-closeup.jpg",
+      "smartphone-modern.jpg"
+    ]
+  },
+  "SEED2_EL_012": {
+    "folder": "phones",
+    "images": [
+      "phone-closeup.jpg",
+      "smartphone-modern.jpg"
+    ]
+  },
+  "SEED2_EL_013": {
+    "folder": "phones",
+    "images": [
+      "smartphone-modern.jpg",
+      "phone-back.jpg",
+      "phone-screen.jpg"
+    ]
+  },
+  "SEED2_EL_014": {
+    "folder": "phones",
+    "images": [
+      "phone-back.jpg",
+      "phone-screen.jpg",
+      "iphone-15-pro.jpg"
+    ]
+  },
+  "SEED2_EL_015": {
+    "folder": "phones",
+    "images": [
+      "phone-screen.jpg",
+      "iphone-15-pro.jpg"
+    ]
+  },
+  "SEED2_EL_016": {
+    "folder": "phones",
+    "images": [
+      "iphone-15-pro.jpg",
+      "phone-closeup.jpg",
+      "smartphone-modern.jpg"
+    ]
+  },
+  "SEED2_EL_017": {
+    "folder": "phones",
+    "images": [
+      "phone-closeup.jpg",
+      "smartphone-modern.jpg",
+      "phone-back.jpg"
+    ]
+  },
+  "SEED2_EL_018": {
+    "folder": "phones",
+    "images": [
+      "smartphone-modern.jpg",
+      "phone-back.jpg"
+    ]
+  },
+  "SEED2_EL_019": {
+    "folder": "phones",
+    "images": [
+      "phone-back.jpg",
+      "phone-screen.jpg",
+      "iphone-15-pro.jpg"
+    ]
+  },
+  "SEED2_EL_020": {
+    "folder": "phones",
+    "images": [
+      "phone-screen.jpg",
+      "iphone-15-pro.jpg",
+      "phone-closeup.jpg"
+    ]
+  },
+  "SEED2_EL_021": {
+    "folder": "phones",
+    "images": [
+      "iphone-15-pro.jpg",
+      "phone-closeup.jpg"
+    ]
+  },
+  "SEED2_EL_022": {
+    "folder": "phones",
+    "images": [
+      "phone-closeup.jpg",
+      "smartphone-modern.jpg",
+      "phone-back.jpg"
+    ]
+  },
+  "SEED2_EL_023": {
+    "folder": "phones",
+    "images": [
+      "smartphone-modern.jpg",
+      "phone-back.jpg",
+      "phone-screen.jpg"
+    ]
+  },
+  "SEED2_EL_024": {
+    "folder": "phones",
+    "images": [
+      "phone-back.jpg",
+      "phone-screen.jpg"
+    ]
+  },
+  "SEED2_EL_025": {
+    "folder": "phones",
+    "images": [
+      "phone-screen.jpg",
+      "iphone-15-pro.jpg",
+      "phone-closeup.jpg"
+    ]
+  },
+  "SEED2_EL_026": {
+    "folder": "phones",
+    "images": [
+      "iphone-15-pro.jpg",
+      "phone-closeup.jpg",
+      "smartphone-modern.jpg"
+    ]
+  },
+  "SEED2_EL_027": {
+    "folder": "phones",
+    "images": [
+      "phone-closeup.jpg",
+      "smartphone-modern.jpg"
+    ]
+  },
+  "SEED2_EL_028": {
+    "folder": "phones",
+    "images": [
+      "smartphone-modern.jpg",
+      "phone-back.jpg",
+      "phone-screen.jpg"
+    ]
+  },
+  "SEED2_EL_029": {
+    "folder": "phones",
+    "images": [
+      "phone-back.jpg",
+      "phone-screen.jpg",
+      "iphone-15-pro.jpg"
+    ]
+  },
+  "SEED2_EL_030": {
+    "folder": "phones",
+    "images": [
+      "phone-screen.jpg",
+      "iphone-15-pro.jpg"
+    ]
+  },
+  "SEED2_HG_001": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_HG_002": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_HG_003": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_HG_004": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_HG_005": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_HG_006": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_HG_007": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_HG_008": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_HG_009": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_HG_010": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_HG_011": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_HG_012": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_HG_013": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_HG_014": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_HG_015": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_HG_016": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_HG_017": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_HG_018": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_HG_019": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_HG_020": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_HG_021": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_HG_022": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg"
+    ]
+  },
+  "SEED2_HG_023": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_HG_024": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_HG_025": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg"
+    ]
+  },
+  "SEED2_HG_026": {
+    "folder": "apartments",
+    "images": [
+      "apartment-living.jpg",
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_HG_027": {
+    "folder": "apartments",
+    "images": [
+      "apartment-bedroom.jpg",
+      "apartment-kitchen.jpg"
+    ]
+  },
+  "SEED2_HG_028": {
+    "folder": "apartments",
+    "images": [
+      "apartment-kitchen.jpg",
+      "house-exterior.jpg",
+      "baku-view.jpg"
+    ]
+  },
+  "SEED2_HG_029": {
+    "folder": "apartments",
+    "images": [
+      "house-exterior.jpg",
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_HG_030": {
+    "folder": "apartments",
+    "images": [
+      "baku-view.jpg",
+      "apartment-living.jpg"
+    ]
+  },
+  "SEED2_CL_001": {
+    "folder": "clothing",
+    "images": [
+      "womens-fashion.jpg",
+      "mens-jacket.jpg",
+      "sneakers-nike.jpg"
+    ]
+  },
+  "SEED2_CL_002": {
+    "folder": "clothing",
+    "images": [
+      "mens-jacket.jpg",
+      "sneakers-nike.jpg",
+      "leather-bag.jpg"
+    ]
+  },
+  "SEED2_CL_003": {
+    "folder": "clothing",
+    "images": [
+      "sneakers-nike.jpg",
+      "leather-bag.jpg"
+    ]
+  },
+  "SEED2_CL_004": {
+    "folder": "clothing",
+    "images": [
+      "leather-bag.jpg",
+      "wristwatch.jpg",
+      "womens-fashion.jpg"
+    ]
+  },
+  "SEED2_CL_005": {
+    "folder": "clothing",
+    "images": [
+      "wristwatch.jpg",
+      "womens-fashion.jpg",
+      "mens-jacket.jpg"
+    ]
+  },
+  "SEED2_CL_006": {
+    "folder": "clothing",
+    "images": [
+      "womens-fashion.jpg",
+      "mens-jacket.jpg"
+    ]
+  },
+  "SEED2_CL_007": {
+    "folder": "clothing",
+    "images": [
+      "mens-jacket.jpg",
+      "sneakers-nike.jpg",
+      "leather-bag.jpg"
+    ]
+  },
+  "SEED2_CL_008": {
+    "folder": "clothing",
+    "images": [
+      "sneakers-nike.jpg",
+      "leather-bag.jpg",
+      "wristwatch.jpg"
+    ]
+  },
+  "SEED2_CL_009": {
+    "folder": "clothing",
+    "images": [
+      "leather-bag.jpg",
+      "wristwatch.jpg"
+    ]
+  },
+  "SEED2_CL_010": {
+    "folder": "clothing",
+    "images": [
+      "wristwatch.jpg",
+      "womens-fashion.jpg",
+      "mens-jacket.jpg"
+    ]
+  },
+  "SEED2_CL_011": {
+    "folder": "clothing",
+    "images": [
+      "womens-fashion.jpg",
+      "mens-jacket.jpg",
+      "sneakers-nike.jpg"
+    ]
+  },
+  "SEED2_CL_012": {
+    "folder": "clothing",
+    "images": [
+      "mens-jacket.jpg",
+      "sneakers-nike.jpg"
+    ]
+  },
+  "SEED2_CL_013": {
+    "folder": "clothing",
+    "images": [
+      "sneakers-nike.jpg",
+      "leather-bag.jpg",
+      "wristwatch.jpg"
+    ]
+  },
+  "SEED2_CL_014": {
+    "folder": "clothing",
+    "images": [
+      "leather-bag.jpg",
+      "wristwatch.jpg",
+      "womens-fashion.jpg"
+    ]
+  },
+  "SEED2_CL_015": {
+    "folder": "clothing",
+    "images": [
+      "wristwatch.jpg",
+      "womens-fashion.jpg"
+    ]
+  },
+  "SEED2_CL_016": {
+    "folder": "clothing",
+    "images": [
+      "womens-fashion.jpg",
+      "mens-jacket.jpg",
+      "sneakers-nike.jpg"
+    ]
+  },
+  "SEED2_CL_017": {
+    "folder": "clothing",
+    "images": [
+      "mens-jacket.jpg",
+      "sneakers-nike.jpg",
+      "leather-bag.jpg"
+    ]
+  },
+  "SEED2_CL_018": {
+    "folder": "clothing",
+    "images": [
+      "sneakers-nike.jpg",
+      "leather-bag.jpg"
+    ]
+  },
+  "SEED2_CL_019": {
+    "folder": "clothing",
+    "images": [
+      "leather-bag.jpg",
+      "wristwatch.jpg",
+      "womens-fashion.jpg"
+    ]
+  },
+  "SEED2_CL_020": {
+    "folder": "clothing",
+    "images": [
+      "wristwatch.jpg",
+      "womens-fashion.jpg",
+      "mens-jacket.jpg"
+    ]
+  },
+  "SEED2_CL_021": {
+    "folder": "clothing",
+    "images": [
+      "womens-fashion.jpg",
+      "mens-jacket.jpg"
+    ]
+  },
+  "SEED2_CL_022": {
+    "folder": "clothing",
+    "images": [
+      "mens-jacket.jpg",
+      "sneakers-nike.jpg",
+      "leather-bag.jpg"
+    ]
+  },
+  "SEED2_CL_023": {
+    "folder": "clothing",
+    "images": [
+      "sneakers-nike.jpg",
+      "leather-bag.jpg",
+      "wristwatch.jpg"
+    ]
+  },
+  "SEED2_CL_024": {
+    "folder": "clothing",
+    "images": [
+      "leather-bag.jpg",
+      "wristwatch.jpg"
+    ]
+  },
+  "SEED2_CL_025": {
+    "folder": "clothing",
+    "images": [
+      "wristwatch.jpg",
+      "womens-fashion.jpg",
+      "mens-jacket.jpg"
+    ]
+  },
+  "SEED2_CL_026": {
+    "folder": "clothing",
+    "images": [
+      "womens-fashion.jpg",
+      "mens-jacket.jpg",
+      "sneakers-nike.jpg"
+    ]
+  },
+  "SEED2_CL_027": {
+    "folder": "clothing",
+    "images": [
+      "mens-jacket.jpg",
+      "sneakers-nike.jpg"
+    ]
+  },
+  "SEED2_CL_028": {
+    "folder": "clothing",
+    "images": [
+      "sneakers-nike.jpg",
+      "leather-bag.jpg",
+      "wristwatch.jpg"
+    ]
+  },
+  "SEED2_CL_029": {
+    "folder": "clothing",
+    "images": [
+      "leather-bag.jpg",
+      "wristwatch.jpg",
+      "womens-fashion.jpg"
+    ]
+  },
+  "SEED2_CL_030": {
+    "folder": "clothing",
+    "images": [
+      "wristwatch.jpg",
+      "womens-fashion.jpg"
+    ]
+  },
+  "SEED2_KD_001": {
+    "folder": "kids",
+    "images": [
+      "baby-stroller.jpg",
+      "kids-toys.jpg",
+      "kids-clothing.jpg"
+    ]
+  },
+  "SEED2_KD_002": {
+    "folder": "kids",
+    "images": [
+      "kids-toys.jpg",
+      "kids-clothing.jpg",
+      "baby-bed.jpg"
+    ]
+  },
+  "SEED2_KD_003": {
+    "folder": "kids",
+    "images": [
+      "kids-clothing.jpg",
+      "baby-bed.jpg"
+    ]
+  },
+  "SEED2_KD_004": {
+    "folder": "kids",
+    "images": [
+      "baby-bed.jpg",
+      "baby-stroller.jpg",
+      "kids-toys.jpg"
+    ]
+  },
+  "SEED2_KD_005": {
+    "folder": "kids",
+    "images": [
+      "baby-stroller.jpg",
+      "kids-toys.jpg",
+      "kids-clothing.jpg"
+    ]
+  },
+  "SEED2_KD_006": {
+    "folder": "kids",
+    "images": [
+      "kids-toys.jpg",
+      "kids-clothing.jpg"
+    ]
+  },
+  "SEED2_KD_007": {
+    "folder": "kids",
+    "images": [
+      "kids-clothing.jpg",
+      "baby-bed.jpg",
+      "baby-stroller.jpg"
+    ]
+  },
+  "SEED2_KD_008": {
+    "folder": "kids",
+    "images": [
+      "baby-bed.jpg",
+      "baby-stroller.jpg",
+      "kids-toys.jpg"
+    ]
+  },
+  "SEED2_KD_009": {
+    "folder": "kids",
+    "images": [
+      "baby-stroller.jpg",
+      "kids-toys.jpg"
+    ]
+  },
+  "SEED2_KD_010": {
+    "folder": "kids",
+    "images": [
+      "kids-toys.jpg",
+      "kids-clothing.jpg",
+      "baby-bed.jpg"
+    ]
+  },
+  "SEED2_KD_011": {
+    "folder": "kids",
+    "images": [
+      "kids-clothing.jpg",
+      "baby-bed.jpg",
+      "baby-stroller.jpg"
+    ]
+  },
+  "SEED2_KD_012": {
+    "folder": "kids",
+    "images": [
+      "baby-bed.jpg",
+      "baby-stroller.jpg"
+    ]
+  },
+  "SEED2_KD_013": {
+    "folder": "kids",
+    "images": [
+      "baby-stroller.jpg",
+      "kids-toys.jpg",
+      "kids-clothing.jpg"
+    ]
+  },
+  "SEED2_KD_014": {
+    "folder": "kids",
+    "images": [
+      "kids-toys.jpg",
+      "kids-clothing.jpg",
+      "baby-bed.jpg"
+    ]
+  },
+  "SEED2_KD_015": {
+    "folder": "kids",
+    "images": [
+      "kids-clothing.jpg",
+      "baby-bed.jpg"
+    ]
+  },
+  "SEED2_KD_016": {
+    "folder": "kids",
+    "images": [
+      "baby-bed.jpg",
+      "baby-stroller.jpg",
+      "kids-toys.jpg"
+    ]
+  },
+  "SEED2_KD_017": {
+    "folder": "kids",
+    "images": [
+      "baby-stroller.jpg",
+      "kids-toys.jpg",
+      "kids-clothing.jpg"
+    ]
+  },
+  "SEED2_KD_018": {
+    "folder": "kids",
+    "images": [
+      "kids-toys.jpg",
+      "kids-clothing.jpg"
+    ]
+  },
+  "SEED2_KD_019": {
+    "folder": "kids",
+    "images": [
+      "kids-clothing.jpg",
+      "baby-bed.jpg",
+      "baby-stroller.jpg"
+    ]
+  },
+  "SEED2_KD_020": {
+    "folder": "kids",
+    "images": [
+      "baby-bed.jpg",
+      "baby-stroller.jpg",
+      "kids-toys.jpg"
+    ]
+  },
+  "SEED2_KD_021": {
+    "folder": "kids",
+    "images": [
+      "baby-stroller.jpg",
+      "kids-toys.jpg"
+    ]
+  },
+  "SEED2_KD_022": {
+    "folder": "kids",
+    "images": [
+      "kids-toys.jpg",
+      "kids-clothing.jpg",
+      "baby-bed.jpg"
+    ]
+  },
+  "SEED2_KD_023": {
+    "folder": "kids",
+    "images": [
+      "kids-clothing.jpg",
+      "baby-bed.jpg",
+      "baby-stroller.jpg"
+    ]
+  },
+  "SEED2_KD_024": {
+    "folder": "kids",
+    "images": [
+      "baby-bed.jpg",
+      "baby-stroller.jpg"
+    ]
+  },
+  "SEED2_KD_025": {
+    "folder": "kids",
+    "images": [
+      "baby-stroller.jpg",
+      "kids-toys.jpg",
+      "kids-clothing.jpg"
+    ]
+  },
+  "SEED2_KD_026": {
+    "folder": "kids",
+    "images": [
+      "kids-toys.jpg",
+      "kids-clothing.jpg",
+      "baby-bed.jpg"
+    ]
+  },
+  "SEED2_KD_027": {
+    "folder": "kids",
+    "images": [
+      "kids-clothing.jpg",
+      "baby-bed.jpg"
+    ]
+  },
+  "SEED2_KD_028": {
+    "folder": "kids",
+    "images": [
+      "baby-bed.jpg",
+      "baby-stroller.jpg",
+      "kids-toys.jpg"
+    ]
+  },
+  "SEED2_KD_029": {
+    "folder": "kids",
+    "images": [
+      "baby-stroller.jpg",
+      "kids-toys.jpg",
+      "kids-clothing.jpg"
+    ]
+  },
+  "SEED2_KD_030": {
+    "folder": "kids",
+    "images": [
+      "kids-toys.jpg",
+      "kids-clothing.jpg"
+    ]
+  },
+  "SEED2_BE_001": {
+    "folder": "beauty",
+    "images": [
+      "perfume-bottle.jpg",
+      "makeup-set.jpg",
+      "skincare-cream.jpg"
+    ]
+  },
+  "SEED2_BE_002": {
+    "folder": "beauty",
+    "images": [
+      "makeup-set.jpg",
+      "skincare-cream.jpg",
+      "hair-products.jpg"
+    ]
+  },
+  "SEED2_BE_003": {
+    "folder": "beauty",
+    "images": [
+      "skincare-cream.jpg",
+      "hair-products.jpg"
+    ]
+  },
+  "SEED2_BE_004": {
+    "folder": "beauty",
+    "images": [
+      "hair-products.jpg",
+      "perfume-bottle.jpg",
+      "makeup-set.jpg"
+    ]
+  },
+  "SEED2_BE_005": {
+    "folder": "beauty",
+    "images": [
+      "perfume-bottle.jpg",
+      "makeup-set.jpg",
+      "skincare-cream.jpg"
+    ]
+  },
+  "SEED2_BE_006": {
+    "folder": "beauty",
+    "images": [
+      "makeup-set.jpg",
+      "skincare-cream.jpg"
+    ]
+  },
+  "SEED2_BE_007": {
+    "folder": "beauty",
+    "images": [
+      "skincare-cream.jpg",
+      "hair-products.jpg",
+      "perfume-bottle.jpg"
+    ]
+  },
+  "SEED2_BE_008": {
+    "folder": "beauty",
+    "images": [
+      "hair-products.jpg",
+      "perfume-bottle.jpg",
+      "makeup-set.jpg"
+    ]
+  },
+  "SEED2_BE_009": {
+    "folder": "beauty",
+    "images": [
+      "perfume-bottle.jpg",
+      "makeup-set.jpg"
+    ]
+  },
+  "SEED2_BE_010": {
+    "folder": "beauty",
+    "images": [
+      "makeup-set.jpg",
+      "skincare-cream.jpg",
+      "hair-products.jpg"
+    ]
+  },
+  "SEED2_BE_011": {
+    "folder": "beauty",
+    "images": [
+      "skincare-cream.jpg",
+      "hair-products.jpg",
+      "perfume-bottle.jpg"
+    ]
+  },
+  "SEED2_BE_012": {
+    "folder": "beauty",
+    "images": [
+      "hair-products.jpg",
+      "perfume-bottle.jpg"
+    ]
+  },
+  "SEED2_BE_013": {
+    "folder": "beauty",
+    "images": [
+      "perfume-bottle.jpg",
+      "makeup-set.jpg",
+      "skincare-cream.jpg"
+    ]
+  },
+  "SEED2_BE_014": {
+    "folder": "beauty",
+    "images": [
+      "makeup-set.jpg",
+      "skincare-cream.jpg",
+      "hair-products.jpg"
+    ]
+  },
+  "SEED2_BE_015": {
+    "folder": "beauty",
+    "images": [
+      "skincare-cream.jpg",
+      "hair-products.jpg"
+    ]
+  },
+  "SEED2_BE_016": {
+    "folder": "beauty",
+    "images": [
+      "hair-products.jpg",
+      "perfume-bottle.jpg",
+      "makeup-set.jpg"
+    ]
+  },
+  "SEED2_BE_017": {
+    "folder": "beauty",
+    "images": [
+      "perfume-bottle.jpg",
+      "makeup-set.jpg",
+      "skincare-cream.jpg"
+    ]
+  },
+  "SEED2_BE_018": {
+    "folder": "beauty",
+    "images": [
+      "makeup-set.jpg",
+      "skincare-cream.jpg"
+    ]
+  },
+  "SEED2_BE_019": {
+    "folder": "beauty",
+    "images": [
+      "skincare-cream.jpg",
+      "hair-products.jpg",
+      "perfume-bottle.jpg"
+    ]
+  },
+  "SEED2_BE_020": {
+    "folder": "beauty",
+    "images": [
+      "hair-products.jpg",
+      "perfume-bottle.jpg",
+      "makeup-set.jpg"
+    ]
+  },
+  "SEED2_BE_021": {
+    "folder": "beauty",
+    "images": [
+      "perfume-bottle.jpg",
+      "makeup-set.jpg"
+    ]
+  },
+  "SEED2_BE_022": {
+    "folder": "beauty",
+    "images": [
+      "makeup-set.jpg",
+      "skincare-cream.jpg",
+      "hair-products.jpg"
+    ]
+  },
+  "SEED2_BE_023": {
+    "folder": "beauty",
+    "images": [
+      "skincare-cream.jpg",
+      "hair-products.jpg",
+      "perfume-bottle.jpg"
+    ]
+  },
+  "SEED2_BE_024": {
+    "folder": "beauty",
+    "images": [
+      "hair-products.jpg",
+      "perfume-bottle.jpg"
+    ]
+  },
+  "SEED2_BE_025": {
+    "folder": "beauty",
+    "images": [
+      "perfume-bottle.jpg",
+      "makeup-set.jpg",
+      "skincare-cream.jpg"
+    ]
+  },
+  "SEED2_BE_026": {
+    "folder": "beauty",
+    "images": [
+      "makeup-set.jpg",
+      "skincare-cream.jpg",
+      "hair-products.jpg"
+    ]
+  },
+  "SEED2_BE_027": {
+    "folder": "beauty",
+    "images": [
+      "skincare-cream.jpg",
+      "hair-products.jpg"
+    ]
+  },
+  "SEED2_BE_028": {
+    "folder": "beauty",
+    "images": [
+      "hair-products.jpg",
+      "perfume-bottle.jpg",
+      "makeup-set.jpg"
+    ]
+  },
+  "SEED2_BE_029": {
+    "folder": "beauty",
+    "images": [
+      "perfume-bottle.jpg",
+      "makeup-set.jpg",
+      "skincare-cream.jpg"
+    ]
+  },
+  "SEED2_BE_030": {
+    "folder": "beauty",
+    "images": [
+      "makeup-set.jpg",
+      "skincare-cream.jpg"
+    ]
+  },
+  "SEED2_SP_001": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_SP_002": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_SP_003": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_SP_004": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  },
+  "SEED2_SP_005": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_SP_006": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_SP_007": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_SP_008": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_SP_009": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_SP_010": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_SP_011": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_SP_012": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_SP_013": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_SP_014": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  },
+  "SEED2_SP_015": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  },
+  "SEED2_SP_016": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_SP_017": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_SP_018": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_SP_019": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  },
+  "SEED2_SP_020": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_SP_021": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_SP_022": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_SP_023": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_SP_024": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_SP_025": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_SP_026": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_SP_027": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_SP_028": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_SP_029": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  },
+  "SEED2_SP_030": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  },
+  "SEED2_AN_001": {
+    "folder": "animals",
+    "images": [
+      "golden-retriever.jpg",
+      "cat-persian.jpg",
+      "parrot-colorful.jpg"
+    ]
+  },
+  "SEED2_AN_002": {
+    "folder": "animals",
+    "images": [
+      "cat-persian.jpg",
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg"
+    ]
+  },
+  "SEED2_AN_003": {
+    "folder": "animals",
+    "images": [
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg"
+    ]
+  },
+  "SEED2_AN_004": {
+    "folder": "animals",
+    "images": [
+      "dog-puppy.jpg",
+      "golden-retriever.jpg",
+      "cat-persian.jpg"
+    ]
+  },
+  "SEED2_AN_005": {
+    "folder": "animals",
+    "images": [
+      "golden-retriever.jpg",
+      "cat-persian.jpg",
+      "parrot-colorful.jpg"
+    ]
+  },
+  "SEED2_AN_006": {
+    "folder": "animals",
+    "images": [
+      "cat-persian.jpg",
+      "parrot-colorful.jpg"
+    ]
+  },
+  "SEED2_AN_007": {
+    "folder": "animals",
+    "images": [
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg",
+      "golden-retriever.jpg"
+    ]
+  },
+  "SEED2_AN_008": {
+    "folder": "animals",
+    "images": [
+      "dog-puppy.jpg",
+      "golden-retriever.jpg",
+      "cat-persian.jpg"
+    ]
+  },
+  "SEED2_AN_009": {
+    "folder": "animals",
+    "images": [
+      "golden-retriever.jpg",
+      "cat-persian.jpg"
+    ]
+  },
+  "SEED2_AN_010": {
+    "folder": "animals",
+    "images": [
+      "cat-persian.jpg",
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg"
+    ]
+  },
+  "SEED2_AN_011": {
+    "folder": "animals",
+    "images": [
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg",
+      "golden-retriever.jpg"
+    ]
+  },
+  "SEED2_AN_012": {
+    "folder": "animals",
+    "images": [
+      "dog-puppy.jpg",
+      "golden-retriever.jpg"
+    ]
+  },
+  "SEED2_AN_013": {
+    "folder": "animals",
+    "images": [
+      "golden-retriever.jpg",
+      "cat-persian.jpg",
+      "parrot-colorful.jpg"
+    ]
+  },
+  "SEED2_AN_014": {
+    "folder": "animals",
+    "images": [
+      "cat-persian.jpg",
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg"
+    ]
+  },
+  "SEED2_AN_015": {
+    "folder": "animals",
+    "images": [
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg"
+    ]
+  },
+  "SEED2_AN_016": {
+    "folder": "animals",
+    "images": [
+      "dog-puppy.jpg",
+      "golden-retriever.jpg",
+      "cat-persian.jpg"
+    ]
+  },
+  "SEED2_AN_017": {
+    "folder": "animals",
+    "images": [
+      "golden-retriever.jpg",
+      "cat-persian.jpg",
+      "parrot-colorful.jpg"
+    ]
+  },
+  "SEED2_AN_018": {
+    "folder": "animals",
+    "images": [
+      "cat-persian.jpg",
+      "parrot-colorful.jpg"
+    ]
+  },
+  "SEED2_AN_019": {
+    "folder": "animals",
+    "images": [
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg",
+      "golden-retriever.jpg"
+    ]
+  },
+  "SEED2_AN_020": {
+    "folder": "animals",
+    "images": [
+      "dog-puppy.jpg",
+      "golden-retriever.jpg",
+      "cat-persian.jpg"
+    ]
+  },
+  "SEED2_AN_021": {
+    "folder": "animals",
+    "images": [
+      "golden-retriever.jpg",
+      "cat-persian.jpg"
+    ]
+  },
+  "SEED2_AN_022": {
+    "folder": "animals",
+    "images": [
+      "cat-persian.jpg",
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg"
+    ]
+  },
+  "SEED2_AN_023": {
+    "folder": "animals",
+    "images": [
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg",
+      "golden-retriever.jpg"
+    ]
+  },
+  "SEED2_AN_024": {
+    "folder": "animals",
+    "images": [
+      "dog-puppy.jpg",
+      "golden-retriever.jpg"
+    ]
+  },
+  "SEED2_AN_025": {
+    "folder": "animals",
+    "images": [
+      "golden-retriever.jpg",
+      "cat-persian.jpg",
+      "parrot-colorful.jpg"
+    ]
+  },
+  "SEED2_AN_026": {
+    "folder": "animals",
+    "images": [
+      "cat-persian.jpg",
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg"
+    ]
+  },
+  "SEED2_AN_027": {
+    "folder": "animals",
+    "images": [
+      "parrot-colorful.jpg",
+      "dog-puppy.jpg"
+    ]
+  },
+  "SEED2_AN_028": {
+    "folder": "animals",
+    "images": [
+      "dog-puppy.jpg",
+      "golden-retriever.jpg",
+      "cat-persian.jpg"
+    ]
+  },
+  "SEED2_AN_029": {
+    "folder": "animals",
+    "images": [
+      "golden-retriever.jpg",
+      "cat-persian.jpg",
+      "parrot-colorful.jpg"
+    ]
+  },
+  "SEED2_AN_030": {
+    "folder": "animals",
+    "images": [
+      "cat-persian.jpg",
+      "parrot-colorful.jpg"
+    ]
+  },
+  "SEED2_SV_001": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_SV_002": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_003": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_004": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_SV_005": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_006": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_007": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_SV_008": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_009": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_010": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_SV_011": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_012": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_013": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_SV_014": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_015": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_016": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_SV_017": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_018": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_019": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_SV_020": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_021": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_022": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_SV_023": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_024": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_025": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_SV_026": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_027": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_028": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_SV_029": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_SV_030": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_BZ_001": {
+    "folder": "business",
+    "images": [
+      "restaurant-kitchen.jpg",
+      "industrial-machine.jpg",
+      "coffee-machine.jpg"
+    ]
+  },
+  "SEED2_BZ_002": {
+    "folder": "business",
+    "images": [
+      "industrial-machine.jpg",
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_003": {
+    "folder": "business",
+    "images": [
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_004": {
+    "folder": "business",
+    "images": [
+      "restaurant-kitchen.jpg",
+      "industrial-machine.jpg",
+      "coffee-machine.jpg"
+    ]
+  },
+  "SEED2_BZ_005": {
+    "folder": "business",
+    "images": [
+      "industrial-machine.jpg",
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_006": {
+    "folder": "business",
+    "images": [
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_007": {
+    "folder": "business",
+    "images": [
+      "restaurant-kitchen.jpg",
+      "industrial-machine.jpg",
+      "coffee-machine.jpg"
+    ]
+  },
+  "SEED2_BZ_008": {
+    "folder": "business",
+    "images": [
+      "industrial-machine.jpg",
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_009": {
+    "folder": "business",
+    "images": [
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_010": {
+    "folder": "business",
+    "images": [
+      "restaurant-kitchen.jpg",
+      "industrial-machine.jpg",
+      "coffee-machine.jpg"
+    ]
+  },
+  "SEED2_BZ_011": {
+    "folder": "business",
+    "images": [
+      "industrial-machine.jpg",
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_012": {
+    "folder": "business",
+    "images": [
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_013": {
+    "folder": "business",
+    "images": [
+      "restaurant-kitchen.jpg",
+      "industrial-machine.jpg",
+      "coffee-machine.jpg"
+    ]
+  },
+  "SEED2_BZ_014": {
+    "folder": "business",
+    "images": [
+      "industrial-machine.jpg",
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_015": {
+    "folder": "business",
+    "images": [
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_016": {
+    "folder": "business",
+    "images": [
+      "restaurant-kitchen.jpg",
+      "industrial-machine.jpg",
+      "coffee-machine.jpg"
+    ]
+  },
+  "SEED2_BZ_017": {
+    "folder": "business",
+    "images": [
+      "industrial-machine.jpg",
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_018": {
+    "folder": "business",
+    "images": [
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_019": {
+    "folder": "business",
+    "images": [
+      "restaurant-kitchen.jpg",
+      "industrial-machine.jpg",
+      "coffee-machine.jpg"
+    ]
+  },
+  "SEED2_BZ_020": {
+    "folder": "business",
+    "images": [
+      "industrial-machine.jpg",
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_021": {
+    "folder": "business",
+    "images": [
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_022": {
+    "folder": "business",
+    "images": [
+      "restaurant-kitchen.jpg",
+      "industrial-machine.jpg",
+      "coffee-machine.jpg"
+    ]
+  },
+  "SEED2_BZ_023": {
+    "folder": "business",
+    "images": [
+      "industrial-machine.jpg",
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_024": {
+    "folder": "business",
+    "images": [
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_025": {
+    "folder": "business",
+    "images": [
+      "restaurant-kitchen.jpg",
+      "industrial-machine.jpg",
+      "coffee-machine.jpg"
+    ]
+  },
+  "SEED2_BZ_026": {
+    "folder": "business",
+    "images": [
+      "industrial-machine.jpg",
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_027": {
+    "folder": "business",
+    "images": [
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_028": {
+    "folder": "business",
+    "images": [
+      "restaurant-kitchen.jpg",
+      "industrial-machine.jpg",
+      "coffee-machine.jpg"
+    ]
+  },
+  "SEED2_BZ_029": {
+    "folder": "business",
+    "images": [
+      "industrial-machine.jpg",
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_BZ_030": {
+    "folder": "business",
+    "images": [
+      "coffee-machine.jpg",
+      "restaurant-kitchen.jpg"
+    ]
+  },
+  "SEED2_DG_001": {
+    "folder": "digital",
+    "images": [
+      "vip-number.jpg",
+      "domain-web.jpg",
+      "gaming-account.jpg"
+    ]
+  },
+  "SEED2_DG_002": {
+    "folder": "digital",
+    "images": [
+      "domain-web.jpg",
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_003": {
+    "folder": "digital",
+    "images": [
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_004": {
+    "folder": "digital",
+    "images": [
+      "vip-number.jpg",
+      "domain-web.jpg",
+      "gaming-account.jpg"
+    ]
+  },
+  "SEED2_DG_005": {
+    "folder": "digital",
+    "images": [
+      "domain-web.jpg",
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_006": {
+    "folder": "digital",
+    "images": [
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_007": {
+    "folder": "digital",
+    "images": [
+      "vip-number.jpg",
+      "domain-web.jpg",
+      "gaming-account.jpg"
+    ]
+  },
+  "SEED2_DG_008": {
+    "folder": "digital",
+    "images": [
+      "domain-web.jpg",
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_009": {
+    "folder": "digital",
+    "images": [
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_010": {
+    "folder": "digital",
+    "images": [
+      "vip-number.jpg",
+      "domain-web.jpg",
+      "gaming-account.jpg"
+    ]
+  },
+  "SEED2_DG_011": {
+    "folder": "digital",
+    "images": [
+      "domain-web.jpg",
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_012": {
+    "folder": "digital",
+    "images": [
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_013": {
+    "folder": "digital",
+    "images": [
+      "vip-number.jpg",
+      "domain-web.jpg",
+      "gaming-account.jpg"
+    ]
+  },
+  "SEED2_DG_014": {
+    "folder": "digital",
+    "images": [
+      "domain-web.jpg",
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_015": {
+    "folder": "digital",
+    "images": [
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_016": {
+    "folder": "digital",
+    "images": [
+      "vip-number.jpg",
+      "domain-web.jpg",
+      "gaming-account.jpg"
+    ]
+  },
+  "SEED2_DG_017": {
+    "folder": "digital",
+    "images": [
+      "domain-web.jpg",
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_018": {
+    "folder": "digital",
+    "images": [
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_019": {
+    "folder": "digital",
+    "images": [
+      "vip-number.jpg",
+      "domain-web.jpg",
+      "gaming-account.jpg"
+    ]
+  },
+  "SEED2_DG_020": {
+    "folder": "digital",
+    "images": [
+      "domain-web.jpg",
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_021": {
+    "folder": "digital",
+    "images": [
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_022": {
+    "folder": "digital",
+    "images": [
+      "vip-number.jpg",
+      "domain-web.jpg",
+      "gaming-account.jpg"
+    ]
+  },
+  "SEED2_DG_023": {
+    "folder": "digital",
+    "images": [
+      "domain-web.jpg",
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_024": {
+    "folder": "digital",
+    "images": [
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_025": {
+    "folder": "digital",
+    "images": [
+      "vip-number.jpg",
+      "domain-web.jpg",
+      "gaming-account.jpg"
+    ]
+  },
+  "SEED2_DG_026": {
+    "folder": "digital",
+    "images": [
+      "domain-web.jpg",
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_027": {
+    "folder": "digital",
+    "images": [
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_028": {
+    "folder": "digital",
+    "images": [
+      "vip-number.jpg",
+      "domain-web.jpg",
+      "gaming-account.jpg"
+    ]
+  },
+  "SEED2_DG_029": {
+    "folder": "digital",
+    "images": [
+      "domain-web.jpg",
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_DG_030": {
+    "folder": "digital",
+    "images": [
+      "gaming-account.jpg",
+      "vip-number.jpg"
+    ]
+  },
+  "SEED2_JS_001": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_JS_002": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_003": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_004": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_JS_005": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_006": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_007": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_JS_008": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_009": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_010": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_JS_011": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_012": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_013": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_JS_014": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_015": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_016": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_JS_017": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_018": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_019": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_JS_020": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_021": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_022": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_JS_023": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_024": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_025": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_JS_026": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_027": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_028": {
+    "folder": "services",
+    "images": [
+      "home-repair.jpg",
+      "photographer.jpg",
+      "car-wash.jpg"
+    ]
+  },
+  "SEED2_JS_029": {
+    "folder": "services",
+    "images": [
+      "photographer.jpg",
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_JS_030": {
+    "folder": "services",
+    "images": [
+      "car-wash.jpg",
+      "home-repair.jpg"
+    ]
+  },
+  "SEED2_HB_001": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_HB_002": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_HB_003": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_HB_004": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  },
+  "SEED2_HB_005": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_HB_006": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_HB_007": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_HB_008": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_HB_009": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_HB_010": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_HB_011": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_HB_012": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_HB_013": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_HB_014": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  },
+  "SEED2_HB_015": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  },
+  "SEED2_HB_016": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_HB_017": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_HB_018": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_HB_019": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  },
+  "SEED2_HB_020": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_HB_021": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_HB_022": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg",
+      "camping-tent.jpg"
+    ]
+  },
+  "SEED2_HB_023": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_HB_024": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_HB_025": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg"
+    ]
+  },
+  "SEED2_HB_026": {
+    "folder": "sports",
+    "images": [
+      "bicycle-mountain.jpg",
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_HB_027": {
+    "folder": "sports",
+    "images": [
+      "guitar-fender.jpg",
+      "boxing-gloves.jpg"
+    ]
+  },
+  "SEED2_HB_028": {
+    "folder": "sports",
+    "images": [
+      "boxing-gloves.jpg",
+      "camping-tent.jpg",
+      "gym-equipment.jpg"
+    ]
+  },
+  "SEED2_HB_029": {
+    "folder": "sports",
+    "images": [
+      "camping-tent.jpg",
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  },
+  "SEED2_HB_030": {
+    "folder": "sports",
+    "images": [
+      "gym-equipment.jpg",
+      "bicycle-mountain.jpg"
+    ]
+  }
+}

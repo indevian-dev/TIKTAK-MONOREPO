@@ -1,9 +1,9 @@
 import { cache } from 'react';
-import { PublicSingleBlogWidget } from '@/app/[locale]/(public)/blogs/(widgets)/PublicSingleBlogWidget';
-import { fetch as apiCallForSsrHelper } from '@/lib/helpers/apiCallForSsrHelper';
+import { PublicSingleBlogWidget } from '@/app/[locale]/(public)/blogs/(widgets)/PublicSingleBlog.widget';
+import { fetch as apiCallForSsrHelper } from '@/lib/utils/Http.FetchApiSSR.util';
 import { notFound } from 'next/navigation';
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 interface BlogPageParams {
   slug: string;
   locale: string;

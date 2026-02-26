@@ -1,11 +1,11 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { StaffPageEditWidget }
-  from '@/app/[locale]/workspaces/staff/[workspaceId]/pages/(widgets)/StaffPageEditWidget';
+  from '@/app/[locale]/workspaces/staff/[workspaceId]/pages/(widgets)/StaffPageEdit.widget';
 
 export default withPageAuth(
-    async function StaffRulesEditPage({ }) {
+  async function StaffRulesEditPage({ }) {
     return <StaffPageEditWidget pageType="RULES" title="Rules" />;
   },
-  { pagePath: '/staff/pages/rules', inlineHandlers: true }
+  { path: '/staff/pages/rules', inlineHandlers: true }
 );

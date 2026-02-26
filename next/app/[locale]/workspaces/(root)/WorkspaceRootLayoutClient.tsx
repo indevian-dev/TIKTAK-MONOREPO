@@ -10,10 +10,13 @@ import {
 import { LuUser } from 'react-icons/lu';
 
 // Layout Components
-import { GlobalHeaderWidget } from '@/app/[locale]/(global)/(widgets)/GlobalHeaderWidget';
-import { GlobalFastNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFastNavigationWidget';
-import { GlobalFullNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFullNavigationWidget';
-import type { DomainNavConfig } from '@tiktak/shared/types';
+import { GlobalHeaderWidget } from '@/app/[locale]/(global)/(widgets)/GlobalHeader.widget';
+import { GlobalFastNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFastNavigation.widget';
+import { GlobalFullNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFullNavigation.widget';
+import type { DomainNavConfig } from '@tiktak/shared/types/ui/Navigation.types';
+import { Section } from '@/app/primitives/Section.primitive';
+import { Main } from '@/app/primitives/Main.primitive';
+import { Container } from '@/app/primitives/Container.primitive';
 
 interface WorkspaceRootLayoutClientProps {
     children: ReactNode;
@@ -47,12 +50,12 @@ export function WorkspaceRootLayoutClient({ children }: WorkspaceRootLayoutClien
         ],
         menuDisplayMode: {
             desktop: 'sidebar',
-            mobile: 'modal'
+            mobile: 'mobile-modal'
         }
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col">
+        <>
             <GlobalHeaderWidget
                 navConfig={navConfig}
                 isMenuOpen={isMenuOpen}
@@ -65,33 +68,20 @@ export function WorkspaceRootLayoutClient({ children }: WorkspaceRootLayoutClien
                 />
             </GlobalHeaderWidget>
 
-            <div className="flex-1 max-w-[1440px] w-full mx-auto flex flex-col lg:flex-row gap-6 p-4 lg:p-6 mb-16 lg:mb-0">
-                <aside className="lg:w-64 flex-shrink-0">
-                    <GlobalFullNavigationWidget
-                        navConfig={navConfig}
-                        isMenuOpen={isMenuOpen}
-                        setIsMenuOpen={setIsMenuOpen}
-                    />
-                </aside>
-
-                <main className="flex-1 bg-white rounded-3xl shadow-sm border border-gray-100 p-4 lg:p-8 overflow-hidden">
-                    {children}
-                </main>
-            </div>
-
-            <GlobalFastNavigationWidget
-                navConfig={navConfig}
-                isMenuOpen={isMenuOpen}
-                setIsMenuOpen={setIsMenuOpen}
-            />
-
-            {/* Mobile Modal Navigation */}
-            <GlobalFullNavigationWidget
-                navConfig={navConfig}
-                isMenuOpen={isMenuOpen}
-                setIsMenuOpen={setIsMenuOpen}
-                currentPath="/workspaces"
-            />
-        </div>
+            <Main variant="app">
+                <Container variant="centered">
+                    <aside className="hidden lg:flex shrink-0 sticky top-[70px] min-h-[calc(100vh-70px)] overflow-hidden w-64 flex-col">
+                        <GlobalFullNavigationWidget
+                            navConfig={navConfig}
+                            isMenuOpen={isMenuOpen}
+                            setIsMenuOpen={setIsMenuOpen}
+                        />
+                    </aside>
+                    <Section>
+                        {children}
+                    </Section>
+                </Container>
+            </Main>
+        </>
     );
 }

@@ -1,8 +1,8 @@
 'use client';
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 
-import { apiCallForSpaHelper } from '@/lib/helpers/apiCallForSpaHelper';
+import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 
 /**
  * Cards Public Service
@@ -11,7 +11,7 @@ import { apiCallForSpaHelper } from '@/lib/helpers/apiCallForSpaHelper';
 
 interface CardFilters {
   storeId?: number;
-  categoryId?: number | number[];
+  categoryId?: string | number | string[] | number[];
   categoryIds?: string;
   categories?: string[];
   userId?: number;
@@ -88,10 +88,10 @@ export async function searchCards(filters: CardFilters = {}): Promise<SearchResp
       // Use categories from filter widget (comma-separated string)
       params.categoryIds = filters.categories.join(',');
     } else if (filters.categoryId) {
-      // Use single category ID for backward compatibility
-      params.categoryIds = typeof filters.categoryId === 'number' 
-        ? filters.categoryId 
-        : filters.categoryId.join(',');
+      // Handle string, number, or array of either
+      params.categoryIds = Array.isArray(filters.categoryId)
+        ? filters.categoryId.join(',')
+        : String(filters.categoryId);
     }
 
     if (filters.userId) params.userId = filters.userId;
@@ -129,7 +129,7 @@ export async function searchCards(filters: CardFilters = {}): Promise<SearchResp
 
     ConsoleLogger.log('🔍 API request to /api/cards/search with params:', params);
 
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'GET',
       url: '/api/cards/search',
       params,

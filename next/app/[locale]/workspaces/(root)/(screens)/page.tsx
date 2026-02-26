@@ -1,4 +1,4 @@
-import { withPageAuth } from '@/lib/middleware/handlers';
+import { withPageAuth } from '@/lib/middleware/Interceptor.View.middleware';
 import { WorkspacesRootPageClient } from './WorkspacesRootPageClient';
 
 interface WorkspacesRootPageProps {

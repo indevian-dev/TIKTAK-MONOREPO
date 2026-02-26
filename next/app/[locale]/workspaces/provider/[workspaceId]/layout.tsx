@@ -1,4 +1,4 @@
-import { withLayoutAuth } from '@/lib/auth/AccessValidatorForLayouts';
+import { withLayoutAuth } from '@/lib/middleware/Interceptor.View.middleware';
 import { ProviderClientLayout } from '@/app/[locale]/workspaces/provider/[workspaceId]/ProviderClientLayout';
 
 /**
@@ -6,7 +6,7 @@ import { ProviderClientLayout } from '@/app/[locale]/workspaces/provider/[worksp
  * Permissions auto-detected from provider_pages.ts config
  */
 export default withLayoutAuth(ProviderServerLayout, {
-  layoutPath: '/provider'
+  path: '/provider'
 });
 
 function ProviderServerLayout({ children }: { children: React.ReactNode }) {

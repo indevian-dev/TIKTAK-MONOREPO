@@ -1,7 +1,7 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { StaffCategoriesListWidget }
-  from '@/app/[locale]/workspaces/staff/[workspaceId]/categories/(widgets)/StaffCategoriesListWidget';
+  from '@/app/[locale]/workspaces/staff/[workspaceId]/categories/(widgets)/StaffCategoriesList.widget';
 
 export default withPageAuth(
   async function StaffCategoriesListPage() {
@@ -14,5 +14,5 @@ export default withPageAuth(
       </div>
     );
   },
-  { pagePath: '/staff/categories', inlineHandlers: true }
+  { path: '/staff/categories', inlineHandlers: true }
 );

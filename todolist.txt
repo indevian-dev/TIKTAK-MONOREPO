@@ -1,0 +1,1 @@
+1. remove store id form card

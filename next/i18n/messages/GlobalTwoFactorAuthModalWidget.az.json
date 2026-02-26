@@ -1,14 +1,21 @@
 {
-  "title": "İki faktorlu autentifikasiya",
-  "email_method": "E-poçt",
-  "sms_method": "SMS",
-  "send_code": "Kod göndər",
+  "title": "İki Mərhələli Doğrulama",
+  "subtitle_email_required": "Davam etmək üçün e-poçt təsdiqi tələb olunur",
+  "subtitle_phone_required": "Davam etmək üçün telefon təsdiqi tələb olunur",
+  "subtitle": "Davam etmək üçün şəxsiyyətinizi təsdiqləyin",
+  "choose_method": "Təsdiq kodunu necə almaq istədiyinizi seçin:",
+  "email_option": "E-poçt",
+  "email_description": "Kodu e-poçt vasitəsilə alın",
+  "phone_option": "SMS",
+  "phone_description": "Kodu SMS vasitəsilə alın",
+  "send_code": "Təsdiq kodu göndər",
+  "email_sent": "Kod e-poçtunuza göndərildi",
+  "sms_sent": "Kod telefonunuza göndərildi",
+  "enter_code": "6 rəqəmli kodu daxil edin",
+  "auto_verify": "Tamamlandıqda Enter düyməsini basın və ya Təsdiq et seçin",
+  "verify": "Kodu təsdiqlə",
+  "change_method": "Metodu dəyişin",
+  "resend_in": "Yenidən göndər",
   "resend_code": "Kodu yenidən göndər",
-  "verify": "Təsdiqlə",
-  "code_placeholder": "Kodu daxil edin",
-  "sending": "Göndərilir...",
-  "verifying": "Təsdiqlənir...",
-  "close": "Bağla",
-  "wait_seconds": "{seconds} saniyə gözləyin"
+  "security_note": "Bu doğrulama hesabınızın təhlükəsizliyini təmin etməyə kömək edir"
 }
-

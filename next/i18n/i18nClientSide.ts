@@ -1,7 +1,7 @@
 import { useLocale } from 'next-intl';
 import { useState, useEffect } from 'react';
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 // No pre-defined mapping - use direct variable passing
 
 type TranslationValue = string | number | boolean | TranslationObject;

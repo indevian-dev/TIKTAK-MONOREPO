@@ -1,53 +1,70 @@
-import { NextResponse } from 'next/server';
-import { unifiedApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import { CookieAuthenticator } from '@/lib/middleware/authenticators/CookieAuthenticator';
+import type { NextRequest } from "next/server";
+import { unifiedApiHandler } from "@/lib/middleware/_Middleware.index";
+import { CookieAuthenticator } from "@/lib/middleware/Authenticator.Cookie.middleware";
+import { createdResponse, errorResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
+import { RegisterSchema } from '@tiktak/shared/types/auth/Auth.schemas';
+import { validateBody } from '@/lib/utils/Zod.validate.util';
 
 /**
  * POST /api/auth/register
- * Handles user registration and initial session
+ *
+ * Registration endpoint decoupled into AuthService
  */
-export const POST = unifiedApiHandler(async (request, { module, log }) => {
-  try {
-    const body = await request.json();
-    const { name, email, phone, password, confirmPassword } = body;
+export const POST = unifiedApiHandler(
+  async (request: NextRequest, { module, log }) => {
+    try {
+      const parsed = await validateBody(request, RegisterSchema);
+      if (!parsed.success) return parsed.errorResponse;
 
-    const ip = request.headers.get('x-forwarded-for') || '0.0.0.0';
-    const userAgent = request.headers.get('user-agent') || 'unknown';
+      const { email, password, confirmPassword, firstName, lastName, phone } = parsed.data;
 
-    const result = await module.auth.register({
-      firstName: name,
-      email,
-      phone,
-      password,
-      confirmPassword,
-      ip,
-      userAgent
-    });
+      // Extract client info for session creation
+      const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ||
+        request.headers.get("x-real-ip") ||
+        "0.0.0.0";
+      const userAgent = request.headers.get("user-agent") || "unknown";
 
-    if (!result.success) {
-      return NextResponse.json(result, { status: result.status });
-    }
-
-    // Create success response
-    const response = NextResponse.json(result, { status: 201 });
-
-    // Set auth cookies for the initial session
-    if (result.data?.session) {
-      CookieAuthenticator.setAuthCookies({
-        response,
-        data: {
-          session: result.data.session.id,
-          expireAt: result.data.session.expires_at
-        }
+      // Call AuthService to handle registration logic
+      const result = await module.auth.register({
+        email,
+        password,
+        confirmPassword,
+        firstName,
+        lastName,
+        phone,
+        ip: ip ?? '0.0.0.0',
+        userAgent,
       });
+
+      if (!result.success) {
+        if (log) log.warn("Registration failed", { email, error: result.error });
+        return errorResponse(result.error || "Registration failed", result.status || 400);
+      }
+
+      // Prepare success response
+      const responsePayload = {
+        ...result.data,
+        success: true,
+      };
+
+      const response = createdResponse(responsePayload);
+
+      // Set authentication cookies if session was created
+      if (result.data?.session?.id) {
+        const { authCookiesResponse } = CookieAuthenticator.setAuthCookies({
+          response,
+          data: {
+            session: result.data.session.id,
+          },
+        });
+        return authCookiesResponse;
+      }
+
+      return response;
+    } catch (error) {
+      if (log) log.error("Registration route error", error);
+      return serverErrorResponse("An unexpected error occurred during registration");
     }
-
-    return response;
-
-  } catch (error: any) {
-    log.error('[Auth Register API] Unexpected error:', error);
-    return NextResponse.json({
-      error: 'Internal server error occurred'
-    }, { status: 500 });
   }
-});
+);
+

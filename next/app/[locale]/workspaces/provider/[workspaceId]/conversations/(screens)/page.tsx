@@ -1,11 +1,11 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { ProviderConversationsListWidget }
-  from '@/app/[locale]/workspaces/provider/[workspaceId]/conversations/(widgets)/ProviderConversationsListWidget';
+  from '@/app/[locale]/workspaces/provider/[workspaceId]/conversations/(widgets)/ProviderConversationsList.widget';
 
 export default withPageAuth(
   async function ProviderConversationsListPage({ authData }) {
     return <ProviderConversationsListWidget />;
   },
-  { pagePath: '/provider/conversations', inlineHandlers: true }
+  { path: '/provider/conversations', inlineHandlers: true }
 );

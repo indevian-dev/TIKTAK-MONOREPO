@@ -2,10 +2,10 @@
 
 import { ReactNode, useState, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { GlobalHeaderWidget } from '@/app/[locale]/(global)/(widgets)/GlobalHeaderWidget';
-import { GlobalFastNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFastNavigationWidget';
-import { GlobalFullNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFullNavigationWidget';
-import { PublicFooterWidget } from '@/app/[locale]/(public)/(layout)/footer/(widgets)/PublicFooterWidget';
+import { GlobalHeaderWidget } from '@/app/[locale]/(global)/(widgets)/GlobalHeader.widget';
+import { GlobalFastNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFastNavigation.widget';
+import { GlobalFullNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFullNavigation.widget';
+import { PublicFooterWidget } from '@/app/[locale]/(public)/(layout)/footer/(widgets)/PublicFooter.widget';
 import { PublicSearchProvider } from '@/app/[locale]/(public)/(context)/PublicSearchContext';
 import { PublicHeaderNavProvider } from '@/app/[locale]/(public)/(context)/PublicHeaderNavContext';
 import {
@@ -15,9 +15,15 @@ import {
   PiArticle,
   PiQuestion
 } from 'react-icons/pi';
-import type { DomainNavConfig } from '@tiktak/shared/types';
+import type { DomainNavConfig } from '@tiktak/shared/types/ui/Navigation.types';
+import { Main } from '@/app/primitives/Main.primitive';
+import { Container } from '@/app/primitives/Container.primitive';
 
 const getPublicNavConfig = (): DomainNavConfig => ({
+  domain: 'public',
+  logoSrc: '/logoblack.svg',
+  label: 'TikTak',
+  fastNavLinks: [],
   menuGroups: [
     {
       label: 'Explore',
@@ -36,7 +42,7 @@ const getPublicNavConfig = (): DomainNavConfig => ({
       ]
     }
   ],
-  menuDisplayMode: 'dropdown'
+  menuDisplayMode: { desktop: 'dropdown', mobile: 'mobile-modal' }
 });
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
@@ -66,19 +72,15 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
             <GlobalFastNavigationWidget {...navProps} />
           </GlobalHeaderWidget>
 
-          <main className='text-dark min-h-screen'>
-            {children}
-          </main>
+          <Main variant="default">
+            <Container variant="full">
+              {children}
+            </Container>
+          </Main>
 
           <PublicFooterWidget />
-
-          <GlobalFastNavigationWidget {...navProps} />
-
-          {/* Mobile Modal Navigation */}
-          <GlobalFullNavigationWidget
-            {...navProps}
-            navConfig={{ ...navConfig, menuDisplayMode: 'modal' }}
-          />
+          {/* Full Navigation (Dropdown on desktop, Modal on mobile) */}
+          <GlobalFullNavigationWidget {...navProps} />
         </PublicSearchProvider>
       </PublicHeaderNavProvider>
     </>

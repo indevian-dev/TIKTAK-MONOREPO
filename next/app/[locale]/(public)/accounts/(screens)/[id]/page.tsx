@@ -1,6 +1,6 @@
 
 import PublicAccountWidget
-  from '@/app/[locale]/(public)/accounts/(widgets)/PublicAccountWidget';
+  from '@/app/[locale]/(public)/accounts/(widgets)/PublicAccount.widget';
 
 function PublicAccountScreen() {
 

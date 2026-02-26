@@ -3,11 +3,13 @@
 import { Link }
   from '@/i18n/routing';
 import { NavData } from '@/app/[locale]/(public)/(context)/PublicHeaderNavContext';
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 import { loadClientSideCoLocatedTranslations }
   from '@/i18n/i18nClientSide';
 import { generateSlug }
-  from '@/lib/utils/formatting/slugify';
+  from '@/lib/utils/Formatter.Slugify.util';
+
+import { lt } from '@/lib/utils/Localized.util';
 
 import {
   PiArrowLeftLight,
@@ -17,7 +19,7 @@ import {
 
 export function PublicHeaderNavCard({ navData }: { navData: NavData }) {
   const { t } = loadClientSideCoLocatedTranslations('PublicHeaderNavCard');
-  
+
   // Generate slug on-the-fly from category title
   const categorySlug = generateSlug(navData.category?.title || 'category');
 
@@ -42,10 +44,10 @@ export function PublicHeaderNavCard({ navData }: { navData: NavData }) {
       {/* Back Button */}
       <button
         onClick={() => window.history.back()}
-        className="inline-flex items-center gap-1 text-dark hover:text-gray-600 focus:outline-none bg-brandPrimaryLightBg rounded-md p-2"
+        className="inline-flex items-center gap-1 text-gray-900 hover:text-gray-600 focus:outline-none bg-app-bright-purple/10 rounded-md p-2"
       >
-        <PiArrowLeftLight className='text-dark text-3xl' />
-        <span className='hidden sm:flex no-wrap flex-nowrap whitespace-nowrap font-bold text-dark text-md'>
+        <PiArrowLeftLight className='text-gray-900 text-3xl' />
+        <span className='hidden sm:flex no-wrap flex-nowrap whitespace-nowrap font-bold text-gray-900 text-md'>
           {t('back')}
         </span>
       </button>
@@ -54,11 +56,11 @@ export function PublicHeaderNavCard({ navData }: { navData: NavData }) {
       {navData?.category && (
         <Link
           href={`/categories/${categorySlug}-${navData.category.id}`}
-          className="inline-flex items-center gap-1 text-dark hover:text-gray-600 bg-brandPrimaryLightBg/50 rounded-md px-2 py-1"
+          className="inline-flex items-center gap-1 text-gray-900 hover:text-gray-600 bg-app-bright-purple/10/50 rounded-md px-2 py-1"
         >
-          <PiTagLight className='text-dark text-xl' />
-          <span className='no-wrap flex flex-nowrap whitespace-nowrap text-dark text-sm truncate max-w-[120px] sm:max-w-[200px]'>
-            {navData.category.title}
+          <PiTagLight className='text-gray-900 text-xl' />
+          <span className='no-wrap flex flex-nowrap whitespace-nowrap text-gray-900 text-sm truncate max-w-[120px] sm:max-w-[200px]'>
+            {lt(navData.category.title)}
           </span>
         </Link>
       )}
@@ -69,10 +71,10 @@ export function PublicHeaderNavCard({ navData }: { navData: NavData }) {
       {/* Share Button */}
       <button
         onClick={handleShare}
-        className="inline-flex items-center gap-1 text-dark hover:text-gray-600 focus:outline-none bg-brandPrimaryLightBg rounded-md p-2"
+        className="inline-flex items-center gap-1 text-gray-900 hover:text-gray-600 focus:outline-none bg-app-bright-purple/10 rounded-md p-2"
       >
-        <PiShareNetworkLight className='text-dark text-2xl' />
-        <span className='hidden sm:flex no-wrap flex-nowrap whitespace-nowrap font-bold text-dark text-sm'>
+        <PiShareNetworkLight className='text-gray-900 text-2xl' />
+        <span className='hidden sm:flex no-wrap flex-nowrap whitespace-nowrap font-bold text-gray-900 text-sm'>
           {t('share')}
         </span>
       </button>

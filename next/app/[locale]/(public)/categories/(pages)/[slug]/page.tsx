@@ -1,55 +1,50 @@
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
-
-// pages/types/[slug].js
-
+import { cache } from 'react';
 import { PublicSingleCategoryWidget }
-  from '@/app/[locale]/(public)/categories/(widgets)/PublicSingleCategoryWidget';
-import supabase
-  from '@/lib/clients/supabaseServiceRoleClient';
+  from '@/app/[locale]/(public)/categories/(widgets)/PublicSingleCategory.widget';
+import { fetch as apiCallForSsrHelper } from '@/lib/utils/Http.FetchApiSSR.util';
+import { notFound } from 'next/navigation';
+
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 
 interface CategoryPageParams {
   slug: string;
   locale: string;
 }
 
-// Helper function to fetch category data
-const getCategoryData = async (id: number) => {
-  try {
-    const { data: category, error } = await supabase
-      .from('categories')
-      .select('*')
-      .eq('id', id)
-      .single();
-
-    if (error) {
-      ConsoleLogger.error('Error fetching category:', error);
-      return null;
-    }
-
-    return category;
-  } catch (error) {
-    ConsoleLogger.error('Error fetching category:', error);
-    return null;
-  }
+// Helper function to extract ID from slug (e.g. "some-category-name-123" → "123")
+const extractIdFromSlug = (slug: string): string | null => {
+  const lastHyphen = slug.lastIndexOf('-');
+  if (lastHyphen === -1 || lastHyphen === slug.length - 1) return null;
+  return slug.substring(lastHyphen + 1);
 };
 
-// Helper function to extract ID from slug
-const extractIdFromSlug = (slug: string): number | null => {
-  const regex = /(\d+)$/;
-  const match = slug.match(regex);
-  return match ? parseInt(match[0]) : null;
+const getCategoryData = cache(async (id: string) => {
+  try {
+    const response = await apiCallForSsrHelper({
+      url: `/api/categories/${id}`,
+    });
+
+    // SSR fetch returns raw axios response
+    // API response envelope: { success, data: { category } }
+    const envelope = response.data;
+    return envelope?.data?.category || envelope?.category || null;
+  } catch (error) {
+    const err = error as Error;
+    ConsoleLogger.error('Error fetching category:', err.message);
+    return null;
+  }
+});
+
+// Helper to extract localized title string
+const getLocalizedTitle = (title: any, fallback = 'Category'): string => {
+  if (!title) return fallback;
+  if (typeof title === 'string') return title;
+  return title.az || title.en || title.ru || fallback;
 };
 
 export async function generateMetadata({ params }: { params: Promise<CategoryPageParams> }) {
   const { slug, locale } = await params;
 
-  if (!locale) {
-    return {
-      title: 'Category Not Found',
-      description: 'The requested category could not be found.'
-    };
-  }
-
   const id = extractIdFromSlug(slug);
 
   if (!id) {
@@ -68,38 +63,40 @@ export async function generateMetadata({ params }: { params: Promise<CategoryPag
     };
   }
 
+  const title = getLocalizedTitle(category.title);
+  const description = getLocalizedTitle(category.description, `Browse items in ${title}`);
+
   return {
-    title: category.title
-      || 'Category',
-    description: category.description
-      || `Browse items in ${category.title
-      || 'this category'}`,
+    title,
+    description,
     openGraph: {
-      title: category.title
-        || 'Category',
-      description: category.description
-        || `Browse items in ${category.title || 'this category'}`,
+      title,
+      description,
       type: 'website',
       locale: locale,
-      url: `${Bun.env.NEXT_PUBLIC_SITE_URL}/${locale}/categories/${slug}`,
-      ...(category.image && { images: [{ url: category.image }] })
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/categories/${slug}`,
+      ...(category.icon && { images: [{ url: category.icon }] })
     },
   };
 }
 
 const PublicSingleCategoryPage = async ({ params }: { params: Promise<CategoryPageParams> }) => {
-  const { slug } = await params;
+  const { slug, locale } = await params;
+
+  if (!locale) {
+    notFound();
+  }
 
   const id = extractIdFromSlug(slug);
 
   if (!id) {
-    return <div>Invalid category URL</div>;
+    notFound();
   }
 
   const category = await getCategoryData(id);
 
   if (!category) {
-    return <div>Category not found</div>;
+    notFound();
   }
 
   return (
@@ -108,4 +105,3 @@ const PublicSingleCategoryPage = async ({ params }: { params: Promise<CategoryPa
 }
 
 export default PublicSingleCategoryPage;
-

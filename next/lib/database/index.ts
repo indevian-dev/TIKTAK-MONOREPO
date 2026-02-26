@@ -1,79 +1,64 @@
-/**
- * Database Compatibility Layer
- * Re-exports from new locations for backward compatibility with @/db imports
- */
+import { drizzle } from "drizzle-orm/postgres-js";
+import { pgsqlClient } from "@/lib/integrations/Pgsql.Supabase.client";
+import { pgsqlSearchClient } from "@/lib/integrations/Pgsql.Neon.client";
+import * as schema from "./schema";
 
-// Export database instance and Drizzle utilities
-export { db } from '@/lib/clients/drizzlePostgresClient';
-export type { DrizzleDb as DbClient } from '@/types/lib/database';
+// ═══════════════════════════════════════════════════════════════
+// DRIZZLE DATABASE CLIENT (MAIN DATABASE — Supabase Postgres)
+// ═══════════════════════════════════════════════════════════════
 
-// Re-export all Drizzle ORM operators and utilities
-export {
-  eq,
-  ne,
-  gt,
-  gte,
-  lt,
-  lte,
-  isNull,
-  isNotNull,
-  inArray,
-  notInArray,
-  exists,
-  notExists,
-  between,
-  notBetween,
-  like,
-  notLike,
-  ilike,
-  notIlike,
-  and,
-  or,
-  not,
-  desc,
-  asc,
-  count,
-  sum,
-  avg,
-  min,
-  max,
-  aliasedTable,
-} from 'drizzle-orm';
+export const db = drizzle(pgsqlClient, { schema });
+export type Database = typeof db;
 
-// Re-export all table schemas from modular locations
-export {
-  // User tables
-  users,
-  userCredentials,
-  userSessions,
-  accountOtps,
-  // Account tables
-  accounts,
-  // Workspace tables
-  workspaces,
-  workspaceAccesses,
-  workspaceRoles,
-  workspaceSubscriptionCoupons,
-  workspaceSubscriptionTransactions,
-  // Card tables
-  cards,
-  favoriteCards,
-  // Category tables
-  categories,
-  categoryFilters,
-  categoryFilterOptions,
-  categoriesCardsStats,
-  categoriesAccountsCardsStats,
-  categoriesStoresCardsStats,
-  // Notification tables
-  accountNotifications,
-  // Support tables
-  conversations,
-  messages,
-  // Content tables
-  blogs,
-  docs,
-  // Geo tables
-  countries,
-  cities,
+// Helper type for Transaction or Database
+export type DbClientTypes = Database | Parameters<Parameters<Database["transaction"]>[0]>[0];
+
+// ═══════════════════════════════════════════════════════════════
+// RAW PGSQL CLIENT (SEARCH DATABASE — Neon PgSQL + pg_search)
+// ═══════════════════════════════════════════════════════════════
+
+export const searchDb = pgsqlSearchClient;
+
+export { schema };
+
+// ═══════════════════════════════════════════════════════════════
+// DB RECORD TYPE RE-EXPORTS
+// Import DB record types from here, not directly from schema:
+//   import type { CardDbRecord } from '@/lib/database'
+// ═══════════════════════════════════════════════════════════════
+export type {
+    // Users & Auth
+    UserDbRecord, UserDbInsert,
+    UserCredentialDbRecord, UserCredentialDbInsert,
+    UserSessionDbRecord, UserSessionDbInsert,
+    AccountOtpDbRecord, AccountOtpDbInsert,
+    // Accounts
+    AccountDbRecord, AccountDbInsert,
+    // Workspaces
+    WorkspaceDbRecord, WorkspaceDbInsert,
+    WorkspaceAccessDbRecord, WorkspaceAccessDbInsert,
+    WorkspaceRoleDbRecord, WorkspaceRoleDbInsert,
+    WorkspaceInvitationDbRecord, WorkspaceInvitationDbInsert,
+    WorkspaceSubscriptionCouponDbRecord, WorkspaceSubscriptionCouponDbInsert,
+    WorkspaceSubscriptionTransactionDbRecord, WorkspaceSubscriptionTransactionDbInsert,
+    // Notifications
+    AccountNotificationDbRecord, AccountNotificationDbInsert,
+    // Cards
+    CardDbRecord, CardDbInsert,
+    FavoriteCardDbRecord, FavoriteCardDbInsert,
+    // Categories
+    CategoryDbRecord, CategoryDbInsert,
+    CategoryFilterDbRecord, CategoryFilterDbInsert,
+    CategoryFilterOptionDbRecord, CategoryFilterOptionDbInsert,
+    // Support
+    ConversationDbRecord, ConversationDbInsert,
+    MessageDbRecord, MessageDbInsert,
+    // Content
+    BlogDbRecord, BlogDbInsert,
+    DocDbRecord, DocDbInsert,
+    // Geo
+    CountryDbRecord, CountryDbInsert,
+    CityDbRecord, CityDbInsert,
+    // Deactivation
+    DeactivationRequestDbRecord, DeactivationRequestDbInsert,
 } from './schema';

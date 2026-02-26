@@ -17,6 +17,16 @@
   "unknown_error": "Naməlum xəta",
   "error_prefix": "Xəta",
   "unexpected_error": "Gözlənilməz xəta baş verdi",
-  "oauth_error": "Giriş zamanı xəta baş verdi."
+  "oauth_error": "Giriş zamanı xəta baş verdi.",
+  "need_account": "Hesabınız yoxdur?",
+  "sign_in": "Daxil ol",
+  "sign_in_description": "Hesabınıza daxil olun.",
+  "secured_with_device": "Cihazınızla qorunur",
+  "signing_in": "Daxil olunur...",
+  "sign_in_button": "Daxil ol",
+  "social_login_soon": "Sosial şəbəkələrlə giriş tezliklə olacaq",
+  "google": "Google",
+  "facebook": "Facebook",
+  "apple": "Apple",
+  "login_error": "Giriş xətası: {message}"
 }
-

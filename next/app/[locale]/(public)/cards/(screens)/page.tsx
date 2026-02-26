@@ -2,7 +2,7 @@
 import Head
   from 'next/head';
 import { PublicCardsWithFiltersWidget }
-  from '@/app/[locale]/(public)/cards/(widgets)/PublicCardsWithFiltersWidget';
+  from '@/app/[locale]/(public)/cards/(widgets)/PublicCardsWithFilters.widget';
 import { PublicSearchProvider }
   from '@/app/[locale]/(public)/(context)/PublicSearchContext';
 

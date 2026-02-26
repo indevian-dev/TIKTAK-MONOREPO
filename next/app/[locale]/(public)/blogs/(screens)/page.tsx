@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { PublicBlogsListWidget }
-  from '@/app/[locale]/(public)/blogs/(widgets)/PublicBlogsListWidget';
+  from '@/app/[locale]/(public)/blogs/(widgets)/PublicBlogsList.widget';
 
 const PublicBlogsListPage = () => {
   return (

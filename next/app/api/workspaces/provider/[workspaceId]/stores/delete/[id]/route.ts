@@ -1,3 +1,2 @@
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import type { NextRequest } from 'next/server';
-import type { ApiHandlerContext } from '@/types/next';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+// Stub route — no handler exported yet

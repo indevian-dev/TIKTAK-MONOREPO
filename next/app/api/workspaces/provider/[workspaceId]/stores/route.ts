@@ -1,25 +1,11 @@
-import { NextResponse } from 'next/server';
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import { ModuleFactory } from '@/lib/domain/factory';
-import type { NextRequest } from 'next/server';
-import type { ApiHandlerContext } from '@/types/next';
-
-export const GET = withApiHandler(async (request: NextRequest, ctx: ApiHandlerContext) => {
-  const { authData } = ctx;
-  if (!authData) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
-  const modules = new ModuleFactory(authData as any);
-
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { okResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
+export const GET = unifiedApiHandler(async (_request, { module, log }) => {
   try {
-    const stores = await modules.stores.listMyStores();
-    return NextResponse.json({
-      operation: 'success',
-      stores
-    });
+    const stores = await module.workspace.listProviders();
+    return okResponse({ operation: 'success', stores });
   } catch (error) {
-    console.error('[Stores API] Error:', error);
-    return NextResponse.json({ error: 'Failed to fetch stores' }, { status: 500 });
+    log?.error('Error fetching stores', error as Error);
+    return serverErrorResponse('Failed to fetch stores');
   }
 });

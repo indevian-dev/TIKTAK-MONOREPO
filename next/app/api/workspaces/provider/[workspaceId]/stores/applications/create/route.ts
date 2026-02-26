@@ -1,13 +1,13 @@
-import { unifiedApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import { NextResponse } from 'next/server';
-import { cleanPhoneNumber, validateAzerbaijanPhone } from '@/lib/utils/formatting/phoneFormatterUtility';
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { cleanPhoneNumber, validateAzerbaijanPhone } from '@/lib/utils/Formatter.Phone.util';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { createdResponse, errorResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
 
 export const POST = unifiedApiHandler(async (req, { module, auth }) => {
   try {
     // Get authenticated account ID
-    if (!auth || !auth.account) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!auth || !auth.accountId) {
+      return errorResponse('Unauthorized', 401);
     }
 
     // Parse the request body
@@ -23,37 +23,41 @@ export const POST = unifiedApiHandler(async (req, { module, auth }) => {
 
     // Validate required fields (Basic check, service does detailed check but good to fail fast)
     if (!contact_name || !phone || !email || !voen || !store_name || !store_address) {
-      return NextResponse.json({
-        error: 'All fields are required: contact_name, phone, email, voen, store_name, store_address'
-      }, { status: 400 });
+      return errorResponse('All fields are required: contact_name, phone, email, voen, store_name, store_address', 400);
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json({
-        error: 'Invalid email format'
-      }, { status: 400 });
+      return errorResponse('Invalid email format', 400);
     }
 
     // Validate Azerbaijan phone number format
     if (!validateAzerbaijanPhone(phone)) {
-      return NextResponse.json({
-        error: 'Please enter a valid Azerbaijan phone number'
-      }, { status: 400 });
+      return errorResponse('Please enter a valid Azerbaijan phone number', 400);
     }
 
     // Clean phone number for storage
     const cleanedPhone = cleanPhoneNumber(phone);
 
-    const result = await module.stores.submitApplication({
-      contact_name,
-      phone: cleanedPhone,
-      email,
-      voen,
-      store_name,
-      store_address
-    });
+    const result = await module.workspace.submitProviderApplication(
+      auth.accountId,
+      {
+        title: store_name,
+        metadata: {
+          contact_name,
+          phone: cleanedPhone,
+          email,
+          voen,
+          store_address,
+        },
+      },
+      'provider'
+    );
+
+    if (!('data' in result)) {
+      return errorResponse((result as { success: boolean; error: string }).error ?? 'Failed to submit application', 400);
+    }
 
     // Send email notification to admins (optional - can be implemented later)
     ConsoleLogger.log('📧 Store application notification should be sent to admins:', {
@@ -61,36 +65,30 @@ export const POST = unifiedApiHandler(async (req, { module, auth }) => {
       store_name: store_name,
       email: email,
       phone: cleanedPhone,
-      application_id: result.id
+      application_id: result.data.id
     });
 
-    return NextResponse.json({
+    return createdResponse({
       message: 'Store application submitted successfully',
       data: {
-        id: result.id,
-        contact_name: result.contactName,
-        store_name: result.storeName,
-        created_at: result.createdAt
+        id: result.data.id,
+        contact_name: contact_name,
+        store_name: store_name,
+        created_at: result.data.createdAt
       }
-    }, { status: 201 });
+    });
 
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     // Handle specific error cases
     if (errorMessage.includes('VOEN already exists')) {
-      return NextResponse.json({
-        error: 'An application with this VOEN already exists'
-      }, { status: 409 });
+      return errorResponse('An application with this VOEN already exists', 409);
     }
 
     if (errorMessage.includes('already have a pending')) {
-      return NextResponse.json({
-        error: 'You already have a pending store application'
-      }, { status: 409 });
+      return errorResponse('You already have a pending store application', 409);
     }
 
-    return NextResponse.json({
-      error: errorMessage || 'Failed to submit store application'
-    }, { status: 500 });
+    return serverErrorResponse(errorMessage || 'Failed to submit store application');
   }
 });

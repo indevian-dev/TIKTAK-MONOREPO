@@ -1,54 +1,51 @@
-import { NextResponse } from 'next/server';
-import { unifiedApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import { CookieAuthenticator } from '@/lib/middleware/authenticators/CookieAuthenticator';
 
-/**
- * POST /api/auth/login
- * Handles user authentication and session creation
- */
-export const POST = unifiedApiHandler(async (request, { module, log }) => {
+import { NextRequest } from 'next/server';
+import { unifiedApiHandler } from "@/lib/middleware/_Middleware.index";
+import { CookieAuthenticator } from "@/lib/middleware/Authenticator.Cookie.middleware";
+import { ConsoleLogger } from "@/lib/logging/Console.logger";
+import { okResponse, errorResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
+import { LoginSchema } from '@tiktak/shared/types/auth/Auth.schemas';
+import { validateBody } from '@/lib/utils/Zod.validate.util';
+
+export const POST = unifiedApiHandler(async (request: NextRequest, { module }) => {
   try {
-    const body = await request.json();
-    const { email, password } = body;
+    const parsed = await validateBody(request, LoginSchema);
+    if (!parsed.success) return parsed.errorResponse;
 
-    if (!email || !password) {
-      return NextResponse.json({
-        error: 'Email and password are required'
-      }, { status: 400 });
-    }
+    const { email, password, deviceInfo } = parsed.data;
 
-    const ip = request.headers.get('x-forwarded-for') || '0.0.0.0';
-    const userAgent = request.headers.get('user-agent') || 'unknown';
-
+    // Use AuthService from ModuleFactory
     const result = await module.auth.login({
       email,
       password,
-      ip,
-      userAgent
+      deviceInfo,
+      ip: request.headers.get("x-forwarded-for")?.split(",")[0] ||
+        request.headers.get("x-real-ip") ||
+        "0.0.0.0",
     });
 
-    if (!result.success) {
-      return NextResponse.json(result, { status: result.status });
+    if (!result.success || !result.data) {
+      return errorResponse(result.error, result.status);
     }
 
-    // Create success response
-    const response = NextResponse.json(result, { status: 200 });
+    // Create minimal response
+    const response = okResponse({ success: true, message: "Logged in successfully" });
 
-    // Set auth cookies
+    const { session, expireAt } = result.data;
+
+    // Set authentication cookies
     const { authCookiesResponse } = CookieAuthenticator.setAuthCookies({
       response,
       data: {
-        session: result.data.session,
-        expireAt: result.data.expireAt
-      }
+        session,
+        expireAt,
+      },
     });
 
     return authCookiesResponse;
-
-  } catch (error: any) {
-    log.error('[Auth Login API] Unexpected error:', error);
-    return NextResponse.json({
-      error: 'Internal server error occurred'
-    }, { status: 500 });
+  } catch (error) {
+    ConsoleLogger.error("Error in login route:", error);
+    return serverErrorResponse("Server error occurred");
   }
 });
+

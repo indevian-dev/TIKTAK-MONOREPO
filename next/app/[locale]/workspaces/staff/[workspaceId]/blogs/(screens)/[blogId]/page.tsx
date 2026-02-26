@@ -1,11 +1,11 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { StaffBlogEditWidget }
-  from '@/app/[locale]/workspaces/staff/[workspaceId]/blogs/(widgets)/StaffBlogEditWidget';
+  from '@/app/[locale]/workspaces/staff/[workspaceId]/blogs/(widgets)/StaffBlogEdit.widget';
 
 export default withPageAuth(
   async function BlogEditPage({ params }: { params: Promise<{ locale: string; blogId: string }> }) {
     return <StaffBlogEditWidget params={params} />;
   },
-  { pagePath: '/staff/blogs/:blogId', inlineHandlers: true }
+  { path: '/staff/blogs/:blogId', inlineHandlers: true }
 );

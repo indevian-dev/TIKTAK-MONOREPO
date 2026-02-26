@@ -1,45 +1,25 @@
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import type { NextRequest } from 'next/server';
-import type { ApiHandlerContext } from '@/types/next';
-import supabase from '@/lib/clients/supabaseServiceRoleClient';
-import { NextResponse } from 'next/server';
-import type { ApiRouteHandler } from '@/types/next';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { NextRequest } from 'next/server';
+import { createdResponse, errorResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
+import { RoleCreateSchema } from '@tiktak/shared/types/domain/Workspace.schemas';
+import { validateBody } from '@/lib/utils/Zod.validate.util';
 
-export const POST: ApiRouteHandler = withApiHandler(async (request, { authData, params }) => {
+export const POST = unifiedApiHandler(async (request: NextRequest, { module, log }) => {
   try {
-    const body = await request.json();
-    const { name, description, permissions } = body;
+    const parsed = await validateBody(request, RoleCreateSchema);
+    if (!parsed.success) return parsed.errorResponse;
 
-    // Basic validation
-    if (!name) {
-      return NextResponse.json(
-        { error: 'Role name is required' },
-        { status: 400 }
-      );
+    const { name, permissions } = parsed.data;
+
+    const result = await module.roles.createRole({ name, permissions: permissions || [] });
+
+    if (!result.success) {
+      return serverErrorResponse(result.error ?? 'Failed to create role');
     }
 
-    // Create role
-    const { data: role, error } = await supabase
-      .from('accounts_roles')
-      .insert({
-        name,
-        permissions: permissions || []
-      })
-      .select()
-      .single();
-
-    if (error) {
-      return NextResponse.json(
-        { error: 'Failed to create role' },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({ role }, { status: 201 });
+    return createdResponse({ role: result.role });
   } catch (error) {
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    log?.error('Create role error', error as Error);
+    return serverErrorResponse('Internal server error');
   }
-})
+});

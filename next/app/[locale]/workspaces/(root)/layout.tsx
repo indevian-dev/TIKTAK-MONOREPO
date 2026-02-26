@@ -1,4 +1,4 @@
-import { withLayoutAuth } from '@/lib/middleware/handlers';
+import { withLayoutAuth } from '@/lib/middleware/Interceptor.View.middleware';
 import type { ReactNode } from 'react';
 import { WorkspaceRootLayoutClient } from './WorkspaceRootLayoutClient';
 

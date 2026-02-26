@@ -1,28 +1,26 @@
 
 
-import { withLayoutAuth } from '@/lib/auth/AccessValidatorForLayouts';
-import { StaffClientLayout } from '@/app/[locale]/workspaces/staff/[workspaceId]/StaffClientLayout';
-import type { AuthData } from '@/types';
+import { withLayoutAuth } from '@/lib/middleware/_Middleware.index';
+import { StaffClientLayout } from '@/app/[locale]/workspaces/staff/[workspaceId]/Staff.layout';
 
 /**
  * Staff Layout
  * Auth is handled by individual pages using withPageAuth
  */
-export default withLayoutAuth(StaffServerLayout, {
-  layoutPath: '/staff',
-});
+
 
 function StaffServerLayout({
-  children,
-  authData
+  children
 }: {
   children: React.ReactNode;
-  authData?: AuthData | null;
 }) {
   return (
-    <StaffClientLayout authData={authData}>
+    <StaffClientLayout>
       {children}
     </StaffClientLayout>
   );
 }
 
+export default withLayoutAuth(StaffServerLayout, {
+  path: '/workspaces/staff/:workspaceId',
+});

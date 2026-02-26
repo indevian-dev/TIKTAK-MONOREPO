@@ -1,10 +1,22 @@
 'use client';
 
-import { apiCallForSpaHelper } from '@/lib/helpers/apiCallForSpaHelper';
-import type { Store, StoreApplication } from '@/types';
+import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
+import type { Workspace } from '@tiktak/shared/types/domain/Workspace.types';
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
-type StoreType = Store.PrivateAccess;
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
+
+type WorkspaceApplication = Workspace.Application;
+
+// Inline type for store data returned by the API
+interface StoreType {
+  id: string;
+  title?: string;
+  slug?: string;
+  is_approved?: boolean;
+  is_active?: boolean;
+  is_blocked?: boolean;
+  created_at?: string;
+}
 
 /**
  * Staff Stores Service
@@ -47,7 +59,7 @@ interface GetStoreApplicationsOptions {
 }
 
 interface GetStoreApplicationsResult {
-  applications: StoreApplication[];
+  applications: WorkspaceApplication[];
   total: number;
   page: number;
   pageSize: number;
@@ -55,13 +67,13 @@ interface GetStoreApplicationsResult {
 }
 
 interface ApproveStoreApplicationResult {
-  application: StoreApplication | null;
+  application: WorkspaceApplication | null;
   store: StoreType | null;
   error: string | null;
 }
 
 interface RejectStoreApplicationResult {
-  application: StoreApplication | null;
+  application: WorkspaceApplication | null;
   error: string | null;
 }
 
@@ -92,7 +104,7 @@ export async function getStores(options: GetStoresOptions = {}): Promise<GetStor
       params.searchType = searchType;
     }
 
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'GET',
       url: '/api/staff/stores',
       params,
@@ -133,7 +145,7 @@ export async function getStoreById(storeId: number | string): Promise<GetStoreBy
       throw new Error('Valid store ID is required');
     }
 
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'GET',
       url: `/api/staff/stores/${storeIdStr}`,
       params: {},
@@ -315,7 +327,7 @@ export async function getStoresSorted(options: GetStoresSortedOptions = {}): Pro
     } = options;
 
     const allowedSortColumns = ['id', 'created_at', 'title', 'is_approved', 'is_active', 'is_blocked'];
-    
+
     if (!allowedSortColumns.includes(sortBy)) {
       throw new Error(`Invalid sort column. Allowed columns: ${allowedSortColumns.join(', ')}`);
     }
@@ -372,7 +384,7 @@ export async function toggleStoreBlock(_storeId: number, _blocked = true) {
 /**
  * Fetch store applications with search and pagination
  */
-export async function getStoreApplications(options: GetStoreApplicationsOptions = {}): Promise<GetStoreApplicationsResult> {
+export async function getWorkspaceApplications(options: GetStoreApplicationsOptions = {}): Promise<GetStoreApplicationsResult> {
   try {
     const {
       page = 1,
@@ -390,7 +402,7 @@ export async function getStoreApplications(options: GetStoreApplicationsOptions 
       params.search = search.trim();
     }
 
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'GET',
       url: '/api/staff/stores/applications',
       params,
@@ -424,14 +436,14 @@ export async function getStoreApplications(options: GetStoreApplicationsOptions 
 /**
  * Approve a store application
  */
-export async function approveStoreApplication(applicationId: number | string): Promise<ApproveStoreApplicationResult> {
+export async function approveWorkspaceApplication(applicationId: number | string): Promise<ApproveStoreApplicationResult> {
   try {
     const appId = typeof applicationId === 'string' ? applicationId : String(applicationId);
     if (!applicationId || (typeof applicationId === 'string' && isNaN(parseInt(applicationId)))) {
       throw new Error('Valid application ID is required');
     }
 
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'PUT',
       url: `/api/staff/stores/applications/update/${appId}`,
       params: {},
@@ -461,7 +473,7 @@ export async function approveStoreApplication(applicationId: number | string): P
 /**
  * Reject a store application
  */
-export async function rejectStoreApplication(applicationId: number | string, reason: string): Promise<RejectStoreApplicationResult> {
+export async function rejectWorkspaceApplication(applicationId: number | string, reason: string): Promise<RejectStoreApplicationResult> {
   try {
     const appId = typeof applicationId === 'string' ? applicationId : String(applicationId);
     if (!applicationId || (typeof applicationId === 'string' && isNaN(parseInt(applicationId)))) {
@@ -472,13 +484,13 @@ export async function rejectStoreApplication(applicationId: number | string, rea
       throw new Error('Rejection reason is required');
     }
 
-    const response = await apiCallForSpaHelper({
+    const response = await apiCall({
       method: 'PUT',
       url: `/api/staff/stores/applications/update/${appId}`,
       params: {},
-      body: { 
-        approved: false, 
-        reason: reason.trim() 
+      body: {
+        approved: false,
+        reason: reason.trim()
       }
     });
 

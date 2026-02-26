@@ -1,10 +1,10 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { StaffSingleRoleWidget }
-  from '@/app/[locale]/workspaces/staff/[workspaceId]/roles/(widgets)/StaffSingleRoleWidget';
+  from '@/app/[locale]/workspaces/staff/[workspaceId]/roles/(widgets)/StaffSingleRole.widget';
 
 export default withPageAuth(
-  async function StaffSingleRolePage({ params }) {
+  async function StaffSingleRolePage({ params }: { params: { id: string } }) {
     const { id } = await params;
     return (
       <div>
@@ -15,5 +15,5 @@ export default withPageAuth(
       </div>
     );
   },
-  { pagePath: '/staff/roles/:id', inlineHandlers: true }
+  { path: '/staff/roles/:id', inlineHandlers: true }
 );

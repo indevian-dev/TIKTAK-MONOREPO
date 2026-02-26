@@ -1,11 +1,11 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { ProviderAddCardWidget }
-  from '@/app/[locale]/workspaces/provider/[workspaceId]/cards/(widgets)/ProviderAddCardWidget';
+  from '@/app/[locale]/workspaces/provider/[workspaceId]/cards/(widgets)/ProviderAddCard.widget';
 
 export default withPageAuth(
   async function ProviderAddCardPage({ }) {
-  return <ProviderAddCardWidget />;
+    return <ProviderAddCardWidget />;
   },
-  { pagePath: '/provider/cards/create', inlineHandlers: true }
+  { path: '/provider/cards/create', inlineHandlers: true }
 );

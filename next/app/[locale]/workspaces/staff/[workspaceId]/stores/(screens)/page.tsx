@@ -1,7 +1,7 @@
 import { withPageAuth }
-  from "@/lib/auth/AccessValidatorForPages";
+  from "@/lib/middleware/Interceptor.View.middleware";
 import { StaffStoresListWidget }
-  from '@/app/[locale]/workspaces/staff/[workspaceId]/stores/(widgets)/StaffStoresListWidget';
+  from '@/app/[locale]/workspaces/staff/[workspaceId]/stores/(widgets)/StaffStoresList.widget';
 
 export default withPageAuth(
   async function StaffStoresListPage({ }) {
@@ -14,5 +14,5 @@ export default withPageAuth(
       </div>
     );
   },
-  { pagePath: '/staff/stores', inlineHandlers: true }
+  { path: '/staff/stores', inlineHandlers: true }
 );

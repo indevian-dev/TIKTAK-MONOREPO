@@ -1,47 +1,37 @@
-import { allEndpoints } from '@/lib/routes';
-import { RouteValidator } from '@/lib/middleware/validators/RouteValidator';
-import { ResponseResponder } from '@/lib/middleware/responses/ResponseResponder';
-import { LocalizationService } from '@/i18n/LocalizationService';
+import { allRoutes } from '@/lib/routes/_Route.index';
+import { RouteValidator } from '@/lib/middleware/Validator.Route.middleware';
+import { EdgeGuard } from '@/lib/middleware/Guard.EdgeResponse.middleware';
+import { LocalizationService } from '@/i18n/Localization.service';
 import { NextRequest, NextResponse } from 'next/server';
-import { CookieAuthenticator } from '@/lib/middleware/authenticators/CookieAuthenticator';
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
-import type { RouteValidation } from '@/types';
+import { CookieAuthenticator } from '@/lib/middleware/Authenticator.Cookie.middleware';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import type { RouteValidation } from '@/lib/routes/Route.types';
 
 export default async function middleware(
   request: NextRequest
 ): Promise<NextResponse> {
 
 
-  const endpointValidationResult = RouteValidator.validateEndpoint(request, allEndpoints);
+  const endpointValidationResult = RouteValidator.validateRoute(request, allRoutes);
 
-  const normalizedPath = request.nextUrl.pathname;
-  ConsoleLogger.log(`[Proxy] Request: ${request.method} ${normalizedPath}`);
-  ConsoleLogger.log(`[Proxy] Validation result:`, {
-    isValid: endpointValidationResult.isValid,
-    type: endpointValidationResult.type,
-    matchedPattern: endpointValidationResult.normalizedPath
-  });
+  ConsoleLogger.log(('endpointValidationResult:'), endpointValidationResult);
 
-  if (!endpointValidationResult.isValid) {
-    ConsoleLogger.warn(`[Proxy] 404 - No route matched for ${normalizedPath}. Keys in allEndpoints:`, Object.keys(allEndpoints).slice(0, 10));
-  }
-
-  if (!endpointValidationResult.isValid || !endpointValidationResult.endpoint) {
+  if (!endpointValidationResult.isValid || !endpointValidationResult.route) {
     const isApiRequest = request.nextUrl.pathname.startsWith('/api');
 
     if (isApiRequest) {
-      return ResponseResponder.createNotFoundApiResponse();
+      return EdgeGuard.createNotFoundApiResponse();
     } else {
       const requestedLocale = LocalizationService.getLocaleFromRequest(request);
       ConsoleLogger.log(`⛔ Page request validation failed for: ${request.nextUrl.pathname}`);
-      return ResponseResponder.createNotFoundPageResponse({
+      return EdgeGuard.createNotFoundPageResponse({
         locale: requestedLocale,
         request
       });
     }
   }
 
-  if (endpointValidationResult.type === 'api') {
+  if (endpointValidationResult.route.type === 'api') {
     return handleApiRequest(request, endpointValidationResult);
   } else {
     return handlePageRequest(request, endpointValidationResult);
@@ -55,7 +45,7 @@ function handleApiRequest(
   try {
     // Step 2: Check if authentication is required
     // If not, return next
-    if (!endpointValidationResult.endpoint?.authRequired) {
+    if (!endpointValidationResult.route?.authRequired) {
       return NextResponse.next();
     }
 
@@ -63,7 +53,7 @@ function handleApiRequest(
     const { authCookiesData } = CookieAuthenticator.getAuthCookiesFromRequest(request);
     if (!authCookiesData.session) {
       ConsoleLogger.error(('⛔ No session - unauthorized'));
-      return ResponseResponder.createUnauthorizedApiResponse();
+      return EdgeGuard.createUnauthorizedApiResponse();
     }
 
     // Pass through - let withApiHandler do the actual session verification
@@ -71,7 +61,7 @@ function handleApiRequest(
 
   } catch (error) {
     ConsoleLogger.error(('API middleware error:'), error);
-    return ResponseResponder.createInternalServerErrorApiResponse();
+    return EdgeGuard.createInternalServerErrorApiResponse();
   }
 }
 
@@ -85,17 +75,17 @@ function handlePageRequest(
   try {
 
 
-    if (!endpointValidationResult.isValid || !endpointValidationResult.endpoint) {
+    if (!endpointValidationResult.isValid || !endpointValidationResult.route) {
       ConsoleLogger.log(('⛔ Page request validation failed:'), endpointValidationResult);
-      return ResponseResponder.createNotFoundPageResponse({
+      return EdgeGuard.createNotFoundPageResponse({
         locale: requestedLocale,
         request
       });
     }
 
     // Step 2: Check if authentication is required
-    if (!endpointValidationResult.endpoint?.authRequired) {
-      return ResponseResponder.createSuccessPageResponse({
+    if (!endpointValidationResult.route?.authRequired) {
+      return EdgeGuard.createSuccessPageResponse({
         locale: requestedLocale,
         request
       });
@@ -105,21 +95,21 @@ function handlePageRequest(
     const { authCookiesData } = CookieAuthenticator.getAuthCookiesFromRequest(request);
     if (!authCookiesData.session) {
       ConsoleLogger.log(('⛔ No session - unauthorized'));
-      return ResponseResponder.createUnauthorizedPageResponse({
+      return EdgeGuard.createUnauthorizedPageResponse({
         locale: requestedLocale,
         request
       });
     }
 
     // Pass through - let layout validators do the actual session verification
-    return ResponseResponder.createSuccessPageResponse({
+    return EdgeGuard.createSuccessPageResponse({
       locale: requestedLocale,
       request
     });
 
   } catch (error) {
     ConsoleLogger.error(('Page middleware error:'), error);
-    return ResponseResponder.createUnauthorizedPageResponse({
+    return EdgeGuard.createUnauthorizedPageResponse({
       locale: requestedLocale,
       request
     });

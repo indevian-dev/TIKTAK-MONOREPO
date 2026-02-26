@@ -13,9 +13,9 @@ import {
   PiFunnelLight,
   PiSortAscendingLight,
 } from "react-icons/pi";
-import { PublicHeaderSearchFiltersModalWidget } from '@/app/[locale]/(public)/(layout)/header/(widgets)/PublicHeaderSearchFiltersModalWidget';
+import { PublicHeaderSearchFiltersModalWidget } from '@/app/[locale]/(public)/(layout)/header/(widgets)/PublicHeaderSearchFiltersModal.widget';
 import { generateSlug }
-  from '@/lib/utils/formatting/slugify';
+  from '@/lib/utils/Formatter.Slugify.util';
 
 export function PublicHeaderNavCategory({ navData, isCataloguePage }: { navData: NavData; isCataloguePage: boolean }) {
   const { t } = loadClientSideCoLocatedTranslations('PublicHeaderNavCategory');
@@ -29,9 +29,9 @@ export function PublicHeaderNavCategory({ navData, isCataloguePage }: { navData:
       {/* Back Button */}
       <button
         onClick={() => window.history.back()}
-        className="inline-flex items-center gap-1 text-dark hover:text-gray-600 focus:outline-none bg-brandPrimaryLightBg rounded-md p-2"
+        className="inline-flex items-center gap-1 text-gray-900 hover:text-gray-600 focus:outline-none bg-app-bright-purple/10 rounded-md p-2"
       >
-        <PiArrowLeftLight className='text-dark text-3xl' />
+        <PiArrowLeftLight className='text-gray-900 text-3xl' />
       </button>
 
       {!isCataloguePage ? (
@@ -43,12 +43,12 @@ export function PublicHeaderNavCategory({ navData, isCataloguePage }: { navData:
           {/* Search/Filter/Sort Button */}
           < button
             onClick={() => setIsModalOpen(true)}
-            className="inline-flex items-center gap-1 text-dark hover:text-gray-600 bg-brandPrimaryLightBg rounded-md p-2"
+            className="inline-flex items-center gap-1 text-gray-900 hover:text-gray-600 bg-app-bright-purple/10 rounded-md p-2"
             aria-label={t('search_filter_sort')}
           >
-            <PiMagnifyingGlassLight className='text-dark text-xl' />
-            <PiFunnelLight className='text-dark text-xl' />
-            <PiSortAscendingLight className='text-dark text-xl' />
+            <PiMagnifyingGlassLight className='text-gray-900 text-xl' />
+            <PiFunnelLight className='text-gray-900 text-xl' />
+            <PiSortAscendingLight className='text-gray-900 text-xl' />
           </button>
 
           {/* Search Filters Modal */}

@@ -1,135 +1,43 @@
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import { NextRequest, NextResponse } from 'next/server';
-import { eq } from 'drizzle-orm';
-import { users } from '@/lib/database/schema';
-import type { OtpType, ApiRouteHandler, ApiHandlerContext } from '@/types/next';
-import {
-    generateOtp,
-    storeOtp,
-    checkRecentOtpExists
-} from '@/lib/utils/security/otpHandlingUtility';
-import { generateVerificationOtpEmail }
-    from '@/lib/signals/mail/mailGenerator';
-import { sendMail }
-    from '@/lib/clients/mailServiceClient';
-import { generateVerificationOtpSms }
-    from '@/lib/signals/sms/smsGenerator';
-import { sendOtpSmsPlus }
-    from '@/lib/clients/smsServiceClient';
 
-export const POST: ApiRouteHandler = withApiHandler(async (request: NextRequest, { authData, db, log }: ApiHandlerContext) => {
-  // Validate API Request (Auth, Permissions, 2FA, Suspension)
-  // Auth handled by withApiHandler - authData available in context
-try {
-        if (!authData) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+import { unifiedApiHandler } from "@/lib/middleware/_Middleware.index";
+import { okResponse, errorResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
+import { TwoFactorGenerateSchema } from '@tiktak/shared/types/auth/Auth.schemas';
+import { validateBody } from '@/lib/utils/Zod.validate.util';
+
+export const POST = unifiedApiHandler(async (request, { module, authData }) => {
+    try {
+        if (!authData?.user?.id || !authData?.account?.id) {
+            return errorResponse("Unauthorized", 401, "UNAUTHORIZED");
         }
 
-        if (!authData.user) {
-            return NextResponse.json({ error: 'User not found' }, { status: 401 });
+        const parsed = await validateBody(request, TwoFactorGenerateSchema);
+        if (!parsed.success) return parsed.errorResponse;
+
+        const { type } = parsed.data;
+
+        // Fetch phone from DB when needed (not stored in session data)
+        let phone: string | undefined;
+        if (type === 'phone') {
+            const userDetails = await module.auth.getUserDetails(authData.user.id);
+            phone = userDetails.data?.user?.phone ?? undefined;
+            if (!phone) {
+                return errorResponse("No phone number on file", 400, "PHONE_MISSING");
+            }
         }
 
-        const userId = authData.user.id;
-
-        const body = await request.json();
-        const { method } = body;
-
-        if (!method || !['email', 'phone'].includes(method)) {
-            return NextResponse.json({ error: 'Invalid method. Must be email or phone' }, { status: 400 });
-        }
-
-        // Check if user has recent OTP (within 2 minutes)
-        const recentOtp = await checkRecentOtpExists({ userId, type: `2fa_${method}` as OtpType });
-        if (recentOtp && recentOtp.expireAt) {
-            const expireTime = new Date(recentOtp.expireAt).getTime();
-            const currentTime = new Date().getTime();
-            return NextResponse.json({
-                error: 'OTP already sent recently. Please wait before requesting a new one.',
-                nextAvailableIn: Math.ceil((expireTime - currentTime) / 1000)
-            }, { status: 429 });
-        }
-
-        // Generate OTP
-        const { otpCode } = generateOtp();
-        const { isOtpIssued } = await storeOtp({
-            userId,
-            otpCode,
-            type: `2fa_${method}` as OtpType,
-            ttlMinutes: 10
+        const result = await module.auth.requestVerificationCode({
+            email: type === 'email' ? authData.user.email : undefined,
+            phone,
+            operation: '2fa',
         });
 
-        if (!isOtpIssued) {
-            return NextResponse.json({ error: 'Failed to generate OTP' }, { status: 500 });
+        if (!result.success) {
+            return errorResponse(result.error, result.status);
         }
 
-        // Get user contact info
-        const [user] = await db
-            .select({
-                email: users.email,
-                phone: users.phone
-            })
-            .from(users)
-            .where(eq(users.id, userId))
-            .limit(1);
-
-        if (!user) {
-            return NextResponse.json({ error: 'User not found' }, { status: 400 });
-        }
-
-        const { email, phone } = user;
-
-        // Send OTP based on method
-        if (method === 'email') {
-            if (!email) {
-                return NextResponse.json({ error: 'Email not available' }, { status: 400 });
-            }
-
-            const emailTemplate = generateVerificationOtpEmail({
-                username: userId,
-                otp: otpCode,
-                expiryMinutes: 10
-            });
-
-            const result = await sendMail({
-                to: email,
-                subject: 'Two-Factor Authentication Code',
-                html: emailTemplate.html
-            });
-
-            if (!result.success) {
-                return NextResponse.json({ error: 'Failed to send verification email' }, { status: 500 });
-            }
-        } else if (method === 'phone') {
-            if (!phone) {
-                return NextResponse.json({ error: 'Phone number not available' }, { status: 400 });
-            }
-
-            // Generate SMS template (for logging/future use)
-            generateVerificationOtpSms({
-                username: userId,
-                otp: otpCode,
-                expiryMinutes: 10
-            });
-
-            const result = await sendOtpSmsPlus({
-                number: phone,
-                otp: otpCode,
-                expiryMinutes: 10
-            });
-
-            if (!result.success) {
-                return NextResponse.json({ error: 'Failed to send verification SMS' }, { status: 500 });
-            }
-        }
-
-        return NextResponse.json({
-            success: true,
-            message: `Verification code sent via ${method}`,
-            expiresIn: 600 // 10 minutes in seconds
-        }, { status: 200 });
-
+        return okResponse(result.data);
     } catch (error) {
-        log?.error('2FA OTP generation error', error as Error);
-        return NextResponse.json({ error: 'Failed to process verification request' }, { status: 500 });
+        console.error("Error in 2FA generate route:", error);
+        return serverErrorResponse("Server error occurred");
     }
 });

@@ -1,31 +1,33 @@
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import type { NextRequest } from 'next/server';
-import type { ApiHandlerContext } from '@/types/next';
-import { NextResponse } from 'next/server';
-import supabase from '@/lib/clients/supabaseServiceRoleClient';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { okResponse, errorResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
+import { WorkspaceUpdateSchema } from '@tiktak/shared/types/domain/Workspace.schemas';
 
-export const PUT = withApiHandler(async (req: NextRequest, { authData, params }: ApiHandlerContext) => {
-  if (!authData) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+import { validateBody } from '@/lib/utils/Zod.validate.util';
+
+export const PUT = unifiedApiHandler(async (req, { params, module, auth }) => {
+  try {
+    if (!auth || !auth.accountId) {
+      return errorResponse('Unauthorized', 401);
+    }
+
+    const resolvedParams = await params;
+    if (!resolvedParams?.id) {
+      return errorResponse('Store ID is required', 400);
+    }
+
+    const parsed = await validateBody(req, WorkspaceUpdateSchema);
+    if (!parsed.success) return parsed.errorResponse;
+
+    const result = await module.workspace.updateProviderProfile(resolvedParams.id, parsed.data);
+
+    if (!result.success) {
+      return errorResponse(result.error ?? 'Failed to update store', 400);
+    }
+
+    return okResponse(result.data);
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return serverErrorResponse(errorMessage || 'Failed to update store');
   }
+});
 
-  const resolvedParams = await params;
-  if (!resolvedParams?.id) {
-    return NextResponse.json({ error: 'Store ID is required' }, { status: 400 });
-  }
-  const id = resolvedParams.id;
-
-  const { data, error } = await supabase
-    .from('stores')
-    .update(await req.json())
-    .match({ id: id })
-    .select();
-
-  if (error) {
-    return NextResponse.json({
-      error: error.message
-    }, { status: 500 });
-  }
-
-  return NextResponse.json(data, { status: 200 });
-})

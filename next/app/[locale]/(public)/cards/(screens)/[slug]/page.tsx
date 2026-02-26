@@ -1,33 +1,34 @@
 import { cache } from 'react';
-import PublicSingleCardWidget from '@/app/[locale]/(public)/cards/(widgets)/PublicSingleCardWidget';
-import { fetch as apiCallForSsrHelper } from '@/lib/helpers/apiCallForSsrHelper';
+import PublicSingleCardWidget from '@/app/[locale]/(public)/cards/(widgets)/PublicSingleCard.widget';
+import { fetch as apiCallForSsrHelper } from '@/lib/utils/Http.FetchApiSSR.util';
 import { notFound } from 'next/navigation';
 
-import { ConsoleLogger } from '@/lib/logging/ConsoleLogger';
+import { ConsoleLogger } from '@/lib/logging/Console.logger';
 interface CardPageParams {
   slug: string;
   locale: string;
 }
 
 const getCardData = cache(async (slug: string) => {
-  const regex = /-(\d+)$/;
-  const match = slug.match(regex);
+  // Card IDs are varchar — extract last segment after final hyphen
+  // Supports both numeric (e.g. "macbook-pro-123") and string IDs (e.g. "macbook-DEMO_CARD_003")
+  const lastHyphen = slug.lastIndexOf('-');
 
-  if (!match || !match[1]) {
+  if (lastHyphen === -1 || lastHyphen === slug.length - 1) {
     ConsoleLogger.error('Invalid card slug format:', slug);
     return null;
   }
 
-  const id = parseInt(match[1]);
-  const RLKEY = Bun.env.CLOUDFLARE_RATE_LIMIT_TOKEN;
-
+  const id = slug.substring(lastHyphen + 1);
   try {
     const response = await apiCallForSsrHelper({
       url: `/api/cards/${id}`,
-      headers: RLKEY ? { 'x-rl-key': RLKEY } : undefined
     });
 
-    return response.data.card;
+    // SSR fetch returns raw axios response
+    // API response envelope: { success, data: { card } }
+    const envelope = response.data;
+    return envelope?.data?.card || envelope?.card || null;
   } catch (error) {
     const err = error as Error;
     ConsoleLogger.error('Error fetching card:', err.message);
@@ -50,16 +51,16 @@ export async function generateMetadata({ params }: { params: Promise<CardPagePar
 
   return {
     title: card.title,
-    description: card.description,
+    description: card.body,
     openGraph: {
       title: card.title,
-      description: card.description,
+      description: card.body,
       type: 'article',
     },
     twitter: {
       card: 'summary_large_image',
       title: card.title,
-      description: card.description,
+      description: card.body,
     }
   };
 }
@@ -80,7 +81,7 @@ const PublicCardPage = async ({ params }: { params: Promise<CardPageParams> }) =
     notFound();
   }
 
-  return <PublicSingleCardWidget card={card} />;
+  return <PublicSingleCardWidget card={card as any} />;
 };
 
 export default PublicCardPage;

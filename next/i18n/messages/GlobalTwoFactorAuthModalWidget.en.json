@@ -1,14 +1,21 @@
 {
   "title": "Two-Factor Authentication",
-  "email_method": "Email",
-  "sms_method": "SMS",
-  "send_code": "Send Code",
+  "subtitle_email_required": "Email verification required to continue",
+  "subtitle_phone_required": "Phone verification required to continue",
+  "subtitle": "Verify your identity to continue",
+  "choose_method": "Choose how you want to receive your verification code:",
+  "email_option": "Email",
+  "email_description": "Receive code via email",
+  "phone_option": "SMS",
+  "phone_description": "Receive code via SMS",
+  "send_code": "Send Verification Code",
+  "email_sent": "Code sent to your email",
+  "sms_sent": "Code sent to your phone",
+  "enter_code": "Enter the 6-digit code",
+  "auto_verify": "Press Enter or click Verify when complete",
+  "verify": "Verify Code",
+  "change_method": "Change Method",
+  "resend_in": "Resend in",
   "resend_code": "Resend Code",
-  "verify": "Verify",
-  "code_placeholder": "Enter code",
-  "sending": "Sending...",
-  "verifying": "Verifying...",
-  "close": "Close",
-  "wait_seconds": "Wait {seconds} sec"
+  "security_note": "This verification helps keep your account secure"
 }
-

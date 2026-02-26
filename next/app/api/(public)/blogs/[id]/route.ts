@@ -1,44 +1,26 @@
-import { withApiHandler } from '@/lib/middleware/handlers/ApiInterceptor';
-import { NextRequest, NextResponse } from 'next/server';
-import { eq, and } from 'drizzle-orm';
-import { blogs } from '@/lib/database/schema';
-import { ValidationService } from '@/lib/services/ValidationService';
-import type { ApiRouteHandler, ApiHandlerContext } from '@/types/next';
+import { unifiedApiHandler } from '@/lib/middleware/Interceptor.Api.middleware';
+import { ValidationService } from '@/lib/utils/Validator.Id.util';
+import { okResponse, errorResponse, notFoundResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.middleware';
 
-export const GET: ApiRouteHandler = withApiHandler(async (_request: NextRequest, { authData: _authData, params, db, log }: ApiHandlerContext) => {
+export const GET = unifiedApiHandler(async (_request, { params, module, log }) => {
   const resolvedParams = await params;
   const { id } = resolvedParams || { id: '' };
 
-  // Validate ID parameter
   const idValidation = ValidationService.validateId(id);
   if (!idValidation.isValid) {
-    return NextResponse.json({
-      error: 'Valid ID is required'
-    }, { status: 400 });
+    return errorResponse('Valid ID is required', 400);
   }
 
   try {
-    const blogId = Number(idValidation.sanitized);
-    const [blog] = await db
-      .select()
-      .from(blogs)
-      .where(and(
-        eq(blogs.id, blogId),
-        eq(blogs.isPublished, true)
-      ))
-      .limit(1);
+    const blog = await module.blogs.getBlog(idValidation.sanitized);
 
     if (!blog) {
-      return NextResponse.json({
-        error: 'Blog not found'
-      }, { status: 404 });
+      return notFoundResponse('Blog not found');
     }
 
-    return NextResponse.json({ blog }, { status: 200 });
+    return okResponse({ blog });
   } catch (error) {
     log?.error('Error fetching blog', error as Error);
-    return NextResponse.json({
-      error: 'Internal Server Error'
-    }, { status: 500 });
+    return serverErrorResponse('Internal Server Error');
   }
-})
+});
