@@ -23,7 +23,6 @@ function normalizeSqlRow(row: Record<string, unknown>) {
         isApproved: row.is_approved,
         price: row.price,
         body: row.body,
-        storeId: row.store_id,
         accountId: row.account_id,
         storagePrefix: row.storage_prefix,
         location: row.location,
@@ -59,17 +58,17 @@ export class CardsRepository {
         const cardRow = normalizeSqlRow(rawRow);
         const card = mapCardRowToPublic(cardRow);
 
-        // Fetch store data
-        let stores = null;
-        if (cardRow.storeId) {
-            const storeId = cardRow.storeId;
-            const storeResult = await this.dbInstance.execute(
-                sql`SELECT id, title, profile FROM workspaces WHERE id = ${storeId} LIMIT 1`
+        // Fetch workspace data (workspace serves as store for provider workspaces)
+        let workspace = null;
+        if (cardRow.workspaceId) {
+            const wsId = cardRow.workspaceId;
+            const wsResult = await this.dbInstance.execute(
+                sql`SELECT id, title, profile FROM workspaces WHERE id = ${wsId} LIMIT 1`
             );
-            const ws = (storeResult as any[])?.[0];
+            const ws = (wsResult as any[])?.[0];
             if (ws) {
-                const profile = (ws.profile || {}) as Record<string, string>;
-                stores = { id: ws.id, title: ws.title, logo: profile.logo || null, phone: profile.phone || null };
+                const profile = (ws.profile || {}) as import('@tiktak/shared/types/domain/Workspace.types').Workspace.ProviderProfile;
+                workspace = { id: ws.id, title: ws.title, logo: profile.logo || null, phone: profile.phone || null };
             }
         }
 
@@ -92,7 +91,7 @@ export class CardsRepository {
             }
         }
 
-        return { ...card, stores, accounts };
+        return { ...card, workspace, accounts };
     }
 
     // ─── Neon Search DB ─────────────────────────────────────────────
@@ -103,7 +102,7 @@ export class CardsRepository {
             searchText,
             priceMin,
             priceMax,
-            storeId,
+            workspaceId,
             pagination = 12,
         } = query;
 
@@ -150,10 +149,10 @@ export class CardsRepository {
             paramIdx++;
         }
 
-        // Store / workspace filter
-        if (storeId) {
+        // Workspace filter
+        if (workspaceId) {
             conditions.push(`workspace_id = $${paramIdx}`);
-            values.push(storeId);
+            values.push(workspaceId);
             paramIdx++;
         }
 

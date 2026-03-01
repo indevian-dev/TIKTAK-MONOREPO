@@ -3,7 +3,7 @@ import { okResponse, serverErrorResponse } from '@/lib/middleware/Response.Api.m
 export const GET = unifiedApiHandler(async (_req, { module, log }) => {
   try {
     const blogsList = await module.blogs.listBlogs({ isActive: true });
-    return okResponse({ blogs: blogsList.data });
+    return okResponse(blogsList.data);
   } catch (error) {
     log?.error('Error fetching blogs', error as Error);
     return serverErrorResponse('Failed to fetch blogs');

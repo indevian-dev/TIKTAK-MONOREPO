@@ -9,7 +9,7 @@ import { Category } from '@/app/[locale]/(public)/categories/PublicCategoriesSer
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
 import { lt } from '@/lib/utils/Localized.util';
-import { Section } from '@/app/primitives/Section.primitive';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 interface PublicSingleCategoryWidgetProps {
     category: Category;
 }

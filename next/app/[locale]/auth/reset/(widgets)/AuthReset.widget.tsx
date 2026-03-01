@@ -11,6 +11,7 @@ import { ConsoleLogger } from '@/lib/logging/Console.logger';
 import { GlobalLogoTile } from '@/app/[locale]/(global)/(tiles)/GlobalLogo.tile';
 import Image
   from 'next/image';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 interface FormErrors {
   email?: string;
@@ -136,7 +137,7 @@ export default function AuthResetWidget() {
   };
 
   return (
-    <section className="w-full max-w-screen-xl m-auto py-4 px-4 my-4 md:my-6 lg:my-8 flex justify-center items-center">
+    <SectionPrimitive variant="centered">
       <div className="w-full max-w-md grid grid-cols-1 justify-center items-center gap-2">
         <Link href="/" className="text-sm text-app-dark-blue dark:text-white mb-4 grid grid-cols-1 justify-center items-center gap-2">
           <div className="col-span-1 flex justify-center items-center">
@@ -264,6 +265,6 @@ export default function AuthResetWidget() {
           </form>
         )}
       </div>
-    </section>
+    </SectionPrimitive>
   );
 }

@@ -8,6 +8,7 @@ import {
     PiMoonLight,
     PiSunLight
 } from 'react-icons/pi';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 interface PublicHeaderMenuWidgetProps {
     toggleMenu: () => void;
@@ -60,7 +61,7 @@ export default function PublicHeaderMenuWidget({ toggleMenu }: PublicHeaderMenuW
     };
 
     return (
-        <section className={`relative m-auto max-w-screen-xl px-4 ${theme}`}>
+        <SectionPrimitive variant='centered'>
             {/* Language and Theme Controls */}
             <div className='flex gap-2 py-2 w-full justify-between bg-white'>
                 <div className='flex gap-2'>
@@ -102,6 +103,6 @@ export default function PublicHeaderMenuWidget({ toggleMenu }: PublicHeaderMenuW
                     </div>
                 ))}
             </div>
-        </section>
+        </SectionPrimitive>
     );
 }

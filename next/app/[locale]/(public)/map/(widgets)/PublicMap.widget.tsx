@@ -12,11 +12,12 @@ import { PublicMapboxWidthCardsWidget }
     from '@/app/[locale]/(public)/map/(widgets)/PublicMapboxWidthCards.widget';
 import { loadClientSideCoLocatedTranslations }
     from '@/i18n/i18nClientSide';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 export function PublicMapWidget() {
     const { t } = loadClientSideCoLocatedTranslations('PublicMapWidget');
 
     return (
-        <section className='w-full my-8 md:my-12 lg:my-16 max-w-screen-xl px-4 mx-auto'>
+        <SectionPrimitive variant="full">
             <PublicSectionTitleTile sectionTitle={t('cards')} />
 
             <div>
@@ -44,6 +45,6 @@ export function PublicMapWidget() {
                     </div>
                 </div>
             </div>
-        </section>
+        </SectionPrimitive>
     );
 };

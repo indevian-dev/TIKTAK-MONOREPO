@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Link, usePathname } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
 import { routing } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
+import { loadClientSideCoLocatedTranslations } from '@/i18n/i18nClientSide';
 import { PiGlobeLight, PiCheckBold, PiCaretDownBold } from 'react-icons/pi';
 
 const fullNames: Record<string, string> = {
@@ -17,7 +17,7 @@ export function GlobalLangSwitcherTile() {
   const pathname = usePathname();
   const currentLocale = useLocale();
   const locales = routing.locales;
-  const t = useTranslations('GlobalLangSwitcherTile');
+  const { t } = loadClientSideCoLocatedTranslations('GlobalLangSwitcherTile');
   const [open, setOpen] = useState(false);
 
   return (

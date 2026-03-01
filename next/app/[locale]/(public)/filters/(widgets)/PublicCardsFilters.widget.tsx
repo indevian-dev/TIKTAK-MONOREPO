@@ -6,7 +6,7 @@ import {
     useRef,
     useCallback
 } from 'react';
-import { GlobalSelectWidget } from '@/app/[locale]/(global)/(widgets)/GlobalSelect.widget';
+import { SelectPrimitive } from '@/app/primitives/Select.primitive';
 import { useGlobalCategoryContext } from '@/app/[locale]/(global)/(context)/GlobalCategoryContext';
 import { usePublicSearchContext } from '@/app/[locale]/(public)/(context)/PublicSearchContext';
 import { loadClientSideCoLocatedTranslations } from '@/i18n/i18nClientSide';
@@ -339,7 +339,7 @@ export function PublicCardsFiltersWidget({
                 <div key={`category-level-${originalLevel}`} className="col-span-12 w-full">
                     <div className="rounded space-y-2 w-full">
                         <div className="font-bold w-full">{levelLabel}</div>
-                        <GlobalSelectWidget
+                        <SelectPrimitive
                             options={[
                                 { label: `${t('select')} ${levelLabel}`, value: '' },
                                 ...categoryOptions
@@ -388,7 +388,7 @@ export function PublicCardsFiltersWidget({
                             </div>
                         ) : (
                             <div>
-                                <GlobalSelectWidget
+                                <SelectPrimitive
                                     options={(cardOption.category_filter_options || []).map(option => ({
                                         label: option.title,
                                         value: String(option.id)

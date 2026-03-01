@@ -1,7 +1,7 @@
 'use client'
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
-
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 import { useState }
     from 'react';
 import dynamic
@@ -30,7 +30,7 @@ export default function PublicContactWidget() {
 
     return (
         <>
-            <section className='w-full bg-gray-200 text-sm grid grid-cols-1 py-28'>
+            <SectionPrimitive variant="full">
                 <div className='w-full  max-w-7xl mx-auto grid grid-cols-12 px-4 md:px-8 lg:px-12 relative justify-center items-center gap-4 lg:gap-8'>
                     <div className='col-span-12 lg:col-span-5 gap-5 grid grid-cols-1'>
                         <div className="">
@@ -129,7 +129,7 @@ export default function PublicContactWidget() {
                         </button>
                     </div>
                 </div>
-            </section>
+            </SectionPrimitive>
         </>
 
     );

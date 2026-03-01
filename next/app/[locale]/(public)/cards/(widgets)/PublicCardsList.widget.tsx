@@ -103,7 +103,7 @@ export const PublicCardItemWidget = memo(function PublicCardItemWidget({ card }:
                 href={`/cards/${slug}-${card.id}`}
                 passHref
             >
-                {card.storeId ? (
+                {card.workspaceId ? (
                     <span className='bg-app-bright-purple/10 text-gray-900 px-2 py-1 rounded absolute top-2 left-2 z-[2] font-bold'>
                         {t('store')}
                     </span>

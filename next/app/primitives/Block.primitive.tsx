@@ -1,85 +1,46 @@
-import * as React from "react"
+"use client"
 
-const variantStyles = {
+import { useEffect } from "react"
+
+const variants = {
     default: "rounded-app border text-app-dark-blue dark:text-white transition-all duration-300 p-4 md:p-6 border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5",
     flat: "rounded-app text-app-dark-blue dark:text-white transition-all duration-300 bg-transparent bg-white dark:bg-app-dark-purple",
     elevated: "rounded-app border text-app-dark-blue dark:text-white transition-all duration-300 p-4 md:p-6 border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5",
+    modal: "fixed inset-0 z-50 h-screen overflow-y-auto overscroll-contain grid grid-cols-1 justify-center items-center bg-white dark:bg-app-dark-purple px-4 md:px-24 lg:px-48 py-24 animate-in fade-in zoom-in duration-200",
 } as const
 
-type BlockVariant = keyof typeof variantStyles
+type BlockVariant = keyof typeof variants
 
-interface BlockProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "className"> {
-    variant?: BlockVariant
+function BlockPrimitive({ variant = "default", children }: { variant?: BlockVariant; children?: React.ReactNode }) {
+    useEffect(() => {
+        if (variant !== "modal") return;
+        const prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        return () => { document.body.style.overflow = prevOverflow; };
+    }, [variant]);
+
+    return <div className={variants[variant]}>{children}</div>
 }
 
-const Block = React.forwardRef<HTMLDivElement, BlockProps>(
-    ({ variant = "default", ...props }, ref) => (
-        <div
-            ref={ref}
-            className={variantStyles[variant]}
-            {...props}
-        />
-    )
-)
-Block.displayName = "Block"
+function BlockHeader({ children }: { children?: React.ReactNode }) {
+    return <div className="flex flex-col space-y-1.5 p-6">{children}</div>
+}
 
-/* ────────────────── Sub-components ────────────────── */
+function BlockTitle({ children }: { children?: React.ReactNode }) {
+    return <h3 className="font-black tracking-tight text-xl leading-none">{children}</h3>
+}
 
-const BlockHeader = React.forwardRef<
-    HTMLDivElement,
-    Omit<React.HTMLAttributes<HTMLDivElement>, "className">
->(({ ...props }, ref) => (
-    <div
-        ref={ref}
-        className="flex flex-col space-y-1.5 p-6"
-        {...props}
-    />
-))
-BlockHeader.displayName = "BlockHeader"
+function BlockDescription({ children }: { children?: React.ReactNode }) {
+    return <p className="text-sm text-app-dark-blue/70 dark:text-white/70 font-medium leading-relaxed">{children}</p>
+}
 
-const BlockTitle = React.forwardRef<
-    HTMLParagraphElement,
-    Omit<React.HTMLAttributes<HTMLHeadingElement>, "className">
->(({ ...props }, ref) => (
-    <h3
-        ref={ref}
-        className="font-black tracking-tight text-xl leading-none"
-        {...props}
-    />
-))
-BlockTitle.displayName = "BlockTitle"
+function BlockContent({ children }: { children?: React.ReactNode }) {
+    return <div className="p-6 pt-0">{children}</div>
+}
 
-const BlockDescription = React.forwardRef<
-    HTMLParagraphElement,
-    Omit<React.HTMLAttributes<HTMLParagraphElement>, "className">
->(({ ...props }, ref) => (
-    <p
-        ref={ref}
-        className="text-sm text-app-dark-blue/70 dark:text-white/70 font-medium leading-relaxed"
-        {...props}
-    />
-))
-BlockDescription.displayName = "BlockDescription"
+function BlockFooter({ children }: { children?: React.ReactNode }) {
+    return <div className="flex items-center p-6 pt-0">{children}</div>
+}
 
-const BlockContent = React.forwardRef<
-    HTMLDivElement,
-    Omit<React.HTMLAttributes<HTMLDivElement>, "className">
->(({ ...props }, ref) => (
-    <div ref={ref} className="p-6 pt-0" {...props} />
-))
-BlockContent.displayName = "BlockContent"
-
-const BlockFooter = React.forwardRef<
-    HTMLDivElement,
-    Omit<React.HTMLAttributes<HTMLDivElement>, "className">
->(({ ...props }, ref) => (
-    <div
-        ref={ref}
-        className="flex items-center p-6 pt-0"
-        {...props}
-    />
-))
-BlockFooter.displayName = "BlockFooter"
-
-export { Block, BlockHeader, BlockFooter, BlockTitle, BlockDescription, BlockContent }
-export type { BlockProps, BlockVariant }
+export { BlockPrimitive, BlockHeader, BlockFooter, BlockTitle, BlockDescription, BlockContent }
+export type { BlockVariant }

@@ -1,5 +1,7 @@
 "use client";
 
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
+
 interface StaffConfirmationModalTileProps {
     isOpen: boolean;
     onClose: () => void;
@@ -11,8 +13,8 @@ export function StaffConfirmationModalTile({ isOpen, onClose, onConfirm, message
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-gray-200 bg-opacity-90 flex justify-center items-center">
-            <div className="bg-white p-4 rounded w-full my-8 lg:w-1/2">
+        <BlockPrimitive variant="modal">
+            <BlockPrimitive variant="default">
                 <p>{message}</p>
                 <div className="flex justify-end gap-2 mt-4">
                     <button onClick={onClose} className="px-4 py-2 border rounded text-black">
@@ -22,7 +24,7 @@ export function StaffConfirmationModalTile({ isOpen, onClose, onConfirm, message
                         Confirm
                     </button>
                 </div>
-            </div>
-        </div>
+            </BlockPrimitive>
+        </BlockPrimitive>
     );
 }

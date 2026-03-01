@@ -2,14 +2,14 @@
 
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { PiSunBold, PiMoonBold, PiDesktopBold } from 'react-icons/pi';
+import { PiSunBold, PiMoonBold } from 'react-icons/pi';
 
 /**
- * Theme switcher toggle — cycles between light, dark, and system.
+ * Theme switcher — full-width segmented control with Light | Dark options.
  * Persisted via next-themes (localStorage).
  */
 export function GlobalThemeSwitcherTile() {
-    const { theme, setTheme } = useTheme();
+    const { theme, setTheme, resolvedTheme } = useTheme();
     const [mounted, setMounted] = useState(false);
 
     // Avoid hydration mismatch — only render after mount
@@ -17,44 +17,36 @@ export function GlobalThemeSwitcherTile() {
 
     if (!mounted) {
         return (
-            <div className="h-9 w-9 rounded-full bg-gray-100 dark:bg-white/5 animate-pulse" />
+            <div className="h-12 w-full rounded-app bg-black/5 dark:bg-white/5 animate-pulse" />
         );
     }
 
-    const cycleTheme = () => {
-        if (theme === 'light') setTheme('dark');
-        else if (theme === 'dark') setTheme('system');
-        else setTheme('light');
-    };
-
-    const icon =
-        theme === 'dark' ? <PiMoonBold size={18} /> :
-            theme === 'light' ? <PiSunBold size={18} /> :
-                <PiDesktopBold size={18} />;
-
-    const label =
-        theme === 'dark' ? 'Dark' :
-            theme === 'light' ? 'Light' :
-                'System';
+    const activeTheme = theme === 'system' ? resolvedTheme : theme;
 
     return (
-        <button
-            onClick={cycleTheme}
-            className="
-                flex items-center justify-center
-                h-9 w-9 rounded-full
-                bg-gray-100 dark:bg-white/10
-                border border-gray-200 dark:border-white/10
-                text-gray-500 dark:text-gray-400
-                hover:text-gray-900 dark:hover:text-white
-                hover:bg-gray-200 dark:hover:bg-white/15
-                transition-all duration-200
-                active:scale-90
-            "
-            title={`Theme: ${label}`}
-            aria-label={`Switch theme (current: ${label})`}
-        >
-            {icon}
-        </button>
+        <div className="w-full flex rounded-app border border-black/8 dark:border-white/10 bg-black/5 dark:bg-white/5 p-1 gap-1">
+            <button
+                onClick={() => setTheme('light')}
+                className={`flex-1 flex items-center justify-center gap-2 rounded-[calc(1.5rem-4px)] px-4 py-2.5 text-sm font-bold transition-all duration-200 ${activeTheme === 'light'
+                        ? 'bg-white dark:bg-white text-app-dark-purple shadow-sm'
+                        : 'text-app-dark-purple/50 dark:text-white/50 hover:text-app-dark-purple dark:hover:text-white'
+                    }`}
+                aria-label="Switch to light theme"
+            >
+                <PiSunBold size={16} />
+                <span>Light</span>
+            </button>
+            <button
+                onClick={() => setTheme('dark')}
+                className={`flex-1 flex items-center justify-center gap-2 rounded-[calc(1.5rem-4px)] px-4 py-2.5 text-sm font-bold transition-all duration-200 ${activeTheme === 'dark'
+                        ? 'bg-app-dark-purple text-white shadow-sm'
+                        : 'text-app-dark-purple/50 dark:text-white/50 hover:text-app-dark-purple dark:hover:text-white'
+                    }`}
+                aria-label="Switch to dark theme"
+            >
+                <PiMoonBold size={16} />
+                <span>Dark</span>
+            </button>
+        </div>
     );
 }

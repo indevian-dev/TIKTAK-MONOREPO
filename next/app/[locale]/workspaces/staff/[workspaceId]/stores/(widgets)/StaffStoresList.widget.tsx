@@ -5,8 +5,8 @@ import {
     useEffect
 } from 'react';
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
-import { Pagination }
-    from '@/app/[locale]/workspaces/staff/[workspaceId]/ui/pagination';
+import { PaginationPrimitive }
+    from '@/app/primitives/Pagination.primitive';
 import { toast }
     from 'react-toastify';
 import { GlobalLoaderTile }
@@ -32,6 +32,7 @@ interface StoreType {
     updated_at?: string;
 }
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 import {
     PiStorefront,
     PiEye,
@@ -345,7 +346,7 @@ export function StaffStoresListWidget() {
 
             {/* Pagination */}
             {totalPages > 1 && (
-                <Pagination
+                <PaginationPrimitive
                     currentPage={page}
                     totalPages={totalPages}
                     onPageChange={handlePageChange}
@@ -354,8 +355,8 @@ export function StaffStoresListWidget() {
 
             {/* Modal */}
             {isModalOpen && selectedStore && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                <BlockPrimitive variant="modal">
+                    <BlockPrimitive variant="default">
                         {modalType === 'view' && (
                             <>
                                 <h3 className="text-lg font-semibold mb-4">Store Details</h3>
@@ -461,8 +462,8 @@ export function StaffStoresListWidget() {
                                 </div>
                             </>
                         )}
-                    </div>
-                </div>
+                    </BlockPrimitive>
+                </BlockPrimitive>
             )}
         </div>
     );

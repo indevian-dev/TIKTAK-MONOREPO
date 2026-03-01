@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import { PublicSectionTitleTile } from '@/app/[locale]/(public)/(tiles)/PublicSectionTitle.tile';
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 export default function PublicDeactivationFormWidget() {
     const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ export default function PublicDeactivationFormWidget() {
     };
 
     return (
-        <section className="w-full">
+        <SectionPrimitive variant="full">
             <div className='container max-w-7xl mx-auto grid grid-cols-12 p-4 md:p-8 lg:p-12 gap-6 md:gap-8'>
                 <div className='col-span-12'>
                     <PublicSectionTitleTile sectionTitle="Account Deactivation" />
@@ -141,6 +142,6 @@ export default function PublicDeactivationFormWidget() {
                     </form>
                 </div>
             </div>
-        </section>
+        </SectionPrimitive>
     );
 }

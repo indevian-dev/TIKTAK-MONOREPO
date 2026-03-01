@@ -28,6 +28,7 @@ import { ProviderImagesEditWidget }
   from '@/app/[locale]/workspaces/provider/[workspaceId]/cards/(widgets)/ProviderImagesEdit.widget';
 import { ProviderVideoEditWidget }
   from '@/app/[locale]/workspaces/provider/[workspaceId]/cards/(widgets)/ProviderVideoEdit.widget';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 interface LocationCoordinates {
   latitude: number;
@@ -242,7 +243,7 @@ export function ProviderAddCardWidget() {
   );
 
   return (
-    <section className='max-w-7xl m-auto flex flex-wrap bg-white relative'>
+    <SectionPrimitive variant="centered">
       <div className='w-full lg:w-2/3 flex flex-wrap items-start justify-start p-4 relative'>
         {isProcessing ? (
           <ProcessingTile />
@@ -346,6 +347,6 @@ export function ProviderAddCardWidget() {
           onLocationSelect={handleLocationSelect}
         />
       </div>
-    </section>
+    </SectionPrimitive>
   );
 }

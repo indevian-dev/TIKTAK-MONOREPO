@@ -10,7 +10,7 @@ import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
  */
 
 interface CardFilters {
-  storeId?: number;
+  workspaceId?: string;
   categoryId?: string | number | string[] | number[];
   categoryIds?: string;
   categories?: string[];
@@ -61,7 +61,7 @@ interface SearchResponse {
 /**
  * Fetch cards with search filters
  * @param {Object} filters - Search filters
- * @param {number} filters.storeId - Store ID to filter by
+ * @param {string} filters.workspaceId - Workspace ID to filter by
  * @param {number|Array<number>} filters.categoryId - Single category ID or array of category IDs to filter by
  * @param {Array<number>} filters.categories - Array of category IDs from CardsFiltersWidget
  * @param {number} filters.userId - User ID to filter by
@@ -81,7 +81,7 @@ export async function searchCards(filters: CardFilters = {}): Promise<SearchResp
     const params: Record<string, string | number | boolean> = {};
 
     // Add filters to params if they exist
-    if (filters.storeId) params.storeId = filters.storeId;
+    if (filters.workspaceId) params.workspaceId = filters.workspaceId;
 
     // Handle categories filter (array from CardsFiltersWidget) vs single categoryId
     if (filters.categories && filters.categories.length > 0) {
@@ -188,28 +188,28 @@ export async function searchCards(filters: CardFilters = {}): Promise<SearchResp
 }
 
 /**
- * Fetch cards by store ID
- * @param {number} storeId - The store ID
+ * Fetch cards by workspace ID
+ * @param {string} workspaceId - The workspace ID
  * @param {number} pagination - Number of items to fetch (default: 12)
  * @returns {Promise<{cards: Array, total: number, error?: string}>}
  */
-export async function getCardsByStoreId(storeId: number, pagination = 12) {
+export async function getCardsByWorkspaceId(workspaceId: string, pagination = 12) {
   try {
-    if (!storeId) {
-      throw new Error('Store ID is required');
+    if (!workspaceId) {
+      throw new Error('Workspace ID is required');
     }
 
     return await searchCards({
-      storeId: storeId,
+      workspaceId: workspaceId,
       pagination: pagination
     });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Operation failed';
-    ConsoleLogger.error('Error fetching cards by store ID:', error);
+    ConsoleLogger.error('Error fetching cards by workspace ID:', error);
     return {
       cards: [],
       total: 0,
-      error: errorMessage || 'Failed to fetch cards by store ID'
+      error: errorMessage || 'Failed to fetch cards by workspace ID'
     };
   }
 }
@@ -327,7 +327,7 @@ export async function getCardsByPriceRange(fromRate: number | null, toRate: numb
 /**
  * Get cards by multiple filters
  * @param {Object} filters - Multiple filter options
- * @param {number} filters.storeId - Store ID
+ * @param {string} filters.workspaceId - Workspace ID
  * @param {number} filters.categoryId - Category ID
  * @param {string} filters.searchText - Search text
  * @param {number} filters.fromRate - Min price

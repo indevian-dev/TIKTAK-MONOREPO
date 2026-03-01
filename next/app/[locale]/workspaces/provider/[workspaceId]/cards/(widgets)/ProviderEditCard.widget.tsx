@@ -29,6 +29,7 @@ import { useGlobalCategoryContext }
 
 
 import { lt } from '@/lib/utils/Localized.util';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 interface LocationData {
   latitude: number;
@@ -421,7 +422,7 @@ export default function ProviderEditCardWidget({ cardId }: ProviderEditCardWidge
   }
 
   return (
-    <section className="w-full min-h-screen flex flex-wrap items-start justify-start p-4 bg-app-bright-purple/10">
+    <SectionPrimitive variant="full">
       <div className='w-full lg:w-2/3 flex flex-wrap items-start justify-start p-4 relative'>
         <div className="w-full mb-6">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
@@ -561,6 +562,6 @@ export default function ProviderEditCardWidget({ cardId }: ProviderEditCardWidge
           onLocationSelect={handleLocationSelect}
         />
       </div>
-    </section>
+    </SectionPrimitive>
   );
 } 

@@ -24,7 +24,6 @@ export function mapCardRowToPublic(row: CardDbRecord): Card.PublicAccess {
         location: (row.location as { lat: number; lng: number } | null) ?? null,
         categories: (row.categories as string[] | null) ?? null,
         filtersOptions: (row.filtersOptions as Card.FilterOption[] | null) ?? null,
-        storeId: row.storeId ?? null,
         accountId: row.accountId ?? null,
         isApproved: row.isApproved ?? false,
         createdAt: row.createdAt,
@@ -55,7 +54,6 @@ export function mapSearchRowToPublic(row: Card.NeonSearchRow): Card.PublicAccess
         location: (d.location as { lat: number; lng: number } | null) ?? null,
         categories: (d.categories as string[] | null) ?? null,
         filtersOptions: (d.filters_options as Card.FilterOption[] | null) ?? null,  // snake_case in JSONB data
-        storeId: (d.store_id as string | null) ?? null,
         accountId: (d.account_id as string | null) ?? null,
         isApproved: (d.is_approved as boolean | null) ?? false,
         createdAt: new Date((d.created_at as string) ?? row.synced_at),

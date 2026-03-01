@@ -20,6 +20,7 @@ import { generateSlug }
 import type { Card } from '@tiktak/shared/types/domain/Card.types';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 
 interface PublicMapCardDetailModalWidgetProps {
     isOpen?: boolean;
@@ -74,10 +75,7 @@ export function PublicMapCardDetailModalWidget({
     if (!isOpen) return null;
 
     return (
-        <div
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-            onClick={onClose}
-        >
+        <BlockPrimitive variant="modal">
             <div
                 className="bg-white rounded-lg shadow-xl max-w-sm w-full max-h-[90vh] overflow-hidden"
                 onClick={(e) => e.stopPropagation()}
@@ -98,7 +96,7 @@ export function PublicMapCardDetailModalWidget({
                         </button>
 
                         {/* Store badge if applicable */}
-                        {card.storeId && (
+                        {card.workspaceId && (
                             <span className="absolute top-2 left-2 z-10 bg-app-bright-purple/10 text-gray-900 px-2 py-1 rounded font-bold text-xs">
                                 {t('store')}
                             </span>
@@ -190,7 +188,7 @@ export function PublicMapCardDetailModalWidget({
                     </div>
                 )}
             </div>
-        </div>
+        </BlockPrimitive>
     );
 }
 

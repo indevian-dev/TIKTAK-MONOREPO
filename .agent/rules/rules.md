@@ -18,6 +18,10 @@ next prefix docs is next.js related  , expo prefix is expo related , monorepo is
 - **Write code for humans:** Focus on readability and effective maintenance.
 - **BUN engine:** Use `bun` for all terminal commands and as the primary JS engine.
 - **AI-Generated Files:** All AI files must be stored in the `.agent/files` folder.
+- **Terminal Shell:** ALWAYS use Git Bash for ALL terminal commands. PowerShell breaks on `[bracket]` paths (Next.js `[locale]`, `[workspaceId]` etc.). Wrap commands as: `bash -c "your command here"` or use Git Bash syntax directly. NEVER use PowerShell-native commands like `Remove-Item`.
+
+## 5. ALL DB related oparation You must Return SQL and i will run it manually in databse temrinal.
+
 ## CRITICAL 
 - **Massive Changes:** Always use Manual one by one update files for massive tasks. Need collect list of files wich need update and then update them One By One
 - ** In The end of task you need check if docs need be updated and update if needed

@@ -12,6 +12,7 @@ import { GlobalLoaderTile }
 import type { Role } from '@tiktak/shared/types/domain/Role.types';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 type RoleType = Role.PublicView;
 
 interface NewRoleForm {
@@ -97,8 +98,8 @@ export function StaffRolesListWidget() {
 
             {/* Modal Form */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                    <div className="bg-white p-6 rounded-lg w-full max-w-md">
+                <BlockPrimitive variant="modal">
+                    <BlockPrimitive variant="default">
                         <h2 className="text-xl font-bold mb-4">Create New Role</h2>
                         <form onSubmit={handleCreateRole}>
                             <div className="space-y-4">
@@ -140,8 +141,8 @@ export function StaffRolesListWidget() {
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
+                    </BlockPrimitive>
+                </BlockPrimitive>
             )}
 
             <div className="bg-white shadow overflow-hidden rounded-lg">

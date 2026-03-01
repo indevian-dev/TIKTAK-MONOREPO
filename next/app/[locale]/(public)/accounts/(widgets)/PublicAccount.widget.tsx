@@ -18,7 +18,6 @@ interface Account {
   last_name: string;
   phone: string;
   avatar?: string;
-  store_id?: number;
 }
 
 function PublicAccountWidget() {
@@ -241,9 +240,7 @@ function PublicAccountWidget() {
 
         {/* Links */}
         <ul className="mt-6 space-y-2">
-          {account.store_id ? (
-            <li><a href={`/my/store/`} className="text-blue-600 hover:underline">{t('store_management')}</a></li>
-          ) : ('')}
+          <li><a href="/my/store/" className="text-blue-600 hover:underline">{t('store_management')}</a></li>
           <li><a href="#" className="text-blue-600 hover:underline">{t('my_cards')}</a></li>
           <li><a href="#" className="text-blue-600 hover:underline">{t('my_favorites')}</a></li>
           <li><a href="#" className="text-blue-600 hover:underline">{t('my_bookmarks')}</a></li>

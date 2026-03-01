@@ -9,7 +9,9 @@ import { toast }
 import type { Workspace } from '@tiktak/shared/types/domain/Workspace.types';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 import { apiGet, apiRequest } from '@/lib/utils/ApiRequest.util';
+import { PaginationPrimitive } from '@/app/primitives/Pagination.primitive';
 
 type WorkspaceApplication = Workspace.Application;
 
@@ -180,8 +182,8 @@ export function StaffStoresApplicationsListWidget() {
                         <p className="text-sm text-gray-500">Applied: {formatDate(application.created_at)}</p>
                         {application.status && (
                           <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium mt-1 ${application.status === 'approved' ? 'bg-green-100 text-green-800' :
-                              application.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                                'bg-yellow-100 text-yellow-800'
+                            application.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                              'bg-yellow-100 text-yellow-800'
                             }`}>
                             {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
                           </span>
@@ -222,37 +224,17 @@ export function StaffStoresApplicationsListWidget() {
         )}
 
         {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex justify-center mt-6">
-            <nav className="flex space-x-2">
-              <button
-                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-                className="px-3 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
-              >
-                Previous
-              </button>
-
-              <span className="px-3 py-2 text-sm text-gray-700">
-                Page {currentPage} of {totalPages}
-              </span>
-
-              <button
-                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                disabled={currentPage === totalPages}
-                className="px-3 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
-              >
-                Next
-              </button>
-            </nav>
-          </div>
-        )}
+        <PaginationPrimitive
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       </div>
 
       {/* Reject Modal */}
       {showRejectModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+        <BlockPrimitive variant="modal">
+          <BlockPrimitive variant="default">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               Reject Application: {selectedApplication?.store_name}
             </h3>
@@ -288,8 +270,8 @@ export function StaffStoresApplicationsListWidget() {
                 {processingId === selectedApplication?.id ? 'Processing...' : 'Reject Application'}
               </button>
             </div>
-          </div>
-        </div>
+          </BlockPrimitive>
+        </BlockPrimitive>
       )}
     </div>
   );

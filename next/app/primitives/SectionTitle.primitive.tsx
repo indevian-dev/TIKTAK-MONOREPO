@@ -1,23 +1,13 @@
-import * as React from "react"
-
-interface SectionTitleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title' | 'className'> {
-    /** Main heading text */
+interface SectionTitleProps {
     title: React.ReactNode
-    /** Optional subtitle / description below the title */
     description?: React.ReactNode
-    /** Optional right-side action slot (buttons, links, etc.) */
     action?: React.ReactNode
-    /** Icon shown to the left of the title */
     icon?: React.ReactNode
 }
 
-/**
- * Reusable section header with app-bright-green/10 background pill on the title.
- * Use this anywhere you need a consistent `<h2>` section heading inside a Card.
- */
-const SectionTitle = React.forwardRef<HTMLDivElement, SectionTitleProps>(
-    ({ title, description, action, icon, ...props }, ref) => (
-        <div ref={ref} className="flex items-start justify-between gap-4 mb-6" {...props}>
+function SectionTitlePrimitive({ title, description, action, icon }: SectionTitleProps) {
+    return (
+        <div className="flex items-start justify-between gap-4 mb-6">
             <div className="flex-1 min-w-0">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-app bg-app-bright-green/10 dark:bg-app-bright-green/10 mb-1">
                     {icon && (
@@ -42,7 +32,7 @@ const SectionTitle = React.forwardRef<HTMLDivElement, SectionTitleProps>(
             )}
         </div>
     )
-)
-SectionTitle.displayName = "SectionTitle"
+}
 
-export { SectionTitle }
+export { SectionTitlePrimitive }
+export type { SectionTitleProps }

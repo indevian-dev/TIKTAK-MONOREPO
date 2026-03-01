@@ -5,6 +5,7 @@ import {
   useEffect,
   useCallback
 } from 'react';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 import {
   PiXLight,
   PiMagnifyingGlassLight,
@@ -108,7 +109,7 @@ export function PublicHeaderSearchFiltersModalWidget({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-900/50 flex items-start justify-center z-[200] backdrop-blur-sm pt-4 px-4">
+    <BlockPrimitive variant="modal">
       <div className="bg-white rounded-xl w-full max-w-lg shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-200">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-light">
@@ -223,7 +224,7 @@ export function PublicHeaderSearchFiltersModalWidget({
           </button>
         </div>
       </div>
-    </div>
+    </BlockPrimitive>
   );
 }
 

@@ -9,7 +9,7 @@ import { Category } from '@/app/[locale]/(public)/categories/PublicCategoriesSer
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
 import { lt } from '@/lib/utils/Localized.util';
-import { Section } from '@/app/primitives/Section.primitive';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 interface PublicCategoriesFastNavigationWidgetProps {
   category?: Category | null;
 }
@@ -70,7 +70,7 @@ export function PublicCategoriesFastNavigationWidget({ category }: PublicCategor
   }
 
   return (
-    <Section variant="centered">
+    <SectionPrimitive variant="centered">
       <div className='grid grid-rows-2 grid-flow-col gap-3 overflow-x-scroll py-2 pb-4 text-sm scrollbar-app'>
         <Link key={'map'} href={`/map`} passHref className={`col-span-10 px-2 pt-2 pb-10 rounded-app flex items-center  relative bg-app-bright-purple text-white`} >
           <span className="absolute top-2 font-semibold line-clamp-2">Map</span>
@@ -85,6 +85,6 @@ export function PublicCategoriesFastNavigationWidget({ category }: PublicCategor
           );
         })}
       </div>
-    </Section>
+    </SectionPrimitive>
   );
 }

@@ -209,7 +209,7 @@ export function PublicSearchWidget({ hideOnCardFilters = false }: PublicSearchWi
                                                     <div className="flex-shrink-0">
                                                         {(result._source?.images?.[0] || result.images?.[0]) ? (
                                                             <Image
-                                                                src={`https://tiktak.s3.tebi.io/cards/${result._source?.storage_prefix || result.storage_prefix}/${result._source?.images?.[0] || result.images?.[0]}`}
+                                                                src={process.env.NEXT_PUBLIC_S3_PREFIX + `/cards/${result._source?.storage_prefix || result.storage_prefix}/${result._source?.images?.[0] || result.images?.[0]}`}
                                                                 alt={result._source?.title || result.title}
                                                                 width={64}
                                                                 height={64}
@@ -328,7 +328,7 @@ export function PublicSearchWidget({ hideOnCardFilters = false }: PublicSearchWi
                                                 <div className="flex-shrink-0">
                                                     {(result._source?.images?.[0] || result.images?.[0]) ? (
                                                         <Image
-                                                            src={`https://tiktak.s3.tebi.io/cards/${result._source?.storage_prefix || result.storage_prefix}/${result._source?.images?.[0] || result.images?.[0]}`}
+                                                            src={`${process.env.NEXT_PUBLIC_S3_PREFIX}/cards/${result._source?.storage_prefix || result.storage_prefix}/${result._source?.images?.[0] || result.images?.[0]}`}
                                                             alt={result._source?.title || result.title}
                                                             width={64}
                                                             height={64}

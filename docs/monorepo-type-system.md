@@ -80,25 +80,28 @@ _shared.types/
     Auth.schemas.ts         ← Zod schemas for auth flows
     Auth.types.ts           ← TypeScript types for auth domain
 
+  base/
+    Base.types.ts           ← Timestamps, Pagination, Location, etc.
+
   domain/
+    Auth.views.ts           ← Shared Auth view interfaces (User/Account/Session × Public/Private/Full)
     Card.schemas.ts         ← Zod input schemas (what clients SEND)
-    Card.types.ts           ← Domain types (what the API RETURNS)
+    Card.types.ts           ← Card domain types (PublicAccess, PrivateAccess, FilterOption)
     Category.schemas.ts
     Category.types.ts
     Notification.schemas.ts
     Notification.types.ts
-    Role.types.ts
+    Payment.types.ts        ← Transaction and Coupon view interfaces
+    Role.types.ts           ← Role, Access, and Invitation view interfaces
     Workspace.schemas.ts
-    Workspace.types.ts
+    Workspace.types.ts      ← Workspace view interfaces (PublicView/PrivateView/FullView)
     User.schemas.ts
     Support.schemas.ts
     Content.schemas.ts
     Jobs.schemas.ts
 
   api/                      ← Shared API response envelope types
-  base/                     ← Primitive shared types (Pagination, etc.)
-  ui/                       ← Shared UI-related enums / constants
-  validation/               ← Shared validation helpers
+  ui/                       ← Shared UI-related types (Form, Modal, Select)
 ```
 
 ### `_shared.types/package.json`
@@ -194,35 +197,89 @@ export type NotificationPreferencesInput = z.infer<typeof NotificationPreference
 
 ---
 
-## 5. Access Level Pattern (`PublicAccess` / `PrivateAccess`)
+## 5. The `satisfies` Mapper Pattern (View Types)
+
+Mappers now use TypeScript's `satisfies` operator to enforce that the returned object matches the shared view type **at compile time**, without losing the inferred return type:
+
+```typescript
+// _shared.types/domain/Workspace.types.ts
+export namespace Workspace {
+    export interface Profile { logo?: string | null; phone?: string | null; /* ... */ }
+
+    export interface PublicView {
+        id: string;
+        title: string;
+        type: string;
+        profile: Profile | null;
+        isStore: boolean | null;
+    }
+
+    export interface PrivateView extends PublicView {
+        cityId: string | null;
+        isActive: boolean | null;
+        isBlocked: boolean | null;
+    }
+
+    export interface FullView extends PrivateView {
+        createdAt: Date | null;
+        updatedAt: Date | null;
+    }
+}
+```
+
+```typescript
+// next/lib/domain/workspace/Workspace.mappers.ts
+import type { Workspace } from '@tiktak/shared/types/domain/Workspace.types';
+
+export function toWorkspacePublicView(row: WorkspaceDbRecord) {
+    return {
+        id: row.id,
+        title: row.title,
+        type: row.type,
+        profile: (row.profile as Workspace.Profile) ?? null,
+        isStore: row.isStore ?? false,
+    } satisfies Workspace.PublicView;
+}
+```
+
+All 4 mapper domains use this pattern: **Workspace** (3 views), **Auth** (7 views), **Role/Access/Invitation** (6 views), **Payment** (4 views).
+
+> **Key Rule:** Never define inline view interfaces in mapper files. Always define them in `_shared.types/domain/` and use `satisfies` in the mapper.
+
+---
+
+## 6. Access Level Pattern (`PublicAccess` / `PrivateAccess` / View Types)
 
 Domain types use a **namespace with access levels** to encode visibility rules at the type level.
 
 | Access Level | Description | Used In |
 |---|---|---|
-| `PublicAccess` | Minimal fields. Safe for unauthenticated API responses or listings. | Public API routes, card listings, store pages |
-| `PrivateAccess` | Full fields for the authenticated owner. Extends `PublicAccess`. | Owner dashboards, notification drawer |
-| `AdminAccess` | Full fields + admin-only metadata. Used by staff/admin screens only. | Staff workspace screens |
+| `PublicAccess` / `PublicView` | Minimal fields. Safe for unauthenticated API responses or listings. | Public API routes, card listings, store pages |
+| `PrivateAccess` / `PrivateView` | Full fields for the authenticated owner. Extends Public. | Owner dashboards, notification drawer |
+| `FullView` / `AdminAccess` | Full fields + admin-only metadata. Used by staff/admin screens only. | Staff workspace screens |
 
 **Rule:** Always return the most restrictive type that satisfies the use case. Never return a `PrivateAccess` shape from a public-facing route.
 
 ---
 
-## 6. Naming Conventions (Enforced)
+## 7. Naming Conventions (Enforced)
 
 | Thing | Convention | Example |
 |---|---|---|
 | Domain type namespace | `PascalCase` | `Notification`, `Card`, `Workspace` |
 | Output types file | `<Domain>.types.ts` | `Notification.types.ts` |
+| View types file | `<Domain>.views.ts` | `Auth.views.ts` |
 | Input schemas file | `<Domain>.schemas.ts` | `Notification.schemas.ts` |
 | Zod schema | `<Entity><Action>Schema` | `NotificationMarkReadSchema` |
 | Inferred input type | `<Entity><Action>Input` | `NotificationMarkReadInput` |
 | DB record type | `<Domain>DbRecord` | `AccountNotificationDbRecord` |
 | DB insert type | `<Domain>DbInsert` | `AccountNotificationDbInsert` |
+| View type | `<Domain>.<Level>View` | `Workspace.PublicView` |
+| Mapper function | `to<Domain><Level>View` | `toWorkspacePublicView` |
 
 ---
 
-## 7. Import Paths
+## 8. Import Paths
 
 ### In `next/` (Next.js)
 
@@ -246,30 +303,46 @@ import type { Notification } from '@tiktak/shared/types/domain/Notification.type
 
 ---
 
-## 8. Type Derivation from Drizzle Schema
+## 9. Type Derivation from Drizzle Schema
 
 The Drizzle ORM schema in `next/lib/database/schema.ts` is the **ultimate source of truth** for database shapes. Domain types should be derived from it — not manually duplicated.
 
+### JSONB Column Typing
+
+JSONB columns should be typed at the schema level with `.$type<>()` for compile-time safety:
+
 ```typescript
 // In schema.ts
-export const accountNotifications = pgTable('account_notifications', {
+export interface WorkspaceProfileJsonb {
+    logo?: string | null;
+    phone?: string | null;
+    address?: string | null;
+}
+
+export const workspaces = pgTable('workspaces', {
     id: varchar('id').primaryKey(),
-    accountId: varchar('account_id').notNull(),
-    isRead: boolean('is_read').default(false).notNull(),
+    title: text('title').notNull(),
+    profile: jsonb('profile').$type<WorkspaceProfileJsonb>().default({}),
+    isStore: boolean('is_store').default(false),
     // ...
 });
-
-// DB types (in schema.ts or domain index)
-export type AccountNotificationDbRecord = InferSelectModel<typeof accountNotifications>;
-export type AccountNotificationDbInsert = InferInsertModel<typeof accountNotifications>;
 ```
 
-Domain types (`PrivateAccess`) are then a **curated subset** of `AccountNotificationDbRecord` — renamed to camelCase, with sensitive fields removed, and computed fields added (`canDelete`, `canMarkAsRead`).
+### Shared Timestamps
 
-The **mapper** bridges DB ↔ domain:
+The single `Timestamps` definition lives in `_shared.types/base/Base.types.ts` and accepts both `Date` and `string` to be compatible with both DB records and serialized API responses:
+
+```typescript
+export interface Timestamps {
+    createdAt: Date | string;
+    updatedAt?: Date | string | null;
+}
+```
+
+The **mapper** bridges DB ↔ domain and uses `satisfies` to enforce the shared contract:
 ```typescript
 // next/lib/domain/notification/Notification.mapper.ts
-export function toPrivateAccess(record: AccountNotificationDbRecord): Notification.PrivateAccess {
+export function toPrivateAccess(record: AccountNotificationDbRecord) {
     return {
         id: record.id,
         title: record.title,
@@ -277,18 +350,20 @@ export function toPrivateAccess(record: AccountNotificationDbRecord): Notificati
         isRead: record.isRead,
         createdAt: record.createdAt,
         accountId: record.accountId,
-        // ... computed fields
         canDelete: true,
         canMarkAsRead: !record.isRead,
-    };
+    } satisfies Notification.PrivateAccess;
 }
 ```
 
-> **Critical Convention:** DB column names are `snake_case`. Domain type properties are always `camelCase`. Never access DB column names directly in UI components — always go through the mapper and domain type.
+> **Critical Conventions:**
+> - DB column names are `snake_case`. Domain type properties are always `camelCase`.
+> - Never access DB column names directly in UI components — always go through the mapper.
+> - Cards use `workspaceId` to identify the owning workspace. The old `storeId` column has been removed — workspaces with `isStore: true` serve as stores.
 
 ---
 
-## 9. Data Flow (End to End)
+## 10. Data Flow (End to End)
 
 ```
 Client (Next.js UI / Expo)
@@ -301,10 +376,10 @@ Service (next/lib/domain/notification/Notification.service.ts)
     │  business logic, calls repository
     ▼
 Repository (next/lib/domain/notification/Notification.repository.ts)
-    │  Drizzle ORM query → returns AccountNotificationDbRecord
+    │  Drizzle ORM query → returns DbRecord
     ▼
 Mapper (Notification.mapper.ts)
-    │  toPrivateAccess(dbRecord) → returns Notification.PrivateAccess
+    │  toPrivateAccess(dbRecord) satisfies Notification.PrivateAccess
     ▼
 API Route Handler
     │  return okResponse(privateAccessObject)
@@ -314,26 +389,31 @@ Client receives typed Notification.PrivateAccess JSON
 
 ---
 
-## 10. Adding a New Domain Entity (Checklist)
+## 11. Adding a New Domain Entity (Checklist)
 
 1. **Zod schema** → create `_shared.types/domain/<Domain>.schemas.ts`
 2. **Domain types** → create `_shared.types/domain/<Domain>.types.ts` with namespace + access levels
-3. **Barrel export** → add `export * from './domain/<Domain>.schemas'` and `export * from './domain/<Domain>.types'` to `_shared.types/Shared.types.ts`
-4. **DB schema** → add table to `next/lib/database/schema.ts`, export `DbRecord` and `DbInsert` types
-5. **Mapper** → create `next/lib/domain/<domain>/<Domain>.mapper.ts`
-6. **Repository** → create `next/lib/domain/<domain>/<Domain>.repository.ts`
-7. **Service** → create `next/lib/domain/<domain>/<Domain>.service.ts`
-8. **API route** → create thin controller in `next/app/api/...`, use `validateBody()` + `Domain.factory.ts`
+3. **View types** → add `PublicView`, `PrivateView`, `FullView` interfaces to the namespace
+4. **Barrel export** → add `export * from './domain/<Domain>.schemas'` and `export * from './domain/<Domain>.types'` to `_shared.types/Shared.types.ts`
+5. **DB schema** → add table to `next/lib/database/schema.ts`, export `DbRecord` and `DbInsert` types. Type JSONB columns with `.$type<>()`.
+6. **Mapper** → create `next/lib/domain/<domain>/<Domain>.mapper.ts` using `satisfies` against shared types
+7. **Repository** → create `next/lib/domain/<domain>/<Domain>.repository.ts`
+8. **Service** → create `next/lib/domain/<domain>/<Domain>.service.ts`
+9. **API route** → create thin controller in `next/app/api/...`, use `validateBody()` + `Domain.factory.ts`
 
 ---
 
-## 11. Anti-Patterns (Never Do These)
+## 12. Anti-Patterns (Never Do These)
 
 | ❌ Wrong | ✅ Correct |
 |---|---|
-| Define types inside `next/lib/domain/` | Define types in `_shared.types/domain/` |
+| Define inline view interfaces in mapper files | Define views in `_shared.types/domain/` and use `satisfies` |
+| Define types inside `next/lib/domain/` for client consumption | Define types in `_shared.types/domain/` |
 | Install `zod` inside `next/package.json` | Zod lives only in root `package.json` |
 | Access `notification.mark_as_read` in UI | Use `notification.isRead` (camelCase domain type) |
 | Copy-paste type from schema into Expo | Import from `@tiktak/shared/types/...` |
 | Return raw DB record from API route | Always map through `*.mapper.ts` first |
 | Use `any` as DB record type | Use `AccountNotificationDbRecord` from schema |
+| Use `storeId` on cards | Cards use `workspaceId`; workspaces with `isStore: true` are stores |
+| Define `Timestamps` locally in each domain | Import from `@tiktak/shared/types/base/Base.types` |
+| Leave JSONB columns untyped | Type with `.$type<Interface>()` in schema.ts |

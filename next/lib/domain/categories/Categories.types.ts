@@ -3,11 +3,7 @@
  * Hierarchical category system with tree structure
  */
 
-/** Shared timestamp fields */
-interface Timestamps {
-    createdAt: Date;
-    updatedAt?: Date | null;
-}
+import type { Timestamps } from '@tiktak/shared/types/base/Base.types';
 
 /** JSONB shape for localized text fields */
 export type LocalizedText = { az?: string; ru?: string; en?: string };

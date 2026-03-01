@@ -18,7 +18,7 @@ import 'swiper/css/pagination';
 
 import type { ProviderPublicProfile } from '@/app/[locale]/(public)/stores/(widgets)/PublicStoresListItem.widget';
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
-import { Section } from "@/app/primitives/Section.primitive";
+import { SectionPrimitive } from "@/app/primitives/Section.primitive";
 
 
 export function PublicRootScreenStoresWidget() {
@@ -40,7 +40,7 @@ export function PublicRootScreenStoresWidget() {
 
 
     return (
-        <Section variant="centered">
+        <SectionPrimitive variant="centered">
             <div className='flex justify-between items-center py-4'>
                 <PublicSectionTitleTile sectionTitle={t('stores')} />
                 <Link href="/stores" className="text-app-bright-purple font-bold whitespace-nowrap bg-app-bright-purple/10 px-4 py-2 rounded">
@@ -96,6 +96,6 @@ export function PublicRootScreenStoresWidget() {
                     opacity: 1;
                 }
             `}} />
-        </Section>
+        </SectionPrimitive>
     )
 }

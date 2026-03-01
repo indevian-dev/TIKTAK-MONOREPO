@@ -66,7 +66,7 @@ export function GlobalVideoPlayerWidget({
     if (!storagePrefix || !videoFileName) return null;
 
     // Fallback S3 prefix if environment variable is not set
-    const s3Prefix = Bun.env.NEXT_PUBLIC_S3_PREFIX || 'https://tiktak.s3.tebi.io';
+    const s3Prefix = Bun.env.NEXT_PUBLIC_S3_PREFIX || 'https://s3.tiktak.az';
 
     // Construct URL for specific quality using the pattern: cards/storagePrefix/video/public/quality/filename
     return `${s3Prefix}/cards/${storagePrefix}/video/public/${quality}/${videoFileName}`;

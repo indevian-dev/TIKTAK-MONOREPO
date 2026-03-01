@@ -6,14 +6,13 @@ import { toast } from 'react-toastify';
 import type { Notification } from '@tiktak/shared/types/domain/Notification.types';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { PaginationPrimitive } from '@/app/primitives/Pagination.primitive';
 type NotificationType = Notification.PrivateAccess;
 import {
   PiBell,
   PiBellRinging,
   PiCheck,
-  PiX,
-  PiCaretLeft,
-  PiCaretRight
+  PiX
 } from 'react-icons/pi';
 
 interface PaginationInfo {
@@ -274,38 +273,11 @@ function NotificationsList() {
         )}
       </div>
 
-      {/* Pagination */}
-      {pagination.totalPages > 1 && (
-        <div className="border-t border-gray-200 px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-500">
-              Showing {((page - 1) * limit) + 1} to {Math.min(page * limit, pagination.total)} of {pagination.total} notifications
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setPage(page - 1)}
-                disabled={!pagination.hasPrev}
-                className="p-2 rounded-md border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <PiCaretLeft className="text-lg" />
-              </button>
-
-              <span className="px-3 py-1 text-sm font-medium">
-                Page {page} of {pagination.totalPages}
-              </span>
-
-              <button
-                onClick={() => setPage(page + 1)}
-                disabled={!pagination.hasNext}
-                className="p-2 rounded-md border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <PiCaretRight className="text-lg" />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <PaginationPrimitive
+        currentPage={page}
+        totalPages={pagination.totalPages}
+        onPageChange={setPage}
+      />
     </div>
   );
 }

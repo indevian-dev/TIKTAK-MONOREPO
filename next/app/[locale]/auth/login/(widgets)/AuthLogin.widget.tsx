@@ -16,6 +16,7 @@ import { GlobalLogoTile } from '@/app/[locale]/(global)/(tiles)/GlobalLogo.tile'
 import { loadClientSideCoLocatedTranslations }
   from '@/i18n/i18nClientSide';
 import { useTheme } from 'next-themes';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 interface DeviceInfo {
   userAgent?: string;
@@ -137,7 +138,7 @@ export function AuthLoginWidget() {
   };
 
   return (
-    <section className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-app-bright-purple/5 via-white dark:via-gray-950 to-gray-50 dark:to-gray-900 px-4 py-12">
+    <SectionPrimitive variant='centered'>
       <div className="w-full max-w-md">
         {/* Card */}
         <div className="bg-white dark:bg-gray-900 rounded-app shadow-lg border border-black/10 dark:border-white/10 overflow-hidden">
@@ -258,6 +259,6 @@ export function AuthLoginWidget() {
           </div>
         </div>
       </div>
-    </section>
+    </SectionPrimitive>
   );
 }

@@ -2,6 +2,7 @@
 
 import { loadClientSideCoLocatedTranslations }
     from '@/i18n/i18nClientSide';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 
 interface GlobalFavoritesLimitsModalWidgetProps {
     isOpen: boolean;
@@ -15,8 +16,8 @@ const GlobalFavoritesLimitsModalWidget = ({ isOpen, onClose, maxFavorites }: Glo
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+        <BlockPrimitive variant="modal">
+            <BlockPrimitive variant="default">
                 <div className="flex items-center mb-4">
                     <div className="shrink-0">
                         <svg className="h-6 w-6 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
@@ -44,8 +45,8 @@ const GlobalFavoritesLimitsModalWidget = ({ isOpen, onClose, maxFavorites }: Glo
                         {t('close')}
                     </button>
                 </div>
-            </div>
-        </div>
+            </BlockPrimitive>
+        </BlockPrimitive>
     );
 };
 

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useGlobalCategoryContext } from '@/app/[locale]/(global)/(context)/GlobalCategoryContext';
 import { Category } from '../PublicCategoriesService';
 import { lt } from '@/lib/utils/Localized.util';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 interface PublicHeaderCategoriesMenuWidgetProps {
     onMenuClose?: () => void;
@@ -50,27 +51,27 @@ export function PublicHeaderCategoriesMenuWidget({ onMenuClose }: PublicHeaderCa
     // Handle loading state
     if (loading) {
         return (
-            <section className='relative m-auto max-w-7xl grid gap-3 grid-cols-1 lg:grid-cols-3 justify-center px-4'>
+            <SectionPrimitive variant="centered">
                 <div className="text-center col-span-1 lg:col-span-3 p-4">
                     <div className="animate-pulse text-gray-500">Loading categories...</div>
                 </div>
-            </section>
+            </SectionPrimitive>
         );
     }
 
     // Handle error state
     if (error) {
         return (
-            <section className='relative m-auto max-w-7xl grid gap-3 grid-cols-1 lg:grid-cols-3 justify-center px-4'>
+            <SectionPrimitive variant="centered">
                 <div className="text-center col-span-1 lg:col-span-3 p-4">
                     <div className="text-red-500">Error loading categories: {error}</div>
                 </div>
-            </section>
+            </SectionPrimitive>
         );
     }
 
     return (
-        <section className='relative m-auto max-w-7xl grid gap-3 grid-cols-1 lg:grid-cols-3  justify-center px-4'>
+        <SectionPrimitive variant="centered">
             {!selectedCategory && categoriesHierarchy.map((category: Category) => (
                 <div
                     key={category.id}
@@ -100,6 +101,6 @@ export function PublicHeaderCategoriesMenuWidget({ onMenuClose }: PublicHeaderCa
                     </div>
                 </div>
             )}
-        </section>
+        </SectionPrimitive>
     );
 }

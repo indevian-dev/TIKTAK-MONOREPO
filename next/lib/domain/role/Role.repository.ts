@@ -19,12 +19,10 @@ export class RoleRepository {
     }
 
     async create(data: { name: string; permissions?: string[]; forWorkspaceType?: string }) {
-        const slug = data.name.toLowerCase().replace(/\s+/g, '-');
         const [role] = await this.db
             .insert(workspaceRoles)
             .values({
                 name: data.name,
-                slug,
                 permissions: data.permissions || [],
                 forWorkspaceType: data.forWorkspaceType,
             })

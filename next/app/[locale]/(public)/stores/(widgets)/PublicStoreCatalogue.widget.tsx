@@ -48,7 +48,7 @@ export function PublicStoreCatalogueWidget({ store }: PublicStoreCatalogueWidget
 
     useEffect(() => {
         updateInitialProps({
-            storeId: store?.id ? String(store.id) : null,
+            workspaceId: store?.id ? String(store.id) : null,
             includeFacets: true,
             pagination: 50,
             useAdvancedFilters: false

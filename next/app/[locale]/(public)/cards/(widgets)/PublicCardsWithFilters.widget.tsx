@@ -4,7 +4,7 @@ import { loadClientSideCoLocatedTranslations } from '@/i18n/i18nClientSide';
 import { PublicSectionTitleTile } from '@/app/[locale]/(public)/(tiles)/PublicSectionTitle.tile';
 import { PublicCardsListWidget } from '@/app/[locale]/(public)/cards/(widgets)/PublicCardsList.widget';
 import { usePublicSearchContext } from '@/app/[locale]/(public)/(context)/PublicSearchContext';
-import { Section } from '@/app/primitives/Section.primitive';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 interface PublicCardsWithFiltersWidgetProps {
     title?: string | null;
@@ -34,7 +34,7 @@ export function PublicCardsWithFiltersWidget({
     const displayTitle = showResultsCount ? `${sectionTitle} (${cards.length})` : sectionTitle;
 
     return (
-        <Section variant='centered'>
+        <SectionPrimitive variant='centered'>
             {showTitle && <PublicSectionTitleTile sectionTitle={displayTitle} />}
 
             {/* Search and Sort - always visible */}
@@ -60,6 +60,6 @@ export function PublicCardsWithFiltersWidget({
                     )}
                 </div>
             </div>
-        </Section>
+        </SectionPrimitive>
     );
 };
