@@ -14,9 +14,9 @@ import { GlobalHeaderWidget } from '@/app/[locale]/(global)/(widgets)/GlobalHead
 import { GlobalFastNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFastNavigation.widget';
 import { GlobalFullNavigationWidget } from '@/app/[locale]/(global)/(widgets)/GlobalFullNavigation.widget';
 import type { DomainNavConfig } from '@tiktak/shared/types/ui/Navigation.types';
-import { Section } from '@/app/primitives/Section.primitive';
-import { Main } from '@/app/primitives/Main.primitive';
-import { Container } from '@/app/primitives/Container.primitive';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
+import { MainPrimitive } from '@/app/primitives/Main.primitive';
+import { ContainerPrimitive } from '@/app/primitives/Container.primitive';
 
 interface WorkspaceRootLayoutClientProps {
     children: ReactNode;
@@ -68,8 +68,8 @@ export function WorkspaceRootLayoutClient({ children }: WorkspaceRootLayoutClien
                 />
             </GlobalHeaderWidget>
 
-            <Main variant="app">
-                <Container variant="centered">
+            <MainPrimitive variant="app">
+                <ContainerPrimitive variant="centered">
                     <aside className="hidden lg:flex shrink-0 sticky top-[70px] min-h-[calc(100vh-70px)] overflow-hidden w-64 flex-col">
                         <GlobalFullNavigationWidget
                             navConfig={navConfig}
@@ -77,11 +77,11 @@ export function WorkspaceRootLayoutClient({ children }: WorkspaceRootLayoutClien
                             setIsMenuOpen={setIsMenuOpen}
                         />
                     </aside>
-                    <Section>
+                    <SectionPrimitive>
                         {children}
-                    </Section>
-                </Container>
-            </Main>
+                    </SectionPrimitive>
+                </ContainerPrimitive>
+            </MainPrimitive>
         </>
     );
 }

@@ -38,15 +38,15 @@ interface CardFilterOption {
 
 import type { Card } from '@tiktak/shared/types/domain/Card.types';
 
-import { Container } from '@/app/primitives/Container.primitive';
-import { Section } from '@/app/primitives/Section.primitive';
-import { Block } from '@/app/primitives/Block.primitive';
+import { ContainerPrimitive } from '@/app/primitives/Container.primitive';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
 import { lt } from '@/lib/utils/Localized.util';
 // Single card API response — extends shared Card.PublicAccess (all camelCase)
 type PublicSingleCardApiResponse = Card.PublicAccess & {
-  stores?: { id: string; title: string; logo?: string | null; phone?: string | null } | null;
+  workspace?: { id: string; title: string; logo?: string | null; phone?: string | null } | null;
   accounts?: { name?: string | null; phone?: string | null } | null;
 };
 
@@ -221,10 +221,10 @@ const PublicSingleCardWidget = ({ card }: PublicSingleCardWidgetProps) => {
 
   return (
     <>
-      <Section variant='centered'>
+      <SectionPrimitive variant='centered'>
         <PublicBreadCrumbsTile categories={mappedCategories} />
-      </Section>
-      <Section variant='centered'>
+      </SectionPrimitive>
+      <SectionPrimitive variant='centered'>
         {/* ═══ ROW 1: Gallery + Provider Info (2 cols desktop, 1 col mobile) ═══ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
           {/* LEFT: Gallery + Video */}
@@ -255,23 +255,23 @@ const PublicSingleCardWidget = ({ card }: PublicSingleCardWidgetProps) => {
             </div>
 
             {/* Store / Account Info + Actions */}
-            <Block variant="elevated">
-              {card.stores?.id ? (
+            <BlockPrimitive variant="elevated">
+              {card.workspace?.id ? (
                 <div className="mb-4">
                   <div className="flex gap-4 items-center">
-                    <Link href={`/stores/${generateSlug(card.stores.title || 'store')}-${card.stores.id}`}>
+                    <Link href={`/stores/${generateSlug(card.workspace.title || 'store')}-${card.workspace.id}`}>
                       <Image
                         className="rounded-full object-cover aspect-square border-2 border-app-bright-purple/20"
                         width={50}
                         height={50}
-                        src={card.stores.logo ? `https://tiktak.s3.tebi.io/stores/${card.stores.id}/${card.stores.logo}` : '/pg.webp'}
-                        alt={card.stores.title || 'Store'}
+                        src={card.workspace.logo ? `${process.env.NEXT_PUBLIC_S3_PREFIX}/stores/${card.workspace.id}/${card.workspace.logo}` : '/pg.webp'}
+                        alt={card.workspace.title || 'Store'}
                       />
                     </Link>
                     <div className="flex flex-col justify-center">
-                      <span className="font-extrabold text-app-dark-purple dark:text-white">{card.stores.title}</span>
-                      {card.stores.phone && (
-                        <span className="text-sm text-gray-500">{card.stores.phone}</span>
+                      <span className="font-extrabold text-app-dark-purple dark:text-white">{card.workspace.title}</span>
+                      {card.workspace.phone && (
+                        <span className="text-sm text-gray-500">{card.workspace.phone}</span>
                       )}
                     </div>
                   </div>
@@ -292,16 +292,15 @@ const PublicSingleCardWidget = ({ card }: PublicSingleCardWidgetProps) => {
                   cardId={card.id}
                   cardTitle={card.title || ''}
                   accountId={card.accountId ?? undefined}
-                  storeId={card.storeId ?? undefined}
                 />
               </div>
-            </Block>
+            </BlockPrimitive>
           </div>
         </div>
-      </Section>
+      </SectionPrimitive>
 
       {/* ═══ ROW 2: Description + Filters + Map (full width) ═══ */}
-      <Section variant='centered'>
+      <SectionPrimitive variant='centered'>
         <div className="flex flex-col gap-6">
           {/* Description */}
           {card.body && (
@@ -327,7 +326,7 @@ const PublicSingleCardWidget = ({ card }: PublicSingleCardWidgetProps) => {
             </div>
           )}
         </div>
-      </Section>
+      </SectionPrimitive>
 
       {/* ═══ ROW 3: Related Cards ═══ */}
       <PublicRelatedCardsWidget categoryId={card.categories && card.categories.length > 0 ? (card.categories[0] || null) : null} />

@@ -30,7 +30,6 @@ export namespace Card {
     export interface PublicAccess {
         id: string;
         workspaceId: string;
-        storeId?: string | null;
         accountId?: string | null;
         title: string | null;
         body: string | null;
@@ -47,7 +46,7 @@ export namespace Card {
         updatedAt?: Date | string | null;
 
         // Optional joined fields (when API performs a DB JOIN)
-        stores?: {
+        workspace?: {
             id: string;
             title: string;
             logo?: string | null;

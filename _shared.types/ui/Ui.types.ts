@@ -1,2 +1,4 @@
-export * from './Form.type';
-export * from './Navigation.type';
+export * from './Form.types';
+export * from './Modal.types';
+export * from './Select.types';
+export * from './Navigation.types';

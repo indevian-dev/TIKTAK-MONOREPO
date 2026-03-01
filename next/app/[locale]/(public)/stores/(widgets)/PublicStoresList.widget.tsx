@@ -8,7 +8,8 @@ import {
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import { PublicStoresListItemWidget } from "@/app/[locale]/(public)/stores/(widgets)/PublicStoresListItem.widget";
 import { PublicSectionTitleTile } from "@/app/[locale]/(public)/(tiles)/PublicSectionTitle.tile";
-import { GlobalSelectWidget } from "@/app/[locale]/(global)/(widgets)/GlobalSelect.widget";
+import { SelectPrimitive } from "@/app/primitives/Select.primitive";
+import { SectionPrimitive } from "@/app/primitives/Section.primitive";
 
 interface Tag {
   id: number;
@@ -77,13 +78,13 @@ export function PublicStoresListWidget() {
   }
 
   return (
-    <section className="relative w-full my-4 md:my-6 lg:my-8">
+    <SectionPrimitive variant="full">
       <div className="container m-auto max-w-7xl px-4 py-5">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <PublicSectionTitleTile sectionTitle="Stores" />
 
           <div className="w-full md:w-1/2">
-            <GlobalSelectWidget
+            <SelectPrimitive
               options={tagOptions}
               placeholder="Filter by tags"
               isMulti
@@ -106,7 +107,7 @@ export function PublicStoresListWidget() {
           </div>
         )}
       </div>
-    </section>
+    </SectionPrimitive>
   );
 }
 

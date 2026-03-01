@@ -1,6 +1,7 @@
 
 import { WorkspaceRepository } from "./Workspace.repository";
-import { type ProviderListOptions, type CreateWorkspaceDetails, type ProviderApplicationDetails, type CreateStudentWorkspaceDetails, type WorkspaceProfile } from "./Workspace.types";
+import { type ProviderListOptions, type CreateWorkspaceDetails, type ProviderApplicationDetails, type CreateStudentWorkspaceDetails } from "./Workspace.types";
+import type { Workspace } from '@tiktak/shared/types/domain/Workspace.types';
 import { BaseService } from "../base/Base.service";
 import { AuthContext } from "@/lib/domain/base/Base.types";
 import { Database } from "@/lib/database";
@@ -22,7 +23,7 @@ export class WorkspaceService extends BaseService {
 
 
     async createWorkspace(ownerAccountId: string, details: CreateWorkspaceDetails) {
-        const allowedTypes = ['student', 'provider', 'staff', 'parent'];
+        const allowedTypes = ['student', 'provider', 'staff', 'parent', 'advertiser'];
         if (!allowedTypes.includes(details.type)) {
             return { success: false, error: `Invalid workspace type: ${details.type}` };
         }
@@ -32,7 +33,7 @@ export class WorkspaceService extends BaseService {
                 const workspace = await this.repository.create({
                     title: details.title,
                     type: details.type,
-                    profile: (details.metadata || {}) as any,
+                    profile: (details.metadata || {}) as Workspace.Profile,
                     isActive: true,
                 }, tx);
 
@@ -177,7 +178,7 @@ export class WorkspaceService extends BaseService {
                 const workspace = await this.repository.create({
                     title: details.title,
                     type: type,
-                    profile: details.metadata || {}, // Mapping legacy metadata to profile
+                    profile: (details.metadata || {}) as Workspace.Profile, // Mapping legacy metadata to profile
                     isActive: false, // Must be approved by Staff
                 }, tx);
 
@@ -211,7 +212,7 @@ export class WorkspaceService extends BaseService {
 
                 // 1. Fetch Provider to get trial days from its profile
                 const provider = await this.repository.findById(details.providerId, tx);
-                const profile = provider?.profile as WorkspaceProfile;
+                const profile = provider?.profile as Workspace.ProviderProfile;
                 const trialDays = profile?.providerTrialDaysCount || 0;
 
                 const subscribedUntil = new Date();
@@ -425,6 +426,121 @@ export class WorkspaceService extends BaseService {
         }
     }
     // ═══════════════════════════════════════════════════════════════
+    // MEMBER MANAGEMENT
+    // ═══════════════════════════════════════════════════════════════
+
+    /**
+     * Update a member's role or subscription expiry.
+     * Validates that the access record belongs to the given workspace.
+     */
+    async updateMember(workspaceId: string, accessId: string, data: { role?: string; subscribedUntil?: string | null }) {
+        try {
+            // 1. Find the access record
+            const access = await this.repository.findAccessById(accessId);
+            if (!access) {
+                return { success: false, error: "Access record not found" };
+            }
+
+            // 2. Verify it belongs to this workspace (direct member)
+            if (access.targetWorkspaceId !== workspaceId || access.viaWorkspaceId !== workspaceId) {
+                return { success: false, error: "Access record does not belong to this workspace" };
+            }
+
+            // 3. Build update payload
+            const updatePayload: Record<string, unknown> = {};
+
+            if (data.role !== undefined) {
+                const validRole = await this.repository.findRoleByName(data.role);
+                if (!validRole) {
+                    return { success: false, error: `Invalid role: '${data.role}'` };
+                }
+                updatePayload.accessRole = validRole.name;
+            }
+
+            if (data.subscribedUntil !== undefined) {
+                updatePayload.subscribedUntil = data.subscribedUntil ? new Date(data.subscribedUntil) : null;
+            }
+
+            if (Object.keys(updatePayload).length === 0) {
+                return { success: false, error: "No valid fields to update" };
+            }
+
+            const updated = await this.repository.updateAccess(accessId, updatePayload);
+            return { success: true, data: updated };
+        } catch (error) {
+            this.handleError(error, "updateMember");
+            return { success: false, error: "Failed to update member" };
+        }
+    }
+
+    /**
+     * Remove a member from a workspace.
+     * Safety: cannot remove if they are the last direct member.
+     */
+    async removeMember(workspaceId: string, accessId: string) {
+        try {
+            // 1. Find the access record
+            const access = await this.repository.findAccessById(accessId);
+            if (!access) {
+                return { success: false, error: "Access record not found" };
+            }
+
+            // 2. Verify it belongs to this workspace (direct member)
+            if (access.targetWorkspaceId !== workspaceId || access.viaWorkspaceId !== workspaceId) {
+                return { success: false, error: "Access record does not belong to this workspace" };
+            }
+
+            // 3. Safety check: cannot remove last member
+            const memberCount = await this.repository.countDirectMembers(workspaceId);
+            if (memberCount <= 1) {
+                return { success: false, error: "Cannot remove the last member of a workspace" };
+            }
+
+            // 4. Delete
+            const deleted = await this.repository.deleteAccess(accessId);
+            return { success: true, data: deleted };
+        } catch (error) {
+            this.handleError(error, "removeMember");
+            return { success: false, error: "Failed to remove member" };
+        }
+    }
+
+    /**
+     * List available roles for a workspace type (e.g. 'provider', 'advertiser')
+     */
+    async listWorkspaceRoles(workspaceType: string) {
+        try {
+            const roles = await this.repository.listRolesByWorkspaceType(workspaceType);
+            return {
+                success: true,
+                data: roles.map(r => ({
+                    id: r.id,
+                    name: r.name,
+                    description: r.description,
+                    permissions: r.permissions,
+                    forWorkspaceType: r.forWorkspaceType,
+                }))
+            };
+        } catch (error) {
+            this.handleError(error, "listWorkspaceRoles");
+            return { success: false, error: "Failed to list workspace roles" };
+        }
+    }
+
+    /**
+     * List pending invitations for a workspace
+     */
+    async listWorkspaceInvitations(workspaceId: string) {
+        try {
+            const invitations = await this.repository.listPendingInvitationsForWorkspace(workspaceId);
+            return { success: true, data: invitations };
+        } catch (error) {
+            this.handleError(error, "listWorkspaceInvitations");
+            return { success: false, error: "Failed to list workspace invitations" };
+        }
+    }
+
+    // ═══════════════════════════════════════════════════════════════
     // INVITATIONS
     // ═══════════════════════════════════════════════════════════════
 
@@ -569,7 +685,7 @@ export class WorkspaceService extends BaseService {
             }
 
             if (Object.keys(profileFields).length > 0) {
-                updatePayload.profile = profileFields as any;
+                updatePayload.profile = profileFields as Workspace.Profile;
             }
 
             if (Object.keys(updatePayload).length === 0) {

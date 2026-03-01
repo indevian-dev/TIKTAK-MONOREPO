@@ -13,6 +13,7 @@ import { StaffCategorySelectModalWidget }
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 import { lt } from '@/lib/utils/Localized.util';
 // API response type for staff categories (matches snake_case API response, not the camelCase domain type)
 interface StaffCategoryApiResponse {
@@ -278,8 +279,8 @@ export function StaffCategoriesListWidget() {
         onClose={() => setIsCategorySelectModalOpen(false)}
       />
       {showDeleteConfirmationModal && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-4 rounded shadow-lg">
+        <BlockPrimitive variant="modal">
+          <BlockPrimitive variant="default">
             <h2 className="text-lg font-semibold">Confirm Deletion</h2>
             <p>Are you sure you want to delete this category?</p>
             <div className="flex justify-end gap-4 mt-4">
@@ -290,8 +291,8 @@ export function StaffCategoriesListWidget() {
                 Delete
               </button>
             </div>
-          </div>
-        </div>
+          </BlockPrimitive>
+        </BlockPrimitive>
       )}
     </div>
   );

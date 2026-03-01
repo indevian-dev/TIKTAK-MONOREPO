@@ -5,13 +5,14 @@ import {
     useEffect
 } from 'react';
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
-import { GlobalPaginationTile }
-    from '@/app/[locale]/(global)/(tiles)/GlobalPagination.tile';
+import { PaginationPrimitive }
+    from '@/app/primitives/Pagination.primitive';
 import { toast }
     from 'react-toastify';
 import { GlobalLoaderTile }
     from '@/app/[locale]/(global)/(tiles)/GlobalLoader.tile';
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 
 // Staff-specific API response shapes (snake_case from API)
 interface AdminAccount {
@@ -420,8 +421,8 @@ export function StaffUsersListWidget() {
 
             {/* Role Assignment Modal */}
             {isRoleModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white p-6 rounded-lg max-w-md w-full">
+                <BlockPrimitive variant="modal">
+                    <BlockPrimitive variant="default">
                         <h2 className="text-xl font-bold mb-4">Assign Role</h2>
                         <div className="mb-4">
                             <label className="block text-sm font-medium mb-2">Select Role</label>
@@ -452,14 +453,14 @@ export function StaffUsersListWidget() {
                                 Assign
                             </button>
                         </div>
-                    </div>
-                </div>
+                    </BlockPrimitive>
+                </BlockPrimitive>
             )}
 
             {/* Password Update Modal */}
             {isPasswordModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white p-6 rounded-lg max-w-md w-full">
+                <BlockPrimitive variant="modal">
+                    <BlockPrimitive variant="default">
                         <h2 className="text-xl font-bold mb-4">Update Password</h2>
                         <div className="mb-4">
                             <div className="flex justify-between items-center mb-2">
@@ -535,8 +536,8 @@ export function StaffUsersListWidget() {
                                 Update Password
                             </button>
                         </div>
-                    </div>
-                </div>
+                    </BlockPrimitive>
+                </BlockPrimitive>
             )}
 
             <div className="grid grid-cols-1 gap-4">
@@ -631,7 +632,7 @@ export function StaffUsersListWidget() {
                     </div>
                 ))}
             </div>
-            <GlobalPaginationTile
+            <PaginationPrimitive
                 currentPage={page}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}

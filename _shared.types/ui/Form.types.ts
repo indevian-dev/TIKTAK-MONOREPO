@@ -7,21 +7,6 @@ export interface BaseFormProps {
   disabled?: boolean;
 }
 
-// Base Modal Props
-
-export interface BaseModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
 // Form Mode
 
 export type FormMode = 'create' | 'edit' | 'view';
-
-// Select Option
-
-export interface SelectOption<T = string> {
-  value: T;
-  label: string;
-  disabled?: boolean;
-}

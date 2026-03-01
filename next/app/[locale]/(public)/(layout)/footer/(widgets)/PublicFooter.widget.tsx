@@ -8,7 +8,7 @@ import { loadClientSideCoLocatedTranslations }
   from '@/i18n/i18nClientSide';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { Section } from '@/app/primitives/Section.primitive';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 export function PublicFooterWidget() {
 
@@ -25,7 +25,7 @@ export function PublicFooterWidget() {
         className="p-4 relative bg-gray-100 dark:bg-app-dark-purple  pt-16 md:pt-20 lg:pt-24 w-full transition-colors duration-300"
         data-wow-delay=".1s"
       >
-        <Section variant="centered">
+        <SectionPrimitive variant="centered">
           <div className="container m-auto max-w-screen-xl">
             <div className="-mx-4 flex flex-wrap">
               <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-5/12">
@@ -110,28 +110,28 @@ export function PublicFooterWidget() {
                   </h2>
                   <ul>
                     <li>
-                      <a
+                      <Link
                         href="/blogs"
                         className="mb-4 inline-block text-base text-gray-500 dark:text-gray-400 duration-300 hover:text-app-bright-purple"
                       >
                         {t('blog')}
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
+                      <Link
                         href="/pricing"
                         className="mb-4 inline-block text-base text-gray-500 dark:text-gray-400 duration-300 hover:text-app-bright-purple"
                       >
                         {t('pricing')}
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="/pages/about"
+                      <Link
+                        href="/docs/about"
                         className="mb-4 inline-block text-base text-gray-500 dark:text-gray-400 duration-300 hover:text-app-bright-purple"
                       >
                         {t('about')}
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -144,28 +144,28 @@ export function PublicFooterWidget() {
                   </h2>
                   <ul>
                     <li>
-                      <a
-                        href="/pages/terms"
+                      <Link
+                        href="/docs/terms"
                         className="mb-4 inline-block text-base text-gray-500 dark:text-gray-400 duration-300 hover:text-app-bright-purple"
                       >
                         {t('tos')}
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="/pages/privacy"
+                      <Link
+                        href="/docs/privacy"
                         className="mb-4 inline-block text-base text-gray-500 dark:text-gray-400 duration-300 hover:text-app-bright-purple"
                       >
                         {t('privacy_policy')}
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="/pages/refund"
+                      <Link
+                        href="/docs/refund"
                         className="mb-4 inline-block text-base text-gray-500 dark:text-gray-400 duration-300 hover:text-app-bright-purple"
                       >
                         {t('refund_policy')}
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -178,28 +178,28 @@ export function PublicFooterWidget() {
                   </h2>
                   <ul>
                     <li>
-                      <a
+                      <Link
                         href="/contact"
                         className="mb-4 inline-block text-base text-gray-500 dark:text-gray-400 duration-300 hover:text-app-bright-purple"
                       >
                         {t('open_support_ticket')}
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="/pages/terms"
+                      <Link
+                        href="/docs/terms"
                         className="mb-4 inline-block text-base text-gray-500 dark:text-gray-400 duration-300 hover:text-app-bright-purple"
                       >
                         {t('terms_of_use')}
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a
-                        href="/pages/about"
+                      <Link
+                        href="/docs/about"
                         className="mb-4 inline-block text-base text-gray-500 dark:text-gray-400 duration-300 hover:text-app-bright-purple"
                       >
                         {t('about')}
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -445,7 +445,7 @@ export function PublicFooterWidget() {
               </defs>
             </svg>
           </div>
-        </Section>
+        </SectionPrimitive>
       </footer >
     </>
   );

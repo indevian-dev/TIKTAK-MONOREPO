@@ -1,89 +1,22 @@
 
 import type { UserDbRecord, AccountDbRecord, UserSessionDbRecord } from "@/lib/database/schema";
+import type { Auth } from '@tiktak/shared/types/domain/Auth.views';
 
 // ═══════════════════════════════════════════════════════════════
-// USER VIEWS — Public / Private / Full
+// AUTH MAPPERS — satisfies Auth.* from _shared.types
 // ═══════════════════════════════════════════════════════════════
 
-/** Public: other users see — display name only */
-export interface UserPublicView {
-    id: string;
-    firstName: string | null;
-    lastName: string | null;
-}
+// ─── USER ────────────────────────────────────────────────────
 
-/** Private: user sees their own profile */
-export interface UserPrivateView extends UserPublicView {
-    email: string;
-    phone: string | null;
-    emailIsVerified: boolean | null;
-    phoneIsVerified: boolean | null;
-    createdAt: Date | null;
-}
-
-/** Full: staff/admin — everything including FIN, sessions, 2FA timestamps */
-export interface UserFullView extends UserPrivateView {
-    fin: string | null;
-    sessionsGroupId: string | null;
-    twoFactorAuthEmailExpireAt: string | null;
-    twoFactorAuthPhoneExpireAt: string | null;
-    updatedAt: Date | null;
-}
-
-// ═══════════════════════════════════════════════════════════════
-// ACCOUNT VIEWS — Private / Full
-// ═══════════════════════════════════════════════════════════════
-
-/** Private: account holder sees their own account */
-export interface AccountPrivateView {
-    id: string;
-    userId: string | null;
-    subscribedUntil: Date | null;
-    subscriptionType: string | null;
-    createdAt: Date;
-}
-
-/** Full: staff/admin — entire account record */
-export interface AccountFullView extends AccountPrivateView {
-    suspended: boolean | null;
-    updatedAt: Date | null;
-}
-
-// ═══════════════════════════════════════════════════════════════
-// SESSION VIEWS — Private / Full
-// ═══════════════════════════════════════════════════════════════
-
-/** Private: user sees their active sessions */
-export interface SessionPrivateView {
-    id: string;
-    device: string | null;
-    browser: string | null;
-    os: string | null;
-    createdAt: Date;
-    expireAt: Date | null;
-}
-
-/** Full: staff — includes IP, metadata */
-export interface SessionFullView extends SessionPrivateView {
-    ip: string | null;
-    metadata: unknown;
-    accountId: string | null;
-    sessionsGroupId: string | null;
-}
-
-// ═══════════════════════════════════════════════════════════════
-// MAPPERS
-// ═══════════════════════════════════════════════════════════════
-
-export function toUserPublicView(row: UserDbRecord): UserPublicView {
+export function toUserPublicView(row: UserDbRecord) {
     return {
         id: row.id,
         firstName: row.firstName,
         lastName: row.lastName,
-    };
+    } satisfies Auth.UserPublicView;
 }
 
-export function toUserPrivateView(row: UserDbRecord): UserPrivateView {
+export function toUserPrivateView(row: UserDbRecord) {
     return {
         ...toUserPublicView(row),
         email: row.email,
@@ -91,10 +24,10 @@ export function toUserPrivateView(row: UserDbRecord): UserPrivateView {
         emailIsVerified: row.emailIsVerified,
         phoneIsVerified: row.phoneIsVerified,
         createdAt: row.createdAt,
-    };
+    } satisfies Auth.UserPrivateView;
 }
 
-export function toUserFullView(row: UserDbRecord): UserFullView {
+export function toUserFullView(row: UserDbRecord) {
     return {
         ...toUserPrivateView(row),
         fin: row.fin,
@@ -102,28 +35,32 @@ export function toUserFullView(row: UserDbRecord): UserFullView {
         twoFactorAuthEmailExpireAt: row.twoFactorAuthEmailExpireAt,
         twoFactorAuthPhoneExpireAt: row.twoFactorAuthPhoneExpireAt,
         updatedAt: row.updatedAt,
-    };
+    } satisfies Auth.UserFullView;
 }
 
-export function toAccountPrivateView(row: AccountDbRecord): AccountPrivateView {
+// ─── ACCOUNT ─────────────────────────────────────────────────
+
+export function toAccountPrivateView(row: AccountDbRecord) {
     return {
         id: row.id,
         userId: row.userId,
         subscribedUntil: row.subscribedUntil,
         subscriptionType: row.subscriptionType,
         createdAt: row.createdAt,
-    };
+    } satisfies Auth.AccountPrivateView;
 }
 
-export function toAccountFullView(row: AccountDbRecord): AccountFullView {
+export function toAccountFullView(row: AccountDbRecord) {
     return {
         ...toAccountPrivateView(row),
         suspended: row.suspended,
         updatedAt: row.updatedAt,
-    };
+    } satisfies Auth.AccountFullView;
 }
 
-export function toSessionPrivateView(row: UserSessionDbRecord): SessionPrivateView {
+// ─── SESSION ─────────────────────────────────────────────────
+
+export function toSessionPrivateView(row: UserSessionDbRecord) {
     return {
         id: row.id,
         device: row.device,
@@ -131,15 +68,15 @@ export function toSessionPrivateView(row: UserSessionDbRecord): SessionPrivateVi
         os: row.os,
         createdAt: row.createdAt,
         expireAt: row.expireAt,
-    };
+    } satisfies Auth.SessionPrivateView;
 }
 
-export function toSessionFullView(row: UserSessionDbRecord): SessionFullView {
+export function toSessionFullView(row: UserSessionDbRecord) {
     return {
         ...toSessionPrivateView(row),
         ip: row.ip,
         metadata: row.metadata,
         accountId: row.accountId,
         sessionsGroupId: row.groupId,
-    };
+    } satisfies Auth.SessionFullView;
 }

@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { toast }
   from 'react-toastify';
-import { useRouter }
+import { useRouter, useParams }
   from 'next/navigation';
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import Image
@@ -42,6 +42,8 @@ export function StaffBlogEditWidget({ params }: StaffBlogEditWidgetProps) {
   const [blogId, setBlogId] = useState<string>("");
 
   const router = useRouter();
+  const routeParams = useParams();
+  const workspaceId = routeParams?.workspaceId as string;
 
   useEffect(() => {
     params.then(({ blogId }) => setBlogId(blogId));
@@ -105,7 +107,7 @@ export function StaffBlogEditWidget({ params }: StaffBlogEditWidgetProps) {
       try {
         const response = await apiCall({
           method: 'GET',
-          url: '/api/staff/blogs/' + blogId,
+          url: `/api/workspaces/staff/${workspaceId}/blogs/${blogId}`,
           params: {},
           body: {}
         });
@@ -138,13 +140,13 @@ export function StaffBlogEditWidget({ params }: StaffBlogEditWidgetProps) {
 
       const response = await apiCall({
         method: 'PATCH',
-        url: '/api/staff/blogs/update/' + blogId,
+        url: `/api/workspaces/staff/${workspaceId}/blogs/update/${blogId}`,
         params: {},
         body: formData
       });
 
       if (response.data) {
-        router.push(`/staff/blogs`);
+        router.push(`/workspaces/staff/${workspaceId}/blogs`);
         toast.success('Blog Updated!');
       }
 
@@ -167,7 +169,7 @@ export function StaffBlogEditWidget({ params }: StaffBlogEditWidgetProps) {
       formDataCover.append('cover', file);
       const response = await apiCall({
         method: 'POST',
-        url: '/api/staff/blogs/update/' + blogId + '/cover',
+        url: `/api/workspaces/staff/${workspaceId}/blogs/update/${blogId}/cover`,
         params: {},
         body: formDataCover
       });

@@ -100,7 +100,7 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
         const getInitialState = () => {
             if (typeof window === 'undefined') return null;
             try {
-                const saved = localStorage.getItem('stuwin.ai_profile');
+                const saved = localStorage.getItem('tiktak.ai_profile');
                 if (saved) {
                     const parsed = JSON.parse(saved) as ProfileState;
                     // Only use if less than 60 minutes old for initial snap
@@ -141,7 +141,7 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
         setSubscriptionType(null);
         setSubscribedUntil(null);
         setSubscriptions([]);
-        localStorage.removeItem('stuwin.ai_profile');
+        localStorage.removeItem('tiktak.ai_profile');
     }, []);
 
     // Create a ref to always have the latest state values without triggering dependency updates
@@ -195,7 +195,7 @@ export function GlobalAuthProfileProvider({ children }: GlobalAuthProfileProvide
                 subscriptions: newSubscriptions.length > 0 ? newSubscriptions : stateRef.current.subscriptions,
                 timestamp: Date.now()
             };
-            localStorage.setItem('stuwin.ai_profile', JSON.stringify(dataToStore));
+            localStorage.setItem('tiktak.ai_profile', JSON.stringify(dataToStore));
 
             setLoading(false);
             setError(null);

@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useRouter } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
+import { loadClientSideCoLocatedTranslations } from '@/i18n/i18nClientSide';
 import { DomainNavConfig, MenuGroup, NavItem } from '@tiktak/shared/types/ui/Navigation.types';
 import { GlobalProfileWidget } from '@/app/[locale]/(global)/(widgets)/GlobalProfile.widget';
 import { GlobalLangSwitcherTile } from '@/app/[locale]/(global)/(tiles)/GlobalLangSwitcher.tile';
@@ -14,8 +14,8 @@ import { PiSignOutBold } from 'react-icons/pi';
 import { FiArrowRight } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
-import { Block } from '@/app/primitives/Block.primitive';
-import { Section } from '@/app/primitives/Section.primitive';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 interface GlobalFullNavigationWidgetProps {
     navConfig: DomainNavConfig;
@@ -44,7 +44,7 @@ export function GlobalFullNavigationWidget({
     isMenuOpen,
     setIsMenuOpen
 }: GlobalFullNavigationWidgetProps) {
-    const t = useTranslations('GlobalFullNavigationWidget');
+    const { t } = loadClientSideCoLocatedTranslations('GlobalFullNavigationWidget');
     const router = useRouter();
     const { clearProfile, userId } = useGlobalAuthProfileContext();
     const { menuGroups, domain } = navConfig;
@@ -181,24 +181,24 @@ export function GlobalFullNavigationWidget({
     // ─── Mobile modal (portaled to body) ───
     const mobileModal = hasMounted && createPortal(
         <div
-            className={`lg:hidden fixed inset-0 z-50 bg-white/80 dark:bg-app-dark-blue/80 backdrop-blur-xl ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+            className={`lg:hidden fixed inset-0 z-50 bg-white dark:bg-app-dark-purple ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
                 } transition-transform duration-300 overflow-y-auto`}
         >
             {/* Close button */}
             <button
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute top-4 right-4 z-50 p-2 rounded-app-full bg-white/80 hover:bg-white dark:bg-white/10 dark:hover:bg-white/20 backdrop-blur-md shadow-lg hover:shadow-xl transition-all duration-200"
+                className="absolute top-4 right-4 z-50 p-2 rounded-app-full bg-black/5 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/20 shadow-lg hover:shadow-xl transition-all duration-200"
                 aria-label="Close menu"
             >
-                <IoClose className="text-2xl text-app-dark-blue dark:text-white" />
+                <IoClose className="text-2xl text-app-dark-purple dark:text-white" />
             </button>
 
             <div className="px-4 pt-20 pb-8">
-                <Block>
+                <BlockPrimitive>
                     <ul className="flex-col justify-center items-center space-y-3">
                         {renderMenuContent()}
                     </ul>
-                </Block>
+                </BlockPrimitive>
             </div>
         </div>,
         document.body
@@ -210,15 +210,15 @@ export function GlobalFullNavigationWidget({
             <>
                 {/* Desktop dropdown */}
                 {isMenuOpen && (
-                    <div className="hidden lg:block overflow-x-hidden overflow-y-scroll transform transition duration-500 ease-in-out top-[70px] right-0 left-0 text-app-dark-blue dark:text-white h-full bg-white/10 dark:bg-app-dark-blue/50 backdrop-blur-xl z-[11] fixed">
+                    <div className="hidden lg:block overflow-x-hidden overflow-y-scroll transform transition duration-500 ease-in-out top-[70px] right-0 left-0 text-app-dark-purple dark:text-white h-full bg-white dark:bg-app-dark-purple z-[11] fixed">
                         <div className="w-full h-12 bg-transparent"></div>
-                        <Section variant="centered">
-                            <Block>
+                        <SectionPrimitive variant="centered">
+                            <BlockPrimitive>
                                 <ul className="pt-6 pb-6 text-app-dark-blue dark:text-white max-w-7xl mx-auto  bg-transparent gap-8 flex flex-row">
                                     {renderMenuContent()}
                                 </ul>
-                            </Block>
-                        </Section>
+                            </BlockPrimitive>
+                        </SectionPrimitive>
                     </div>
                 )}
 
@@ -236,11 +236,11 @@ export function GlobalFullNavigationWidget({
                 className={`hidden lg:block ${isMenuOpen ? 'translate-x-0 opacity-100' : 'lg:translate-x-0 lg:opacity-100'
                     } transition-all duration-500`}
             >
-                <Block>
+                <BlockPrimitive>
                     <ul className="flex-col justify-center items-center space-y-4">
                         {renderMenuContent()}
                     </ul>
-                </Block>
+                </BlockPrimitive>
             </div>
 
             {/* Mobile modal (portaled to body — escapes aside containment) */}

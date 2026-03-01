@@ -11,6 +11,7 @@ import { systemRoutes } from './system/System.routes';
 import { workspacesRootRoutes } from './workspaces/WorkspaceRoot.routes';
 // Provider Routes (Consolidated)
 import { providerRoutes } from './workspaces/provider/Provider.routes';
+import { advertiserRoutes } from './workspaces/advertiser/Advertiser.routes';
 import { staffRoutes } from './workspaces/staff/Staff.routes';
 import { moderatorRoutes } from './workspaces/moderator/Moderator.routes';
 // Custom Routes
@@ -22,6 +23,7 @@ export {
   systemRoutes,
   workspacesRootRoutes,
   providerRoutes,
+  advertiserRoutes,
   staffRoutes,
   moderatorRoutes,
   customRoutes,
@@ -49,6 +51,7 @@ export const allRoutes: RoutesMap = {
   ...authRoutes,
   ...workspacesRootRoutes,
   ...providerRoutes,
+  ...advertiserRoutes,
   ...staffRoutes,
   ...moderatorRoutes,
   ...publicRoutes,

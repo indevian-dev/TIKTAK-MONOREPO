@@ -15,6 +15,7 @@ import { useRouter }
 import type { Card } from '@tiktak/shared/types/domain/Card.types';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { PaginationPrimitive } from '@/app/primitives/Pagination.primitive';
 // API response type for provider favorite cards (extends domain Card.PrivateAccess with favorite-specific fields)
 interface ProviderFavoriteCardApiResponse extends Omit<Card.PrivateAccess, 'images' | 'slug'> {
   favorite_id: number; // Favorite relationship ID
@@ -22,7 +23,6 @@ interface ProviderFavoriteCardApiResponse extends Omit<Card.PrivateAccess, 'imag
   slug?: string; // URL slug for the card
   storage_prefix: string; // Storage prefix for images
   images?: string[]; // Processed images array
-  store_id?: number; // Store relationship
 }
 
 interface PaginationData {
@@ -140,7 +140,7 @@ export function ProviderFavoriteCardsListWidget() {
             {favorites.map((favorite) => (
               <div key={favorite.favorite_id} className="grid col-span-6 md:col-span-4 lg:col-span-3 w-full relative rounded bg-white">
                 {/* Store Badge */}
-                {(favorite.store_id !== null) ? (
+                {(favorite.workspaceId) ? (
                   <span className='bg-app-bright-purple/10 text-gray-900 px-2 py-1 rounded absolute top-2 left-2 z-2 font-bold'>
                     Store
                   </span>
@@ -202,35 +202,11 @@ export function ProviderFavoriteCardsListWidget() {
             ))}
           </div>
 
-          {/* Pagination */}
-          {pagination.totalPages > 1 && (
-            <div className="flex justify-center items-center space-x-4 mt-8">
-              <button
-                onClick={() => setPage(page - 1)}
-                disabled={page === 1 || loading}
-                className="px-4 py-2 border border-light rounded-primary text-gray-900 bg-white hover:bg-app-bright-purple/10 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
-              >
-                Previous
-              </button>
-
-              <span className="text-gray-600">
-                Page {page} of {pagination.totalPages}
-                {pagination.total > 0 && (
-                  <span className="ml-2 text-sm">
-                    ({pagination.total} total favorites)
-                  </span>
-                )}
-              </span>
-
-              <button
-                onClick={() => setPage(page + 1)}
-                disabled={!pagination.hasNext || loading}
-                className="px-4 py-2 border border-light rounded-primary text-gray-900 bg-white hover:bg-app-bright-purple/10 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
-              >
-                Next
-              </button>
-            </div>
-          )}
+          <PaginationPrimitive
+            currentPage={page}
+            totalPages={pagination.totalPages}
+            onPageChange={setPage}
+          />
         </>
       )}
     </div>

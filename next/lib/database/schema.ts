@@ -22,6 +22,14 @@ import {
   doublePrecision,
 } from 'drizzle-orm/pg-core';
 import { generateSlimId } from "@/lib/utils/Helper.SlimUlid.util";
+import type { Workspace } from '@tiktak/shared/types/domain/Workspace.types';
+
+// ═══════════════════════════════════════════════════
+// JSONB COLUMN TYPES
+// ═══════════════════════════════════════════════════
+
+/** Shape stored in workspaces.profile JSONB column — union of per-type profiles */
+export type WorkspaceProfileJsonb = Workspace.Profile;
 
 // ═══════════════════════════════════════════════════
 // USERS & AUTH
@@ -102,10 +110,11 @@ export const workspaces = pgTable('workspaces', {
   id: varchar('id').primaryKey().$defaultFn(() => generateSlimId()),
   type: varchar('type').notNull(),
   title: text('title').notNull(),
-  profile: jsonb('profile').default('{}'),
+  profile: jsonb('profile').$type<WorkspaceProfileJsonb>().default({}),
   cityId: varchar('city_id'),
   isActive: boolean('is_active').default(true),
   isBlocked: boolean('is_blocked').default(false),
+  isStore: boolean('is_store').default(false),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
 });
@@ -125,7 +134,6 @@ export const workspaceRoles = pgTable('workspace_roles', {
   id: varchar('id').primaryKey().$defaultFn(() => generateSlimId()),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   name: varchar('name').notNull().unique(),
-  slug: varchar('slug').notNull(),
   permissions: jsonb('permissions').default('{}'),
   isStaff: boolean('is_staff').default(false),
   forWorkspaceType: varchar('for_workspace_type'),
@@ -191,7 +199,6 @@ export const cards = pgTable('cards', {
   isApproved: boolean('is_approved').default(false),
   price: doublePrecision('price'),
   body: text('body'),
-  storeId: varchar('store_id'),
   accountId: varchar('account_id'),
   storagePrefix: varchar('storage_prefix').unique(),
   location: json('location'),
@@ -266,7 +273,7 @@ export const categoriesStoresCardsStats = pgTable('categories_stores_cards_stats
   id: varchar('id').primaryKey().notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   categoryId: varchar('category_id'),
-  storeId: varchar('store_id'),
+  workspaceId: varchar('workspace_id'),
   allCardsCount: bigint('all_cards_count', { mode: 'number' }),
   publicCardsCount: bigint('public_cards_count', { mode: 'number' }),
 });

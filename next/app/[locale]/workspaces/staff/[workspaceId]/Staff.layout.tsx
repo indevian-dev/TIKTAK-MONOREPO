@@ -19,12 +19,13 @@ import {
   PiUsersFill,
   PiGrainsFill,
   PiStorefrontFill,
-  PiHouse
+  PiHouse,
+  PiCurrencyDollar
 } from 'react-icons/pi';
 import type { DomainNavConfig } from '@tiktak/shared/types/ui/Navigation.types';
-import { Main } from '@/app/primitives/Main.primitive';
-import { Container } from '@/app/primitives/Container.primitive';
-import { Section } from '@/app/primitives/Section.primitive';
+import { MainPrimitive } from '@/app/primitives/Main.primitive';
+import { ContainerPrimitive } from '@/app/primitives/Container.primitive';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 const getStaffNavConfig = (workspaceId: string): DomainNavConfig => ({
   domain: 'staff',
@@ -37,7 +38,6 @@ const getStaffNavConfig = (workspaceId: string): DomainNavConfig => ({
       items: [
         { href: `/workspaces/staff/${workspaceId}`, icon: PiHouse, label: 'Provider' },
         { href: `/workspaces/staff/${workspaceId}/adds`, icon: PiNotebook, label: 'Adds' },
-        { href: `/workspaces/staff/${workspaceId}/blogs`, icon: PiArticle, label: 'Blogs' },
       ]
     },
     {
@@ -71,13 +71,16 @@ const getStaffNavConfig = (workspaceId: string): DomainNavConfig => ({
       ]
     },
     {
-      label: 'Pages',
+      label: 'Content Management',
       items: [
-        { href: `/workspaces/staff/${workspaceId}/pages/faq`, icon: PiFile, label: 'Faq' },
-        { href: `/workspaces/staff/${workspaceId}/pages/terms`, icon: PiFile, label: 'Terms' },
-        { href: `/workspaces/staff/${workspaceId}/pages/privacy`, icon: PiFile, label: 'Privacy' },
-        { href: `/workspaces/staff/${workspaceId}/pages/about`, icon: PiFile, label: 'About' },
-        { href: `/workspaces/staff/${workspaceId}/pages/rules`, icon: PiFile, label: 'Rules' },
+        { href: `/workspaces/staff/${workspaceId}/blogs`, icon: PiArticle, label: 'Blogs' },
+        { href: `/workspaces/staff/${workspaceId}/docs/about`, icon: PiFile, label: 'About' },
+        { href: `/workspaces/staff/${workspaceId}/docs/privacy`, icon: PiFile, label: 'Privacy' },
+        { href: `/workspaces/staff/${workspaceId}/docs/terms`, icon: PiFile, label: 'Terms of Use' },
+        { href: `/workspaces/staff/${workspaceId}/docs/pricing`, icon: PiCurrencyDollar, label: 'Pricing' },
+        { href: `/workspaces/staff/${workspaceId}/docs/refund`, icon: PiFile, label: 'Refund Policy' },
+        { href: `/workspaces/staff/${workspaceId}/docs/faq`, icon: PiFile, label: 'FAQ' },
+        { href: `/workspaces/staff/${workspaceId}/docs/rules`, icon: PiFile, label: 'Rules' },
       ]
     }
   ],
@@ -114,16 +117,16 @@ export function StaffClientLayout({
         <GlobalFastNavigationWidget {...navProps} />
       </GlobalHeaderWidget>
 
-      <Main variant="app">
-        <Container variant="centered">
+      <MainPrimitive variant="app">
+        <ContainerPrimitive variant="centered">
           <aside className="hidden lg:flex shrink-0 sticky top-[70px] min-h-[calc(100vh-70px)] overflow-hidden w-64 flex-col">
             <GlobalFullNavigationWidget {...navProps} />
           </aside>
-          <Section>
+          <SectionPrimitive>
             {children}
-          </Section>
-        </Container>
-      </Main>
+          </SectionPrimitive>
+        </ContainerPrimitive>
+      </MainPrimitive>
 
       {/* Mobile modal navigation (handled internally by the widget) */}
       <GlobalFullNavigationWidget {...navProps} />

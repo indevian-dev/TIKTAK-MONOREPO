@@ -17,7 +17,7 @@ import type { Card } from '@/lib/domain/cards/Cards.types';
  *   searchText   - text to search in title
  *   priceMin     - minimum price
  *   priceMax     - maximum price
- *   storeId      - filter by store/workspace
+ *   workspaceId  - filter by workspace
  *   pagination   - max results (default 12)
  */
 export const GET = unifiedApiHandler(async (request: NextRequest, { log }) => {
@@ -28,7 +28,7 @@ export const GET = unifiedApiHandler(async (request: NextRequest, { log }) => {
     searchText: params.get('searchText') ?? undefined,
     priceMin: params.get('priceMin') ? parseFloat(params.get('priceMin')!) : undefined,
     priceMax: params.get('priceMax') ? parseFloat(params.get('priceMax')!) : undefined,
-    storeId: params.get('storeId') ?? undefined,
+    workspaceId: params.get('workspaceId') ?? undefined,
     pagination: parseInt(params.get('pagination') || '12', 10),
   };
 

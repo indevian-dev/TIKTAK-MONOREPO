@@ -6,6 +6,7 @@ import React, {
   useState,
   useEffect
 } from 'react';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 import { useGlobalCategoryContext }
   from '@/app/[locale]/(global)/(context)/GlobalCategoryContext';
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
@@ -476,7 +477,7 @@ export function StaffCardDetailsModalWidget({
   // Show loading state
   if (loading) {
     return (
-      <div className="fixed inset-0 bg-slate-900 bg-opacity-50 flex justify-start items-start z-50 overflow-hidden">
+      <BlockPrimitive variant="modal">
         <div className="bg-white w-full h-full overflow-y-auto">
           {/* Header */}
           <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 shadow-sm z-10">
@@ -497,14 +498,14 @@ export function StaffCardDetailsModalWidget({
             </div>
           </div>
         </div>
-      </div>
+      </BlockPrimitive>
     );
   }
 
   // Show error state if no card data
   if (!selectedCard) {
     return (
-      <div className="fixed inset-0 bg-slate-900 bg-opacity-50 flex justify-start items-start z-50 overflow-hidden">
+      <BlockPrimitive variant="modal">
         <div className="bg-white w-full h-full overflow-y-auto">
           {/* Header */}
           <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 shadow-sm z-10">
@@ -528,7 +529,7 @@ export function StaffCardDetailsModalWidget({
             </button>
           </div>
         </div>
-      </div>
+      </BlockPrimitive>
     );
   }
 
@@ -536,7 +537,7 @@ export function StaffCardDetailsModalWidget({
   const hasPendingChanges = !selectedCard.is_approved || (selectedCard.published_data && differences.length > 0);
 
   return (
-    <div className="fixed inset-0 bg-slate-900 bg-opacity-50 flex justify-start items-start z-50 overflow-hidden">
+    <BlockPrimitive variant="modal">
       <div className="bg-white w-full h-full overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4 shadow-sm z-10">
@@ -885,6 +886,6 @@ export function StaffCardDetailsModalWidget({
         </div>
 
       </div>
-    </div>
+    </BlockPrimitive>
   );
 }

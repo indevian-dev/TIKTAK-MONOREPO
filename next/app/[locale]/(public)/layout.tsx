@@ -13,11 +13,12 @@ import {
   PiStorefront,
   PiIdentificationCard,
   PiArticle,
-  PiQuestion
+  PiQuestion,
+  PiCurrencyDollar
 } from 'react-icons/pi';
 import type { DomainNavConfig } from '@tiktak/shared/types/ui/Navigation.types';
-import { Main } from '@/app/primitives/Main.primitive';
-import { Container } from '@/app/primitives/Container.primitive';
+import { MainPrimitive } from '@/app/primitives/Main.primitive';
+import { ContainerPrimitive } from '@/app/primitives/Container.primitive';
 
 const getPublicNavConfig = (): DomainNavConfig => ({
   domain: 'public',
@@ -37,8 +38,9 @@ const getPublicNavConfig = (): DomainNavConfig => ({
     {
       label: 'Support',
       items: [
-        { href: '/pages/faq', icon: PiQuestion, label: 'faq' },
-        { href: '/pages/about', icon: PiQuestion, label: 'about' },
+        { href: '/docs/faq', icon: PiQuestion, label: 'faq' },
+        { href: '/docs/about', icon: PiQuestion, label: 'about' },
+        { href: '/docs/pricing', icon: PiCurrencyDollar, label: 'pricing' },
       ]
     }
   ],
@@ -72,11 +74,11 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
             <GlobalFastNavigationWidget {...navProps} />
           </GlobalHeaderWidget>
 
-          <Main variant="default">
-            <Container variant="full">
+          <MainPrimitive variant="default">
+            <ContainerPrimitive variant="full">
               {children}
-            </Container>
-          </Main>
+            </ContainerPrimitive>
+          </MainPrimitive>
 
           <PublicFooterWidget />
           {/* Full Navigation (Dropdown on desktop, Modal on mobile) */}

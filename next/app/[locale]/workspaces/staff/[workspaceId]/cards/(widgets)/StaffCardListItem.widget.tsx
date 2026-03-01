@@ -12,10 +12,9 @@ import type { Card } from '@tiktak/shared/types/domain/Card.types';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
 // API response type for staff card list items (extends domain Card.PrivateAccess)
-interface StaffCardListItemApiResponse extends Omit<Card.PrivateAccess, 'images' | 'video' | 'storeId' | 'price'> {
+interface StaffCardListItemApiResponse extends Omit<Card.PrivateAccess, 'images' | 'video' | 'price'> {
     created_at: Date; // API uses snake_case
-    store_id?: string | null; // API uses snake_case
-    store_name?: string; // Joined data from store table
+    store_name?: string; // Joined data from workspace table
     is_approved: boolean;
     is_active: boolean;
     published_data?: any;
@@ -143,11 +142,11 @@ export function StaffCardListItemWidget({
                 <div className="flex items-center gap-2">
                     <span className="text-sm bg-slate-200 px-2 py-1 rounded">ID: {card.id}</span>
                     {/* Absolutely positioned store/personal badge */}
-                    <span className={`text-xs font-semibold px-2 py-1 rounded-full ${card.store_id
+                    <span className={`text-xs font-semibold px-2 py-1 rounded-full ${card.workspaceId
                         ? 'bg-purple-100 text-purple-800 border border-purple-200'
                         : 'bg-green-100 text-green-800 border border-green-200'
                         }`}>
-                        {card.store_id ? 'Store' : 'Personal'}
+                        {card.workspaceId ? 'Workspace' : 'Personal'}
                     </span>
                 </div>
                 <div className="flex items-center gap-2">

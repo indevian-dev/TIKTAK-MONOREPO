@@ -20,6 +20,7 @@ import {
     PiShieldCheck,
     PiKey
 } from 'react-icons/pi';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 
 export function GlobalTwoFactorAuthModalWidget() {
     const {
@@ -91,7 +92,7 @@ export function GlobalTwoFactorAuthModalWidget() {
     if (typeof window === 'undefined') return null;
 
     return createPortal(
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <BlockPrimitive variant="modal">
             <div
                 className="absolute inset-0 bg-black/50 backdrop-blur-sm"
                 onClick={hideTwoFactorModal}
@@ -287,7 +288,7 @@ export function GlobalTwoFactorAuthModalWidget() {
                     </p>
                 </div>
             </div>
-        </div >,
+        </BlockPrimitive>,
         document.body
     );
 }

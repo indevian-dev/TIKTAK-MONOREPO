@@ -132,4 +132,112 @@ export const staffRoutes: RoutesMap = {
     permission: "STAFF_CATEGORY_READ",
     type: "api",
   }),
+
+  // ============================================
+  // Content Management Pages
+  // ============================================
+  "/workspaces/staff/:workspaceId/blogs": createStaffRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "page",
+  }),
+  "/workspaces/staff/:workspaceId/docs/about": createStaffRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "page",
+  }),
+  "/workspaces/staff/:workspaceId/docs/privacy": createStaffRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "page",
+  }),
+  "/workspaces/staff/:workspaceId/docs/terms": createStaffRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "page",
+  }),
+  "/workspaces/staff/:workspaceId/docs/pricing": createStaffRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "page",
+  }),
+  "/workspaces/staff/:workspaceId/docs/refund": createStaffRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "page",
+  }),
+  "/workspaces/staff/:workspaceId/docs/faq": createStaffRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "page",
+  }),
+  "/workspaces/staff/:workspaceId/docs/rules": createStaffRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "page",
+  }),
+
+  // ============================================
+  // Content Management APIs — Blogs
+  // ============================================
+  "/api/workspaces/staff/:workspaceId/blogs": createStaffRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "api",
+  }),
+  "/api/workspaces/staff/:workspaceId/blogs/create": createStaffRoute({
+    method: "POST",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "api",
+  }),
+  "/api/workspaces/staff/:workspaceId/blogs/:id": createStaffRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "api",
+  }),
+  "/api/workspaces/staff/:workspaceId/blogs/update/:id": createStaffRoute({
+    method: "PATCH",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "api",
+  }),
+  "/api/workspaces/staff/:workspaceId/blogs/:id/publish": createStaffRoute({
+    method: "PUT",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "api",
+  }),
+  "/api/workspaces/staff/:workspaceId/blogs/:id/home-page": createStaffRoute({
+    method: "PUT",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "api",
+  }),
+
+  // ============================================
+  // Content Management APIs — Pages
+  // ============================================
+  "/api/workspaces/staff/:workspaceId/pages": createStaffRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "api",
+  }),
+  "/api/workspaces/staff/:workspaceId/docs/update": createStaffRoute({
+    method: "PUT",
+    authRequired: true,
+    permission: "STAFF_ACCESS",
+    type: "api",
+  }),
 };

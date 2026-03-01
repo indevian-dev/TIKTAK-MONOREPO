@@ -6,8 +6,8 @@ import {
   useMemo,
   useRef
 } from 'react';
-import { GlobalSelectWidget }
-  from '@/app/[locale]/(global)/(widgets)/GlobalSelect.widget';
+import { SelectPrimitive }
+  from '@/app/primitives/Select.primitive';
 
 interface FilterOption {
   filter_id: string;
@@ -142,7 +142,7 @@ export function ProviderOptionsSelectorWidget({
               />
             ) : (
               // Render custom select component for static options
-              <GlobalSelectWidget
+              <SelectPrimitive
                 value={currentValue}
                 onChange={value => {
                   handleOptionChange(filter.id.toString(), value, filter.type);

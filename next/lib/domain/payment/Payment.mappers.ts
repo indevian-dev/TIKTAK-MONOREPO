@@ -3,85 +3,50 @@ import type {
     WorkspaceSubscriptionTransactionDbRecord,
     WorkspaceSubscriptionCouponDbRecord,
 } from "@/lib/database/schema";
+import type { Payment } from '@tiktak/shared/types/domain/Payment.types';
 
 // ═══════════════════════════════════════════════════════════════
-// (PaymentSubscription removed — table was dropped)
+// PAYMENT MAPPERS — satisfies Payment.* from _shared.types
 // ═══════════════════════════════════════════════════════════════
 
-/** Private: user sees their payment history */
-export interface TransactionPrivateView {
-    id: string;
-    paymentChannel: string | null;
-    paidAmount: number | null;
-    status: string | null;
-    createdAt: Date;
-}
+// ─── TRANSACTION ─────────────────────────────────────────────
 
-/** Full: staff — includes account/workspace and metadata */
-export interface TransactionFullView extends TransactionPrivateView {
-    accountId: string | null;
-    workspaceId: string | null;
-    metadata: unknown;
-    statusMetadata: unknown;
-}
-
-// ═══════════════════════════════════════════════════════════════
-// COUPON VIEWS — Private / Full
-// ═══════════════════════════════════════════════════════════════
-
-/** Private: coupon holder sees code and discount */
-export interface CouponPrivateView {
-    id: string;
-    code: string;
-    discountPercent: number | null;
-    isActive: boolean | null;
-}
-
-/** Full: staff — includes usage stats and workspace */
-export interface CouponFullView extends CouponPrivateView {
-    usageCount: number | null;
-    workspaceId: string | null;
-    createdAt: Date;
-}
-
-// ═══════════════════════════════════════════════════════════════
-// MAPPERS
-// ═══════════════════════════════════════════════════════════════
-
-export function toTransactionPrivateView(row: WorkspaceSubscriptionTransactionDbRecord): TransactionPrivateView {
+export function toTransactionPrivateView(row: WorkspaceSubscriptionTransactionDbRecord) {
     return {
         id: row.id,
         paymentChannel: row.paymentChannel,
         paidAmount: row.paidAmount,
         status: row.status,
         createdAt: row.createdAt,
-    };
+    } satisfies Payment.TransactionPrivateView;
 }
 
-export function toTransactionFullView(row: WorkspaceSubscriptionTransactionDbRecord): TransactionFullView {
+export function toTransactionFullView(row: WorkspaceSubscriptionTransactionDbRecord) {
     return {
         ...toTransactionPrivateView(row),
         accountId: row.accountId,
         workspaceId: row.workspaceId,
         metadata: row.metadata,
         statusMetadata: row.statusMetadata,
-    };
+    } satisfies Payment.TransactionFullView;
 }
 
-export function toCouponPrivateView(row: WorkspaceSubscriptionCouponDbRecord): CouponPrivateView {
+// ─── COUPON ──────────────────────────────────────────────────
+
+export function toCouponPrivateView(row: WorkspaceSubscriptionCouponDbRecord) {
     return {
         id: row.id,
         code: row.code,
         discountPercent: row.discountPercent,
         isActive: row.isActive,
-    };
+    } satisfies Payment.CouponPrivateView;
 }
 
-export function toCouponFullView(row: WorkspaceSubscriptionCouponDbRecord): CouponFullView {
+export function toCouponFullView(row: WorkspaceSubscriptionCouponDbRecord) {
     return {
         ...toCouponPrivateView(row),
         usageCount: row.usageCount,
         workspaceId: row.workspaceId,
         createdAt: row.createdAt,
-    };
+    } satisfies Payment.CouponFullView;
 }

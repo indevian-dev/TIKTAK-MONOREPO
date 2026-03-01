@@ -1,5 +1,7 @@
 "use client";
 
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
+
 interface Option {
   id: string;
   label: string;
@@ -16,8 +18,8 @@ export function StaffCategorySelectModalWidget({ isOpen, options, onSelect, onCl
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-slate-950 bg-opacity-90 flex justify-center items-center">
-      <div className="bg-white rounded shadow-lgw-full my-8 p-6 lg:w-2/3">
+    <BlockPrimitive variant="modal">
+      <BlockPrimitive variant="default">
         <h2 className="text-lg font-semibold mb-4">Select Parent Category</h2>
         <ul className="max-h-80 overflow-auto text-md">
           <li
@@ -43,7 +45,7 @@ export function StaffCategorySelectModalWidget({ isOpen, options, onSelect, onCl
         >
           Close
         </button>
-      </div>
-    </div>
+      </BlockPrimitive>
+    </BlockPrimitive>
   );
 }

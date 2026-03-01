@@ -168,6 +168,55 @@ export const publicRoutes: RoutesMap = {
     authRequired: false,
     type: "api",
   }),
+  "/api/docs/pricing": createRoute({
+    method: "GET",
+    authRequired: false,
+    type: "api",
+  }),
+  "/api/docs/refund": createRoute({
+    method: "GET",
+    authRequired: false,
+    type: "api",
+  }),
+
+  // ============================================
+  // Public Doc Pages
+  // ============================================
+  "/docs/about": createRoute({
+    method: "GET",
+    authRequired: false,
+    type: "page",
+  }),
+  "/docs/faq": createRoute({
+    method: "GET",
+    authRequired: false,
+    type: "page",
+  }),
+  "/docs/privacy": createRoute({
+    method: "GET",
+    authRequired: false,
+    type: "page",
+  }),
+  "/docs/terms": createRoute({
+    method: "GET",
+    authRequired: false,
+    type: "page",
+  }),
+  "/docs/rules": createRoute({
+    method: "GET",
+    authRequired: false,
+    type: "page",
+  }),
+  "/docs/pricing": createRoute({
+    method: "GET",
+    authRequired: false,
+    type: "page",
+  }),
+  "/docs/refund": createRoute({
+    method: "GET",
+    authRequired: false,
+    type: "page",
+  }),
 
   // ============================================
   // Category Pages

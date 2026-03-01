@@ -8,6 +8,7 @@ import {
 } from 'react-icons/pi';
 import { loadClientSideCoLocatedTranslations } from '@/i18n/i18nClientSide';
 import { IconType } from 'react-icons';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 interface StaticLink {
   id: number;
@@ -41,7 +42,7 @@ export function PublicUsefullLinksWidget() {
   ];
 
   return (
-    <section className="max-w-screen-xl m-auto px-2 py-2">
+    <SectionPrimitive variant="centered">
       <div className='flex gap-2 overflow-x-auto scrollbar-hide pb-4'>
         {staticLinks.map(link => (
           <Link
@@ -54,6 +55,6 @@ export function PublicUsefullLinksWidget() {
           </Link>
         ))}
       </div>
-    </section>
+    </SectionPrimitive>
   );
 }

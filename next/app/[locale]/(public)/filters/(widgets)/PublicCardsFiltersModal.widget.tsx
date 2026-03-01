@@ -7,13 +7,14 @@ import {
     useCallback
 } from 'react';
 import { MdFilterList } from "react-icons/md";
-import { GlobalSelectWidget } from '@/app/[locale]/(global)/(widgets)/GlobalSelect.widget';
+import { SelectPrimitive } from '@/app/primitives/Select.primitive';
 import { useGlobalCategoryContext } from '@/app/[locale]/(global)/(context)/GlobalCategoryContext';
 import { usePublicSearchContext } from '@/app/[locale]/(public)/(context)/PublicSearchContext';
 import { loadClientSideCoLocatedTranslations } from '@/i18n/i18nClientSide';
 import type { Category } from '@/app/[locale]/(public)/categories/PublicCategoriesService';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 import { lt } from '@/lib/utils/Localized.util';
 interface CategoryStat {
     category_id: string;
@@ -501,7 +502,7 @@ export function PublicCardsFiltersModalWidget({
                 <div key={`category-level-${originalLevel}`} className="col-span-12 w-full">
                     <div className="rounded space-y-2 w-full">
                         <div className="font-bold w-full">{levelLabel}</div>
-                        <GlobalSelectWidget
+                        <SelectPrimitive
                             options={[
                                 { label: `${t('select')} ${levelLabel}`, value: '' },
                                 ...categoryOptions
@@ -561,7 +562,7 @@ export function PublicCardsFiltersModalWidget({
 
             {/* Filters Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-app-bright-purple/10 bg-opacity-70 flex items-center justify-center z-100 bg-blure backdrop-blur-sm">
+                <BlockPrimitive variant="modal">
                     <div className="bg-white/80 rounded-lg w-full mx-3 md:mx-6 lg:mx-12 xl:mx-16 max-w-7xl min-w-[80hv] max-h-[80vh] overflow-hidden bg-opacity-50 ">
                         <div className="flex flex-col h-full max-h-[80vh]">
                             {/* Modal Header */}
@@ -665,7 +666,7 @@ export function PublicCardsFiltersModalWidget({
                                                         </div>
                                                     ) : (
                                                         <div>
-                                                            <GlobalSelectWidget
+                                                            <SelectPrimitive
                                                                 options={(cardOption.category_filter_options || []).map(option => ({
                                                                     label: option.title,
                                                                     value: String(option.id)
@@ -689,7 +690,7 @@ export function PublicCardsFiltersModalWidget({
                                             {/* Main Sort Dropdown */}
                                             <div className="space-y-2">
                                                 <div className="font-semibold">{t('select_sort_option')}</div>
-                                                <GlobalSelectWidget
+                                                <SelectPrimitive
                                                     options={sortOptions}
                                                     onChange={handleSortChange}
                                                     value={selectedSort}
@@ -784,7 +785,7 @@ export function PublicCardsFiltersModalWidget({
                             </div>
                         </div>
                     </div>
-                </div>
+                </BlockPrimitive>
             )}
         </>
     );

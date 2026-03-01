@@ -3,6 +3,7 @@
 import { useState }
     from 'react';
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 
 interface StaffCategoryAddModalWidgetProps {
     parentId: string | null;
@@ -30,8 +31,8 @@ export function StaffCategoryAddModalWidget({ parentId, isOpen, onClose, onAdd =
     if (!isOpen) return null; // Don't render the modal if it's not open
 
     return (
-        <div className="fixed inset-0 bg-slate-950 bg-opacity-90 z-50 flex justify-center items-center">
-            <form onSubmit={handleSubmit} className="bg-white p-4 rounded w-full my-8 lg:w-1/2">
+        <BlockPrimitive variant="modal">
+            <BlockPrimitive variant="default">
                 {/* Title Input */}
                 <div className="mb-4">
                     <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
@@ -88,7 +89,7 @@ export function StaffCategoryAddModalWidget({ parentId, isOpen, onClose, onAdd =
                         Add Category
                     </button>
                 </div>
-            </form>
-        </div>
+            </BlockPrimitive>
+        </BlockPrimitive>
     );
 }

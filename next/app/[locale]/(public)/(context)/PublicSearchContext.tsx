@@ -58,7 +58,7 @@ interface SearchState {
 interface InitialProps {
     mode?: 'simple' | 'map';
     categoryId?: string | null;
-    storeId?: string | null;
+    workspaceId?: string | null;
     includeFacets?: boolean;
     pagination?: number;
     useAdvancedFilters?: boolean;
@@ -108,7 +108,7 @@ export function PublicSearchProvider({ children, initialProps = {} }: PublicSear
     // These are set once and remain throughout the session
     const initialPropsRef = useRef<InitialProps>({
         categoryId: initialProps.categoryId || null,
-        storeId: initialProps.storeId || null,
+        workspaceId: initialProps.workspaceId || null,
         includeFacets: initialProps.includeFacets ?? true,
         pagination: initialProps.pagination || 50,
         useAdvancedFilters: initialProps.useAdvancedFilters || false,
@@ -229,8 +229,8 @@ export function PublicSearchProvider({ children, initialProps = {} }: PublicSear
             }
 
             // Always include initial props
-            if (initialPropsRef.current.storeId) {
-                searchFilters.storeId = initialPropsRef.current.storeId;
+            if (initialPropsRef.current.workspaceId) {
+                searchFilters.workspaceId = initialPropsRef.current.workspaceId;
             }
 
             // Handle categories: user filters take precedence over initial categoryId
@@ -499,14 +499,14 @@ export function PublicSearchProvider({ children, initialProps = {} }: PublicSear
         const oldProps = initialPropsRef.current;
         const newPropsCombined = { ...oldProps, ...newProps };
 
-        // Check if categoryId or storeId changed (these affect search results)
+        // Check if categoryId or workspaceId changed (these affect search results)
         const categoryChanged = oldProps.categoryId !== newPropsCombined.categoryId;
-        const storeChanged = oldProps.storeId !== newPropsCombined.storeId;
+        const workspaceChanged = oldProps.workspaceId !== newPropsCombined.workspaceId;
 
         initialPropsRef.current = newPropsCombined;
 
-        // Reset facets and trigger search only if category or store changed
-        if (categoryChanged || storeChanged) {
+        // Reset facets and trigger search only if category or workspace changed
+        if (categoryChanged || workspaceChanged) {
             setSearchState(prev => ({
                 ...prev,
                 categoryFacets: [],

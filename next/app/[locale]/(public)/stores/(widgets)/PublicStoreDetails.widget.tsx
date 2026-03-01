@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { PublicCardsWithFiltersWidget }
   from '@/app/[locale]/(public)/cards/(widgets)/PublicCardsWithFilters.widget';
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 // Store is a provider-type workspace with public-facing fields
 interface Store {
@@ -59,7 +60,7 @@ const PublicStoreDetailsWidget = ({ store }: PublicStoreDetailsWidgetProps) => {
 
     // Set initial props (persistent, never cleared)
     updateInitialProps({
-      storeId: store.id ? String(store.id) : null,
+      workspaceId: store.id ? String(store.id) : null,
       includeFacets: true,
       pagination: 50,
       useAdvancedFilters: false
@@ -79,7 +80,7 @@ const PublicStoreDetailsWidget = ({ store }: PublicStoreDetailsWidgetProps) => {
 
   return (
     <>
-      <section className="max-w-7xl mx-auto py-10 px-4">
+      <SectionPrimitive variant="centered">
         <div className="text-left">
           {/* Avatar */}
           <div className='relative w-full aspect-2/1 md:aspect-3/1 lg:aspect-4/1 xl:aspect-5/1  flex items-center'>
@@ -122,7 +123,7 @@ const PublicStoreDetailsWidget = ({ store }: PublicStoreDetailsWidgetProps) => {
 
           {/* Links */}
         </div>
-      </section>
+      </SectionPrimitive>
 
       <PublicCardsWithFiltersWidget showTitle={false} showResultsCount={true} />
     </>

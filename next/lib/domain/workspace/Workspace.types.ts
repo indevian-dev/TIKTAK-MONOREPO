@@ -1,56 +1,17 @@
 
-import type { Timestamps } from '../base/Base.types';
+import type { Workspace } from '@tiktak/shared/types/domain/Workspace.types';
 
 // ═══════════════════════════════════════════════════════════════
-// WORKSPACE MODULE TYPES
+// WORKSPACE MODULE TYPES (Server-only)
 // ═══════════════════════════════════════════════════════════════
 
-export type WorkspaceType = 'student' | 'provider' | 'staff' | 'parent' | 'admin';
-
-export interface Workspace {
-    id: string;
-    title: string;
-    type: WorkspaceType;
-    isActive: boolean;
-    profile?: any;
-    createdAt: Date;
-    updatedAt?: Date;
-}
-
-export interface WorkspaceListItem {
-    workspaceId: string;
-    workspaceType: WorkspaceType;
-    title: string;
-    description?: string;
-    createdAt: string | Date;
-    isActive: boolean;
-}
-
-export interface CreateWorkspaceRequest {
-    workspaceType: WorkspaceType;
-    title: string;
-    description?: string;
-}
+// Re-export shared types for backward compatibility
+export type WorkspaceProfile = Workspace.Profile;
+export type WorkspaceType = Workspace.WorkspaceType;
 
 // ═══════════════════════════════════════════════════════════════
-// MEMBERSHIP & ROLE
+// SERVICE INPUT TYPES (Server-only — not in shared)
 // ═══════════════════════════════════════════════════════════════
-
-export interface WorkspaceMembership {
-    id: string;
-    accountId: string;
-    workspaceId: string;
-    workspaceRoleId: string;
-    isActive: boolean;
-    createdAt: Date;
-}
-
-export interface WorkspaceRole {
-    id: string;
-    name: string;
-    permissions: any;
-    forWorkspaceType: string;
-}
 
 export interface ProviderListOptions {
     limit?: number;
@@ -58,14 +19,6 @@ export interface ProviderListOptions {
     sortField?: 'title' | 'price' | 'createdAt' | string;
     orderDir?: 'asc' | 'desc';
     search?: string;
-}
-
-export interface WorkspaceProfile {
-    type?: string;
-    gradeLevel?: any;
-    providerSubscriptionPrice?: number;
-    providerTrialDaysCount?: number;
-    [key: string]: any;
 }
 
 export interface CreateWorkspaceDetails {

@@ -132,6 +132,60 @@ export class WorkspaceRepository extends BaseRepository {
         return result[0];
     }
 
+    /**
+     * Update an existing access record (role, subscribedUntil)
+     */
+    async updateAccess(accessId: string, data: Partial<typeof workspaceAccesses.$inferInsert>, tx?: DbClientTypes) {
+        const client = tx ?? this.db;
+        const result = await client
+            .update(workspaceAccesses)
+            .set(data)
+            .where(eq(workspaceAccesses.id, accessId))
+            .returning();
+        return result[0] || null;
+    }
+
+    /**
+     * Delete an access record
+     */
+    async deleteAccess(accessId: string, tx?: DbClientTypes) {
+        const client = tx ?? this.db;
+        const result = await client
+            .delete(workspaceAccesses)
+            .where(eq(workspaceAccesses.id, accessId))
+            .returning();
+        return result[0] || null;
+    }
+
+    /**
+     * Count direct members of a workspace (target = via).
+     * Used for safety check before removing last member.
+     */
+    async countDirectMembers(workspaceId: string, tx?: DbClientTypes) {
+        const client = tx ?? this.db;
+        const [result] = await client
+            .select({ total: count() })
+            .from(workspaceAccesses)
+            .where(and(
+                eq(workspaceAccesses.targetWorkspaceId, workspaceId),
+                eq(workspaceAccesses.viaWorkspaceId, workspaceId)
+            ));
+        return result?.total ?? 0;
+    }
+
+    /**
+     * Find a specific access record by ID
+     */
+    async findAccessById(accessId: string, tx?: DbClientTypes) {
+        const client = tx ?? this.db;
+        const result = await client
+            .select()
+            .from(workspaceAccesses)
+            .where(eq(workspaceAccesses.id, accessId))
+            .limit(1);
+        return result[0] || null;
+    }
+
     // ═══════════════════════════════════════════════════════════════
     // QUERIES
     // ═══════════════════════════════════════════════════════════════
@@ -311,6 +365,7 @@ export class WorkspaceRepository extends BaseRepository {
                 accessId: workspaceAccesses.id,
                 accountId: workspaceAccesses.actorAccountId,
                 accessRole: workspaceAccesses.accessRole,
+                subscribedUntil: workspaceAccesses.subscribedUntil,
                 createdAt: workspaceAccesses.createdAt,
                 userId: users.id,
                 email: users.email,
@@ -336,6 +391,7 @@ export class WorkspaceRepository extends BaseRepository {
                 firstName: row.firstName || 'Unknown',
                 lastName: row.lastName || '',
                 accessRole: row.accessRole,
+                subscribedUntil: row.subscribedUntil?.toISOString() ?? null,
                 createdAt: row.createdAt?.toISOString(),
             })),
             total,
@@ -477,6 +533,18 @@ export class WorkspaceRepository extends BaseRepository {
         return result[0] || null;
     }
 
+    /**
+     * List roles filtered by workspace type (e.g. 'provider', 'advertiser')
+     */
+    async listRolesByWorkspaceType(workspaceType: string, tx?: DbClientTypes) {
+        const client = tx ?? this.db;
+        return await client
+            .select()
+            .from(workspaceRoles)
+            .where(eq(workspaceRoles.forWorkspaceType, workspaceType))
+            .orderBy(asc(workspaceRoles.name));
+    }
+
     // ═══════════════════════════════════════════════════════════════
     // INVITATIONS
     // ═══════════════════════════════════════════════════════════════
@@ -529,6 +597,48 @@ export class WorkspaceRepository extends BaseRepository {
                 eq(workspaceInvitations.isDeclined, false)
             ))
             .orderBy(desc(workspaceInvitations.createdAt));
+    }
+
+    /**
+     * List pending invitations for a workspace (not approved, not declined, not expired)
+     */
+    async listPendingInvitationsForWorkspace(workspaceId: string, tx?: DbClientTypes) {
+        const client = tx ?? this.db;
+
+        // Alias tables for invited user lookup
+        const rows = await client
+            .select({
+                id: workspaceInvitations.id,
+                accessRole: workspaceInvitations.accessRole,
+                isApproved: workspaceInvitations.isApproved,
+                isDeclined: workspaceInvitations.isDeclined,
+                expireAt: workspaceInvitations.expireAt,
+                createdAt: workspaceInvitations.createdAt,
+                invitedEmail: users.email,
+                invitedFirstName: users.firstName,
+                invitedLastName: users.lastName,
+            })
+            .from(workspaceInvitations)
+            .leftJoin(accounts, eq(workspaceInvitations.invitedAccountId, accounts.id))
+            .leftJoin(users, eq(accounts.userId, users.id))
+            .where(and(
+                eq(workspaceInvitations.forWorkspaceId, workspaceId),
+                eq(workspaceInvitations.isApproved, false),
+                eq(workspaceInvitations.isDeclined, false)
+            ))
+            .orderBy(desc(workspaceInvitations.createdAt));
+
+        return rows.map(row => ({
+            id: row.id,
+            invitedEmail: row.invitedEmail || 'unknown',
+            invitedFirstName: row.invitedFirstName || '',
+            invitedLastName: row.invitedLastName || '',
+            accessRole: row.accessRole,
+            isApproved: row.isApproved,
+            isDeclined: row.isDeclined,
+            expireAt: row.expireAt?.toISOString() ?? null,
+            createdAt: row.createdAt.toISOString(),
+        }));
     }
 
     async findAccountByEmail(email: string, tx?: DbClientTypes) {

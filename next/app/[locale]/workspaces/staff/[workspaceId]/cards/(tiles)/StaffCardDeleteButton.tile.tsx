@@ -1,6 +1,7 @@
 "use client";
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 
 import { useState }
   from 'react';
@@ -63,8 +64,8 @@ export default function ConsoleCardDeleteButtonElement({ cardId, cardTitle, onDe
 
       {/* Confirmation Modal */}
       {showConfirmModal && (
-        <div className="fixed inset-0 bg-slate-900 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg w-full mx-4 max-w-md">
+        <BlockPrimitive variant="modal">
+          <BlockPrimitive variant="default">
             <div className="flex items-center mb-4">
               <div className="bg-red-100 rounded-full p-2 mr-3">
                 <svg
@@ -121,8 +122,8 @@ export default function ConsoleCardDeleteButtonElement({ cardId, cardTitle, onDe
                 )}
               </button>
             </div>
-          </div>
-        </div>
+          </BlockPrimitive>
+        </BlockPrimitive>
       )}
     </>
   );

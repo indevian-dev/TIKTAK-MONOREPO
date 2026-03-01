@@ -8,6 +8,7 @@ import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import type { CategoryFilterDbRecord, CategoryFilterOptionDbRecord } from '@/lib/domain/categories/_Categories.index';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 interface ModalProps {
     title: string;
     children: React.ReactNode;
@@ -16,13 +17,13 @@ interface ModalProps {
 
 // Simple Modal Component
 const Modal = ({ title, children, onClose }: ModalProps) => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-        <div className="bg-white p-4 rounded">
+    <BlockPrimitive variant="modal">
+        <BlockPrimitive variant="default">
             <h4 className="text-lg font-medium">{title}</h4>
             {children}
             <button onClick={onClose} className="mt-2 px-4 py-2 bg-red-500 text-white rounded">Close</button>
-        </div>
-    </div>
+        </BlockPrimitive>
+    </BlockPrimitive>
 );
 
 interface FilterWithOptions extends CategoryFilterDbRecord {

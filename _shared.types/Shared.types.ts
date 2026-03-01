@@ -7,6 +7,8 @@ export * from './domain/Category.types';
 export * from './domain/Notification.types';
 export * from './domain/Role.types';
 export * from './domain/Workspace.types';
+export * from './domain/Auth.views';
+export * from './domain/Payment.types';
 
 // Domain Input Schemas (Zod — Option A)
 export * from './domain/Card.schemas';
@@ -24,8 +26,8 @@ export * from './auth/Auth.types';
 // API Contracts
 export * from './api/ApiResponse.types';
 
-// Validation
-export * from './validation/Validation.types';
+// Validation (removed — directory does not exist)
+// export * from './validation/Validation.types';
 
 // UI
 export * from './ui/Ui.types';

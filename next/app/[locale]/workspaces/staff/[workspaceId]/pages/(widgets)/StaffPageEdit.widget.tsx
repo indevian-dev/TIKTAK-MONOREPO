@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import { toast } from 'react-toastify';
-
+import { sanityRead, GROQ } from '@/lib/integrations/Cms.Sanity.read';
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
 const LOCALES = [
     { code: 'en', label: 'English' },
@@ -31,38 +32,25 @@ export function StaffPageEditWidget({ pageType, title }: StaffPageEditWidgetProp
     const [showAllEditors, setShowAllEditors] = useState(false);
     const [selectedLocale, setSelectedLocale] = useState<LocaleCode>('en');
     const [saving, setSaving] = useState(false);
+    const params = useParams();
+    const workspaceId = params?.workspaceId as string;
 
     useEffect(() => {
-        const fetchPagesContent = async () => {
-            try {
-                // Fetch pages for all locales
-                const response = await apiCall({
-                    method: 'GET',
-                    url: '/api/staff/pages',
-                    body: {},
-                    params: {
-                        type: pageType,
-                    }
-                });
-                if (response.status !== 200) {
-                    toast.error((response as any).error || 'Failed to load pages');
-                    return;
-                }
-
-                // Transform API response to match expected structure
-                const pageData = response.data.page;
-
+        // Read from Sanity directly
+        sanityRead.fetch(GROQ.pageByType(pageType))
+            .then((page: Record<string, unknown> | null) => {
+                if (!page) return;
+                const localized = (page.localizedContent as Record<string, { content?: string }>) || {};
                 setPages({
-                    en: { content: pageData.content_en || '' },
-                    az: { content: pageData.content_az || '' },
-                    ru: { content: pageData.content_ru || '' }
+                    en: { content: localized.en?.content || '' },
+                    az: { content: localized.az?.content || '' },
+                    ru: { content: localized.ru?.content || '' }
                 });
-            } catch (error) {
-                toast.error('Error loading pages');
-                ConsoleLogger.error(error);
-            }
-        };
-        fetchPagesContent();
+            })
+            .catch((err: unknown) => {
+                toast.error('Error loading page from Sanity');
+                ConsoleLogger.error(err);
+            });
     }, [pageType]);
 
     const handleContentChange = async (locale: LocaleCode, content: string) => {
@@ -77,7 +65,7 @@ export function StaffPageEditWidget({ pageType, title }: StaffPageEditWidgetProp
         try {
             const response = await apiCall({
                 method: 'PUT',
-                url: '/api/staff/pages/update',
+                url: `/api/workspaces/staff/${workspaceId}/docs/update`,
                 body: {
                     type: pageType,
                     content_en: pages.en?.content || '',

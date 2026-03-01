@@ -17,62 +17,40 @@ import { StaffSwitchButtonTile }
   from '@/app/[locale]/workspaces/staff/[workspaceId]/(tiles)/StaffSwitchButton.tile';
 import { toast }
   from 'react-toastify';
-import { routing }
-  from '@/i18n/routing';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
+import { fetchBlogsAdmin, sanityImageUrl } from '@/lib/integrations/Cms.Sanity.read';
 
-// API response type for staff blog data
-interface StaffBlogApiResponse {
-  id: number;
-  title?: {
-    content: string;
-  };
-  cover?: string;
-  published: boolean;
-  home_page: boolean;
-  [key: string]: unknown;
+// Sanity blog type
+interface SanityBlog {
+  _id: string;
+  title?: string;
+  slug?: { current: string };
+  cover?: unknown;
+  isActive?: boolean;
+  isFeatured?: boolean;
+  _createdAt?: string;
 }
 
 export default function StaffBlogListWidget() {
-  const [blogsList, setblogsList] = useState<StaffBlogApiResponse[]>([]);
+  const [blogsList, setblogsList] = useState<SanityBlog[]>([]);
   const [isDeleting, setIsDeleting] = useState(false);
   const params = useParams();
-  const locale = (params?.locale as string) || routing.defaultLocale;
-
+  const workspaceId = params?.workspaceId as string;
 
   useEffect(() => {
-    async function fetchblogs() {
-      try {
-        const response = await apiCall({
-          method: 'GET',
-          url: '/api/staff/blogs',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+    // Read from Sanity directly
+    fetchBlogsAdmin()
+      .then((blogs: SanityBlog[]) => setblogsList(blogs || []))
+      .catch((err: unknown) => ConsoleLogger.error('Error fetching blogs:', err));
+  }, [workspaceId]);
 
-        if (response.status !== 200) {
-          ConsoleLogger.log('error', response.data);
-          return;
-        }
-
-        const data = response.data;
-        setblogsList(data.blogs?.data || data.blogs || []);
-
-      } catch (error) {
-        ConsoleLogger.log(error);
-      }
-    }
-
-    fetchblogs();
-  }, [locale]);
-
-  const handleDelete = async (blogId: number) => {
+  const handleDelete = async (blogId: string) => {
     if (window.confirm('Are you sure you want to delete this blog?')) {
       setIsDeleting(true);
       try {
         const response = await apiCall({
           method: 'DELETE',
-          url: `/api/staff/blogs/${blogId}`,
+          url: `/api/workspaces/staff/${workspaceId}/blogs/${blogId}`,
           headers: {
             'Content-Type': 'application/json',
           },
@@ -82,7 +60,7 @@ export default function StaffBlogListWidget() {
 
         if (response.status === 200) {
           setblogsList((prevblogs) =>
-            prevblogs.filter((blog) => blog.id !== blogId));
+            prevblogs.filter((blog) => blog._id !== blogId));
           toast.success('Blog deleted successfully!');
           return;
         }
@@ -95,15 +73,15 @@ export default function StaffBlogListWidget() {
     }
   };
 
-  const isPublished = (blog: StaffBlogApiResponse) => {
-    return blog.published === true;
+  const isPublished = (blog: SanityBlog) => {
+    return blog.isActive === true;
   };
 
-  const handlePublishToggle = async (blog: StaffBlogApiResponse) => {
+  const handlePublishToggle = async (blog: SanityBlog) => {
     try {
       const response = await apiCall({
         method: 'PUT',
-        url: `/api/staff/blogs/${blog.id}/publish`,
+        url: `/api/workspaces/staff/${workspaceId}/blogs/${blog._id}/publish`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -115,7 +93,7 @@ export default function StaffBlogListWidget() {
         // Update the blog's published status in the local state
         setblogsList((prevblogs) =>
           prevblogs.map((prevblog) =>
-            prevblog.id === blog.id ? { ...prevblog, published: !isPublished(blog) } : prevblog
+            prevblog._id === blog._id ? { ...prevblog, isActive: !isPublished(blog) } : prevblog
           )
         );
         return;
@@ -127,15 +105,15 @@ export default function StaffBlogListWidget() {
     }
   };
 
-  const isHomePage = (blog: StaffBlogApiResponse) => {
-    return blog.home_page === true;
+  const isHomePage = (blog: SanityBlog) => {
+    return blog.isFeatured === true;
   };
 
-  const handleHomePageToggle = async (blog: StaffBlogApiResponse) => {
+  const handleHomePageToggle = async (blog: SanityBlog) => {
     try {
       const response = await apiCall({
         method: 'PUT',
-        url: `/api/staff/blogs/${blog.id}/home-page`,
+        url: `/api/workspaces/staff/${workspaceId}/blogs/${blog._id}/home-page`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -147,7 +125,7 @@ export default function StaffBlogListWidget() {
         // Update the blog's home_page status in the local state
         setblogsList((prevblogs) =>
           prevblogs.map((prevblog) =>
-            prevblog.id === blog.id ? { ...prevblog, home_page: !isHomePage(blog) } : prevblog
+            prevblog._id === blog._id ? { ...prevblog, isFeatured: !isHomePage(blog) } : prevblog
           )
         );
         return;
@@ -160,8 +138,8 @@ export default function StaffBlogListWidget() {
   };
 
   return (
-    <section className="bg-gray-200 text-sm text-black flex flex-wrap  justify-start items">
-      <Link href="/admin/blogs/create" className='p-5 w-full'>
+    <SectionPrimitive variant='full'>
+      <Link href={`/workspaces/staff/${workspaceId}/blogs/create`} className='p-5 w-full'>
         <button className='bg-emerald-500 hover:bg-emerald-800 text-white font-bold py-2 px-4 rounded'>Create blog</button>
       </Link>
       <div className="w-full px-6 grid grid-cols-11 my-5">
@@ -188,15 +166,15 @@ export default function StaffBlogListWidget() {
         </div>
       </div>
       {blogsList.map((blog) => (
-        <div key={blog.id} className="w-full px-6 grid grid-cols-11">
+        <div key={blog._id} className="w-full px-6 grid grid-cols-11">
           <div className="flex col-span-1 flex-col w-full justify-center items-start px-6 tracking-wide">
-            <p>{blog.id}</p>
+            <p>{blog._id.slice(0, 6)}</p>
           </div>
           <div className="flex col-span-5 flex-col w-full justify-center items-start px-6 tracking-wide">
-            <p>{blog.title?.content}</p>
+            <p>{blog.title}</p>
           </div>
           <div className="flex relative col-span-1 py-10 flex-col w-full justify-center items-start px-6 tracking-wide">
-            <Image className='rounded-2xl' style={{ objectFit: 'cover' }} src={blog?.cover ? `${Bun.env.NEXT_PUBLIC_BLOG_COVER_URL_PREFIX + '/' + blog?.id + '/' + blog.cover}` : '/pg.webp'} width={150} height={150} alt={blog?.title?.content ? blog.title?.content : 'blog title'} />
+            <Image className='rounded-2xl' style={{ objectFit: 'cover' }} src={blog?.cover ? sanityImageUrl(blog.cover).width(150).url() : '/pg.webp'} width={150} height={150} alt={blog?.title || 'blog title'} />
           </div>
           <div className="flex col-span-1 flex-col w-full justify-center items-start px-6 tracking-wide">
             <StaffSwitchButtonTile checked={isPublished(blog)} onChange={() => handlePublishToggle(blog)} />
@@ -206,17 +184,17 @@ export default function StaffBlogListWidget() {
           </div>
           <div className="flex col-span-1 flex-col w-full justify-center items-start px-6 tracking-wide">
             <button>
-              <Link href={`/admin/blogs/${blog.id}/edit`}>
+              <Link href={`/workspaces/staff/${workspaceId}/blogs/${blog._id}/edit`}>
                 Edit
               </Link>
             </button>
           </div>
           <div className="flex col-span-1 flex-col w-full justify-center items-start px-6 tracking-wide">
-            <button onClick={() => handleDelete(blog.id)} disabled={isDeleting}>
+            <button onClick={() => handleDelete(blog._id)} disabled={isDeleting}>
               {isDeleting ? 'Deleting...' : 'Delete'}
             </button>          </div>
         </div>
       ))}
-    </section>
+    </SectionPrimitive>
   )
 }

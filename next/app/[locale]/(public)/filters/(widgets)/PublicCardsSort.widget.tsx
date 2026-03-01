@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { usePublicSearchContext } from '@/app/[locale]/(public)/(context)/PublicSearchContext';
-import { GlobalSelectWidget } from '@/app/[locale]/(global)/(widgets)/GlobalSelect.widget';
+import { SelectPrimitive } from '@/app/primitives/Select.primitive';
+import { BlockPrimitive } from '@/app/primitives/Block.primitive';
 import { loadClientSideCoLocatedTranslations } from '@/i18n/i18nClientSide';
 
 interface PublicCardsSortWidgetProps {
@@ -102,8 +103,8 @@ export function PublicCardsSortWidget({
 
             {/* Sort Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+                <BlockPrimitive variant="modal">
+                    <BlockPrimitive variant="default">
                         <div className="space-y-6">
                             {/* Modal Header */}
                             <div className="flex items-center justify-between">
@@ -119,10 +120,10 @@ export function PublicCardsSortWidget({
 
                             {/* Main Sort Dropdown */}
                             <div className="space-y-3">
-<label className="block text-sm font-medium text-gray-900">
-                                {t('select_sort_option')}
-                            </label>
-                                <GlobalSelectWidget
+                                <label className="block text-sm font-medium text-gray-900">
+                                    {t('select_sort_option')}
+                                </label>
+                                <SelectPrimitive
                                     options={sortOptions}
                                     onChange={handleSortChange}
                                     value={selectedSort}
@@ -133,9 +134,9 @@ export function PublicCardsSortWidget({
 
                             {/* Quick Sort Buttons */}
                             <div className="space-y-3">
-<label className="block text-sm font-medium text-gray-900">
-                                {t('quick_sort')}
-                            </label>
+                                <label className="block text-sm font-medium text-gray-900">
+                                    {t('quick_sort')}
+                                </label>
                                 <div className="grid grid-cols-2 gap-2">
                                     <QuickSortButton
                                         sortValue="newest"
@@ -163,9 +164,9 @@ export function PublicCardsSortWidget({
                             {/* Sort Direction Toggle for supported sorts */}
                             {(selectedSort.includes('price') || selectedSort.includes('title') || selectedSort.includes('rating')) && (
                                 <div className="space-y-3">
-<label className="block text-sm font-medium text-gray-900">
-                                    {t('sort_direction')}
-                                </label>
+                                    <label className="block text-sm font-medium text-gray-900">
+                                        {t('sort_direction')}
+                                    </label>
                                     <button
                                         onClick={() => {
                                             const isAsc = selectedSort.includes('_low') || selectedSort.includes('_asc');
@@ -203,8 +204,8 @@ export function PublicCardsSortWidget({
                                 </button>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </BlockPrimitive>
+                </BlockPrimitive>
             )}
         </>
     );

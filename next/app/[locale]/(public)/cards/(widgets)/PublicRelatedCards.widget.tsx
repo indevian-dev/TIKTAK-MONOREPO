@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { searchCards } from '@/app/[locale]/(public)/cards/PublicCardsService';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
-import { Section } from '@/app/primitives/Section.primitive';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 interface PublicRelatedCardsWidgetProps {
     categoryId: string | null;
@@ -53,7 +53,7 @@ export function PublicRelatedCardsWidget({ categoryId }: PublicRelatedCardsWidge
     }
 
     return (
-        <Section variant='centered'>
+        <SectionPrimitive variant='centered'>
             <PublicSectionTitleTile sectionTitle={t('related_cards')} />
             <div className='w-full'>
                 {loading ? (
@@ -64,6 +64,6 @@ export function PublicRelatedCardsWidget({ categoryId }: PublicRelatedCardsWidge
                     <PublicCardsListWidget cards={relatedCards} />
                 )}
             </div>
-        </Section>
+        </SectionPrimitive>
     );
 }

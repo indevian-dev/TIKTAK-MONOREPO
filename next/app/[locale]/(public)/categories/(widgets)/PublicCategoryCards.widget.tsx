@@ -14,6 +14,7 @@ import { PublicCardsFiltersWidget }
     from '@/app/[locale]/(public)/filters/(widgets)/PublicCardsFilters.widget';
 import { usePublicSearchContext }
     from '@/app/[locale]/(public)/(context)/PublicSearchContext';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 interface CategoryWithStats {
     id: number;
@@ -42,7 +43,7 @@ export function PublicCategoryCardsWidget({ category }: PublicCategoryCardsWidge
     }
 
     return (
-        <section className='w-full my-8 md:my-12 lg:my-16 max-w-screen-xl px-4 mx-auto'>
+        <SectionPrimitive variant="centered">
             <PublicSectionTitleTile sectionTitle={t('cards')} />
 
             <div>
@@ -86,6 +87,6 @@ export function PublicCategoryCardsWidget({ category }: PublicCategoryCardsWidge
                     </div>
                 </div>
             </div>
-        </section>
+        </SectionPrimitive>
     );
 }

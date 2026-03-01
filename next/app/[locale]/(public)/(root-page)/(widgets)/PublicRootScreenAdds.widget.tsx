@@ -1,16 +1,16 @@
 'use client'
 
-import { Block } from "@/app/primitives/Block.primitive"
-import { Section } from "@/app/primitives/Section.primitive"
+import { BlockPrimitive } from "@/app/primitives/Block.primitive"
+import { SectionPrimitive } from "@/app/primitives/Section.primitive"
 
 export function PublicRootScreenAddsWidget() {
   return (
-    <Section variant="centered">
+    <SectionPrimitive variant="centered">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <AdSlot variant="promote" />
         <AdSlot variant="grow" />
       </div>
-    </Section>
+    </SectionPrimitive>
   )
 }
 

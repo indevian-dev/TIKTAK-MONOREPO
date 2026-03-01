@@ -1,15 +1,35 @@
 import { headers } from 'next/headers';
 import { db } from '@/lib/database';
-import type { OAuthTokenData, OAuthUserInfo } from '@tiktak/shared/types/auth/Oauth.types';
 
-/**
- * Local enum copy — Turbopack can't bundle runtime values from outside project root.
- * Keep in sync with @tiktak/shared/types/auth/Oauth.types.OAuthProvider
- */
+// ─── Server-only OAuth types (not in shared — client does not need these) ───
+
+/** Turbopack can't bundle runtime enums from outside project root — kept local */
 export enum OAuthProvider {
   GOOGLE = 'google',
   FACEBOOK = 'facebook',
   APPLE = 'apple',
+}
+
+/** Raw token response from OAuth provider token endpoint */
+export interface OAuthTokenData {
+  access_token: string;
+  refresh_token?: string;
+  expires_in?: number;
+  token_type?: string;
+  scope?: string;
+  id_token?: string;
+}
+
+/** Normalised user info returned from OAuth provider userinfo endpoint */
+export interface OAuthUserInfo {
+  id: string;
+  email?: string;
+  name?: string;
+  picture?: string;
+  verified_email?: boolean;
+  providerId?: string;
+  provider?: OAuthProvider;
+  [key: string]: any;
 }
 import { eq } from 'drizzle-orm';
 import { users, userCredentials } from '@/lib/database/schema';

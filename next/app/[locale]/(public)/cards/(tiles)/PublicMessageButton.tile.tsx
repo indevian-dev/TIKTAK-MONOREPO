@@ -11,7 +11,6 @@ interface PublicMessageButtonTileProps {
   cardId: string;
   cardTitle: string;
   accountId?: string;
-  storeId?: string;
 }
 
 export function PublicMessageButtonTile({ cardId, cardTitle }: PublicMessageButtonTileProps) {

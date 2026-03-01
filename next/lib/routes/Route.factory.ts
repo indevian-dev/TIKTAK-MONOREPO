@@ -11,7 +11,7 @@ export interface RouteConfigOptions {
   needPhoneVerification?: boolean;
   twoFactorAuth?: boolean;
   twoFactorAuthType?: string;
-  workspace?: 'moderator' | 'staff' | 'provider' | 'root' | undefined;
+  workspace?: 'moderator' | 'staff' | 'provider' | 'advertiser' | 'root' | undefined;
   type: "page" | "api";
   collectActionLogs?: boolean;
   collectLogs?: boolean;
@@ -23,7 +23,7 @@ export interface RouteConfigOptions {
  * Creates a route configuration factory for a specific workspace
  */
 export const createRouteFactory = (defaults: {
-  workspace: 'moderator' | 'staff' | 'provider' | 'root' | undefined;
+  workspace: 'moderator' | 'staff' | 'provider' | 'advertiser' | 'root' | undefined;
   verifyOwnership?: boolean;
   needEmailVerification?: boolean;
   needPhoneVerification?: boolean;

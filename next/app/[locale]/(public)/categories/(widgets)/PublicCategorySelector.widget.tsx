@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import { loadClientSideCoLocatedTranslations } from '@/i18n/i18nClientSide';
-import { GlobalSelectWidget } from '@/app/[locale]/(global)/(widgets)/GlobalSelect.widget';
+import { SelectPrimitive } from '@/app/primitives/Select.primitive';
 import { Category } from '@/app/[locale]/(public)/categories/PublicCategoriesService';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
@@ -75,7 +75,7 @@ export function PublicCategorySelectorWidget({ onCategoryChange }: PublicCategor
       <>
         <div className="mb-4 text-md">
           <label className="block text-gray-900 font-bold mt-2 mb-2">{t("category")}</label>
-          <GlobalSelectWidget
+          <SelectPrimitive
             options={categories.map(category => ({ label: lt(category.title) || '', value: String(category.id) }))}
             onChange={(value) => handleCategoryChange(value, level)}
             value={selectedId !== undefined ? String(selectedId) : ''}

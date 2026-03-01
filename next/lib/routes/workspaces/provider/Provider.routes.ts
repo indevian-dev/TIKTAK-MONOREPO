@@ -28,6 +28,11 @@ export const PERMISSIONS = {
 
   PROVIDER_ACCOUNT_READ: "View account info",
   PROVIDER_ROLE_READ: "View roles",
+
+  PROVIDER_MEMBER_READ: "View workspace members",
+  PROVIDER_MEMBER_INVITE: "Invite new members",
+  PROVIDER_MEMBER_UPDATE: "Update member role/expiry",
+  PROVIDER_MEMBER_REMOVE: "Remove members",
 } as const;
 
 // ═══════════════════════════════════════════════════════════════
@@ -142,6 +147,46 @@ export const providerRoutes: RoutesMap = {
     method: "GET",
     authRequired: true,
     permission: "PROVIDER_NOTIFICATION_READ",
+    type: "api",
+  }),
+
+  // ============================================
+  // Member Management APIs
+  // ============================================
+  "/api/workspaces/provider/:workspaceId/members": createRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "PROVIDER_MEMBER_READ",
+    type: "api",
+  }),
+  "/api/workspaces/provider/:workspaceId/members/invite": createRoute({
+    method: "POST",
+    authRequired: true,
+    permission: "PROVIDER_MEMBER_INVITE",
+    type: "api",
+  }),
+  "/api/workspaces/provider/:workspaceId/members/:accessId": createRoute({
+    method: "PATCH",
+    authRequired: true,
+    permission: "PROVIDER_MEMBER_UPDATE",
+    type: "api",
+  }),
+  "/api/workspaces/provider/:workspaceId/members/:accessId/delete": createRoute({
+    method: "DELETE",
+    authRequired: true,
+    permission: "PROVIDER_MEMBER_REMOVE",
+    type: "api",
+  }),
+  "/api/workspaces/provider/:workspaceId/members/roles": createRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "PROVIDER_MEMBER_READ",
+    type: "api",
+  }),
+  "/api/workspaces/provider/:workspaceId/members/invitations": createRoute({
+    method: "GET",
+    authRequired: true,
+    permission: "PROVIDER_MEMBER_READ",
     type: "api",
   }),
 };

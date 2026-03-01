@@ -1,59 +1,35 @@
 
 
 import type { WorkspaceDbRecord } from "@/lib/database/schema";
-import type { WorkspaceProfile } from "./Workspace.types";
+import type { Workspace } from '@tiktak/shared/types/domain/Workspace.types';
 
 // ═══════════════════════════════════════════════════════════════
-// WORKSPACE VIEWS — Public / Private / Full
+// WORKSPACE MAPPERS — satisfies Workspace.* from _shared.types
 // ═══════════════════════════════════════════════════════════════
 
-/** Public: provider listing, catalog — only external-facing fields */
-export interface WorkspacePublicView {
-    id: string;
-    title: string;
-    type: string;
-    profile: WorkspaceProfile | null;
-}
-
-/** Private: workspace owner/member — operational fields */
-export interface WorkspacePrivateView extends WorkspacePublicView {
-    isActive: boolean | null;
-    cityId: string | null;
-    createdAt: Date | null;
-}
-
-/** Full: staff/admin — everything including block status */
-export interface WorkspaceFullView extends WorkspacePrivateView {
-    isBlocked: boolean | null;
-    updatedAt: Date | null;
-}
-
-// ═══════════════════════════════════════════════════════════════
-// MAPPERS
-// ═══════════════════════════════════════════════════════════════
-
-export function toWorkspacePublicView(row: WorkspaceDbRecord): WorkspacePublicView {
+export function toWorkspacePublicView(row: WorkspaceDbRecord) {
     return {
         id: row.id,
         title: row.title,
         type: row.type,
-        profile: (row.profile as WorkspaceProfile) ?? null,
-    };
+        profile: (row.profile as Workspace.Profile) ?? null,
+        isStore: row.isStore ?? false,
+    } satisfies Workspace.PublicView;
 }
 
-export function toWorkspacePrivateView(row: WorkspaceDbRecord): WorkspacePrivateView {
+export function toWorkspacePrivateView(row: WorkspaceDbRecord) {
     return {
         ...toWorkspacePublicView(row),
         isActive: row.isActive,
         cityId: row.cityId,
         createdAt: row.createdAt,
-    };
+    } satisfies Workspace.PrivateView;
 }
 
-export function toWorkspaceFullView(row: WorkspaceDbRecord): WorkspaceFullView {
+export function toWorkspaceFullView(row: WorkspaceDbRecord) {
     return {
         ...toWorkspacePrivateView(row),
         isBlocked: row.isBlocked,
         updatedAt: row.updatedAt,
-    };
+    } satisfies Workspace.FullView;
 }

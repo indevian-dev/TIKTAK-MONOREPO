@@ -23,7 +23,7 @@ export default function StaffBlogCreateWidget() {
 
   const router = useRouter();
   const params = useParams();
-  const locale = params.locale as string;
+  const workspaceId = params?.workspaceId as string;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -40,7 +40,7 @@ export default function StaffBlogCreateWidget() {
     try {
       await apiCall({
         method: 'POST',
-        url: '/api/staff/blogs/create',
+        url: `/api/workspaces/staff/${workspaceId}/blogs/create`,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -48,7 +48,7 @@ export default function StaffBlogCreateWidget() {
       });
 
       toast.success('Blog Created!');
-      router.push(`/${locale}/staff/blogs`);
+      router.push(`/workspaces/staff/${workspaceId}/blogs`);
     } catch (error) {
       if (error instanceof Error) {
         toast.error('Error: ' + error.message);
@@ -108,7 +108,7 @@ export default function StaffBlogCreateWidget() {
         </div>
         <button type="submit" className="w-full bg-indigo-800 text-white font-medium py-2 rounded-md hover:bg-indigo-600 transition duration-300">Submit</button>
       </form>
-      <Link href="/admin/blogs/content" className="block mt-4 text-sm text-indigo-500 hover:text-indigo-600 transition duration-300">Edit Content</Link>
+      <Link href={`/workspaces/staff/${workspaceId}/blogs`} className="block mt-4 text-sm text-indigo-500 hover:text-indigo-600 transition duration-300">Back to Blogs</Link>
     </div>
 
   );

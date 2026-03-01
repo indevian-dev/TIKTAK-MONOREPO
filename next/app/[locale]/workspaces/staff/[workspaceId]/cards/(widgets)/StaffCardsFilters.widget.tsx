@@ -8,8 +8,8 @@ import {
   useRef
 } from 'react';
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
-import { GlobalSelectWidget }
-  from '@/app/[locale]/(global)/(widgets)/GlobalSelect.widget';
+import { SelectPrimitive }
+  from '@/app/primitives/Select.primitive';
 import { lt } from '@/lib/utils/Localized.util';
 
 interface FiltersType {
@@ -173,7 +173,7 @@ export function StaffCardsFiltersWidget({ onFiltersChange }: StaffCardsFiltersWi
           <label className="block text-sm font-medium text-slate-700 mb-1">
             Category
           </label>
-          <GlobalSelectWidget
+          <SelectPrimitive
             options={categoryOptions}
             value={filters.categoryId}
             onChange={(value) => handleFilterChange('categoryId', value)}
@@ -186,7 +186,7 @@ export function StaffCardsFiltersWidget({ onFiltersChange }: StaffCardsFiltersWi
           <label className="block text-sm font-medium text-slate-700 mb-1">
             Approval Status
           </label>
-          <GlobalSelectWidget
+          <SelectPrimitive
             options={approvalStatusOptions}
             value={filters.isApproved}
             onChange={(value) => handleFilterChange('isApproved', value)}
@@ -199,7 +199,7 @@ export function StaffCardsFiltersWidget({ onFiltersChange }: StaffCardsFiltersWi
           <label className="block text-sm font-medium text-slate-700 mb-1">
             Active Status
           </label>
-          <GlobalSelectWidget
+          <SelectPrimitive
             options={activeStatusOptions}
             value={filters.isActive}
             onChange={(value) => handleFilterChange('isActive', value)}

@@ -13,7 +13,7 @@ import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import type { Card } from '@tiktak/shared/types/domain/Card.types';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
-import { Section } from '@/app/primitives/Section.primitive';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 export function PublicRootScreenCardsWidget() {
 
@@ -42,9 +42,9 @@ export function PublicRootScreenCardsWidget() {
   }, [locale]);
 
   return (
-    <Section variant="centered">
+    <SectionPrimitive variant="centered">
       <PublicSectionTitleTile sectionTitle={t('cards')} />
       <PublicCardsListWidget cards={cardsList as any} className='' />
-    </Section>
+    </SectionPrimitive>
   );
 }

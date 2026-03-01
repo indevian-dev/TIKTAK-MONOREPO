@@ -17,9 +17,9 @@ import {
   PiStorefrontDuotone
 } from 'react-icons/pi';
 import type { DomainNavConfig } from '@tiktak/shared/types/ui/Navigation.types';
-import { Main } from '@/app/primitives/Main.primitive';
-import { Container } from '@/app/primitives/Container.primitive';
-import { Section } from '@/app/primitives/Section.primitive';
+import { MainPrimitive } from '@/app/primitives/Main.primitive';
+import { ContainerPrimitive } from '@/app/primitives/Container.primitive';
+import { SectionPrimitive } from '@/app/primitives/Section.primitive';
 
 const getProviderNavConfig = (workspaceId: string): DomainNavConfig => ({
   domain: 'provider',
@@ -94,16 +94,16 @@ export function ProviderClientLayout({ children }: { children: React.ReactNode }
         <GlobalFastNavigationWidget {...navProps} />
       </GlobalHeaderWidget>
 
-      <Main variant="app">
-        <Container variant="centered">
+      <MainPrimitive variant="app">
+        <ContainerPrimitive variant="centered">
           <aside className="hidden lg:flex shrink-0 sticky top-[70px] min-h-[calc(100vh-70px)] overflow-hidden w-64 flex-col">
             <GlobalFullNavigationWidget {...navProps} />
           </aside>
-          <Section>
+          <SectionPrimitive>
             {children}
-          </Section>
-        </Container>
-      </Main>
+          </SectionPrimitive>
+        </ContainerPrimitive>
+      </MainPrimitive>
 
       {/* Mobile modal navigation (handled internally by the widget) */}
       <GlobalFullNavigationWidget {...navProps} />

@@ -14,11 +14,11 @@ import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import type { Card } from '@tiktak/shared/types/domain/Card.types';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
+import { PaginationPrimitive } from '@/app/primitives/Pagination.primitive';
 // API response type for staff cards (extends domain Card.PrivateAccess with API-specific fields)
-interface StaffCardApiResponse extends Omit<Card.PrivateAccess, 'store_id' | 'price'> {
+interface StaffCardApiResponse extends Omit<Card.PrivateAccess, 'price'> {
   created_at: Date; // API uses snake_case
-  store_id?: string | null; // API uses snake_case
-  store_name?: string; // Joined data from store table
+  store_name?: string; // Joined data from workspace table
   is_approved: boolean;
   is_active: boolean;
   published_data?: any;
@@ -135,26 +135,11 @@ export function StaffCardsListWidget() {
         )}
       </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center mt-6">
-        <button
-          onClick={() => setPage(page - 1)}
-          disabled={page === 1 || loading}
-          className="px-4 py-2 mr-2 border rounded text-slate-900 bg-sky-500 hover:bg-sky-600 disabled:bg-gray-300"
-        >
-          Previous
-        </button>
-        <span className="px-4 py-2 text-slate-900">
-          Page {page} of {pagination.totalPages}
-        </span>
-        <button
-          onClick={() => setPage(page + 1)}
-          disabled={page >= pagination.totalPages || loading}
-          className="px-4 py-2 border rounded text-slate-900 bg-sky-500 hover:bg-sky-600 disabled:bg-gray-300"
-        >
-          Next
-        </button>
-      </div>
+      <PaginationPrimitive
+        currentPage={page}
+        totalPages={pagination.totalPages}
+        onPageChange={setPage}
+      />
     </div>
   );
 }

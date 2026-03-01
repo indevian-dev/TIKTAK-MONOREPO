@@ -21,7 +21,6 @@ export namespace Card {
         location: { lat: number; lng: number } | null;
         categories: string[] | null;
         filtersOptions: FilterOption[] | null;
-        storeId: string | null;
         accountId: string | null;
         isApproved: boolean;
         createdAt: Date;
@@ -44,7 +43,7 @@ export namespace Card {
         searchText?: string;
         priceMin?: number;
         priceMax?: number;
-        storeId?: string;
+        workspaceId?: string;
         pagination?: number;
     }
 

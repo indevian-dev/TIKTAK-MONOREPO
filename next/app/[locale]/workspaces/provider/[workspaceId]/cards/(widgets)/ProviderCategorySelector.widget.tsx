@@ -9,8 +9,8 @@ import {
 import { apiCall } from '@/lib/utils/Http.FetchApiSPA.util';
 import { loadClientSideCoLocatedTranslations }
   from '@/i18n/i18nClientSide';
-import { GlobalSelectWidget }
-  from '@/app/[locale]/(global)/(widgets)/GlobalSelect.widget';
+import { SelectPrimitive }
+  from '@/app/primitives/Select.primitive';
 import type { Category } from '@tiktak/shared/types/domain/Category.types';
 
 import { ConsoleLogger } from '@/lib/logging/Console.logger';
@@ -91,7 +91,7 @@ export function ProviderCategorySelectorWidget({
       <>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mt-2 mb-2">{t("category")}</label>
-          <GlobalSelectWidget
+          <SelectPrimitive
             key={level}
             value={selectedId ? selectedId.toString() : ''}
             onChange={(value: string) => handleCategoryChange(value, level)}

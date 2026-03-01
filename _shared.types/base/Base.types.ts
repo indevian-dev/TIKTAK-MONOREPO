@@ -3,8 +3,8 @@
 // Timestamps
 
 export interface Timestamps {
-    createdAt: string;
-    updatedAt?: string;
+    createdAt: Date | string;
+    updatedAt?: Date | string | null;
 }
 
 // Sorting & Filtering
